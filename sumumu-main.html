@@ -53,6 +53,7 @@ body {
   line-height: 1.8;
   color: var(--text-primary);
   background: var(--bg-page);
+  padding-bottom: 68px;
 }
 a { color: inherit; text-decoration: none; }
 
@@ -1790,6 +1791,145 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
 @media (min-width: 769px) and (max-width: 1024px) {
   .tools-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ─── FV PAIN TEXT ───────────────────────── */
+.fv-pain {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 2.2;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+.fv-ttl em { color: var(--brand); font-style: normal; }
+
+/* ─── VOICE TABS ─────────────────────────── */
+.voice-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+.voice-tab {
+  padding: 9px 18px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  background: none;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.voice-tab:hover { color: var(--text-primary); }
+.voice-tab.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 500; }
+
+/* ─── VOICE STAR RATING ──────────────────── */
+.voice-stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.star-ico { color: #F5A623; font-size: 13px; }
+.voice-star-val { font-size: 11px; color: var(--text-muted); margin-left: 4px; }
+
+/* ─── VOICE CATEGORY ─────────────────────── */
+.voice-cat {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 9px;
+  border-radius: var(--r-pill);
+  background: var(--brand-bg);
+  color: var(--brand-h);
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+/* ─── SUPPORT 4カード ────────────────────── */
+.support-features-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.support-feat-4 {
+  background: var(--bg-white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-sm);
+}
+.support-feat-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--brand);
+  margin-bottom: 6px;
+}
+.support-feat-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+.support-feat-desc {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ─── STICKY CTA BAR ─────────────────────── */
+.sticky-cta {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  border-top: 0.5px solid var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  z-index: 300;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+.sticky-cta-label {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-right: 4px;
+  white-space: nowrap;
+}
+.sticky-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 28px;
+  border-radius: var(--r-pill);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.sticky-cta-btn--primary {
+  background: var(--line);
+  color: #fff;
+}
+.sticky-cta-btn--primary:hover { background: var(--line-h); color: #fff; }
+.sticky-cta-btn--secondary {
+  background: var(--brand);
+  color: #fff;
+}
+.sticky-cta-btn--secondary:hover { background: var(--brand-h); color: #fff; }
+@media (max-width: 768px) {
+  .sticky-cta { padding: 10px 12px 14px; gap: 8px; }
+  .sticky-cta-label { display: none; }
+  .sticky-cta-btn { padding: 10px 18px; font-size: 12.5px; }
+  .support-features-4 { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1985,8 +2125,9 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
   <div class="fv-content">
     <!-- Headline -->
     <div class="fv-head">
-      <span class="eyebrow">REAL VOICES</span>
-      <h2 class="fv-ttl">住んだ先輩の声が、<br>あなたの住み替えを変える。</h2>
+      <span class="eyebrow">REAL VOICES FROM SENIORS</span>
+      <p class="fv-pain">情報は多いのに、信頼できる声がない・・<br>営業には聞けない本音が知りたい・・</p>
+      <h2 class="fv-ttl">そんなあなたに、<br><em>住んだ先輩の声</em>という選択肢。</h2>
       <p class="fv-sub">エリアにカーソルをあわせると、そこに暮らす先輩のリアルな声が届きます。</p>
     </div>
 
@@ -2428,58 +2569,41 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
   <div class="inner">
     <span class="support-eyebrow">SUPPORT</span>
     <span class="eyebrow-sub">住み替えサポート</span>
-    <h2 class="support-title">専任スタッフが、中立な立場で<br>住み替えを支援します</h2>
+    <h2 class="support-title">住み替えの不安、<br>全力でサポートします。</h2>
     <p class="support-lead">
-      すむむ。の住み替え支援は完全無料。不動産会社の営業担当とは異なり、特定の物件や会社に誘導しません。
-      あなたのライフプランに合った選択を一緒に考えます。
+      「何から始めればいい？」「通勤はどうなる？」「本当に後悔しない？」<br>
+      すむむ。は4つのサポートで、あなたの住み替えを全力で支えます。
     </p>
-    <div class="support-features">
-      <div class="support-feat">
-        <div class="feat-icon" style="background:#FFF0F0;">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="15" cy="15" r="12" stroke="#f04646" stroke-width="1.6"/>
-            <text x="15" y="13" font-size="7" fill="#f04646" text-anchor="middle" font-family="sans-serif" font-weight="700">完全</text>
-            <text x="15" y="21" font-size="9" fill="#f04646" text-anchor="middle" font-family="sans-serif" font-weight="700">無料</text>
-          </svg>
-        </div>
-        <div class="feat-ttl">完全無料</div>
-        <div class="feat-desc">相談・情報提供はすべて無料。費用が発生するのは、住み替えが成立した後のみです</div>
+    <div class="support-features-4">
+
+      <!-- 01 コミュニティ -->
+      <div class="support-feat-4">
+        <div class="support-feat-num">SUPPORT 01</div>
+        <div class="support-feat-name">先輩購入者コミュニティ</div>
+        <div class="support-feat-desc">実際に住み替えを実現した先輩たちのリアルな声を読める・聞ける。482件の体験談から、あなたの疑問に合う声を見つけてください。</div>
       </div>
-      <div class="support-feat">
-        <div class="feat-icon" style="background:#FFF0F0;">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#f04646" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <!-- 天秤 -->
-            <line x1="15" y1="5" x2="15" y2="25"/>
-            <line x1="8" y1="8" x2="22" y2="8"/>
-            <!-- 左皿 -->
-            <path d="M5 14 Q8 18 11 14" fill="none"/>
-            <!-- 右皿 -->
-            <path d="M19 14 Q22 18 25 14" fill="none"/>
-            <!-- 左の鎖 -->
-            <line x1="8" y1="8" x2="5" y2="14"/>
-            <line x1="8" y1="8" x2="11" y2="14"/>
-            <!-- 右の鎖 -->
-            <line x1="22" y1="8" x2="19" y2="14"/>
-            <line x1="22" y1="8" x2="25" y2="14"/>
-            <circle cx="15" cy="5" r="1.5" fill="#f04646" stroke="none"/>
-          </svg>
-        </div>
-        <div class="feat-ttl">中立なアドバイス</div>
-        <div class="feat-desc">特定の不動産会社・物件の紹介はしません。あなたの利益を最優先に考えたアドバイスを提供します</div>
+
+      <!-- 02 イベント -->
+      <div class="support-feat-4">
+        <div class="support-feat-num">SUPPORT 02</div>
+        <div class="support-feat-name">無料イベント開催</div>
+        <div class="support-feat-desc">不動産のプロや先輩購入者が登壇する座談会・見学ツアーを毎月開催。オンライン・オフラインで参加でき、リアルな情報が得られます。</div>
       </div>
-      <div class="support-feat">
-        <div class="feat-icon" style="background:#FFF0F0;">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#f04646" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-            <!-- 人物 -->
-            <circle cx="15" cy="10" r="5"/>
-            <path d="M6 26 Q6 18 15 18 Q24 18 24 26"/>
-            <!-- ハートマーク -->
-            <path d="M12 5.5 Q13 3.5 15 4.5 Q17 3.5 18 5.5 Q19 7.5 15 10 Q11 7.5 12 5.5Z" fill="#f04646" stroke="none"/>
-          </svg>
-        </div>
-        <div class="feat-ttl">専任担当制</div>
-        <div class="feat-desc">担当スタッフが最初から最後まで一貫してサポート。何度でも相談できます</div>
+
+      <!-- 03 コンシェルジュ -->
+      <div class="support-feat-4">
+        <div class="support-feat-num">SUPPORT 03</div>
+        <div class="support-feat-name">専任コンシェルジュ（無料）</div>
+        <div class="support-feat-desc">FP・住宅ローンアドバイザー・不動産のプロがワンストップで無料相談。売り込みなし、中立な立場であなたの住み替えに伴走します。</div>
       </div>
+
+      <!-- 04 シミュレーション -->
+      <div class="support-feat-4">
+        <div class="support-feat-num">SUPPORT 04</div>
+        <div class="support-feat-name">シミュレーションツール</div>
+        <div class="support-feat-desc">ローン返済・借入可能額・賃貸vs購入・コスト全体像など6つのツールで、数字をもとに判断できます。FP監修・完全無料で利用できます。</div>
+      </div>
+
     </div>
     <p class="support-catch">まずは話を聞くだけでOK。気軽にLINEしてみてください。</p>
     <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-support-cta">
@@ -2694,6 +2818,16 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
     <span class="eyebrow-sub">先輩達の体験記</span>
     <h2 class="sec-title">先輩たちの体験談</h2>
     <p class="voices-lead">すむむ。を通じて住み替えを実現した先輩たちのリアルな声をご紹介します。「どうやって物件を選んだ？」「資金計画はどうした？」—生の声が参考になります。</p>
+
+    <!-- カテゴリタブ -->
+    <div class="voice-tabs" role="tablist">
+      <button class="voice-tab active" data-vcat="all">すべて</button>
+      <button class="voice-tab" data-vcat="access">立地・アクセス</button>
+      <button class="voice-tab" data-vcat="kosodate">子育て・教育</button>
+      <button class="voice-tab" data-vcat="nature">自然・環境</button>
+      <button class="voice-tab" data-vcat="life">日常生活</button>
+    </div>
+
     <div class="voices-stats">
       <div class="vs-item">
         <div class="vs-num">1,200<span class="vs-unit">+</span></div>
@@ -2712,15 +2846,20 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
         <div class="vs-label">「知人にもすすめたい」</div>
       </div>
     </div>
-    <div class="voices-grid">
+    <div class="voices-grid" id="voicesGrid">
       <!-- VOICE 01 -->
-      <div class="voice-card">
+      <div class="voice-card" data-vcat="life">
         <div class="voice-stage">✓ はじめての住宅購入</div>
         <div class="voice-img">
           <img src="images/voice01.jpg" alt="田中さやかさん"
                onerror="this.src='https://picsum.photos/seed/voice01/400/160'">
         </div>
         <div class="voice-body">
+          <span class="voice-cat">日常生活</span>
+          <div class="voice-stars">
+            <span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span>
+            <span class="voice-star-val">5.0</span>
+          </div>
           <div class="voice-header">
             <div class="voice-avatar">
               <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" width="52" height="52">
@@ -2733,8 +2872,8 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
               </svg>
             </div>
             <div>
-              <div class="voice-name">田中 さやか</div>
-              <div class="voice-detail">33歳・会社員（育休復帰後）・大阪市在住<br>夫・子1人（2歳）</div>
+              <div class="voice-name">T.Sさん（33歳）</div>
+              <div class="voice-detail">大阪市在住・夫婦＋子1人（2歳）・女性</div>
             </div>
           </div>
           <div class="voice-props">
@@ -2743,18 +2882,23 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
             <span class="voice-prop">約65m²</span>
           </div>
           <div class="voice-price">4,200万円<span>（住宅ローン利用）</span></div>
-          <p class="voice-quote">「営業の人に急かされるのが怖くて、ずっと踏み出せなかった。すむむ。のイベントで先輩の話を聞いて、やっと動き出せました。」</p>
+          <p class="voice-quote">「営業の人に急かされるのが怖くて、ずっと踏み出せなかった。すむむ。のイベントで先輩の話を聞いて、やっと動き出せました。数字も先輩の声も、ここで全部揃った感じです。」</p>
           <a href="sumumu-journal.html" class="voice-link">購入体験の詳細を読む →</a>
         </div>
       </div>
       <!-- VOICE 02 -->
-      <div class="voice-card">
+      <div class="voice-card" data-vcat="access">
         <div class="voice-stage">✓ マンション → 新居 住み替え</div>
         <div class="voice-img">
           <img src="images/voice02.jpg" alt="松本健一さん"
                onerror="this.src='https://picsum.photos/seed/voice02/400/160'">
         </div>
         <div class="voice-body">
+          <span class="voice-cat">立地・アクセス</span>
+          <div class="voice-stars">
+            <span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span>
+            <span class="voice-star-val">5.0</span>
+          </div>
           <div class="voice-header">
             <div class="voice-avatar">
               <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" width="52" height="52">
@@ -2765,8 +2909,8 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
               </svg>
             </div>
             <div>
-              <div class="voice-name">松本 健一</div>
-              <div class="voice-detail">44歳・管理職・滋賀県在住<br>妻・子2人（小学生）</div>
+              <div class="voice-name">M.Mさん（44歳）</div>
+              <div class="voice-detail">滋賀県在住・夫婦＋子2人（小学生）・男性</div>
             </div>
           </div>
           <div class="voice-props">
@@ -2775,18 +2919,23 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
             <span class="voice-prop">約105m²</span>
           </div>
           <div class="voice-price">5,800万円<span>（住み替えローン利用）</span></div>
-          <p class="voice-quote">「マンションの売却と新居の購入を同時進行するのは複雑すぎて。専任の方が資金計画を一緒に整理してくれて本当に助かりました。」</p>
+          <p class="voice-quote">「マンションの売却と新居の購入を同時進行するのは複雑すぎて。専任の方が資金計画を一緒に整理してくれて本当に助かりました。駅近で通勤時間もほぼ変わらず大満足です。」</p>
           <a href="sumumu-journal.html" class="voice-link">購入体験の詳細を読む →</a>
         </div>
       </div>
       <!-- VOICE 03 -->
-      <div class="voice-card">
+      <div class="voice-card" data-vcat="kosodate">
         <div class="voice-stage">✓ 子育て世代の住み替え</div>
         <div class="voice-img">
           <img src="images/voice03.jpg" alt="中村美奈さん"
                onerror="this.src='https://picsum.photos/seed/voice03/400/160'">
         </div>
         <div class="voice-body">
+          <span class="voice-cat">子育て・教育</span>
+          <div class="voice-stars">
+            <span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span><span class="star-ico">★</span>
+            <span class="voice-star-val">4.0</span>
+          </div>
           <div class="voice-header">
             <div class="voice-avatar">
               <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" width="52" height="52">
@@ -2799,8 +2948,8 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
               </svg>
             </div>
             <div>
-              <div class="voice-name">中村 美奈</div>
-              <div class="voice-detail">38歳・パート・名古屋市在住<br>夫・子1人（保育園）</div>
+              <div class="voice-name">M.Nさん（38歳）</div>
+              <div class="voice-detail">名古屋市在住・夫婦＋子1人（保育園）・女性</div>
             </div>
           </div>
           <div class="voice-props">
@@ -2809,7 +2958,7 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
             <span class="voice-prop">約72m²</span>
           </div>
           <div class="voice-price">4,750万円<span>（住宅ローン利用）</span></div>
-          <p class="voice-quote">「子どもの小学校進学前に住み替えたくて。学区情報とローンシミュレーションを組み合わせて使えたのでとても助かりました。」</p>
+          <p class="voice-quote">「子どもの小学校進学前に住み替えたくて。学区情報とローンシミュレーションを組み合わせて使えたのでとても助かりました。子育て環境がこんなに違うとは、住んでみて初めてわかりました。」</p>
           <a href="sumumu-journal.html" class="voice-link">購入体験の詳細を読む →</a>
         </div>
       </div>
@@ -3081,6 +3230,18 @@ a.pref-item .pref-catch { color: var(--text-secondary); }
     <p class="cta-note">LINE公式アカウントに遷移します</p>
   </div>
 </section>
+
+<!-- ══ STICKY CTA BAR ══════════════════════════ -->
+<div class="sticky-cta" id="stickyCta">
+  <span class="sticky-cta-label">まずは気軽に</span>
+  <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="sticky-cta-btn sticky-cta-btn--primary">
+    <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+    LINEで相談する
+  </a>
+  <a href="properties/sumumu-kinki-all.html" class="sticky-cta-btn sticky-cta-btn--secondary">
+    物件を探す →
+  </a>
+</div>
 
 <!-- ══ 11 FOOTER ═══════════════════════════════ -->
 <footer class="footer">
@@ -3630,6 +3791,22 @@ document.querySelectorAll('.mob-parent').forEach(btn => {
       const cat = tab.dataset.cat;
       items.forEach(item => {
         item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+})();
+
+// ── Voice tab filter ──────────────────────────────
+(function(){
+  const vtabs = document.querySelectorAll('.voice-tab');
+  const vcards = document.querySelectorAll('#voicesGrid .voice-card');
+  vtabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      vtabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.vcat;
+      vcards.forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.vcat === cat) ? '' : 'none';
       });
     });
   });
