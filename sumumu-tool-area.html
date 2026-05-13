@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エリア診断 | すむむ。</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --dark-bg:#1A1010;
+  --line:#06C755; --line-h:#05a849;
+  --tool-color:#534AB7; --tool-mid:#7B73D4; --tool-light:#A9A4E6; --tool-bg:#EEEDFE;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5; --green-bg:#E1F5EE;
+  --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --orange-dark:#854F0B; --orange-bg:#FAEEDA;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);color:#fff;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;user-select:none;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;min-width:auto;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);background:none;}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.2s;border-radius:1px;}
+.hamb.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamb.open span:nth-child(2){opacity:0;}
+.hamb.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;background:var(--bg-white);border-bottom:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,0.12);max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:8px 16px 24px;}
+.mob-link{display:block;font-size:14px;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--line);color:#fff;padding:12px;border-radius:var(--r-md);font-size:14px;font-weight:500;margin:14px 4px 0;transition:background 0.15s;}
+.mob-cta:hover{background:var(--line-h);color:#fff;}
+.line-logo-img{width:22px;height:22px;display:block;flex-shrink:0;object-fit:contain;}
+.btn-util .line-logo-img{width:16px;height:16px;}
+
+/* ─── TOOL NAV ────────────────────────────── */
+.tool-nav{position:sticky;top:88px;z-index:100;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.tool-nav-inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;padding:10px 32px;overflow-x:auto;scrollbar-width:none;}
+.tool-nav-inner::-webkit-scrollbar{display:none;}
+.tnav{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;white-space:nowrap;border:1.5px solid var(--border);color:var(--text-secondary);background:var(--bg-white);text-decoration:none;transition:all 0.15s;}
+.tnav:hover{border-color:var(--tool-mid);color:var(--tool-mid);}
+.tnav.active{background:var(--tool-color);border-color:var(--tool-color);color:#fff;}
+.tnav-num{font-size:10px;opacity:0.65;}
+
+/* ─── HERO ────────────────────────────────── */
+.tool-hero{background:var(--bg-white);padding:36px 32px 40px;border-bottom:0.5px solid var(--border);}
+.tool-hero-inner{max-width:1080px;margin:0 auto;}
+.tool-hero-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;}
+.tool-num-badge{background:var(--tool-color);color:#fff;font-size:11px;font-weight:500;padding:3px 12px;border-radius:var(--r-pill);white-space:nowrap;flex-shrink:0;margin-top:4px;}
+.tool-hero h1{font-size:22px;font-weight:500;color:var(--text-primary);line-height:1.4;}
+.tool-hero-sub{font-size:13px;color:var(--text-secondary);max-width:640px;line-height:1.7;}
+.tool-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.tool-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--tool-mid);background:var(--tool-bg);border-radius:var(--r-pill);padding:4px 12px;}
+
+/* ─── LAYOUT ──────────────────────────────── */
+.layout-wrap{max-width:1080px;margin:0 auto;padding:28px 32px 60px;display:flex;gap:24px;align-items:flex-start;}
+.main-col{flex:1;min-width:0;display:flex;flex-direction:column;gap:20px;}
+.side-col{width:268px;flex-shrink:0;display:flex;flex-direction:column;gap:16px;}
+
+/* ─── CARD ────────────────────────────────── */
+.card{background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);padding:20px 24px;}
+.card-hd{display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;}
+.card-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.card-title{font-size:14px;font-weight:500;color:var(--text-primary);}
+.card-sub{font-size:11.5px;color:var(--text-muted);margin-top:2px;}
+.card-hd-right{margin-left:auto;flex-shrink:0;}
+
+/* ─── BADGE ───────────────────────────────── */
+.badge-only{display:inline-block;background:var(--tool-color);color:#fff;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);letter-spacing:0.03em;white-space:nowrap;}
+
+/* ─── PREF / AREA CHIPS ───────────────────── */
+.pref-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;}
+.pref-tab{padding:5px 14px;border-radius:var(--r-pill);border:1.5px solid var(--border);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s;background:var(--bg-white);color:var(--text-secondary);}
+.pref-tab:hover{border-color:var(--tool-mid);color:var(--tool-mid);}
+.pref-tab.active{background:var(--tool-color);border-color:var(--tool-color);color:#fff;}
+.area-chips{display:flex;gap:6px;flex-wrap:wrap;min-height:36px;margin-bottom:14px;}
+.area-chip{padding:5px 12px;border-radius:var(--r-pill);border:1.5px solid var(--border);font-size:12px;cursor:pointer;transition:all 0.15s;background:var(--bg-white);color:var(--text-secondary);}
+.area-chip:hover{border-color:var(--tool-mid);color:var(--tool-mid);}
+.area-chip.sel0{background:var(--tool-color);border-color:var(--tool-color);color:#fff;}
+.area-chip.sel1{background:#C62828;border-color:#C62828;color:#fff;}
+.area-chip.sel2{background:#085041;border-color:#085041;color:#fff;}
+.sel-areas-wrap{background:var(--bg-page);border-radius:var(--r-md);padding:10px 14px;}
+.sel-label{font-size:11px;color:var(--text-muted);margin-bottom:6px;}
+.sel-areas{display:flex;gap:8px;flex-wrap:wrap;min-height:26px;}
+.sel-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px 4px 12px;border-radius:var(--r-pill);font-size:12px;font-weight:500;color:#fff;}
+.sel-tag.st0{background:var(--tool-color);}
+.sel-tag.st1{background:#C62828;}
+.sel-tag.st2{background:#085041;}
+.sel-tag-x{background:rgba(255,255,255,0.28);border:none;border-radius:50%;width:15px;height:15px;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;line-height:1;}
+.max-notice{font-size:11.5px;color:var(--text-muted);margin-top:8px;}
+
+/* ─── LIFESTYLE WEIGHTS ───────────────────── */
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 24px;}
+.ls-item{}
+.ls-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.ls-label{font-size:12px;font-weight:500;color:var(--text-secondary);}
+.ls-val{font-size:12px;font-weight:500;color:var(--tool-mid);min-width:34px;text-align:right;}
+input[type=range].ls-range{width:100%;margin:0;accent-color:var(--tool-color);cursor:pointer;}
+
+/* ─── WEIGHTED SCORE ──────────────────────── */
+.wscore-wrap{display:flex;align-items:center;gap:24px;}
+.wscore-main{text-align:center;flex-shrink:0;}
+.wscore-num{font-size:52px;font-weight:500;color:var(--tool-color);line-height:1;}
+.wscore-pts{font-size:14px;color:var(--tool-mid);}
+.wscore-lbl{font-size:11px;color:var(--text-muted);margin-top:4px;}
+.wscore-info{flex:1;}
+.wscore-title{font-size:13px;font-weight:500;color:var(--tool-color);margin-bottom:4px;}
+.wscore-area-name{font-size:12px;color:var(--text-secondary);margin-bottom:4px;}
+.wscore-breakdown{font-size:12px;color:var(--text-secondary);line-height:1.7;}
+.wscore-divider{width:1px;height:60px;background:var(--border);flex-shrink:0;}
+
+/* ─── CHART ───────────────────────────────── */
+.chart-outer{max-width:380px;margin:0 auto;}
+
+/* ─── SCORE BARS ──────────────────────────── */
+.sbar-list{display:flex;flex-direction:column;gap:10px;}
+.sbar-item{}
+.sbar-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.sbar-name{font-size:12px;color:var(--text-secondary);}
+.sbar-score{font-size:12px;font-weight:500;color:var(--tool-color);}
+.sbar-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.sbar-fill{height:100%;background:linear-gradient(to right,var(--tool-mid),var(--tool-color));border-radius:3px;transition:width 0.4s ease;}
+
+/* ─── FACILITIES ──────────────────────────── */
+.fac-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.fac-card{background:var(--bg-page);border-radius:var(--r-md);padding:12px 14px;}
+.fac-icon{font-size:16px;margin-bottom:3px;}
+.fac-type{font-size:10.5px;color:var(--text-muted);margin-bottom:2px;}
+.fac-val{font-size:12.5px;font-weight:500;color:var(--text-primary);}
+
+/* ─── COMPARE TABLE ───────────────────────── */
+.cmp-scroll{overflow-x:auto;}
+.cmp-table{width:100%;border-collapse:collapse;font-size:12px;min-width:360px;}
+.cmp-table th,.cmp-table td{padding:8px 10px;border-bottom:0.5px solid var(--border);text-align:center;}
+.cmp-table th:first-child,.cmp-table td:first-child{text-align:left;font-size:11.5px;color:var(--text-secondary);}
+.cmp-h0{color:var(--tool-color);}
+.cmp-h1{color:#C62828;}
+.cmp-h2{color:#085041;}
+.cmp-best{font-weight:500;color:var(--tool-color);}
+.cmp-ws-row{background:var(--tool-bg);}
+.cmp-ws-row td{font-weight:500;}
+
+/* ─── VOICES ──────────────────────────────── */
+.voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.voice-card{background:var(--bg-page);border-radius:var(--r-md);padding:14px 16px;}
+.voice-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.voice-avatar{width:34px;height:34px;border-radius:50%;background:var(--tool-color);color:#fff;font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.voice-name{font-size:12.5px;font-weight:500;color:var(--text-primary);}
+.voice-meta{font-size:11px;color:var(--text-muted);}
+.voice-text{font-size:12px;color:var(--text-secondary);line-height:1.7;}
+.btn-more{display:inline-flex;align-items:center;gap:4px;margin-top:14px;font-size:12px;color:var(--tool-mid);border-bottom:1px solid var(--tool-light);padding-bottom:1px;}
+
+/* ─── SHARE CARD ──────────────────────────── */
+.share-card{background:var(--tool-bg);border:1.5px solid var(--tool-light);border-radius:var(--r-lg);padding:20px 24px;text-align:center;}
+.share-title{font-size:14px;font-weight:500;color:var(--tool-color);margin-bottom:6px;}
+.share-sub{font-size:12px;color:var(--text-secondary);margin-bottom:16px;line-height:1.7;}
+.btn-share{display:inline-flex;align-items:center;gap:8px;background:var(--line);color:#fff;border:none;padding:12px 28px;border-radius:var(--r-pill);font-size:13.5px;font-weight:500;cursor:pointer;transition:background 0.15s;}
+.btn-share:hover{background:var(--line-h);}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.sb-cta{background:var(--green-dark);border-radius:var(--r-lg);padding:20px 20px 18px;}
+.sb-cta-ey{font-size:10px;letter-spacing:0.18em;color:var(--green-light);font-weight:500;margin-bottom:6px;}
+.sb-cta-ttl{font-size:14px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:12px;}
+.sb-cta-btn{display:block;background:var(--green-mid);color:#fff;text-align:center;padding:10px;border-radius:var(--r-md);font-size:13px;font-weight:500;transition:background 0.15s;}
+.sb-cta-btn:hover{background:#18856B;color:#fff;}
+.sb-tools{background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);padding:16px 18px;}
+.sb-tools-ttl{font-size:12px;font-weight:500;color:var(--text-muted);margin-bottom:10px;}
+.sb-tool-link{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--text-secondary);transition:color 0.12s;}
+.sb-tool-link:last-child{border-bottom:none;}
+.sb-tool-link:hover{color:var(--text-primary);}
+.sb-tool-num{font-size:10px;padding:1px 6px;border-radius:var(--r-pill);font-weight:500;}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ──────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── TOAST ───────────────────────────────── */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(16px);background:rgba(30,30,30,0.92);color:#fff;padding:10px 20px;border-radius:var(--r-pill);font-size:13px;opacity:0;transition:all 0.25s;z-index:999;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+  .tool-nav{top:52px;}
+}
+@media(max-width:900px){
+  .layout-wrap{flex-direction:column;padding:20px 20px 48px;}
+  .side-col{width:100%;}
+  .ls-grid{grid-template-columns:1fr;}
+  .fac-grid{grid-template-columns:repeat(2,1fr);}
+  .voices-grid{grid-template-columns:1fr;}
+  .wscore-wrap{flex-direction:column;gap:12px;}
+  .wscore-divider{display:none;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:640px){
+  .tool-hero{padding:24px 20px 28px;}
+  .tool-nav-inner{padding:10px 16px;}
+  .util-bar{padding:0 16px;}
+  .main-hd{padding:12px 16px;}
+}
+@media(max-width:480px){
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─────────────────────────────── -->
+<header class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="#">コミュニティ</a>
+        <a href="#">イベント</a>
+        <a href="#">コラム</a>
+      </div>
+      <a href="https://lin.ee/sumumu" class="btn-util" target="_blank">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect width="16" height="16" rx="8" fill="#06C755"/><path d="M13 7.3C13 4.93 10.76 3 8 3S3 4.93 3 7.3c0 2.12 1.88 3.9 4.41 4.23.17.04.41.11.47.26.05.13.03.34.02.47l-.08.46c-.02.13-.1.52.46.28.56-.24 3.03-1.78 4.13-3.05A3.87 3.87 0 0013 7.3z" fill="#fff"/></svg>
+        LINEで相談する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0ta{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0ta" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <div class="ni"><span class="nl">シミュレーション</span><div class="nd"><a href="sumumu-tools.html">一覧を見る</a><a href="sumumu-tool-loan.html">ローン返済</a><a href="sumumu-tool-borrowing.html">借入可能額</a></div></div>
+      <div class="ni"><span class="nl">物件を探す</span><div class="nd"><a href="#">エリアから探す</a><a href="sumumu-kinki.html">近畿エリア</a></div></div>
+      <div class="ni"><span class="nl">コンテンツ</span><div class="nd"><a href="#">コラム</a><a href="#">先輩の声</a></div></div>
+      <div class="ni"><span class="nl">サービスについて</span><div class="nd"><a href="#">すむむ。とは</a><a href="#">よくある質問</a></div></div>
+    </nav>
+    <button class="hamb" id="hambBtn" onclick="document.getElementById('mobNav').classList.toggle('open');this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-tools.html" class="mob-link">シミュレーション一覧</a>
+        <a href="sumumu-tool-loan.html" class="mob-link">ローン返済シミュレーター</a>
+        <a href="sumumu-tool-borrowing.html" class="mob-link">借入可能額 & 住み替え</a>
+        <a href="sumumu-tool-cost.html" class="mob-link">購入コスト全体像</a>
+        <a href="sumumu-tool-rentbuy.html" class="mob-link">賃貸 vs 購入比較</a>
+        <a href="sumumu-tool-area.html" class="mob-link">エリア診断</a>
+        <a href="sumumu-tool-kosodate.html" class="mob-link">子育て診断</a>
+        <a href="https://lin.ee/sumumu" class="mob-cta" target="_blank">LINEでコンシェルジュに相談する</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── TOOL NAV ────────────────────────────── -->
+<nav class="tool-nav">
+  <div class="tool-nav-inner">
+    <a href="sumumu-tool-loan.html" class="tnav"><span class="tnav-num">01</span> ローン返済</a>
+    <a href="sumumu-tool-borrowing.html" class="tnav"><span class="tnav-num">02</span> 借入可能額</a>
+    <a href="sumumu-tool-cost.html" class="tnav"><span class="tnav-num">03</span> 購入コスト</a>
+    <a href="sumumu-tool-rentbuy.html" class="tnav"><span class="tnav-num">04</span> 賃貸 vs 購入</a>
+    <a href="sumumu-tool-area.html" class="tnav active"><span class="tnav-num">05</span> エリア診断</a>
+    <a href="sumumu-tool-kosodate.html" class="tnav"><span class="tnav-num">06</span> 子育て診断</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ────────────────────────────────── -->
+<section class="tool-hero">
+  <div class="tool-hero-inner">
+    <div class="tool-hero-top">
+      <span class="tool-num-badge">TOOL 05</span>
+      <h1>エリア診断<br>— あなたの優先度で街を選ぶ</h1>
+    </div>
+    <p class="tool-hero-sub">住みたいエリアを最大3つ同時比較。「子育て」「通勤」「自然」など5つのライフスタイル軸に重みをつけると、あなただけの加重スコアが出ます。単純な点数ではわからない「本当に合う街」を見つけてください。</p>
+    <div class="tool-chips">
+      <span class="tool-chip">📍 最大3エリア同時比較</span>
+      <span class="tool-chip">⚖️ ライフスタイル重み付け</span>
+      <span class="tool-chip">📊 7軸レーダーチャート</span>
+      <span class="tool-chip">💬 先輩の声マッチング</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LAYOUT ──────────────────────────────── -->
+<div class="layout-wrap">
+
+  <!-- ─── MAIN ─────────────────────────────── -->
+  <main class="main-col">
+
+    <!-- エリア選択 -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">📍</span>
+        <div>
+          <div class="card-title">比較エリアを選ぶ</div>
+          <div class="card-sub">最大3エリアまで同時に比較できます</div>
+        </div>
+      </div>
+      <div id="pref-tabs" class="pref-tabs"></div>
+      <div id="area-chips" class="area-chips"></div>
+      <div class="sel-areas-wrap">
+        <div class="sel-label">選択中エリア（最大3）</div>
+        <div id="sel-tags" class="sel-areas"></div>
+      </div>
+    </div>
+
+    <!-- ライフスタイル重み付け -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">⚖️</span>
+        <div>
+          <div class="card-title">ライフスタイル重み付け</div>
+          <div class="card-sub">あなたが重視する軸を0〜100%で調整してください</div>
+        </div>
+        <div class="card-hd-right"><span class="badge-only">すむむ。のみ</span></div>
+      </div>
+      <div class="ls-grid">
+        <div class="ls-item">
+          <div class="ls-hd"><span class="ls-label">🧒 子育て環境</span><span class="ls-val" id="wval-ikuji">40%</span></div>
+          <input type="range" class="ls-range" id="rng-ikuji" min="0" max="100" step="10" value="40" oninput="setWeight('ikuji',this.value)">
+        </div>
+        <div class="ls-item">
+          <div class="ls-hd"><span class="ls-label">🚃 通勤利便性</span><span class="ls-val" id="wval-tsukin">40%</span></div>
+          <input type="range" class="ls-range" id="rng-tsukin" min="0" max="100" step="10" value="40" oninput="setWeight('tsukin',this.value)">
+        </div>
+        <div class="ls-item">
+          <div class="ls-hd"><span class="ls-label">🛒 生活利便性</span><span class="ls-val" id="wval-seikatsu">40%</span></div>
+          <input type="range" class="ls-range" id="rng-seikatsu" min="0" max="100" step="10" value="40" oninput="setWeight('seikatsu',this.value)">
+        </div>
+        <div class="ls-item">
+          <div class="ls-hd"><span class="ls-label">🌿 自然・静穏</span><span class="ls-val" id="wval-shizen">20%</span></div>
+          <input type="range" class="ls-range" id="rng-shizen" min="0" max="100" step="10" value="20" oninput="setWeight('shizen',this.value)">
+        </div>
+        <div class="ls-item">
+          <div class="ls-hd"><span class="ls-label">💰 住宅コスト</span><span class="ls-val" id="wval-cost">20%</span></div>
+          <input type="range" class="ls-range" id="rng-cost" min="0" max="100" step="10" value="20" oninput="setWeight('cost',this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- 加重スコアバナー -->
+    <div class="card" style="border-color:var(--tool-light);background:var(--tool-bg);">
+      <div class="card-hd">
+        <span class="card-icon">🎯</span>
+        <div>
+          <div class="card-title">ライフスタイル加重スコア</div>
+          <div class="card-sub">あなたの優先度を反映した総合スコア</div>
+        </div>
+        <div class="card-hd-right"><span class="badge-only">すむむ。のみ</span></div>
+      </div>
+      <div class="wscore-wrap">
+        <div class="wscore-main">
+          <div class="wscore-num" id="wscore-num">—</div>
+          <div class="wscore-pts">点</div>
+          <div class="wscore-lbl" id="wscore-lbl">—</div>
+        </div>
+        <div class="wscore-divider"></div>
+        <div class="wscore-info">
+          <div class="wscore-title" id="wscore-area-name">—</div>
+          <div class="wscore-breakdown" id="wscore-breakdown">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- レーダーチャート -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">📊</span>
+        <div>
+          <div class="card-title">7軸 エリア比較レーダーチャート</div>
+          <div class="card-sub">選択したエリアを7つの指標で重ね比較</div>
+        </div>
+        <div class="card-hd-right"><span class="badge-only">すむむ。のみ</span></div>
+      </div>
+      <div class="chart-outer">
+        <canvas id="areaChart"></canvas>
+      </div>
+    </div>
+
+    <!-- スコア詳細 -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">📈</span>
+        <div>
+          <div class="card-title">スコア詳細 — <span id="score-area-name" style="color:var(--tool-color);"></span></div>
+          <div class="card-sub">7項目の詳細スコア（100点満点）</div>
+        </div>
+      </div>
+      <div id="score-bars" class="sbar-list"></div>
+    </div>
+
+    <!-- 周辺環境データ -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">🏙️</span>
+        <div>
+          <div class="card-title">周辺環境データ — <span id="fac-area" style="color:var(--tool-color);"></span></div>
+          <div class="card-sub">施設・交通・コスト概要</div>
+        </div>
+      </div>
+      <div class="fac-grid">
+        <div class="fac-card"><div class="fac-icon">🚃</div><div class="fac-type">最寄り駅（目安）</div><div class="fac-val" id="fac-station">—</div></div>
+        <div class="fac-card"><div class="fac-icon">🛒</div><div class="fac-type">スーパー（周辺）</div><div class="fac-val" id="fac-supermarket">—</div></div>
+        <div class="fac-card"><div class="fac-icon">🏥</div><div class="fac-type">病院・クリニック</div><div class="fac-val" id="fac-hospital">—</div></div>
+        <div class="fac-card"><div class="fac-icon">🏫</div><div class="fac-type">小中学校（学区内）</div><div class="fac-val" id="fac-school">—</div></div>
+        <div class="fac-card"><div class="fac-icon">🏠</div><div class="fac-type">想定賃料（月額）</div><div class="fac-val" id="fac-rent">—</div></div>
+        <div class="fac-card"><div class="fac-icon">🏡</div><div class="fac-type">想定購入価格</div><div class="fac-val" id="fac-buy">—</div></div>
+      </div>
+    </div>
+
+    <!-- 3エリア比較表 -->
+    <div class="card" id="compare-section" style="display:none;">
+      <div class="card-hd">
+        <span class="card-icon">⚖️</span>
+        <div>
+          <div class="card-title">3エリア並列比較表</div>
+          <div class="card-sub">加重スコアも含めて一目比較</div>
+        </div>
+        <div class="card-hd-right"><span class="badge-only">すむむ。のみ</span></div>
+      </div>
+      <div class="cmp-scroll">
+        <div id="cmp-table"></div>
+      </div>
+    </div>
+
+    <!-- 先輩の声 -->
+    <div class="card">
+      <div class="card-hd">
+        <span class="card-icon">💬</span>
+        <div>
+          <div class="card-title">先輩の声 — <span id="voices-area" style="color:var(--tool-color);"></span></div>
+          <div class="card-sub">実際に住んでいる・住み替えた先輩から</div>
+        </div>
+      </div>
+      <div id="voices-list" class="voices-grid"></div>
+      <a href="#" class="btn-more">先輩の体験談をもっと見る →</a>
+    </div>
+
+    <!-- 共有カード -->
+    <div class="share-card">
+      <div class="share-title">この診断結果をコンシェルジュに共有する</div>
+      <div class="share-sub">エリアの絞り込みや優先順位の整理をコンシェルジュが一緒に考えます。<br>費用・学区・通勤など気になる点をまとめてご相談ください。</div>
+      <button class="btn-share" onclick="copyAndLine()">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#06C755"/><path d="M16.25 9.16C16.25 6.16 13.45 3.75 10 3.75S3.75 6.16 3.75 9.16c0 2.65 2.35 4.87 5.51 5.28.21.05.51.14.59.33.07.17.04.43.02.59l-.1.57c-.03.17-.13.65.57.35.7-.3 3.79-2.23 5.16-3.82a4.84 4.84 0 001.75-3.3z" fill="#fff"/></svg>
+        LINEでコンシェルジュに相談する
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ─── SIDEBAR ────────────────────────────── -->
+  <aside class="side-col">
+    <div class="sb-cta">
+      <div class="sb-cta-ey">CONCIERGE</div>
+      <div class="sb-cta-ttl">エリア選びに迷ったら、コンシェルジュに相談</div>
+      <a href="https://lin.ee/sumumu" class="sb-cta-btn" target="_blank">無料で相談する →</a>
+    </div>
+    <div class="sb-tools">
+      <div class="sb-tools-ttl">他のシミュレーター</div>
+      <a href="sumumu-tool-loan.html" class="sb-tool-link">
+        <span class="sb-tool-num" style="background:var(--green-bg);color:var(--green-dark);">01</span> ローン返済
+      </a>
+      <a href="sumumu-tool-borrowing.html" class="sb-tool-link">
+        <span class="sb-tool-num" style="background:var(--purple-bg,#EEEDFE);color:#534AB7;">02</span> 借入可能額
+      </a>
+      <a href="sumumu-tool-cost.html" class="sb-tool-link">
+        <span class="sb-tool-num" style="background:var(--orange-bg);color:var(--orange-dark);">03</span> 購入コスト
+      </a>
+      <a href="sumumu-tool-rentbuy.html" class="sb-tool-link">
+        <span class="sb-tool-num" style="background:var(--blue-bg);color:var(--blue-dark);">04</span> 賃貸 vs 購入
+      </a>
+      <a href="sumumu-tool-kosodate.html" class="sb-tool-link">
+        <span class="sb-tool-num" style="background:var(--green-bg);color:var(--green-dark);">06</span> 子育て診断
+      </a>
+    </div>
+  </aside>
+
+</div><!-- /layout-wrap -->
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">エリアを絞り込んだら、次は専門家に話してみよう</h2>
+    <p class="concierge-lead">診断結果をそのまま持ち込んで相談できます。<br>中立な立場の専任スタッフが、エリアの優先順位を一緒に整理します。</p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">コンシェルジュに相談する →</a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>気持ちが固まったら LINE でコミュニティに参加してみてください。</p>
+    <ul class="cta-catches">
+      <li>登録30秒</li><li>営業・勧誘なし</li><li>完全無料</li><li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="10" fill="#06C755"/><path d="M16.25 9.16C16.25 6.16 13.45 3.75 10 3.75S3.75 6.16 3.75 9.16c0 2.65 2.35 4.87 5.51 5.28.21.05.51.14.59.33.07.17.04.43.02.59l-.1.57c-.03.17-.13.65.57.35.7-.3 3.79-2.23 5.16-3.82a4.84 4.84 0 001.75-3.3z" fill="#fff"/></svg>
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst1{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g><path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/><path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/><path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/><path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/><path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/></g>
+            </g>
+            <path class="fst1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">すべて</a></li><li><a href="sumumu-guide.html?cat=fund">資金計画</a></li><li><a href="sumumu-guide.html?cat=loan">住宅ローン</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tools.html">すべてのツール</a></li><li><a href="sumumu-tool-loan.html">ローン返済</a></li><li><a href="sumumu-tool-area.html">エリア診断</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── DATA ───────────────────────────────────── */
+const AREAS = {
+  osaka_kita:      { pref:'osaka', label:'梅田・北区（大阪市）',    scores:{traffic:97,education:70,commercial:98,medical:85,nature:30,safety:62,cost:28}, facilities:{nearStation:'JR大阪駅（徒歩5分圏）',supermarket:'15件以上',hospital:'12件以上',school:'区内6校'}, avgRent:13.5, avgBuy:5200 },
+  osaka_tennoji:   { pref:'osaka', label:'天王寺区（大阪市）',      scores:{traffic:92,education:75,commercial:88,medical:82,nature:40,safety:65,cost:38}, facilities:{nearStation:'JR天王寺駅（徒歩8分圏）',supermarket:'12件',hospital:'10件',school:'区内8校'}, avgRent:10.8, avgBuy:4500 },
+  osaka_fukushima: { pref:'osaka', label:'福島区（大阪市）',        scores:{traffic:88,education:72,commercial:80,medical:75,nature:35,safety:70,cost:45}, facilities:{nearStation:'JR福島駅（徒歩5分圏）',supermarket:'8件',hospital:'7件',school:'区内5校'}, avgRent:9.5, avgBuy:4200 },
+  osaka_sumiyoshi: { pref:'osaka', label:'住吉区（大阪市）',        scores:{traffic:75,education:80,commercial:70,medical:72,nature:55,safety:78,cost:58}, facilities:{nearStation:'南海住吉大社駅（徒歩10分圏）',supermarket:'9件',hospital:'8件',school:'区内10校'}, avgRent:8.0, avgBuy:3600 },
+  osaka_toyonaka:  { pref:'osaka', label:'豊中市',                  scores:{traffic:85,education:85,commercial:78,medical:80,nature:60,safety:82,cost:48}, facilities:{nearStation:'阪急豊中駅（徒歩10分圏）',supermarket:'11件',hospital:'9件',school:'市内20校以上'}, avgRent:9.2, avgBuy:4100 },
+  osaka_suita:     { pref:'osaka', label:'吹田市',                  scores:{traffic:83,education:82,commercial:75,medical:78,nature:65,safety:80,cost:50}, facilities:{nearStation:'阪急吹田駅（徒歩8分圏）',supermarket:'10件',hospital:'8件',school:'市内16校'}, avgRent:8.8, avgBuy:3900 },
+  osaka_minoh:     { pref:'osaka', label:'箕面市',                  scores:{traffic:72,education:88,commercial:65,medical:70,nature:90,safety:90,cost:55}, facilities:{nearStation:'阪急箕面駅（徒歩15分圏）',supermarket:'7件',hospital:'6件',school:'市内12校'}, avgRent:8.0, avgBuy:3500 },
+  osaka_sakai:     { pref:'osaka', label:'堺市',                    scores:{traffic:78,education:75,commercial:72,medical:75,nature:55,safety:72,cost:68}, facilities:{nearStation:'南海堺駅（徒歩12分圏）',supermarket:'13件',hospital:'10件',school:'市内40校以上'}, avgRent:7.5, avgBuy:3200 },
+
+  kyoto_sakyo:     { pref:'kyoto', label:'左京区（京都市）',        scores:{traffic:72,education:92,commercial:68,medical:78,nature:80,safety:85,cost:45}, facilities:{nearStation:'市営地下鉄北山駅（徒歩10分圏）',supermarket:'8件',hospital:'9件',school:'区内12校'}, avgRent:8.5, avgBuy:4000 },
+  kyoto_fushimi:   { pref:'kyoto', label:'伏見区（京都市）',        scores:{traffic:80,education:78,commercial:75,medical:76,nature:65,safety:80,cost:52}, facilities:{nearStation:'近鉄竹田駅（徒歩10分圏）',supermarket:'11件',hospital:'8件',school:'区内15校'}, avgRent:8.0, avgBuy:3700 },
+  kyoto_uji:       { pref:'kyoto', label:'宇治市',                  scores:{traffic:75,education:80,commercial:70,medical:72,nature:75,safety:82,cost:62}, facilities:{nearStation:'JR宇治駅（徒歩12分圏）',supermarket:'8件',hospital:'6件',school:'市内14校'}, avgRent:7.2, avgBuy:3200 },
+  kyoto_nagaokakyo:{ pref:'kyoto', label:'長岡京市',                scores:{traffic:82,education:82,commercial:68,medical:70,nature:70,safety:85,cost:55}, facilities:{nearStation:'阪急長岡天神駅（徒歩8分圏）',supermarket:'7件',hospital:'5件',school:'市内9校'}, avgRent:7.8, avgBuy:3600 },
+
+  hyogo_nada:      { pref:'hyogo', label:'灘区（神戸市）',          scores:{traffic:85,education:85,commercial:78,medical:80,nature:70,safety:80,cost:48}, facilities:{nearStation:'阪急王子公園駅（徒歩10分圏）',supermarket:'9件',hospital:'8件',school:'区内10校'}, avgRent:9.0, avgBuy:4100 },
+  hyogo_nishinomiya:{ pref:'hyogo',label:'西宮市',                  scores:{traffic:83,education:88,commercial:80,medical:80,nature:65,safety:85,cost:45}, facilities:{nearStation:'阪急西宮北口駅（徒歩10分圏）',supermarket:'12件',hospital:'10件',school:'市内30校以上'}, avgRent:9.5, avgBuy:4400 },
+  hyogo_ashiya:    { pref:'hyogo', label:'芦屋市',                  scores:{traffic:80,education:92,commercial:72,medical:78,nature:72,safety:92,cost:25}, facilities:{nearStation:'JR芦屋駅（徒歩8分圏）',supermarket:'6件',hospital:'7件',school:'市内6校'}, avgRent:12.0, avgBuy:6500 },
+  hyogo_akashi:    { pref:'hyogo', label:'明石市',                  scores:{traffic:78,education:80,commercial:72,medical:75,nature:68,safety:82,cost:62}, facilities:{nearStation:'JR明石駅（徒歩10分圏）',supermarket:'10件',hospital:'7件',school:'市内20校'}, avgRent:7.5, avgBuy:3300 },
+
+  shiga_otsu:      { pref:'shiga', label:'大津市',                  scores:{traffic:78,education:78,commercial:68,medical:72,nature:85,safety:85,cost:65}, facilities:{nearStation:'JR大津駅（徒歩10分圏）',supermarket:'9件',hospital:'7件',school:'市内35校'}, avgRent:7.0, avgBuy:3000 },
+  shiga_kusatsu:   { pref:'shiga', label:'草津市',                  scores:{traffic:82,education:80,commercial:72,medical:74,nature:78,safety:88,cost:68}, facilities:{nearStation:'JR草津駅（徒歩8分圏）',supermarket:'10件',hospital:'6件',school:'市内20校'}, avgRent:7.2, avgBuy:2900 },
+  shiga_moriyama:  { pref:'shiga', label:'守山市',                  scores:{traffic:75,education:80,commercial:62,medical:68,nature:82,safety:90,cost:72}, facilities:{nearStation:'JR守山駅（徒歩15分圏）',supermarket:'7件',hospital:'4件',school:'市内12校'}, avgRent:6.5, avgBuy:2700 },
+
+  nara_nara:       { pref:'nara',  label:'奈良市',                  scores:{traffic:70,education:80,commercial:65,medical:70,nature:80,safety:85,cost:70}, facilities:{nearStation:'近鉄大和西大寺駅（徒歩15分圏）',supermarket:'8件',hospital:'7件',school:'市内30校'}, avgRent:6.8, avgBuy:2800 },
+  nara_ikoma:      { pref:'nara',  label:'生駒市',                  scores:{traffic:75,education:85,commercial:60,medical:68,nature:85,safety:92,cost:65}, facilities:{nearStation:'近鉄生駒駅（徒歩10分圏）',supermarket:'6件',hospital:'5件',school:'市内15校'}, avgRent:7.0, avgBuy:2900 },
+};
+
+const PREFS = {
+  osaka: { label:'大阪府', areas:['osaka_kita','osaka_tennoji','osaka_fukushima','osaka_sumiyoshi','osaka_toyonaka','osaka_suita','osaka_minoh','osaka_sakai'] },
+  kyoto: { label:'京都府', areas:['kyoto_sakyo','kyoto_fushimi','kyoto_uji','kyoto_nagaokakyo'] },
+  hyogo: { label:'兵庫県', areas:['hyogo_nada','hyogo_nishinomiya','hyogo_ashiya','hyogo_akashi'] },
+  shiga: { label:'滋賀県', areas:['shiga_otsu','shiga_kusatsu','shiga_moriyama'] },
+  nara:  { label:'奈良県', areas:['nara_nara','nara_ikoma'] },
+};
+
+const AREA_COLORS = [
+  { border:'#534AB7', bg:'rgba(83,74,183,0.12)' },
+  { border:'#C62828', bg:'rgba(198,40,40,0.10)' },
+  { border:'#085041', bg:'rgba(8,80,65,0.10)' },
+];
+
+const VOICES = [
+  { areas:['osaka_toyonaka','osaka_suita'], name:'K.Mさん（43歳）', label:'豊中市在住 3年', phase:'子育て世帯', text:'梅田まで電車で10分なのに、住宅街は静かで子どもの通学も安全。スーパーも徒歩圏に複数あって毎日の生活がラク。住み替えてよかった。' },
+  { areas:['osaka_minoh'], name:'Y.Hさん（46歳）', label:'箕面市在住 5年', phase:'子育て世帯', text:'箕面の滝が近く自然が豊か。子どもの学校の評判もよく、治安のよさは格別。梅田まで急行で30分ほどかかるのが唯一の難点ですが、慣れます。' },
+  { areas:['osaka_kita','osaka_fukushima'], name:'T.Sさん（38歳）', label:'北区（梅田）在住 2年', phase:'DINKS', text:'どこへ行くにも便利で職場まで徒歩10分。ただ物価は高め。ファミリー向けの広い部屋は予算オーバーになりがちなので、二人暮らしに向いている。' },
+  { areas:['hyogo_nishinomiya','hyogo_nada'], name:'A.Nさん（41歳）', label:'西宮市在住 4年', phase:'子育て世帯', text:'阪急沿線で大阪・神戸の両方に出やすい。学区が充実していて中学受験を考えている方にも人気のエリア。住環境は申し分ない。' },
+  { areas:['hyogo_ashiya'], name:'R.Fさん（52歳）', label:'芦屋市在住 8年', phase:'ステップアップ', text:'住宅価格は高いが、それに見合う生活環境。教育水準が高く、安全で、街並みが美しい。長く住み続けたいと思える街。' },
+  { areas:['shiga_kusatsu','shiga_otsu','shiga_moriyama'], name:'H.Mさん（39歳）', label:'草津市在住 3年', phase:'子育て世帯', text:'琵琶湖が近くて週末のアウトドアが充実。マンション価格は大阪より2〜3割安く広い部屋に住めた。JR新快速で京都15分・大阪35分とアクセスも思ったより良い。' },
+  { areas:['nara_ikoma','nara_nara'], name:'S.Kさん（44歳）', label:'生駒市在住 6年', phase:'子育て世帯', text:'近鉄で大阪・奈良の両方に出られます。山に近くて子どもが自然の中で育てられる。治安のよさは関西屈指。住宅コストが低めで広い家に住めた。' },
+  { areas:['kyoto_sakyo','kyoto_fushimi'], name:'C.Wさん（36歳）', label:'左京区（京都市）在住 3年', phase:'DINKS', text:'大学病院や京大が近く、知的な雰囲気が好き。自然も豊かで鴨川散歩が日課に。京都特有の文化があり外から来た人には最初少し独特に感じるかも。' },
+];
+
+/* ─── STATE ──────────────────────────────────── */
+let currentPref = 'osaka';
+let selectedAreas = ['osaka_toyonaka'];
+let weights = { ikuji:40, tsukin:40, seikatsu:40, shizen:20, cost:20 };
+let areaChart = null;
+const LINE_URL = 'https://lin.ee/sumumu';
+
+/* ─── WEIGHTED SCORE ─────────────────────────── */
+function calcWeighted(id) {
+  const s = AREAS[id].scores;
+  const w = weights;
+  const total = w.ikuji + w.tsukin + w.seikatsu + w.shizen + w.cost;
+  if (total === 0) return Math.round((s.traffic+s.education+s.commercial+s.medical+s.nature+s.safety+s.cost)/7);
+  const sc_ikuji    = s.education*0.4 + s.safety*0.35 + s.medical*0.25;
+  const sc_tsukin   = s.traffic;
+  const sc_seikatsu = s.commercial*0.5 + s.medical*0.5;
+  const sc_shizen   = s.nature*0.65 + s.safety*0.35;
+  const sc_cost     = s.cost;
+  return Math.round((sc_ikuji*w.ikuji + sc_tsukin*w.tsukin + sc_seikatsu*w.seikatsu + sc_shizen*w.shizen + sc_cost*w.cost)/total);
+}
+
+/* ─── AREA SELECTION ─────────────────────────── */
+function toggleArea(id) {
+  const idx = selectedAreas.indexOf(id);
+  if (idx >= 0) {
+    if (selectedAreas.length === 1) { showToast('最低1エリアは選択が必要です'); return; }
+    selectedAreas.splice(idx, 1);
+  } else {
+    if (selectedAreas.length >= 3) { showToast('比較できるエリアは最大3つです'); return; }
+    selectedAreas.push(id);
+  }
+  update();
+}
+
+function removeArea(id) {
+  if (selectedAreas.length <= 1) return;
+  selectedAreas = selectedAreas.filter(a => a !== id);
+  update();
+}
+
+function setPref(prefId) {
+  currentPref = prefId;
+  renderPrefTabs();
+  renderAreaChips();
+}
+
+/* ─── RENDER FUNCTIONS ───────────────────────── */
+function renderPrefTabs() {
+  document.getElementById('pref-tabs').innerHTML = Object.entries(PREFS).map(([id,p]) =>
+    `<button class="pref-tab${id===currentPref?' active':''}" onclick="setPref('${id}')">${p.label}</button>`
+  ).join('');
+}
+
+function renderAreaChips() {
+  document.getElementById('area-chips').innerHTML = PREFS[currentPref].areas.map(id => {
+    const si = selectedAreas.indexOf(id);
+    return `<button class="area-chip${si>=0?' sel'+si:''}" onclick="toggleArea('${id}')">${AREAS[id].label}</button>`;
+  }).join('');
+}
+
+function renderSelTags() {
+  const el = document.getElementById('sel-tags');
+  if (!selectedAreas.length) { el.innerHTML='<span style="font-size:12px;color:var(--text-muted);">エリアを選択してください</span>'; return; }
+  el.innerHTML = selectedAreas.map((id,i) =>
+    `<span class="sel-tag st${i}">${AREAS[id].label}<button class="sel-tag-x" onclick="removeArea('${id}')">✕</button></span>`
+  ).join('');
+}
+
+function updateWeightedScore() {
+  const id = selectedAreas[0];
+  const sc = calcWeighted(id);
+  document.getElementById('wscore-num').textContent = sc;
+  const lbl = sc>=82?'このエリアはあなたに非常に合っています':sc>=68?'あなたの優先度によく合っています':sc>=54?'一部の優先度に合っています':'優先度との差があります';
+  document.getElementById('wscore-lbl').textContent = lbl;
+  document.getElementById('wscore-area-name').textContent = AREAS[id].label;
+  const dims = [
+    {label:'子育て環境',w:weights.ikuji},
+    {label:'通勤利便性',w:weights.tsukin},
+    {label:'生活利便性',w:weights.seikatsu},
+    {label:'自然・静穏',w:weights.shizen},
+    {label:'住宅コスト',w:weights.cost},
+  ].filter(d=>d.w>0).sort((a,b)=>b.w-a.w);
+  const top2 = dims.slice(0,2).map(d=>d.label).join('・');
+  document.getElementById('wscore-breakdown').textContent = top2
+    ? `重視している軸：${top2}。これらの評価を重点的に反映しています。`
+    : 'すべての軸を均等に反映した総合スコアです。';
+}
+
+function updateChart() {
+  const labels = ['交通利便性','教育・学区','商業施設','医療機関','自然環境','治安','住宅コスト'];
+  const datasets = selectedAreas.map((id,i) => ({
+    label: AREAS[id].label,
+    data: [AREAS[id].scores.traffic,AREAS[id].scores.education,AREAS[id].scores.commercial,AREAS[id].scores.medical,AREAS[id].scores.nature,AREAS[id].scores.safety,AREAS[id].scores.cost],
+    borderColor: AREA_COLORS[i].border,
+    backgroundColor: AREA_COLORS[i].bg,
+    borderWidth: 2,
+    pointBackgroundColor: AREA_COLORS[i].border,
+    pointRadius: 4,
+    pointHoverRadius: 6,
+  }));
+  if (areaChart) {
+    areaChart.data.datasets = datasets;
+    areaChart.update();
+  } else {
+    areaChart = new Chart(document.getElementById('areaChart').getContext('2d'), {
+      type: 'radar',
+      data: { labels, datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          r: {
+            min: 0, max: 100,
+            ticks: { stepSize:20, font:{size:9}, backdropColor:'transparent' },
+            pointLabels: { font:{size:11,family:'"Hiragino Sans",sans-serif'} },
+            grid: { color:'rgba(0,0,0,0.08)' },
+            angleLines: { color:'rgba(0,0,0,0.08)' },
+          }
+        },
+        plugins: {
+          legend: { position:'bottom', labels:{font:{size:11},padding:16,usePointStyle:true} },
+          tooltip: { enabled:true },
+        },
+      }
+    });
+  }
+}
+
+function updateScoreBars() {
+  const id = selectedAreas[0];
+  const s = AREAS[id].scores;
+  document.getElementById('score-area-name').textContent = AREAS[id].label;
+  document.getElementById('score-bars').innerHTML = [
+    {label:'🚃 交通利便性',v:s.traffic},
+    {label:'🏫 教育・学区',v:s.education},
+    {label:'🛒 商業施設',v:s.commercial},
+    {label:'🏥 医療機関',v:s.medical},
+    {label:'🌿 自然環境',v:s.nature},
+    {label:'🛡 治安',v:s.safety},
+    {label:'💰 住宅コスト',v:s.cost},
+  ].map(d=>`
+    <div class="sbar-item">
+      <div class="sbar-hd"><span class="sbar-name">${d.label}</span><span class="sbar-score">${d.v}</span></div>
+      <div class="sbar-track"><div class="sbar-fill" style="width:${d.v}%"></div></div>
+    </div>`
+  ).join('');
+}
+
+function updateFacilities() {
+  const id = selectedAreas[0];
+  const a = AREAS[id];
+  document.getElementById('fac-area').textContent = a.label;
+  document.getElementById('fac-station').textContent = a.facilities.nearStation;
+  document.getElementById('fac-supermarket').textContent = a.facilities.supermarket;
+  document.getElementById('fac-hospital').textContent = a.facilities.hospital;
+  document.getElementById('fac-school').textContent = a.facilities.school;
+  document.getElementById('fac-rent').textContent = a.avgRent + '万円/月〜';
+  document.getElementById('fac-buy').textContent = a.avgBuy.toLocaleString() + '万円〜';
+}
+
+function updateCompareTable() {
+  const sec = document.getElementById('compare-section');
+  if (selectedAreas.length < 2) { sec.style.display='none'; return; }
+  sec.style.display='block';
+  const rows = [
+    {label:'交通利便性',key:'traffic'},
+    {label:'教育・学区',key:'education'},
+    {label:'商業施設',key:'commercial'},
+    {label:'医療機関',key:'medical'},
+    {label:'自然環境',key:'nature'},
+    {label:'治安',key:'safety'},
+    {label:'住宅コスト',key:'cost'},
+  ];
+  let h = '<table class="cmp-table"><thead><tr><th>項目</th>';
+  selectedAreas.forEach((id,i) => h+=`<th class="cmp-h${i}">${AREAS[id].label}</th>`);
+  h += '</tr></thead><tbody>';
+  rows.forEach(r => {
+    h += `<tr><td>${r.label}</td>`;
+    const vals = selectedAreas.map(id => AREAS[id].scores[r.key]);
+    const mx = Math.max(...vals);
+    vals.forEach(v => h += `<td class="${v===mx&&vals.filter(x=>x===mx).length===1?'cmp-best':''}">${v}</td>`);
+    h += '</tr>';
+  });
+  h += '<tr class="cmp-ws-row"><td>加重スコア</td>';
+  selectedAreas.forEach((id,i) => h+=`<td class="cmp-h${i}">${calcWeighted(id)}</td>`);
+  h += '</tr><tr><td>想定賃料（月額）</td>';
+  selectedAreas.forEach(id => h+=`<td>${AREAS[id].avgRent}万円〜</td>`);
+  h += '</tr><tr><td>想定購入価格</td>';
+  selectedAreas.forEach(id => h+=`<td>${AREAS[id].avgBuy.toLocaleString()}万円〜</td>`);
+  h += '</tr></tbody></table>';
+  document.getElementById('cmp-table').innerHTML = h;
+}
+
+function updateVoices() {
+  const matched = VOICES.filter(v => v.areas.some(a => selectedAreas.includes(a)));
+  const display = matched.length >= 2 ? matched.slice(0,2) : VOICES.slice(0,2);
+  document.getElementById('voices-area').textContent = AREAS[selectedAreas[0]].label + '周辺';
+  document.getElementById('voices-list').innerHTML = display.map(v=>`
+    <div class="voice-card">
+      <div class="voice-head">
+        <div class="voice-avatar">${v.name.slice(0,1)}</div>
+        <div><div class="voice-name">${v.name}</div><div class="voice-meta">${v.label} · ${v.phase}</div></div>
+      </div>
+      <p class="voice-text">「${v.text}」</p>
+    </div>`
+  ).join('');
+}
+
+/* ─── WEIGHT SLIDER ──────────────────────────── */
+function setWeight(key, val) {
+  weights[key] = parseInt(val);
+  document.getElementById('wval-'+key).textContent = val+'%';
+  updateWeightedScore();
+  updateCompareTable();
+}
+
+/* ─── TOAST ──────────────────────────────────── */
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),300); },2500);
+}
+
+/* ─── SHARE ──────────────────────────────────── */
+function copyAndLine() {
+  const id = selectedAreas[0];
+  const s = AREAS[id].scores;
+  const ws = calcWeighted(id);
+  const text = `【すむむ。エリア診断】\nエリア：${AREAS[id].label}\n加重スコア：${ws}点\n交通利便性：${s.traffic} / 教育・学区：${s.education} / 商業施設：${s.commercial}\n医療機関：${s.medical} / 自然環境：${s.nature} / 治安：${s.safety} / 住宅コスト：${s.cost}\n想定賃料：${AREAS[id].avgRent}万円〜 / 想定購入：${AREAS[id].avgBuy.toLocaleString()}万円〜`;
+  navigator.clipboard.writeText(text)
+    .then(()=>{ showToast('診断結果をコピーしました'); setTimeout(()=>window.open(LINE_URL,'_blank'),600); })
+    .catch(()=>window.open(LINE_URL,'_blank'));
+}
+
+/* ─── INIT ───────────────────────────────────── */
+function update() {
+  renderPrefTabs();
+  renderAreaChips();
+  renderSelTags();
+  updateWeightedScore();
+  updateChart();
+  updateScoreBars();
+  updateFacilities();
+  updateCompareTable();
+  updateVoices();
+}
+update();
+</script>
+</body>
+</html>

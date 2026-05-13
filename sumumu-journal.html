@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>先輩の体験談｜すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-lite:#F97272; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010; --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE; --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+  --orange-bg:#FAEEDA; --purple-bg:#EEEDFE; --pink-bg:#FBEAF0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);}
+.line-logo-img{width:16px;height:16px;display:block;flex-shrink:0;object-fit:contain;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.25s;}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:16px;display:flex;flex-direction:column;gap:2px;}
+.mob-link{display:block;padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);border-radius:var(--r-md);}
+.mob-link:hover{background:var(--bg-page);}
+.mob-group{border-bottom:0.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;}
+.mob-parent{padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);border-radius:var(--r-md);}
+.mob-sub a{display:block;padding:8px 16px;font-size:12px;color:var(--text-secondary);}
+.mob-util{display:flex;gap:12px;padding:8px 12px;font-size:12px;color:var(--text-muted);}
+.mob-cta{display:block;margin:10px 0 4px;padding:12px;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:13px;font-weight:500;}
+
+/* ─── HERO ────────────────────────────────── */
+.journal-hero{background:var(--dark-bg);padding:72px 32px 64px;text-align:center;}
+.journal-hero-inner{max-width:720px;margin:0 auto;}
+.hero-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.22em;color:var(--green-light);text-transform:uppercase;margin-bottom:20px;}
+.hero-ttl{font-size:34px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:14px;}
+.hero-lead{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.95;margin-bottom:40px;}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:40px;margin-bottom:44px;}
+.stat-num{font-size:38px;font-weight:500;color:#fff;line-height:1;}
+.stat-num em{font-style:normal;font-size:20px;color:var(--green-light);margin-left:2px;}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.42);margin-top:5px;}
+.stat-div{width:0.5px;height:44px;background:rgba(255,255,255,0.14);}
+.hero-cats{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+.hero-cat-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:var(--r-pill);background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.72);font-size:12.5px;font-weight:500;cursor:pointer;transition:all 0.15s;}
+.hero-cat-btn:hover,.hero-cat-btn.active{background:var(--green-mid);border-color:var(--green-mid);color:#fff;}
+.hero-cat-count{font-size:10.5px;opacity:0.75;}
+
+/* ─── FILTER BAR ──────────────────────────── */
+.filter-bar{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;position:sticky;top:72px;z-index:100;}
+.filter-bar-inner{max-width:1280px;margin:0 auto;}
+.filter-chips{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:10px;}
+.fchip{padding:5px 13px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;border:0.5px solid var(--border);background:var(--bg-white);color:var(--text-secondary);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.fchip:hover{border-color:var(--green-mid);color:var(--green-dark);}
+.fchip.active{background:var(--brand);border-color:var(--brand);color:#fff;}
+.filter-row{display:flex;align-items:center;gap:10px;}
+.filter-search-input{flex:1;max-width:340px;padding:8px 13px;border:0.5px solid var(--border);border-radius:var(--r-md);font-size:13px;background:var(--bg-page);font-family:inherit;color:var(--text-primary);}
+.filter-search-input:focus{outline:none;border-color:var(--green-mid);background:#fff;}
+.filter-sort{padding:8px 12px;border:0.5px solid var(--border);border-radius:var(--r-md);font-size:12px;background:var(--bg-page);font-family:inherit;color:var(--text-secondary);cursor:pointer;}
+.filter-total{font-size:12px;color:var(--text-muted);margin-left:auto;white-space:nowrap;}
+
+/* ─── CONTENT WRAP ────────────────────────── */
+.journal-sec{background:var(--bg-page);padding:0;}
+.journal-wrap{max-width:1280px;margin:0 auto;padding:36px 32px 60px;display:grid;grid-template-columns:1fr 296px;gap:32px;align-items:start;}
+.journal-main{}
+.journal-sidebar{display:flex;flex-direction:column;gap:18px;position:sticky;top:148px;}
+
+/* ─── FEATURED CARD ───────────────────────── */
+.jcard-featured{display:grid;grid-template-columns:1fr 1fr;background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);overflow:hidden;margin-bottom:18px;transition:box-shadow 0.15s;}
+.jcard-featured:hover{box-shadow:var(--shadow-md);}
+.jcard-featured-img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;}
+.jcard-featured-body{padding:28px 24px;display:flex;flex-direction:column;}
+.jcard-cat{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:10.5px;font-weight:500;margin-bottom:10px;}
+.jcard-cat--voice{background:var(--green-bg);color:var(--green-dark);}
+.jcard-cat--purchase{background:var(--purple-bg);color:#3C3489;}
+.jcard-cat--life{background:var(--blue-bg);color:var(--blue-dark);}
+.jcard-tags{margin-bottom:10px;display:flex;gap:5px;flex-wrap:wrap;}
+.jcard-tag{display:inline-block;padding:2px 8px;border-radius:var(--r-pill);font-size:10px;border:0.5px solid var(--border);color:var(--text-muted);}
+.jcard-featured-ttl{font-size:17px;font-weight:500;line-height:1.55;color:var(--text-primary);margin-bottom:10px;}
+.jcard-featured-excerpt{font-size:12.5px;color:var(--text-secondary);line-height:1.9;margin-bottom:18px;flex:1;}
+.jcard-author{display:flex;align-items:center;gap:10px;margin-top:auto;}
+.jcard-avatar{width:32px;height:32px;border-radius:50%;background:var(--green-bg);color:var(--green-dark);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;}
+.jcard-avatar--purchase{background:var(--purple-bg);color:#3C3489;}
+.jcard-avatar--life{background:var(--blue-bg);color:var(--blue-dark);}
+.jcard-author-name{font-size:12px;font-weight:500;color:var(--text-primary);}
+.jcard-author-meta{font-size:10.5px;color:var(--text-muted);}
+.jcard-likes{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--text-muted);margin-left:auto;white-space:nowrap;}
+
+/* ─── ARTICLE GRID ────────────────────────── */
+.journal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+.jcard{background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);overflow:hidden;transition:box-shadow 0.15s;display:flex;flex-direction:column;}
+.jcard:hover{box-shadow:var(--shadow-md);}
+.jcard-img-wrap{aspect-ratio:16/9;overflow:hidden;background:var(--bg-page);}
+.jcard-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.35s;}
+.jcard:hover .jcard-img{transform:scale(1.04);}
+.jcard-body{padding:14px 16px 12px;flex:1;display:flex;flex-direction:column;}
+.jcard-ttl{font-size:13.5px;font-weight:500;line-height:1.55;color:var(--text-primary);margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.jcard-excerpt{font-size:11.5px;color:var(--text-secondary);line-height:1.8;flex:1;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.jcard-footer{display:flex;align-items:center;gap:7px;padding-top:10px;border-top:0.5px solid var(--border);}
+.jcard-avatar-sm{width:22px;height:22px;border-radius:50%;background:var(--green-bg);color:var(--green-dark);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;}
+.jcard-avatar-sm--purchase{background:var(--purple-bg);color:#3C3489;}
+.jcard-avatar-sm--life{background:var(--blue-bg);color:var(--blue-dark);}
+.jcard-author-sm{font-size:11px;color:var(--text-muted);}
+.jcard-date{font-size:10.5px;color:var(--text-muted);margin-left:auto;}
+
+/* ─── LOAD MORE ───────────────────────────── */
+.btn-more{display:block;width:100%;padding:14px 0;border:0.5px solid var(--border);border-radius:var(--r-md);background:var(--bg-white);font-size:13px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;text-align:center;font-family:inherit;}
+.btn-more:hover{border-color:var(--green-mid);color:var(--green-dark);background:var(--green-bg);}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.sidebar-box{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.sidebar-box-hd{padding:13px 18px 11px;border-bottom:0.5px solid var(--border);font-size:10.5px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;}
+.sidebar-art-list{}
+.sidebar-art-item{display:flex;gap:10px;padding:10px 18px;border-bottom:0.5px solid var(--border);transition:background 0.12s;cursor:pointer;}
+.sidebar-art-item:last-child{border-bottom:none;}
+.sidebar-art-item:hover{background:var(--bg-page);}
+.sidebar-art-thumb{width:54px;height:38px;object-fit:cover;border-radius:5px;flex-shrink:0;background:var(--bg-page);}
+.sidebar-art-body{flex:1;min-width:0;}
+.sidebar-art-ttl{font-size:11.5px;color:var(--text-primary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.sidebar-art-meta{font-size:10px;color:var(--text-muted);margin-top:2px;}
+.sidebar-cat-list{}
+.sidebar-cat-item{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:0.5px solid var(--border);font-size:12.5px;color:var(--text-secondary);cursor:pointer;transition:background 0.12s;}
+.sidebar-cat-item:last-child{border-bottom:none;}
+.sidebar-cat-item:hover{background:var(--bg-page);color:var(--green-dark);}
+.sidebar-cat-left{display:flex;align-items:center;gap:8px;}
+.sidebar-cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sidebar-cat-count{font-size:11px;color:var(--text-muted);}
+.sidebar-cta-box{background:var(--green-dark);border-radius:var(--r-lg);padding:20px;}
+.sidebar-cta-eyebrow{font-size:9.5px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);text-transform:uppercase;margin-bottom:10px;}
+.sidebar-cta-ttl{font-size:13px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:8px;}
+.sidebar-cta-text{font-size:11.5px;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:14px;}
+.btn-sidebar-cta{display:block;width:100%;padding:11px 0;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-sidebar-cta:hover{background:var(--line-h);}
+
+/* ─── EMPTY STATE ─────────────────────────── */
+.journal-empty{grid-column:1/-1;text-align:center;padding:72px 0;color:var(--text-muted);font-size:13px;}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.btn-cta .line-logo-img{width:22px;height:22px;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+}
+@media(max-width:960px){
+  .journal-wrap{grid-template-columns:1fr;padding:28px 16px 48px;}
+  .journal-sidebar{position:static;flex-direction:row;flex-wrap:wrap;}
+  .journal-sidebar .sidebar-box,.journal-sidebar .sidebar-cta-box{flex:1;min-width:260px;}
+  .jcard-featured{grid-template-columns:1fr;}
+  .jcard-featured-img{aspect-ratio:16/9;width:100%;height:auto;}
+}
+@media(max-width:680px){
+  .journal-grid{grid-template-columns:1fr;}
+  .hero-ttl{font-size:24px;}
+  .hero-stats{gap:24px;}
+  .stat-num{font-size:28px;}
+  .filter-bar{padding:12px 16px;top:52px;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:480px){
+  .hero-cats{gap:7px;}
+  .hero-cat-btn{padding:7px 14px;font-size:11.5px;}
+  .journal-sidebar{flex-direction:column;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0j{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0j" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni">
+        <span class="nl">すむむとは。<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-about.html">すむむ。のサービス</a>
+          <a href="sumumu-about.html#partners">パートナー</a>
+          <a href="sumumu-about.html#media">メディア掲載</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">住まいを探す<i>▾</i></span>
+        <div class="nd">
+          <a href="properties/sumumu-kinki.html">エリア別</a>
+          <a href="properties/sumumu-kinki-all.html">条件別</a>
+          <a href="properties/sumumu-kinki-00001.html">個別物件</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl" style="color:var(--green-mid)">先輩の体験談<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-journal.html" style="color:var(--green-mid)">先輩の声</a>
+          <a href="sumumu-journal.html?type=purchase">購入体験</a>
+          <a href="sumumu-journal.html?type=life">暮らし</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">お役立ちコラム<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-guide.html">資金計画</a>
+          <a href="sumumu-guide.html">物件選び</a>
+          <a href="sumumu-guide.html">購入手続き</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">シミュレーション<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-tool-loan.html">ローンシミュレーター</a>
+          <a href="sumumu-tool-borrowing.html">借入可能額</a>
+          <a href="sumumu-tool-rentbuy.html">賃貸vs購入</a>
+        </div>
+      </div>
+      <div class="ni">
+        <a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a>
+        <div class="nd">
+          <a href="sumumu-area.html">エリア一覧</a>
+          <a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a>
+          <a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a>
+          <a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a>
+        </div>
+      </div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">すむむとは。<i>▾</i></div><div class="mob-sub"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a></div></div>
+        <div class="mob-group"><div class="mob-parent">住まいを探す<i>▾</i></div><div class="mob-sub"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+        <a href="sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util"><a href="sumumu-faq.html">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="journal-hero">
+  <div class="journal-hero-inner">
+    <span class="hero-eyebrow">Senior Stories</span>
+    <h1 class="hero-ttl">実際に買った人の話が、<br>一番のヒントになる。</h1>
+    <p class="hero-lead">
+      後悔したこと、決めきれなかったこと、だんだんわかってきたこと。<br>
+      すむむ。のコミュニティに集まった先輩たちのリアルな体験談。
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">1,200<em>+</em></div>
+        <div class="stat-label">体験談数</div>
+      </div>
+      <div class="stat-div"></div>
+      <div class="stat-item">
+        <div class="stat-num">800<em>+</em></div>
+        <div class="stat-label">体験談投稿ユーザー数</div>
+      </div>
+    </div>
+    <div class="hero-cats">
+      <button class="hero-cat-btn active" data-type="all">
+        すべて <span class="hero-cat-count">1,200件</span>
+      </button>
+      <button class="hero-cat-btn" data-type="voice">
+        先輩の声 <span class="hero-cat-count">482件</span>
+      </button>
+      <button class="hero-cat-btn" data-type="purchase">
+        購入体験 <span class="hero-cat-count">418件</span>
+      </button>
+      <button class="hero-cat-btn" data-type="life">
+        暮らし <span class="hero-cat-count">300件</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <div class="filter-chips">
+      <span class="fchip active" data-tag="all">すべて</span>
+      <span class="fchip" data-tag="はじめて購入">はじめて購入</span>
+      <span class="fchip" data-tag="住み替え">住み替え</span>
+      <span class="fchip" data-tag="エリア・街">エリア・街</span>
+      <span class="fchip" data-tag="ローン・資金">ローン・資金</span>
+      <span class="fchip" data-tag="マンション">マンション</span>
+      <span class="fchip" data-tag="戸建て">戸建て</span>
+      <span class="fchip" data-tag="中古・リノベ">中古・リノベ</span>
+      <span class="fchip" data-tag="後悔・失敗">後悔・失敗</span>
+      <span class="fchip" data-tag="夫婦・二世帯">夫婦・二世帯</span>
+      <span class="fchip" data-tag="人気の暮らし">人気の暮らし</span>
+      <span class="fchip" data-tag="単身・DINKS">単身・DINKS</span>
+    </div>
+    <div class="filter-row">
+      <input class="filter-search-input" type="text" id="filterSearch" placeholder="キーワードで記事を探す（例：大阪 3LDK 後悔）">
+      <select class="filter-sort" id="filterSort">
+        <option value="latest">新着順</option>
+        <option value="likes">参考になった順</option>
+      </select>
+      <span class="filter-total" id="filterTotal">全1,200件</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<section class="journal-sec">
+  <div class="journal-wrap">
+
+    <!-- MAIN -->
+    <div class="journal-main">
+      <div id="featuredArea"></div>
+      <div class="journal-grid" id="journalGrid"></div>
+      <button class="btn-more" id="journalMoreBtn" style="display:none"></button>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="journal-sidebar">
+
+      <!-- 注目の体験談 -->
+      <div class="sidebar-box">
+        <div class="sidebar-box-hd">注目の体験談</div>
+        <div class="sidebar-art-list">
+          <a class="sidebar-art-item" href="#">
+            <img class="sidebar-art-thumb" src="images/journal08.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sj08/120/80'">
+            <div class="sidebar-art-body">
+              <div class="sidebar-art-ttl">はじめて購入して後悔した「3つのこと」。同じ失敗をしてほしくないから全部書く</div>
+              <div class="sidebar-art-meta">藤田 英樹 · 32歳</div>
+            </div>
+          </a>
+          <a class="sidebar-art-item" href="#">
+            <img class="sidebar-art-thumb" src="images/journal10.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sj10/120/80'">
+            <div class="sidebar-art-body">
+              <div class="sidebar-art-ttl">二世帯住宅の設計で喧嘩した夫婦が「完全分離型」を選んだ理由</div>
+              <div class="sidebar-art-meta">田中 良子 · 39歳</div>
+            </div>
+          </a>
+          <a class="sidebar-art-item" href="#">
+            <img class="sidebar-art-thumb" src="images/journal07.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sj07/120/80'">
+            <div class="sidebar-art-body">
+              <div class="sidebar-art-ttl">築20年をフルリノベ。後悔したことと本当によかったこと</div>
+              <div class="sidebar-art-meta">橋本 真由美 · 41歳</div>
+            </div>
+          </a>
+          <a class="sidebar-art-item" href="#">
+            <img class="sidebar-art-thumb" src="images/journal04.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sj04/120/80'">
+            <div class="sidebar-art-body">
+              <div class="sidebar-art-ttl">ローンの審査で落ちた。それでも諦めなかった「資金計画」の作り方</div>
+              <div class="sidebar-art-meta">鈴木 健太 · 36歳</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- カテゴリ一覧 -->
+      <div class="sidebar-box">
+        <div class="sidebar-box-hd">カテゴリ一覧</div>
+        <div class="sidebar-cat-list">
+          <div class="sidebar-cat-item" data-type="voice">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--green-mid)"></span>先輩の声
+            </span>
+            <span class="sidebar-cat-count">482件</span>
+          </div>
+          <div class="sidebar-cat-item" data-type="purchase">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:#534AB7"></span>購入体験
+            </span>
+            <span class="sidebar-cat-count">418件</span>
+          </div>
+          <div class="sidebar-cat-item" data-type="life">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--blue-dark)"></span>暮らし
+            </span>
+            <span class="sidebar-cat-count">300件</span>
+          </div>
+          <div class="sidebar-cat-item" data-tag="はじめて購入" style="padding-left:28px;">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--border)"></span>はじめて購入
+            </span>
+            <span class="sidebar-cat-count">248件</span>
+          </div>
+          <div class="sidebar-cat-item" data-tag="住み替え" style="padding-left:28px;">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--border)"></span>住み替え
+            </span>
+            <span class="sidebar-cat-count">209件</span>
+          </div>
+          <div class="sidebar-cat-item" data-tag="マンション" style="padding-left:28px;">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--border)"></span>マンション
+            </span>
+            <span class="sidebar-cat-count">213件</span>
+          </div>
+          <div class="sidebar-cat-item" data-tag="子育て" style="padding-left:28px;">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--border)"></span>子育て
+            </span>
+            <span class="sidebar-cat-count">194件</span>
+          </div>
+          <div class="sidebar-cat-item" data-tag="後悔・失敗" style="padding-left:28px;">
+            <span class="sidebar-cat-left">
+              <span class="sidebar-cat-dot" style="background:var(--border)"></span>後悔・失敗
+            </span>
+            <span class="sidebar-cat-count">74件</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 先輩に質問 CTA -->
+      <div class="sidebar-cta-box">
+        <div class="sidebar-cta-eyebrow">Community</div>
+        <div class="sidebar-cta-ttl">先輩に直接<br>質問できます</div>
+        <p class="sidebar-cta-text">気になることを、実際に購入した先輩に聞いてみましょう。LINEコミュニティに参加すれば、いつでも質問できます。</p>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sidebar-cta">
+          コミュニティに参加する →
+        </a>
+      </div>
+
+    </aside>
+  </div>
+</section>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">体験談を読んで、<br>次は自分の話をしよう</h2>
+    <p class="concierge-lead">
+      中立な立場の専任スタッフが、あなたの住み替えプランを一緒に整理します。<br>
+      資金計画・エリア・物件タイプ。営業・勧誘は一切ありません。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fstj{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fstj" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">資金計画</a></li><li><a href="sumumu-guide.html">物件選び</a></li><li><a href="sumumu-guide.html">購入手続き</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tool-loan.html">ローンシミュレーター</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li><li><a href="sumumu-tool-rentbuy.html">賃貸vs購入</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li><li><a href="/news/?cat=community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Data ── */
+const TYPE_LABEL = { voice:'先輩の声', purchase:'購入体験', life:'暮らし' };
+const TYPE_TOTAL = { all:1200, voice:482, purchase:418, life:300 };
+
+const ARTICLES = [
+  { id:1,  type:'purchase', tags:['はじめて購入','マンション'],
+    title:'「値段ゼロ」とは言えないけど、買ってよかった。33歳、育休中に決断した新築マンション購入のすべて',
+    excerpt:'当時2歳の娘と夫の3人で賃貸に住んでいた私が、真剣に向き合ったのは育休中の夜でした。ローン返済額が今の家賃より安かった、それが最初のきっかけでした。',
+    author:'田中 ゆか', age:33, area:'大阪府吹田市', date:'2024/03', likes:284, featured:true },
+
+  { id:2,  type:'voice', tags:['住み替え','マンション'],
+    title:'大阪への移住、4度目で気づいた「内見中に想像すること」の大切さ',
+    excerpt:'内見しながらソファの位置を考える。それだけで、物件選びがガラッと変わりました。',
+    author:'加藤 昌弘', age:44, area:'大阪府豊中市', date:'2024/02', likes:156 },
+
+  { id:3,  type:'life', tags:['人気の暮らし','戸建て'],
+    title:'「内見中に決断した」こと、実際にやってみたら。中古マンション購入と暮らしのリアル',
+    excerpt:'購入前に想像していた暮らしと、住みはじめてから感じることのギャップを正直に書きます。',
+    author:'山田 恵子', age:38, area:'京都府京都市', date:'2024/01', likes:98 },
+
+  { id:4,  type:'purchase', tags:['ローン・資金','はじめて購入'],
+    title:'ローンの審査で落ちた。それでも諦めなかった私が学んだ「資金計画」の作り方',
+    excerpt:'最初の銀行で審査に落ちたとき、本当に絶望しました。でも違う道があったんです。',
+    author:'鈴木 健太', age:36, area:'兵庫県西宮市', date:'2023/12', likes:203 },
+
+  { id:5,  type:'voice', tags:['エリア・街','戸建て'],
+    title:'学区と物件を同時に考えた。小学校入学前に新築戸建てを購入した共働き夫婦の話',
+    excerpt:'子どもの学区を決めてから物件を探すか、物件を決めてから学区を確認するか。正解がわからなかった。',
+    author:'松本 美咲', age:34, area:'大阪府箕面市', date:'2023/11', likes:178 },
+
+  { id:6,  type:'life', tags:['住み替え','マンション'],
+    title:'マンション売却と新居購入、同時に進めた6ヶ月。スケジュール管理で後悔したこと',
+    excerpt:'売却と購入の同時進行は、想像以上にタイトでした。もう少し余裕を持てばよかった。',
+    author:'中村 隆志', age:47, area:'滋賀県草津市', date:'2023/10', likes:142 },
+
+  { id:7,  type:'purchase', tags:['中古・リノベ','マンション'],
+    title:'築20年のマンションをフルリノベ。後悔したことと、本当によかったこと',
+    excerpt:'中古物件のリノベーションは、新築より自分色に仕上げられる反面、予算オーバーのリスクも。',
+    author:'橋本 真由美', age:41, area:'京都府宇治市', date:'2023/09', likes:219 },
+
+  { id:8,  type:'voice', tags:['後悔・失敗','はじめて購入'],
+    title:'はじめて購入して後悔した「3つのこと」。同じ失敗をしてほしくないから全部書く',
+    excerpt:'日当たりと収納と、管理費。この3つをもっとちゃんと確認すべきでした。',
+    author:'藤田 英樹', age:32, area:'大阪府大阪市', date:'2023/08', likes:312 },
+
+  { id:9,  type:'life', tags:['単身・DINKS','マンション'],
+    title:'35歳、独身でマンションを買った。「なぜ?」とよく聞かれるので全部答えます',
+    excerpt:'賃貸派だった私が、あるきっかけで購入に踏み切ったのは35歳のとき。',
+    author:'伊藤 さおり', age:35, area:'大阪府大阪市', date:'2023/07', likes:187 },
+
+  { id:10, type:'purchase', tags:['夫婦・二世帯','戸建て'],
+    title:'二世帯住宅の設計で喧嘩した夫婦が、最終的に「完全分離型」を選んだ理由',
+    excerpt:'義両親との同居計画、最初は反対していた私が納得するまでの話。',
+    author:'田中 良子', age:39, area:'兵庫県神戸市', date:'2023/06', likes:266 },
+
+  { id:11, type:'voice', tags:['エリア・街','住み替え'],
+    title:'大阪から奈良へ、通勤1時間でも「住み替えてよかった」と思う理由',
+    excerpt:'駅から遠くなって、通勤時間は増えた。でも子どもの環境と家の広さは格段によくなった。',
+    author:'渡辺 浩二', age:43, area:'奈良県奈良市', date:'2023/05', likes:134 },
+
+  { id:12, type:'life', tags:['人気の暮らし','中古・リノベ'],
+    title:'築15年の戸建てを買って1年。DIYで変えた場所、プロに頼んだ場所の正直な話',
+    excerpt:'中古戸建ての醍醐味は「変えられること」。1年かけてやってみてわかったことを全部書きます。',
+    author:'小林 和奏', age:37, area:'京都府長岡京市', date:'2023/04', likes:158 },
+];
+
+/* ── State ── */
+const PAGE_SIZE = 6;
+let activeType = 'all';
+let activeTag  = 'all';
+let keyword    = '';
+let shownCount = PAGE_SIZE;
+
+/* ── Filter ── */
+function getFiltered() {
+  let list = ARTICLES.filter(a => {
+    const typeOk = activeType === 'all' || a.type === activeType;
+    const tagOk  = activeTag  === 'all' || a.tags.includes(activeTag);
+    const kwOk   = !keyword   || a.title.includes(keyword) || a.excerpt.includes(keyword) || a.area.includes(keyword);
+    return typeOk && tagOk && kwOk;
+  });
+  return list;
+}
+
+/* ── Render helpers ── */
+function avatarInitial(name) { return name.charAt(0); }
+function catClass(type) { return `jcard-cat--${type}`; }
+function avatarClass(type) { return type === 'purchase' ? '--purchase' : type === 'life' ? '--life' : ''; }
+
+function featuredCardHTML(a) {
+  const tagsHTML = a.tags.map(t => `<span class="jcard-tag">${t}</span>`).join('');
+  const ac = avatarClass(a.type);
+  const href = `sumumu-journal-${String(a.id).padStart(5,'0')}.html`;
+  return `
+<a class="jcard-featured" href="${href}">
+  <img class="jcard-featured-img"
+       src="images/journal${String(a.id).padStart(2,'0')}.jpg"
+       alt="${a.title}"
+       onerror="this.src='https://picsum.photos/seed/sj${a.id}f/800/600'">
+  <div class="jcard-featured-body">
+    <span class="jcard-cat ${catClass(a.type)}">${TYPE_LABEL[a.type]}</span>
+    <div class="jcard-tags">${tagsHTML}</div>
+    <div class="jcard-featured-ttl">${a.title}</div>
+    <div class="jcard-featured-excerpt">${a.excerpt}</div>
+    <div class="jcard-author">
+      <div class="jcard-avatar jcard-avatar${ac}">${avatarInitial(a.author)}</div>
+      <div>
+        <div class="jcard-author-name">${a.author}</div>
+        <div class="jcard-author-meta">${a.age}歳 · ${a.area} · ${a.date}</div>
+      </div>
+      <span class="jcard-likes">♡ ${a.likes}</span>
+    </div>
+  </div>
+</a>`;
+}
+
+function cardHTML(a) {
+  const ac = avatarClass(a.type);
+  const href = `sumumu-journal-${String(a.id).padStart(5,'0')}.html`;
+  return `
+<a class="jcard" href="${href}">
+  <div class="jcard-img-wrap">
+    <img class="jcard-img"
+         src="images/journal${String(a.id).padStart(2,'0')}.jpg"
+         alt="${a.title}"
+         onerror="this.src='https://picsum.photos/seed/sj${a.id}/600/400'">
+  </div>
+  <div class="jcard-body">
+    <span class="jcard-cat ${catClass(a.type)}">${TYPE_LABEL[a.type]}</span>
+    <div class="jcard-ttl">${a.title}</div>
+    <div class="jcard-excerpt">${a.excerpt}</div>
+    <div class="jcard-footer">
+      <div class="jcard-avatar-sm jcard-avatar-sm${ac}">${avatarInitial(a.author)}</div>
+      <span class="jcard-author-sm">${a.author} · ${a.age}歳</span>
+      <span class="jcard-date">${a.date}</span>
+    </div>
+  </div>
+</a>`;
+}
+
+/* ── Update UI ── */
+function updateUI() {
+  const filtered = getFiltered();
+  const total    = TYPE_TOTAL[activeType] || filtered.length;
+  const toShow   = Math.min(shownCount, filtered.length);
+  const displayed = filtered.slice(0, toShow);
+  const remaining = Math.max(0, total - toShow);
+
+  document.getElementById('filterTotal').textContent = `全${total.toLocaleString()}件`;
+
+  const featuredArea = document.getElementById('featuredArea');
+  const grid         = document.getElementById('journalGrid');
+  const btn          = document.getElementById('journalMoreBtn');
+
+  if (displayed.length === 0) {
+    featuredArea.innerHTML = '';
+    grid.innerHTML = '<div class="journal-empty">該当する記事が見つかりませんでした</div>';
+    btn.style.display = 'none';
+    return;
+  }
+
+  /* First article → featured, rest → grid */
+  featuredArea.innerHTML = featuredCardHTML(displayed[0]);
+  grid.innerHTML = displayed.slice(1).map(cardHTML).join('');
+
+  if (total > toShow) {
+    btn.textContent = `もっと記事を見る（残り${remaining.toLocaleString()}件）→`;
+    btn.style.display = '';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+/* ── Load more ── */
+document.getElementById('journalMoreBtn').addEventListener('click', () => {
+  shownCount += PAGE_SIZE;
+  updateUI();
+});
+
+/* ── Hero category buttons ── */
+document.querySelectorAll('.hero-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.hero-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeType = btn.dataset.type;
+    shownCount = PAGE_SIZE;
+    updateUI();
+  });
+});
+
+/* ── Filter chips ── */
+document.querySelectorAll('.fchip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.fchip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeTag  = chip.dataset.tag;
+    shownCount = PAGE_SIZE;
+    updateUI();
+  });
+});
+
+/* ── Keyword search (debounced) ── */
+let searchTimer;
+document.getElementById('filterSearch').addEventListener('input', e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    keyword    = e.target.value.trim();
+    shownCount = PAGE_SIZE;
+    updateUI();
+  }, 280);
+});
+
+/* ── Sidebar category clicks ── */
+document.querySelectorAll('.sidebar-cat-item[data-type]').forEach(item => {
+  item.addEventListener('click', () => {
+    activeType = item.dataset.type;
+    document.querySelectorAll('.hero-cat-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.type === activeType);
+    });
+    shownCount = PAGE_SIZE;
+    updateUI();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+document.querySelectorAll('.sidebar-cat-item[data-tag]').forEach(item => {
+  item.addEventListener('click', () => {
+    activeTag = item.dataset.tag;
+    document.querySelectorAll('.fchip').forEach(c => {
+      c.classList.toggle('active', c.dataset.tag === activeTag);
+    });
+    shownCount = PAGE_SIZE;
+    updateUI();
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  });
+});
+
+/* ── URL param init ── */
+(function applyUrlParam() {
+  const param = new URLSearchParams(window.location.search).get('type');
+  if (param && TYPE_TOTAL[param]) {
+    activeType = param;
+    document.querySelectorAll('.hero-cat-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.type === param);
+    });
+  }
+  updateUI();
+})();
+
+/* ── Hamburger ── */
+document.getElementById('hambBtn').addEventListener('click', () => {
+  document.getElementById('mobNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

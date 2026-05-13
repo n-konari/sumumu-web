@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>住まいを探す｜すむむ。</title>
+<style>
+:root {
+  --brand:      #f04646;
+  --brand-h:    #D63B3B;
+  --brand-lite: #F97272;
+  --brand-bg:   #FFF0F0;
+  --dark-bg:    #1A1010;
+  --line:       #06C755;
+  --line-h:     #05a849;
+  --green-dark:   #085041;
+  --green-mid:    #1D9E75;
+  --green-light:  #5DCAA5;
+  --green-pale:   #9FE1CB;
+  --green-bg:     #E1F5EE;
+  --blue-dark:    #185FA5;
+  --blue-bg:      #E6F1FB;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-muted:     #888888;
+  --border:         rgba(0,0,0,0.09);
+  --bg-page:        #F8F5F3;
+  --bg-white:       #FFFFFF;
+  --shadow-sm:      0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md:      0 2px 12px rgba(0,0,0,0.09);
+  --r-lg: 12px;
+  --r-md:  8px;
+  --r-pill: 20px;
+  --orange-bg: #FAEEDA;
+  --purple-bg: #EEEDFE;
+  --pink-bg:   #FBEAF0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background: var(--bg-page);
+}
+a { color: inherit; text-decoration: none; }
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd { position: sticky; top: 0; z-index: 200; }
+.util-bar { background: var(--dark-bg); padding: 0 32px; }
+.util-inner {
+  max-width: 1280px; margin: 0 auto; height: 36px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 20px;
+}
+.util-links { display: flex; gap: 16px; align-items: center; }
+.util-links a { font-size: 11px; color: rgba(255,255,255,0.68); transition: color 0.15s; }
+.util-links a:hover { color: #fff; }
+.btn-util {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--line); color: #fff; padding: 5px 14px;
+  border-radius: var(--r-pill); font-size: 11.5px; font-weight: 500;
+  transition: background 0.15s; white-space: nowrap;
+}
+.btn-util:hover { background: var(--line-h); }
+.line-logo-img { width: 16px; height: 16px; display: block; flex-shrink: 0; object-fit: contain; }
+.main-hd {
+  background: var(--bg-white); border-bottom: 0.5px solid var(--border);
+  padding: 14px 32px; display: flex; align-items: flex-start; position: relative;
+}
+.logo { display: flex; align-items: center; margin-right: 28px; flex-shrink: 0; padding-top: 2px; }
+.logo svg { height: 36px; width: auto; display: block; }
+.main-nav { display: flex; align-items: flex-start; flex: 1; flex-wrap: wrap; gap: 0; }
+.ni { display: flex; flex-direction: column; align-items: flex-start; padding: 0 6px; }
+.nl {
+  display: block; font-size: 11.5px; font-weight: 500; color: var(--text-primary);
+  padding: 0 6px 6px; white-space: nowrap; cursor: pointer; transition: color 0.15s;
+}
+.nl i { display: none; }
+.nl:hover { color: var(--brand); }
+.nd { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; border: none; box-shadow: none; padding: 0 6px; }
+.nd a { display: block; font-size: 11px; color: var(--text-muted); padding: 3px 0; white-space: nowrap; transition: color 0.12s; }
+.nd a:hover { color: var(--brand); }
+.hamb { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+.hamb span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); transition: all 0.25s; }
+.mob-nav { display: none; position: absolute; top: 52px; left: 0; right: 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; z-index: 200; background: var(--bg-white); border-bottom: 0.5px solid var(--border); }
+.mob-nav.open { max-height: 80vh; overflow-y: auto; }
+.mob-inner { padding: 16px; display: flex; flex-direction: column; gap: 2px; }
+.mob-link { display: block; padding: 10px 12px; font-size: 13px; font-weight: 500; color: var(--text-primary); border-radius: var(--r-md); }
+.mob-link:hover { background: var(--bg-page); }
+.mob-group { border-radius: var(--r-md); overflow: hidden; }
+.mob-parent { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.mob-parent i { font-style: normal; font-size: 11px; color: var(--text-muted); transition: transform 0.2s; }
+.mob-parent.open i { transform: rotate(180deg); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; background: var(--bg-page); }
+.mob-sub.open { max-height: 220px; }
+.mob-sub a { display: block; padding: 8px 12px 8px 20px; font-size: 12px; color: var(--text-secondary); }
+.mob-util { display: flex; gap: 8px; padding: 10px 12px; flex-wrap: wrap; }
+.mob-util a { font-size: 12px; color: var(--text-muted); }
+.mob-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--line); color: #fff; padding: 12px 20px;
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 500; margin: 8px 12px 12px;
+}
+.mob-cta .line-logo-img { width: 18px; height: 18px; }
+
+@media (max-width: 1060px) {
+  .util-bar { display: none; }
+  .main-nav { display: none; }
+  .hamb { display: flex; }
+  .mob-nav { display: block; }
+  .main-hd { padding: 0 16px; height: 52px; align-items: center; }
+}
+
+/* ─── SEARCH SECTION（白背景） ───────────── */
+.search-sec {
+  background: var(--bg-white);
+  padding: 40px 32px 48px;
+}
+.search-inner { max-width: 1080px; margin: 0 auto; }
+
+.search-ttl {
+  font-size: 22px; font-weight: 500; color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+/* Main tabs */
+.search-tabs {
+  display: flex; gap: 0; margin-bottom: 28px;
+  border-bottom: 1.5px solid var(--border);
+}
+.stab {
+  padding: 10px 20px; font-size: 13px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px; transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+}
+.stab.active { color: var(--text-primary); border-bottom-color: var(--green-mid); }
+.stab:hover:not(.active) { color: var(--text-secondary); }
+
+/* Tab panels */
+.stab-panel { display: none; }
+.stab-panel.active { display: block; }
+
+/* Search bar */
+.search-bar {
+  display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap;
+}
+.search-input {
+  flex: 1; min-width: 240px; height: 44px; padding: 0 14px;
+  border: 0.5px solid var(--border); border-radius: var(--r-md);
+  background: var(--bg-page); color: var(--text-primary); font-size: 13px;
+  outline: none; transition: border-color 0.15s;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus { border-color: var(--green-mid); }
+.search-select {
+  height: 44px; padding: 0 32px 0 14px; border: 0.5px solid var(--border);
+  border-radius: var(--r-md); background: var(--bg-page);
+  color: var(--text-primary); font-size: 13px; cursor: pointer;
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  outline: none; transition: border-color 0.15s; white-space: nowrap;
+}
+.search-select:focus { border-color: var(--green-mid); }
+.btn-search {
+  height: 44px; padding: 0 28px; background: var(--green-mid); color: #fff;
+  border: none; border-radius: var(--r-md); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: background 0.15s; white-space: nowrap;
+}
+.btn-search:hover { background: var(--green-dark); }
+
+/* Prefecture tabs */
+.region-tabs {
+  display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.rtab {
+  padding: 6px 16px; font-size: 12px; font-weight: 500; border-radius: var(--r-pill);
+  background: var(--bg-page); color: var(--text-muted);
+  cursor: pointer; border: 0.5px solid var(--border); transition: all 0.15s;
+}
+.rtab.active { background: var(--green-mid); color: #fff; border-color: var(--green-mid); }
+.rtab:hover:not(.active) { background: var(--green-bg); color: var(--green-dark); border-color: var(--green-mid); }
+
+/* Area map + list layout */
+.area-map-layout {
+  display: grid; grid-template-columns: 1fr 280px; gap: 24px; align-items: start;
+}
+.map-wrap {
+  background: var(--bg-page); border: 0.5px solid var(--border);
+  border-radius: var(--r-lg); padding: 24px; display: flex; align-items: center;
+  justify-content: center; min-height: 300px;
+}
+#kinkiMapContainer path { transition: fill 0.15s; cursor: pointer; }
+#kinkiMapContainer path.kmap-selected { stroke-width: 2 !important; }
+
+/* Prefecture list */
+.pref-list-wrap { display: flex; flex-direction: column; gap: 12px; }
+.pref-list-label {
+  font-size: 10.5px; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.06em; margin-bottom: 4px;
+}
+.pref-list { display: flex; flex-direction: column; gap: 4px; }
+.pref-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px; border-radius: var(--r-md);
+  background: var(--bg-page); border: 0.5px solid var(--border);
+  cursor: pointer; transition: background 0.15s;
+}
+.pref-item:hover, .pref-item.active {
+  background: var(--green-bg); border-color: var(--green-mid);
+}
+.pref-name { font-size: 13px; color: var(--text-primary); font-weight: 500; }
+.pref-count { font-size: 11px; color: var(--green-dark); font-weight: 500; }
+
+/* 人気エリア */
+.popular-label {
+  font-size: 10.5px; font-weight: 500; color: var(--text-muted);
+  letter-spacing: 0.06em; margin-bottom: 8px;
+}
+.popular-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pop-chip {
+  padding: 4px 12px; font-size: 11.5px; font-weight: 500;
+  border-radius: var(--r-pill); border: 0.5px solid var(--green-mid);
+  color: var(--green-dark); cursor: pointer; transition: all 0.15s;
+  background: var(--green-bg);
+}
+.pop-chip:hover { background: var(--green-mid); color: #fff; }
+
+/* Keyword input（白背景上） */
+.keyword-panel { display: flex; gap: 10px; }
+.keyword-input {
+  flex: 1; height: 48px; padding: 0 16px; font-size: 14px;
+  border: 0.5px solid var(--border); border-radius: var(--r-md);
+  background: var(--bg-page); color: var(--text-primary); outline: none;
+}
+.keyword-input::placeholder { color: var(--text-muted); }
+.keyword-input:focus { border-color: var(--green-mid); }
+
+/* ─── CONDITION SECTION（ダーク背景） ────── */
+.condition-sec {
+  background: var(--dark-bg);
+  padding: 40px 32px 48px;
+}
+.condition-inner { max-width: 1080px; margin: 0 auto; }
+.condition-ttl {
+  font-size: 15px; font-weight: 500; color: rgba(255,255,255,0.90);
+  margin-bottom: 24px;
+}
+
+.filter-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-bottom: 24px;
+}
+.filter-item { display: flex; flex-direction: column; gap: 6px; }
+.filter-label { font-size: 11.5px; color: rgba(255,255,255,0.50); }
+.filter-select {
+  height: 42px; padding: 0 32px 0 12px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  border-radius: var(--r-md); background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.85); font-size: 13px; cursor: pointer;
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  outline: none; transition: border-color 0.15s; width: 100%;
+}
+.filter-select:focus { border-color: var(--green-mid); }
+
+/* こだわり条件 */
+.kodawari-label {
+  font-size: 11.5px; color: rgba(255,255,255,0.50); margin-bottom: 10px;
+}
+.kodawari-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.kchip {
+  padding: 6px 14px; font-size: 12px; border-radius: var(--r-pill);
+  border: 0.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.70);
+  cursor: pointer; transition: all 0.15s; background: rgba(255,255,255,0.06);
+}
+.kchip:hover, .kchip.selected {
+  background: rgba(29,158,117,0.25); border-color: var(--green-mid); color: var(--green-light);
+}
+
+/* Search CTA */
+.search-cta-row { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.btn-search-main {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--green-mid); color: #fff; padding: 14px 40px;
+  border: none; border-radius: var(--r-pill); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 0.15s;
+}
+.btn-search-main:hover { background: var(--green-light); }
+.search-result-hint { font-size: 12px; color: rgba(255,255,255,0.40); }
+
+/* ─── PROPERTY LIST SECTION ─────────────────── */
+.props-sec {
+  background: var(--bg-white);
+  padding: 48px 32px 56px;
+  border-top: 0.5px solid var(--border);
+}
+.props-inner-wrap { max-width: 1080px; margin: 0 auto; }
+.props-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.props-ttl-group { display: flex; align-items: baseline; gap: 14px; }
+.props-ttl { font-size: 18px; font-weight: 500; color: var(--text-primary); }
+.props-total { font-size: 13px; color: var(--text-muted); }
+.sort-select {
+  height: 36px; padding: 0 28px 0 12px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-md); background: var(--bg-page);
+  color: var(--text-primary); font-size: 12px; cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  outline: none; transition: border-color 0.15s;
+}
+.sort-select:focus { border-color: var(--green-mid); }
+.prop-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 32px;
+}
+.prop-card {
+  background: var(--bg-white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg); overflow: hidden;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  text-decoration: none; display: block; color: inherit;
+}
+.prop-card:hover { background: var(--bg-page); border-color: var(--green-mid); box-shadow: var(--shadow-sm); }
+.prop-img {
+  position: relative; width: 100%; aspect-ratio: 4/3;
+  background: var(--bg-page);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.prop-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; z-index: 0;
+}
+.prop-img-ph { font-size: 12px; color: var(--text-muted); position: relative; z-index: 0; }
+.prop-type {
+  position: absolute; top: 10px; left: 10px;
+  font-size: 10.5px; font-weight: 500; color: #fff;
+  padding: 3px 9px; border-radius: var(--r-pill); z-index: 1;
+}
+.prop-type--nm { background: #C94020; }
+.prop-type--um { background: #9E5F15; }
+.prop-type--nh { background: var(--green-dark); }
+.prop-type--uh { background: var(--blue-dark); }
+.prop-body { padding: 14px 16px 16px; }
+.prop-name {
+  font-size: 13.5px; font-weight: 500; color: var(--text-primary);
+  margin-bottom: 4px; line-height: 1.4;
+}
+.prop-loc { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.prop-price { font-size: 19px; font-weight: 500; color: var(--green-dark); margin-bottom: 5px; line-height: 1.2; }
+.prop-price em { font-style: normal; font-size: 12px; color: var(--text-muted); }
+.prop-specs { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
+.prop-voices { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--green-mid); }
+.prop-voices-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+.props-cta-wrap { text-align: center; }
+.btn-props-all {
+  display: inline-block; padding: 13px 48px; font-size: 14px; font-weight: 500;
+  border: 1.5px solid var(--green-mid); color: var(--green-dark);
+  border-radius: var(--r-pill); transition: all 0.15s; cursor: pointer;
+  text-decoration: none; background: transparent;
+}
+.btn-props-all:hover { background: var(--green-mid); color: #fff; }
+
+/* ─── VOICES SECTION ─────────────────────────── */
+.voices-sec {
+  background: var(--dark-bg);
+  padding: 52px 32px 60px;
+}
+.voices-inner { max-width: 1080px; margin: 0 auto; }
+.voices-eyebrow {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em;
+  color: var(--brand-lite); margin-bottom: 12px; text-transform: uppercase;
+}
+.voices-ttl {
+  font-size: 22px; font-weight: 500; color: rgba(255,255,255,0.92);
+  margin-bottom: 8px;
+}
+.voices-lead {
+  font-size: 13px; color: rgba(255,255,255,0.50); line-height: 1.8;
+  margin-bottom: 32px;
+}
+.voices-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 32px;
+}
+.voice-card {
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(255,255,255,0.10);
+  border-radius: var(--r-lg); padding: 20px;
+  transition: background 0.15s, border-color 0.15s;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.voice-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.20); }
+.voice-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.voice-stage {
+  font-size: 10.5px; font-weight: 500; flex-shrink: 0;
+  background: rgba(249,114,114,0.15); color: var(--brand-lite);
+  padding: 3px 10px; border-radius: var(--r-pill);
+}
+.voice-pref { font-size: 10.5px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+.voice-info { display: flex; align-items: center; gap: 10px; }
+.voice-avatar {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: var(--brand); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 500;
+}
+.voice-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.90); line-height: 1.3; }
+.voice-detail { font-size: 10.5px; color: rgba(255,255,255,0.40); margin-top: 2px; }
+.voice-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.vbadge {
+  font-size: 10.5px; color: rgba(255,255,255,0.60);
+  border: 0.5px solid rgba(255,255,255,0.20);
+  padding: 2px 8px; border-radius: var(--r-pill);
+}
+.voice-price { font-size: 18px; font-weight: 500; color: #fff; line-height: 1.2; }
+.voice-price em { font-style: normal; font-size: 11px; color: rgba(255,255,255,0.40); margin-left: 2px; }
+.voice-quote {
+  font-size: 12.5px; color: rgba(255,255,255,0.68);
+  line-height: 1.85; flex: 1;
+}
+.voice-link {
+  font-size: 11.5px; color: var(--green-light);
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: color 0.15s; text-decoration: none; margin-top: auto;
+}
+.voice-link:hover { color: var(--green-pale); }
+.voices-cta-wrap { text-align: center; }
+.btn-voices-more {
+  display: inline-block; padding: 13px 48px; font-size: 14px; font-weight: 500;
+  border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.82);
+  border-radius: var(--r-pill); transition: all 0.15s; cursor: pointer;
+  background: transparent;
+}
+.btn-voices-more:hover { border-color: rgba(255,255,255,0.55); color: #fff; background: rgba(255,255,255,0.06); }
+
+/* ─── KINKI NEWS SECTION ─────────────────── */
+.kinki-news-sec {
+  background: var(--bg-white);
+  padding: 52px 32px 60px;
+  border-top: 0.5px solid var(--border);
+}
+.kinki-news-inner { max-width: 1080px; margin: 0 auto; }
+.news-eyebrow {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em;
+  color: var(--brand); margin-bottom: 12px; text-transform: uppercase;
+}
+.news-sec-ttl {
+  font-size: 22px; font-weight: 500; color: var(--text-primary);
+  margin-bottom: 28px;
+}
+.tag {
+  font-size: 10px; font-weight: 500;
+  padding: 2px 10px; border-radius: var(--r-pill);
+  white-space: nowrap; flex-shrink: 0;
+}
+.tag-event     { background: var(--orange-bg); color: #633806; }
+.tag-community { background: var(--purple-bg); color: #3C3489; }
+.tag-news      { background: var(--blue-bg);   color: #0C447C; }
+.tag-media     { background: var(--pink-bg);   color: #72243E; }
+.badge-new {
+  font-size: 9.5px; font-weight: 700;
+  padding: 1px 8px; border-radius: var(--r-pill);
+  background: var(--brand); color: #fff;
+  letter-spacing: 0.04em; flex-shrink: 0;
+}
+.news-tabs {
+  display: flex; gap: 0;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 20px; overflow-x: auto;
+}
+.news-tab {
+  padding: 9px 18px; font-size: 13px; color: var(--text-muted);
+  cursor: pointer; border: none; border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px; background: none; white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.news-tab:hover { color: var(--text-primary); }
+.news-tab.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 500; }
+.news-list { display: flex; flex-direction: column; gap: 8px; }
+.news-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 18px 22px; background: var(--bg-white);
+  border: 0.5px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm); cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+  text-decoration: none; color: inherit;
+}
+.news-item:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.news-item-left {
+  display: flex; flex-direction: column; align-items: flex-start;
+  gap: 7px; flex-shrink: 0; width: 88px;
+}
+.news-date { font-size: 11px; color: var(--text-muted); }
+.news-item-right { flex: 1; min-width: 0; }
+.news-head { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; flex-wrap: wrap; }
+.news-title { font-size: 13.5px; font-weight: 500; color: var(--text-primary); line-height: 1.6; margin-bottom: 4px; }
+.news-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.8; }
+.news-cta-row { margin-top: 24px; text-align: center; }
+.btn-news-more {
+  display: inline-block; padding: 12px 44px; font-size: 13.5px; font-weight: 500;
+  border: 1.5px solid var(--brand); color: var(--brand);
+  border-radius: var(--r-pill); transition: all 0.15s; text-decoration: none;
+  background: transparent;
+}
+.btn-news-more:hover { background: var(--brand); color: #fff; }
+
+/* ─── SNS SECTION ─────────────────────────── */
+.kinki-sns-sec {
+  background: var(--dark-bg);
+  padding: 52px 32px 60px;
+  border-top: 0.5px solid rgba(255,255,255,0.06);
+}
+.kinki-sns-inner { max-width: 1080px; margin: 0 auto; }
+.sns-eyebrow {
+  font-size: 10.5px; font-weight: 500; letter-spacing: 0.14em;
+  color: var(--brand-lite); margin-bottom: 12px; text-transform: uppercase;
+}
+.sns-sec-ttl {
+  font-size: 22px; font-weight: 500; color: rgba(255,255,255,0.92);
+  margin-bottom: 36px;
+}
+.sns-block { margin-bottom: 48px; }
+.sns-block:last-child { margin-bottom: 0; }
+.sns-block-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; padding-bottom: 16px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.10);
+  gap: 12px; flex-wrap: wrap;
+}
+.sns-identity { display: flex; align-items: center; gap: 14px; }
+.sns-ico {
+  width: 46px; height: 46px; border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.sns-ico.yt { background: #FEE2E2; }
+.sns-ico.ig { background: linear-gradient(135deg, #fce38a 0%, #f5a623 35%, #e0525a 65%, #c52c8e 100%); }
+.sns-platform { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 2px; }
+.sns-handle   { font-size: 11.5px; color: rgba(255,255,255,0.45); }
+.btn-sns {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 22px; border-radius: var(--r-pill);
+  font-size: 12.5px; font-weight: 500; border: 1.5px solid;
+  transition: all 0.15s; white-space: nowrap; flex-shrink: 0;
+  text-decoration: none;
+}
+.btn-sns.yt-btn { border-color: #CC0000; color: #CC0000; }
+.btn-sns.yt-btn:hover { background: #CC0000; color: #fff; }
+.btn-sns.ig-btn { border-color: #C13584; color: #C13584; }
+.btn-sns.ig-btn:hover { background: #C13584; color: #fff; }
+.yt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.yt-card {
+  background: rgba(255,255,255,0.07);
+  border: 0.5px solid rgba(255,255,255,0.14);
+  border-radius: var(--r-md); overflow: hidden;
+  display: block; cursor: pointer; transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.yt-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-2px); }
+.yt-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  background: rgba(255,255,255,0.05); position: relative; overflow: hidden;
+}
+.yt-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.yt-duration {
+  position: absolute; bottom: 6px; right: 8px;
+  background: rgba(0,0,0,0.78); color: #fff;
+  font-size: 10px; padding: 1px 6px; border-radius: 3px; letter-spacing: 0.02em;
+}
+.yt-play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0); transition: background 0.2s;
+}
+.yt-card:hover .yt-play-overlay { background: rgba(0,0,0,0.22); }
+.yt-play-icon {
+  width: 40px; height: 40px; background: rgba(204,0,0,0.88);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 14px;
+  opacity: 0; transform: scale(0.8); transition: opacity 0.2s, transform 0.2s;
+}
+.yt-card:hover .yt-play-icon { opacity: 1; transform: scale(1); }
+.yt-info { padding: 10px 12px 14px; }
+.yt-title { font-size: 12.5px; font-weight: 500; color: #fff; line-height: 1.55; margin-bottom: 6px; }
+.yt-meta  { font-size: 11px; color: rgba(255,255,255,0.38); }
+.ig-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.ig-cell  { aspect-ratio: 1/1; background: rgba(255,255,255,0.07); overflow: hidden; position: relative; cursor: pointer; }
+.ig-cell img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ig-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0);
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.ig-cell:hover .ig-overlay { background: rgba(0,0,0,0.38); }
+.ig-hover-ico { font-size: 22px; opacity: 0; transition: opacity 0.2s; }
+.ig-cell:hover .ig-hover-ico { opacity: 1; }
+
+/* ─── GET STARTED SECTION ─────────────────── */
+.kinki-cta-sec {
+  background: var(--bg-white);
+  padding: 88px 32px;
+  text-align: center;
+  border-top: 0.5px solid var(--border);
+}
+.kinki-cta-inner { max-width: 520px; margin: 0 auto; }
+.cta-eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; color: var(--brand); margin-bottom: 14px;
+}
+.cta-title {
+  font-size: 26px; font-weight: 500; color: var(--text-primary);
+  line-height: 1.55; margin-bottom: 14px;
+}
+.cta-lead {
+  font-size: 13px; color: var(--text-secondary);
+  line-height: 1.9; margin-bottom: 36px;
+}
+.cta-catches {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; margin-bottom: 24px; flex-wrap: wrap; padding: 0;
+}
+.cta-catches li {
+  list-style: none; font-size: 12px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 5px;
+}
+.cta-catches li::before { content: "✓"; color: var(--line); font-weight: 500; }
+.btn-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--line); color: #fff;
+  padding: 15px 40px; border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 500; transition: background 0.15s; text-decoration: none;
+}
+.btn-cta:hover { background: var(--line-h); color: #fff; }
+.btn-cta .line-logo-img { width: 22px; height: 22px; }
+.cta-note { font-size: 11px; color: var(--text-muted); margin-top: 12px; }
+
+/* ─── FOOTER ─────────────────────────── */
+.footer { background: var(--dark-bg); color: rgba(255,255,255,0.68); }
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 52px 32px 28px; }
+.footer-top { display: flex; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
+.footer-logo svg { display: block; }
+.footer-tagline { font-size: 12px; color: rgba(255,255,255,0.42); margin-top: 10px; line-height: 1.8; }
+.footer-nav { display: grid; grid-template-columns: repeat(7, 1fr); gap: 24px; flex: 1; }
+.fnav-group h4 {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35); margin-bottom: 12px; text-transform: uppercase;
+}
+.fnav-group ul { list-style: none; }
+.fnav-group li { margin-bottom: 8px; }
+.fnav-group a { font-size: 12px; color: rgba(255,255,255,0.58); transition: color 0.15s; }
+.fnav-group a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.08); padding-top: 20px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  font-size: 11px; color: rgba(255,255,255,0.28);
+}
+.footer-legal { display: flex; gap: 16px; }
+.footer-legal a { color: rgba(255,255,255,0.38); transition: color 0.15s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.70); }
+
+@media (max-width: 900px) {
+  .search-sec { padding: 28px 16px 36px; }
+  .area-map-layout { grid-template-columns: 1fr; }
+  .filter-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-nav { grid-template-columns: repeat(3, 1fr); }
+  .footer-top { gap: 28px; }
+  .props-sec { padding: 36px 16px 44px; }
+  .prop-grid { grid-template-columns: repeat(2, 1fr); }
+  .voices-sec { padding: 40px 16px 48px; }
+  .voices-grid { grid-template-columns: repeat(2, 1fr); }
+  .kinki-news-sec { padding: 40px 16px 48px; }
+  .kinki-sns-sec { padding: 40px 16px 48px; }
+  .kinki-cta-sec { padding: 64px 16px; }
+  .yt-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+}
+@media (max-width: 600px) {
+  .filter-grid { grid-template-columns: 1fr; }
+  .search-bar { flex-direction: column; }
+  .search-input, .search-select, .btn-search { width: 100%; }
+  .condition-sec { padding: 28px 16px 36px; }
+  .footer-nav { grid-template-columns: repeat(2, 1fr); }
+  .prop-grid { grid-template-columns: 1fr; }
+  .btn-props-all { padding: 13px 28px; font-size: 13px; }
+  .voices-grid { grid-template-columns: 1fr; }
+  .btn-voices-more { padding: 13px 28px; font-size: 13px; }
+  .news-item { flex-direction: column; gap: 10px; }
+  .news-item-left { flex-direction: row; align-items: center; gap: 8px; width: auto; }
+  .ig-grid { gap: 2px; }
+  .yt-grid { grid-template-columns: 1fr; }
+  .cta-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="../sumumu-faq.html">よくある質問</a>
+        <a href="../sumumu-contact.html">お問合せ</a>
+        <a href="../sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="../sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0kk{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0kk" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+
+    <nav class="main-nav">
+      <a href="../sumumu-main.html" class="nl">トップ</a>
+      <div class="ni">
+        <span class="nl">すむむとは。<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-about.html">すむむ。のサービス</a>
+          <a href="../sumumu-about.html#partners">パートナー</a>
+          <a href="../sumumu-about.html#media">メディア掲載</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl" style="color:var(--green-mid)">住まいを探す<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-kinki.html">エリア別</a>
+          <a href="sumumu-kinki-all.html" style="color:var(--green-mid)">条件別</a>
+          <a href="sumumu-kinki-00001.html">個別物件</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">先輩の体験談<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-journal.html">先輩の声</a>
+          <a href="../sumumu-journal.html?type=purchase">購入体験</a>
+          <a href="../sumumu-journal.html?type=life">暮らし</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">お役立ちコラム<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-guide.html">資金計画</a>
+          <a href="../sumumu-guide.html">物件選び</a>
+          <a href="../sumumu-guide.html">購入手続き</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">シミュレーション<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-tool-loan.html">ローンシミュレーター</a>
+          <a href="../sumumu-tool-borrowing.html">借入可能額</a>
+          <a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a>
+        </div>
+      </div>
+      <div class="ni">
+        <a href="../sumumu-area.html" class="nl">エリア特集<i>▾</i></a>
+        <div class="nd">
+          <a href="../sumumu-area.html">エリア一覧</a>
+          <a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a>
+          <a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a>
+          <a href="../../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a>
+        </div>
+      </div>
+      <a href="../sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+
+    <button class="hamb" id="hamb" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="../sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group">
+          <div class="mob-parent">住まいを探す<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="sumumu-kinki.html">エリア別</a>
+            <a href="sumumu-kinki-all.html">条件別</a>
+          </div>
+        </div>
+        <div class="mob-group">
+          <div class="mob-parent">先輩の体験談<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="../sumumu-journal.html">先輩の声</a>
+            <a href="../sumumu-journal.html?type=purchase">購入体験</a>
+          </div>
+        </div>
+        <a href="../sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util">
+          <a href="../sumumu-faq.html">よくある質問</a>
+          <a href="../sumumu-contact.html">お問合せ</a>
+        </div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">
+          <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+          コミュニティに無料で参加する
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: 物件検索 -->
+<section class="search-sec">
+  <div class="search-inner">
+    <h1 class="search-ttl">住まいを探す</h1>
+
+    <!-- Main tabs -->
+    <div class="search-tabs">
+      <div class="stab active" data-tab="area">エリアから探す</div>
+      <div class="stab" data-tab="condition">条件から探す</div>
+      <div class="stab" data-tab="keyword">物件名・住所</div>
+    </div>
+
+    <!-- Tab 1: エリアから探す -->
+    <div class="stab-panel active" id="panel-area">
+
+      <!-- Search bar -->
+      <div class="search-bar">
+        <input class="search-input" type="text" placeholder="都道府県・市区町村・路線・駅名を入力">
+        <select class="search-select">
+          <option>種別：すべて</option>
+          <option>新築マンション</option>
+          <option>中古マンション</option>
+          <option>新築戸建</option>
+          <option>中古戸建</option>
+          <option>土地</option>
+        </select>
+        <select class="search-select">
+          <option>予算：上限なし</option>
+          <option>〜2,000万円</option>
+          <option>〜3,000万円</option>
+          <option>〜4,000万円</option>
+          <option>〜5,000万円</option>
+          <option>〜6,000万円</option>
+          <option>6,000万円以上</option>
+        </select>
+        <button class="btn-search">検索する →</button>
+      </div>
+
+      <!-- Prefecture tabs -->
+      <div class="region-tabs">
+        <div class="rtab active" data-pref="all">すべて</div>
+        <div class="rtab" data-pref="滋賀県">滋賀県</div>
+        <div class="rtab" data-pref="京都府">京都府</div>
+        <div class="rtab" data-pref="大阪府">大阪府</div>
+        <div class="rtab" data-pref="兵庫県">兵庫県</div>
+        <div class="rtab" data-pref="奈良県">奈良県</div>
+        <div class="rtab" data-pref="三重県">三重県</div>
+        <div class="rtab" data-pref="和歌山県">和歌山県</div>
+      </div>
+
+      <!-- Map + Prefecture list -->
+      <div class="area-map-layout">
+
+        <!-- Kinki SVG map -->
+        <div class="map-wrap">
+          <div id="kinkiMapContainer" style="width:100%;min-height:300px;display:flex;align-items:center;justify-content:center;">
+            <span style="color:rgba(255,255,255,0.4);font-size:13px;">地図を読み込み中…</span>
+          </div>
+        </div>
+
+        <!-- Prefecture list -->
+        <div class="pref-list-wrap">
+          <div class="pref-list-label">都道府県を選ぶ</div>
+          <div class="pref-list">
+            <div class="pref-item" data-pref="三重県">
+              <span class="pref-name">三重県</span>
+              <span class="pref-count">12件</span>
+            </div>
+            <div class="pref-item" data-pref="滋賀県">
+              <span class="pref-name">滋賀県</span>
+              <span class="pref-count">37件</span>
+            </div>
+            <div class="pref-item" data-pref="京都府">
+              <span class="pref-name">京都府</span>
+              <span class="pref-count">134件</span>
+            </div>
+            <div class="pref-item" data-pref="大阪府">
+              <span class="pref-name">大阪府</span>
+              <span class="pref-count">248件</span>
+            </div>
+            <div class="pref-item" data-pref="兵庫県">
+              <span class="pref-name">兵庫県</span>
+              <span class="pref-count">112件</span>
+            </div>
+            <div class="pref-item" data-pref="奈良県">
+              <span class="pref-name">奈良県</span>
+              <span class="pref-count">44件</span>
+            </div>
+            <div class="pref-item" data-pref="和歌山県">
+              <span class="pref-name">和歌山県</span>
+              <span class="pref-count">20件</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="popular-label">人気エリア</div>
+            <div class="popular-chips">
+              <div class="pop-chip">大阪市中央区</div>
+              <div class="pop-chip">吹田市</div>
+              <div class="pop-chip">豊中市</div>
+              <div class="pop-chip">京都市左京区</div>
+              <div class="pop-chip">草津市</div>
+              <div class="pop-chip">宝塚市</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: 条件から探す -->
+    <div class="stab-panel" id="panel-condition">
+      <div class="search-bar">
+        <select class="search-select">
+          <option>種別：すべて</option>
+          <option>新築マンション</option>
+          <option>中古マンション</option>
+          <option>新築戸建</option>
+          <option>中古戸建</option>
+        </select>
+        <select class="search-select">
+          <option>エリア：近畿</option>
+          <option>大阪府</option>
+          <option>京都府</option>
+          <option>兵庫県</option>
+          <option>奈良県</option>
+          <option>滋賀県</option>
+          <option>和歌山県</option>
+        </select>
+        <button class="btn-search">検索する →</button>
+      </div>
+    </div>
+
+    <!-- Tab 3: 物件名・住所 -->
+    <div class="stab-panel" id="panel-keyword">
+      <div class="keyword-panel">
+        <input class="keyword-input" type="text" placeholder="物件名・住所を入力してください（例：グランドメゾン大阪、大阪市中央区）">
+        <button class="btn-search">検索する →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 1-B: 条件から絞り込む -->
+<section class="condition-sec">
+  <div class="condition-inner">
+    <div class="condition-ttl">条件から絞り込む</div>
+
+    <div class="filter-grid">
+      <div class="filter-item">
+        <span class="filter-label">物件種別</span>
+        <select class="filter-select">
+          <option>新築マンション</option>
+          <option>中古マンション</option>
+          <option>新築戸建</option>
+          <option>中古戸建</option>
+          <option>土地</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <span class="filter-label">価格帯</span>
+        <select class="filter-select">
+          <option>3,000〜5,000万円</option>
+          <option>〜2,000万円</option>
+          <option>〜3,000万円</option>
+          <option>〜4,000万円</option>
+          <option>〜6,000万円</option>
+          <option>6,000万円以上</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <span class="filter-label">間取り</span>
+        <select class="filter-select">
+          <option>3LDK</option>
+          <option>1R・1K</option>
+          <option>1LDK・2K</option>
+          <option>2LDK・3K</option>
+          <option>4LDK以上</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <span class="filter-label">専有面積</span>
+        <select class="filter-select">
+          <option>70㎡以上</option>
+          <option>40㎡以上</option>
+          <option>50㎡以上</option>
+          <option>60㎡以上</option>
+          <option>80㎡以上</option>
+          <option>100㎡以上</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <span class="filter-label">築年数</span>
+        <select class="filter-select">
+          <option>10年以内</option>
+          <option>新築</option>
+          <option>5年以内</option>
+          <option>15年以内</option>
+          <option>20年以内</option>
+          <option>年数指定なし</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <span class="filter-label">駅徒歩</span>
+        <select class="filter-select">
+          <option>10分以内</option>
+          <option>3分以内</option>
+          <option>5分以内</option>
+          <option>15分以内</option>
+          <option>指定なし</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="kodawari-label">こだわり条件</div>
+    <div class="kodawari-chips">
+      <div class="kchip" onclick="this.classList.toggle('selected')">学区設定</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">ペット可</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">駐車場あり</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">二重床</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">宅配ボックス</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">床暖房</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">リノベ済み</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">平屋</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">角部屋</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">南向き</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">管理費なし</div>
+      <div class="kchip" onclick="this.classList.toggle('selected')">新耐震</div>
+    </div>
+
+    <div class="search-cta-row">
+      <button class="btn-search-main">この条件で物件を見る（127件）→</button>
+      <span class="search-result-hint">※ すむむ。は物件の仲介・売買は行いません</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: 物件一覧 -->
+<section class="props-sec">
+  <div class="props-inner-wrap">
+    <div class="props-header">
+      <div class="props-ttl-group">
+        <h2 class="props-ttl">物件一覧</h2>
+        <span class="props-total" id="propsTotal">全607件</span>
+      </div>
+      <select class="sort-select">
+        <option>並び替え：新着順</option>
+        <option>価格が安い順</option>
+        <option>価格が高い順</option>
+        <option>面積が広い順</option>
+        <option>駅近順</option>
+      </select>
+    </div>
+    <div class="prop-grid" id="propGrid"></div>
+    <div class="props-cta-wrap">
+      <a href="sumumu-kinki-all.html" class="btn-props-all" id="propsAllBtn">
+        全ての物件を見る（残り598件）→
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: 先輩たちの体験談 -->
+<section class="voices-sec">
+  <div class="voices-inner">
+    <div class="voices-eyebrow">VOICES</div>
+    <h2 class="voices-ttl">近畿エリアの先輩たちの体験談</h2>
+    <p class="voices-lead">すむむ。を通じて住み替えを実現した近畿エリアの先輩たちの声です。<br>同じエリア・同じ悩みを持つ方のリアルな体験がヒントになります。</p>
+    <div class="voices-grid" id="voiceGrid"></div>
+    <div class="voices-cta-wrap">
+      <button class="btn-voices-more" id="voicesMoreBtn">体験談をもっと見る</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: 近畿エリアのお知らせ -->
+<section class="kinki-news-sec">
+  <div class="kinki-news-inner">
+    <div class="news-eyebrow">EVENTS</div>
+    <h2 class="news-sec-ttl">近畿エリアのお知らせ</h2>
+
+    <div class="news-tabs" id="kinkiNewsTabs" role="tablist">
+      <button class="news-tab active" data-cat="all">すべて</button>
+      <button class="news-tab" data-cat="news">ニュース</button>
+      <button class="news-tab" data-cat="event">イベント</button>
+      <button class="news-tab" data-cat="community">コミュニティ</button>
+      <button class="news-tab" data-cat="media">メディア掲載</button>
+    </div>
+
+    <div class="news-list" id="kinkiNewsList">
+
+      <a href="/news/k001/" class="news-item" data-cat="event">
+        <div class="news-item-left">
+          <span class="news-date">2026.05.08</span>
+          <span class="tag tag-event">イベント</span>
+        </div>
+        <div class="news-item-right">
+          <div class="news-head">
+            <span class="news-title">【6/7開催】大阪・近畿エリア 住まい座談会 vol.8 参加者募集</span>
+            <span class="badge-new">NEW</span>
+          </div>
+          <p class="news-desc">先輩・後輩が一緒に参加する座談会です。テーマは「40代共働き夫婦の住み替え」。大阪・兵庫・京都エリアの体験者ゲストが登壇します。</p>
+        </div>
+      </a>
+
+      <a href="/news/k002/" class="news-item" data-cat="community">
+        <div class="news-item-left">
+          <span class="news-date">2026.05.01</span>
+          <span class="tag tag-community">コミュニティ</span>
+        </div>
+        <div class="news-item-right">
+          <div class="news-head">
+            <span class="news-title">近畿エリアのコミュニティメンバーが200名を突破しました</span>
+            <span class="badge-new">NEW</span>
+          </div>
+          <p class="news-desc">大阪・京都・兵庫・滋賀を中心に、近畿エリアのメンバーが200名を超えました。引き続き先輩・後輩の交流をお楽しみください。</p>
+        </div>
+      </a>
+
+      <a href="/news/k003/" class="news-item" data-cat="event">
+        <div class="news-item-left">
+          <span class="news-date">2026.04.18</span>
+          <span class="tag tag-event">イベント</span>
+        </div>
+        <div class="news-item-right">
+          <div class="news-head">
+            <span class="news-title">【5/25開催】草津・守山エリア モデルルーム見学ツアー参加者募集</span>
+          </div>
+          <p class="news-desc">滋賀県草津・守山エリアの新築マンション・戸建て物件を先輩・後輩が一緒に見学するツアーを開催します。定員12名・参加無料。</p>
+        </div>
+      </a>
+
+      <a href="/news/k004/" class="news-item" data-cat="news">
+        <div class="news-item-left">
+          <span class="news-date">2026.04.07</span>
+          <span class="tag tag-news">ニュース</span>
+        </div>
+        <div class="news-item-right">
+          <div class="news-head">
+            <span class="news-title">コンシェルジュサービスの対応エリアが奈良・和歌山にも拡大しました</span>
+          </div>
+          <p class="news-desc">近畿全7府県でコンシェルジュへの個別相談が無料でご利用いただけるようになりました。お気軽にご相談ください。</p>
+        </div>
+      </a>
+
+      <a href="/news/k005/" class="news-item" data-cat="media">
+        <div class="news-item-left">
+          <span class="news-date">2026.03.25</span>
+          <span class="tag tag-media">メディア掲載</span>
+        </div>
+        <div class="news-item-right">
+          <div class="news-head">
+            <span class="news-title">関西Living誌にすむむ。の近畿エリア特集が掲載されました</span>
+          </div>
+          <p class="news-desc">「住み替えを考える関西の30〜40代へ」という特集記事に、すむむ。のコミュニティと先輩の声が紹介されました。</p>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="news-cta-row">
+      <a href="/news/?area=kinki" class="btn-news-more">お知らせをもっと見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: FOLLOW US -->
+<section class="kinki-sns-sec">
+  <div class="kinki-sns-inner">
+    <div class="sns-eyebrow">FOLLOW US</div>
+    <h2 class="sns-sec-ttl">すむむ。の住み替え情報で学びませんか？</h2>
+
+    <!-- YouTube -->
+    <div class="sns-block">
+      <div class="sns-block-head">
+        <div class="sns-identity">
+          <div class="sns-ico yt">▶️</div>
+          <div>
+            <div class="sns-platform">YouTube</div>
+            <div class="sns-handle">@sumai_sumumu</div>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="btn-sns yt-btn">チャンネルを見る →</a>
+      </div>
+      <div class="yt-grid">
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt01.jpg" alt="大阪エリア住み替え実録" onerror="this.src='https://picsum.photos/seed/yt01house/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">12:34</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">【大阪エリア】30代ファミリーの住み替え実録</div>
+            <div class="yt-meta">1,243 回視聴 · 2週間前</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt02.jpg" alt="住宅ローン基本解説" onerror="this.src='https://picsum.photos/seed/yt02loan/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">18:21</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">住宅ローンの基本をわかりやすく解説</div>
+            <div class="yt-meta">3,812 回視聴 · 1ヶ月前</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt03.jpg" alt="先輩インタビュー" onerror="this.src='https://picsum.photos/seed/yt03family/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">21:05</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">先輩インタビュー：マンションから戸建てへ住み替えた理由</div>
+            <div class="yt-meta">2,104 回視聴 · 1ヶ月前</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt04.jpg" alt="資金計画3ステップ" onerror="this.src='https://picsum.photos/seed/yt04money/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">15:44</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">資金計画の3ステップ：売却→購入の資金フロー</div>
+            <div class="yt-meta">1,678 回視聴 · 2ヶ月前</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt05.jpg" alt="エリア別学区と物件" onerror="this.src='https://picsum.photos/seed/yt05school/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">14:12</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">エリア別！学区と物件の賢い探し方</div>
+            <div class="yt-meta">987 回視聴 · 2ヶ月前</div>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/@sumai_sumumu" target="_blank" rel="noopener noreferrer" class="yt-card">
+          <div class="yt-thumb">
+            <img src="../images/yt06.jpg" alt="コンシェルジュ相談会レポート" onerror="this.src='https://picsum.photos/seed/yt06meeting/640/360'">
+            <div class="yt-play-overlay"><div class="yt-play-icon">▶</div></div>
+            <span class="yt-duration">8:30</span>
+          </div>
+          <div class="yt-info">
+            <div class="yt-title">コンシェルジュ相談会 開催レポート</div>
+            <div class="yt-meta">542 回視聴 · 3ヶ月前</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="sns-block">
+      <div class="sns-block-head">
+        <div class="sns-identity">
+          <div class="sns-ico ig">📷</div>
+          <div>
+            <div class="sns-platform">Instagram</div>
+            <div class="sns-handle">@sumai_sumumu</div>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="btn-sns ig-btn">フォローする →</a>
+      </div>
+      <div class="ig-grid">
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig01.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig01home/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig02.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig02room/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig03.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig03city/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig04.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig04event/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig05.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig05family/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig06.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig06area/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig07.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig07garden/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig08.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig08kitchen/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+        <a href="https://www.instagram.com/sumai_sumumu" target="_blank" rel="noopener noreferrer" class="ig-cell">
+          <img src="../images/ig09.jpg" alt="" onerror="this.src='https://picsum.photos/seed/ig09living/300/300'">
+          <div class="ig-overlay"><span class="ig-hover-ico">📷</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: GET STARTED -->
+<section class="kinki-cta-sec">
+  <div class="kinki-cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0kk{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0kk" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group">
+          <h4>すむむとは。</h4>
+          <ul>
+            <li><a href="../sumumu-about.html">すむむ。のサービス</a></li>
+            <li><a href="../sumumu-about.html#partners">パートナー</a></li>
+            <li><a href="../sumumu-about.html#media">メディア掲載</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>住まいを探す</h4>
+          <ul>
+            <li><a href="sumumu-kinki.html">エリア別</a></li>
+            <li><a href="sumumu-kinki-all.html">条件別</a></li>
+            <li><a href="sumumu-kinki-00001.html">個別物件</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>先輩の体験談</h4>
+          <ul>
+            <li><a href="../sumumu-journal.html">先輩の声</a></li>
+            <li><a href="../sumumu-journal.html?type=purchase">購入体験</a></li>
+            <li><a href="../sumumu-journal.html?type=life">暮らし</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>お役立ちコラム</h4>
+          <ul>
+            <li><a href="../sumumu-guide.html">資金計画</a></li>
+            <li><a href="../sumumu-guide.html">物件選び</a></li>
+            <li><a href="../sumumu-guide.html">購入手続き</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>シミュレーション</h4>
+          <ul>
+            <li><a href="../sumumu-tool-loan.html">ローンシミュレーター</a></li>
+            <li><a href="../sumumu-tool-borrowing.html">借入可能額</a></li>
+            <li><a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>エリア特集</h4>
+          <ul>
+            <li><a href="../sumumu-area.html">エリア一覧</a></li>
+            <li><a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li>
+            <li><a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>お知らせ</h4>
+          <ul>
+            <li><a href="../sumumu-news.html">すべて</a></li>
+            <li><a href="/news/?cat=event">イベント</a></li>
+            <li><a href="/news/?cat=community">コミュニティ</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile nav
+const hamb = document.getElementById('hamb');
+const mobNav = document.getElementById('mobNav');
+if (hamb) {
+  hamb.addEventListener('click', () => {
+    mobNav.classList.toggle('open');
+    hamb.classList.toggle('open');
+  });
+}
+document.querySelectorAll('.mob-parent').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  });
+});
+
+// Main tab switching
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.stab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Prefecture list + tab sync
+const prefItems = document.querySelectorAll('.pref-item');
+const prefTabs  = document.querySelectorAll('.rtab[data-pref]');
+
+function selectPref(pref) {
+  prefTabs.forEach(t => t.classList.toggle('active', t.dataset.pref === pref));
+  document.querySelectorAll('#kinkiMapContainer path[data-pref]').forEach(p => {
+    const isSelected = pref !== 'all' && p.dataset.pref === pref;
+    p.setAttribute('fill', isSelected
+      ? 'var(--green-dark)'
+      : (ACTIVE_KINKI.includes(p.dataset.pref) ? '#1D9E75' : '#7EC5AC'));
+    p.classList.toggle('kmap-selected', isSelected);
+  });
+  prefItems.forEach(i => {
+    i.classList.remove('active');
+    i.style.display = (pref === 'all' || i.dataset.pref === pref) ? '' : 'none';
+  });
+  if (typeof renderProps === 'function') renderProps(pref);
+}
+
+prefTabs.forEach(tab => tab.addEventListener('click', () => selectPref(tab.dataset.pref)));
+prefItems.forEach(item => {
+  item.addEventListener('click', () => { selectPref(item.dataset.pref); item.classList.add('active'); });
+});
+
+// 地図クリック（イベント委譲）
+document.getElementById('kinkiMapContainer').addEventListener('click', e => {
+  const p = e.target.closest('path[data-pref]');
+  if (p) { selectPref(p.dataset.pref); p.setAttribute('fill','var(--green-dark)'); }
+});
+</script>
+
+<script>
+/* ── 物件一覧 ── */
+const PREF_TOTAL = {
+  all: 607,
+  '滋賀県': 37, '京都府': 134, '大阪府': 248,
+  '兵庫県': 112, '奈良県': 44, '三重県': 12, '和歌山県': 20
+};
+
+const PROPERTIES = [
+  // ── 大阪府 ──
+  { id:1,  pref:'大阪府', type:'新築マンション', name:'グランドメゾン大阪上町',       loc:'大阪市中央区',   station:'谷町四丁目駅', walk:5,  price:'4,980', layout:'3LDK', area:75.2,  age:null, voices:3 },
+  { id:4,  pref:'大阪府', type:'中古マンション', name:'プレサンス大阪上本町',          loc:'大阪市中央区',   station:'上本町駅',     walk:3,  price:'3,280', layout:'2LDK', area:62.8,  age:8,    voices:2 },
+  { id:6,  pref:'大阪府', type:'新築マンション', name:'ジオ吹田南千里',               loc:'大阪府吹田市',   station:'南千里駅',     walk:7,  price:'4,280', layout:'3LDK', area:72.8,  age:null, voices:5 },
+  { id:10, pref:'大阪府', type:'新築戸建て',     name:'パナソニックホームズ豊中刀根山', loc:'大阪府豊中市',   station:'緑地公園駅',   walk:12, price:'5,480', layout:'4LDK', area:118.6, age:null, voices:4 },
+  { id:11, pref:'大阪府', type:'中古マンション', name:'ブランズシティ大阪美野島',       loc:'大阪市福島区',   station:'野田阪神駅',   walk:6,  price:'5,980', layout:'3LDK', area:83.4,  age:5,    voices:1 },
+  // ── 京都府 ──
+  { id:2,  pref:'京都府', type:'中古マンション', name:'プレサンス京都丸太池',          loc:'京都市中京区',   station:'烏丸御池駅',   walk:3,  price:'3,580', layout:'2LDK', area:62.8,  age:8,    voices:1 },
+  { id:7,  pref:'京都府', type:'新築マンション', name:'グランドメゾン京都二条',        loc:'京都市中京区',   station:'二条駅',       walk:4,  price:'5,180', layout:'3LDK', area:78.5,  age:null, voices:2 },
+  { id:12, pref:'京都府', type:'中古マンション', name:'ミオカステーロ京都山科',        loc:'京都市山科区',   station:'山科駅',       walk:6,  price:'2,480', layout:'3LDK', area:68.2,  age:15,   voices:3 },
+  { id:13, pref:'京都府', type:'新築マンション', name:'エスリード京都桂',             loc:'京都市西京区',   station:'桂駅',         walk:8,  price:'4,280', layout:'3LDK', area:71.6,  age:null, voices:1 },
+  // ── 兵庫県 ──
+  { id:5,  pref:'兵庫県', type:'中古マンション', name:'ローレルコート宝塚逆瀬川',      loc:'兵庫県宝塚市',   station:'逆瀬川駅',     walk:4,  price:'2,980', layout:'3LDK', area:80.1,  age:15,   voices:2 },
+  { id:8,  pref:'兵庫県', type:'中古マンション', name:'ベルパーク神戸三宮',            loc:'神戸市中央区',   station:'三宮駅',       walk:6,  price:'3,880', layout:'2LDK', area:65.4,  age:10,   voices:4 },
+  { id:14, pref:'兵庫県', type:'新築戸建て',     name:'リーブルガーデン西宮甲子園',    loc:'兵庫県西宮市',   station:'甲子園駅',     walk:12, price:'4,680', layout:'4LDK', area:108.2, age:null, voices:2 },
+  // ── 滋賀県 ──
+  { id:3,  pref:'滋賀県', type:'新築戸建て',     name:'草津市矢橋町 一戸建て',         loc:'滋賀県草津市',   station:'草津駅',       walk:18, price:'3,180', layout:'4LDK', area:105.3, age:null, voices:2 },
+  { id:9,  pref:'滋賀県', type:'新築マンション', name:'グランドメゾン大津膳所',        loc:'滋賀県大津市',   station:'膳所駅',       walk:7,  price:'3,480', layout:'3LDK', area:72.1,  age:null, voices:1 },
+  { id:15, pref:'滋賀県', type:'中古マンション', name:'プレサンス草津南草津',          loc:'滋賀県草津市',   station:'南草津駅',     walk:9,  price:'2,780', layout:'3LDK', area:68.5,  age:12,   voices:3 },
+  // ── 奈良県 ──
+  { id:16, pref:'奈良県', type:'新築戸建て',     name:'ジェネービルド奈良学園前',      loc:'奈良県奈良市',   station:'学園前駅',     walk:15, price:'4,280', layout:'4LDK', area:112.5, age:null, voices:1 },
+  { id:17, pref:'奈良県', type:'中古マンション', name:'プレサンス奈良三条',            loc:'奈良県奈良市',   station:'近鉄奈良駅',   walk:8,  price:'2,180', layout:'3LDK', area:72.3,  age:18,   voices:0 },
+  // ── 三重県 ──
+  { id:18, pref:'三重県', type:'中古マンション', name:'ライオンズ津駅前',              loc:'三重県津市',     station:'津駅',         walk:5,  price:'1,980', layout:'3LDK', area:74.5,  age:20,   voices:0 },
+  // ── 和歌山県 ──
+  { id:19, pref:'和歌山県',type:'中古マンション', name:'ライオンズ和歌山城南',         loc:'和歌山市',       station:'和歌山駅',     walk:12, price:'2,280', layout:'3LDK', area:72.3,  age:18,   voices:0 },
+];
+
+const TYPE_CLASS = {
+  '新築マンション': 'nm', '中古マンション': 'um',
+  '新築戸建て': 'nh',     '中古戸建て': 'uh'
+};
+
+function propCardHTML(p) {
+  const typeKey   = TYPE_CLASS[p.type] || 'nm';
+  const isNew     = p.type.startsWith('新築');
+  const age       = p.age ? `築${p.age}年` : '新築';
+  const priceTag  = isNew
+    ? `${p.price}万円<em>〜</em>`
+    : `${p.price}万円`;
+  const voicesHTML = p.voices > 0
+    ? `<div class="prop-voices"><span class="prop-voices-dot"></span>体験談 ${p.voices}件あり</div>`
+    : '';
+  return `
+<a class="prop-card" href="/properties/kinki/${p.id}/">
+  <div class="prop-img">
+    <span class="prop-img-ph">物件画像</span>
+    <img src="../images/prop${p.id}.jpg" alt="${p.name}"
+         onerror="this.src='https://picsum.photos/seed/smprop${p.id}/400/300'">
+    <span class="prop-type prop-type--${typeKey}">${p.type}</span>
+  </div>
+  <div class="prop-body">
+    <div class="prop-name">${p.name}</div>
+    <div class="prop-loc">${p.loc} / ${p.station} 徒歩${p.walk}分</div>
+    <div class="prop-price">${priceTag}</div>
+    <div class="prop-specs">${p.layout} / ${p.area}㎡ / ${age}</div>
+    ${voicesHTML}
+  </div>
+</a>`;
+}
+
+function renderProps(pref) {
+  const filtered  = pref === 'all'
+    ? PROPERTIES
+    : PROPERTIES.filter(p => p.pref === pref);
+  const show      = filtered.slice(0, 9);
+  const total     = PREF_TOTAL[pref] || filtered.length;
+  const remaining = Math.max(0, total - 9);
+
+  const totalEl = document.getElementById('propsTotal');
+  if (totalEl) totalEl.textContent = `全${total.toLocaleString()}件`;
+
+  const grid = document.getElementById('propGrid');
+  if (grid) {
+    grid.innerHTML = show.length > 0
+      ? show.map(propCardHTML).join('')
+      : '<div style="grid-column:1/-1;text-align:center;padding:48px 0;color:rgba(255,255,255,0.30);font-size:13px;">このエリアの物件は準備中です</div>';
+  }
+
+  const btn = document.getElementById('propsAllBtn');
+  if (btn) {
+    btn.textContent = remaining > 0
+      ? `全ての物件を見る（残り${remaining.toLocaleString()}件）→`
+      : '全ての物件を見る →';
+    btn.style.display = (total > 0) ? '' : 'none';
+    btn.href = pref !== 'all'
+      ? `sumumu-kinki-all.html?pref=${encodeURIComponent(pref)}`
+      : 'sumumu-kinki-all.html';
+  }
+}
+
+renderProps('all');
+
+/* ── 体験談データ ── */
+const VOICE_DATA = [
+  // ── 初期表示 6件 ──
+  { id:1,  stage:'はじめての住み替え',   initial:'田', name:'田中 さやか', detail:'33歳 / 会社員 / 夫・子2人',   pref:'大阪府吹田市', type:'新築マンション', layout:'3LDK', area:75.2,  price:'4,280万円', quote:'コミュニティで同じ条件の方の体験を聞けたことで、ローンへの不安がなくなりました。コンシェルジュの方も中立な立場でアドバイスしてくれて、本当に安心して進められました。', link:'/voices/001/' },
+  { id:2,  stage:'売却と購入の同時進行', initial:'松', name:'松本 健一',   detail:'44歳 / 管理職 / 妻・子2人',   pref:'滋賀県草津市', type:'新築戸建て',     layout:'4LDK', area:105.3, price:'3,180万円', quote:'売却と購入の同時進行は複雑で自分だけでは無理でした。すむむ。のコンシェルジュが資金計画から段取りまで整理してくれたおかげでスムーズに完了できました。', link:'/voices/002/' },
+  { id:3,  stage:'はじめての住み替え',   initial:'木', name:'木村 朋子',   detail:'38歳 / パート / 夫・子1人',   pref:'京都市左京区', type:'新築マンション', layout:'3LDK', area:78.5,  price:'5,180万円', quote:'学区と物件を一緒に検討できたのが一番助かりました。先輩の声で同じ学区の方の体験談を読めたことで、エリアへの不安がなくなり決断できました。', link:'/voices/003/' },
+  { id:4,  stage:'買い替え',             initial:'山', name:'山田 太郎',   detail:'40歳 / 自営業 / 妻',         pref:'兵庫県宝塚市', type:'中古マンション', layout:'3LDK', area:80.1,  price:'2,980万円', quote:'中古物件への不安がありましたが、すむむ。で購入経験者の声を読んで考え方が変わりました。購入価格を抑えた分、リノベーションに費用をかけられて大満足です。', link:'/voices/004/' },
+  { id:5,  stage:'マンションから戸建てへ', initial:'中', name:'中村 みき',   detail:'35歳 / 会社員 / 夫・子2人',  pref:'大阪府豊中市', type:'新築戸建て',     layout:'4LDK', area:118.6, price:'5,480万円', quote:'子どもが増えて手狭になり戸建てへの住み替えを検討。営業に追われずに自分たちのペースで情報収集できたことで、冷静に比較・決断できました。', link:'/voices/005/' },
+  { id:6,  stage:'はじめての住み替え',   initial:'鈴', name:'鈴木 健二',   detail:'42歳 / 会社員 / 妻・子1人',  pref:'滋賀県大津市', type:'新築マンション', layout:'3LDK', area:72.1,  price:'3,480万円', quote:'大阪から滋賀への移住は情報が少なく不安でした。すむむ。の滋賀在住の先輩の体験談が非常に参考になり、実際の生活イメージが持てたことで背中を押してもらえました。', link:'/voices/006/' },
+  // ── 追加表示 6件 ──
+  { id:7,  stage:'はじめての住み替え',   initial:'伊', name:'伊藤 さくら', detail:'31歳 / 会社員 / 夫',         pref:'大阪市天王寺区', type:'中古マンション', layout:'2LDK', area:62.8,  price:'3,280万円', quote:'共働きで時間がなく、どこから手をつければいいか分からない状態でした。コミュニティで夜間に気軽に質問できる環境があって、忙しい私たちにはぴったりでした。', link:'/voices/007/' },
+  { id:8,  stage:'買い替え',             initial:'渡', name:'渡辺 一郎',   detail:'45歳 / 会社員 / 妻・子1人',  pref:'京都市中京区', type:'中古マンション', layout:'2LDK', area:62.8,  price:'3,580万円', quote:'築年数が気になっていましたが、先輩の体験で「この築年数でも快適」という声が多く安心しました。コンシェルジュには物件の見方まで教えてもらい視野が広がりました。', link:'/voices/008/' },
+  { id:9,  stage:'マンションから戸建てへ', initial:'小', name:'小林 美香',   detail:'36歳 / 専業主婦 / 夫・子2人', pref:'兵庫県西宮市', type:'新築戸建て',     layout:'4LDK', area:108.2, price:'4,680万円', quote:'西宮は人気エリアで競争率が高く不安でした。すむむ。でタイミングと資金計画をしっかり整理できたことで、希望エリアで納得のいく物件を購入できました。', link:'/voices/009/' },
+  { id:10, stage:'はじめての住み替え',   initial:'佐', name:'佐藤 健太',   detail:'39歳 / ITエンジニア / 妻',   pref:'大阪府吹田市', type:'新築マンション', layout:'3LDK', area:72.8,  price:'4,280万円', quote:'ネットで調べると情報が多すぎて混乱していました。すむむ。で同じ条件の先輩体験を絞り込んで読めたのが効率的で、1ヶ月で意思決定できました。', link:'/voices/010/' },
+  { id:11, stage:'はじめての住み替え',   initial:'高', name:'高橋 優子',   detail:'41歳 / 看護師 / 夫・子2人',  pref:'奈良県奈良市', type:'新築戸建て',     layout:'4LDK', area:112.5, price:'4,280万円', quote:'奈良は物件情報が少なく不安でしたが、コミュニティで奈良在住の先輩と直接話す機会をいただきました。地元ならではのリアルな情報が決め手になりました。', link:'/voices/011/' },
+  { id:12, stage:'買い替え',             initial:'加', name:'加藤 昌弘',   detail:'37歳 / 会社員 / 妻・子1人',  pref:'大阪市福島区', type:'中古マンション', layout:'3LDK', area:83.4,  price:'5,980万円', quote:'価格帯が高い物件で慎重になっていましたが、同価格帯で購入した先輩の「後悔していない」という声が決断の背中を押してくれました。中立な立場のアドバイスが信頼できました。', link:'/voices/012/' },
+];
+
+const VOICES_INITIAL = 6;
+let voicesExpanded   = false;
+
+function voiceCardHTML(v) {
+  const badges = [v.type, v.layout, `${v.area}㎡`]
+    .map(b => `<span class="vbadge">${b}</span>`).join('');
+  return `
+<div class="voice-card">
+  <div class="voice-card-top">
+    <span class="voice-stage">${v.stage}</span>
+    <span class="voice-pref">${v.pref}</span>
+  </div>
+  <div class="voice-info">
+    <div class="voice-avatar">${v.initial}</div>
+    <div>
+      <div class="voice-name">${v.name}</div>
+      <div class="voice-detail">${v.detail}</div>
+    </div>
+  </div>
+  <div class="voice-badges">${badges}</div>
+  <div class="voice-price">${v.price}<em>で購入</em></div>
+  <p class="voice-quote">「${v.quote}」</p>
+  <a class="voice-link" href="${v.link}">購入体験の詳細を読む →</a>
+</div>`;
+}
+
+function renderVoices() {
+  const grid = document.getElementById('voiceGrid');
+  if (!grid) return;
+  const items = voicesExpanded ? VOICE_DATA : VOICE_DATA.slice(0, VOICES_INITIAL);
+  grid.innerHTML = items.map(voiceCardHTML).join('');
+
+  const btn = document.getElementById('voicesMoreBtn');
+  if (!btn) return;
+  const remaining = VOICE_DATA.length - VOICES_INITIAL;
+  if (voicesExpanded || VOICE_DATA.length <= VOICES_INITIAL) {
+    btn.style.display = 'none';
+  } else {
+    btn.textContent = `体験談をもっと見る（残り${remaining}件）`;
+    btn.style.display = '';
+  }
+}
+
+document.getElementById('voicesMoreBtn').addEventListener('click', () => {
+  voicesExpanded = true;
+  renderVoices();
+});
+
+renderVoices();
+
+/* ── お知らせ タブ絞り込み ── */
+(function initNewsTab() {
+  const tabs  = document.querySelectorAll('#kinkiNewsTabs .news-tab');
+  const items = document.querySelectorAll('#kinkiNewsList .news-item');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      items.forEach(item => {
+        item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+const KINKI_PREFS  = ['滋賀県','京都府','大阪府','兵庫県','奈良県','三重県','和歌山県'];
+const ACTIVE_KINKI = ['滋賀県','京都府','大阪府','兵庫県'];
+const THRESH = 0.000002; // 小島除去しきい値
+
+function removeSmallIslands(feat, prefName) {
+  const geo = feat.geometry;
+  if (!geo || geo.type !== 'MultiPolygon') return feat;
+  const kept = geo.coordinates.filter(coords =>
+    d3.geoArea({ type:'Feature', geometry:{ type:'Polygon', coordinates:coords }, properties:{} }) >= THRESH
+  );
+  return kept.length ? { ...feat, geometry:{ ...geo, coordinates:kept } } : null;
+}
+
+(async function initKinkiMap() {
+  const container = document.getElementById('kinkiMapContainer');
+  if (!container || typeof d3 === 'undefined' || typeof topojson === 'undefined') return;
+
+  try {
+    const res  = await fetch('https://cdn.jsdelivr.net/gh/dataofjapan/land/japan.topojson');
+    if (!res.ok) throw new Error(res.status);
+    const topo = await res.json();
+
+    const key      = Object.keys(topo.objects)[0];
+    const geoAll   = topojson.feature(topo, topo.objects[key]);
+
+    // 近畿7府県のみ抽出・小島除去
+    const kinkiFeatures = geoAll.features
+      .filter(f => {
+        const n = f.properties.nam_ja || f.properties.name_ja || f.properties.name || '';
+        return KINKI_PREFS.includes(n);
+      })
+      .map(f => {
+        const n = f.properties.nam_ja || f.properties.name_ja || f.properties.name || '';
+        return removeSmallIslands(f, n);
+      })
+      .filter(Boolean);
+
+    const kinkiGeo = { type:'FeatureCollection', features: kinkiFeatures };
+
+    const W = 480, H = 420;
+    const proj = d3.geoMercator().fitExtent([[16, 16], [W - 16, H - 16]], kinkiGeo);
+    const path = d3.geoPath().projection(proj);
+
+    container.innerHTML = '';
+    const svg = d3.select(container).append('svg')
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('width', '100%')
+      .style('display', 'block');
+
+    kinkiFeatures.forEach(feat => {
+      const name     = feat.properties.nam_ja || feat.properties.name_ja || feat.properties.name || '';
+      const isActive = ACTIVE_KINKI.includes(name);
+      const fillBase = isActive ? '#1D9E75' : '#7EC5AC';
+
+      const g = svg.append('g').style('cursor', 'pointer');
+
+      g.append('path')
+        .attr('d', path(feat))
+        .attr('data-pref', name)
+        .attr('fill', fillBase)
+        .attr('stroke', '#1A1010')
+        .attr('stroke-width', 1.2)
+        .on('mouseenter', function() {
+          if (!this.classList.contains('kmap-selected'))
+            d3.select(this).attr('fill', isActive ? '#0e7a58' : '#5CAE97');
+        })
+        .on('mouseleave', function() {
+          if (!this.classList.contains('kmap-selected'))
+            d3.select(this).attr('fill', fillBase);
+        });
+
+      // 府県名ラベル：MultiPolygonの最大ポリゴン重心を使い、形状が複雑でも内部に表示
+      let labelCentroid;
+      if (feat.geometry && feat.geometry.type === 'MultiPolygon') {
+        let maxArea = 0, bestPoly = null;
+        feat.geometry.coordinates.forEach(coords => {
+          const poly = { type:'Feature', geometry:{ type:'Polygon', coordinates:coords }, properties:{} };
+          const a = d3.geoArea(poly);
+          if (a > maxArea) { maxArea = a; bestPoly = poly; }
+        });
+        labelCentroid = bestPoly ? path.centroid(bestPoly) : path.centroid(feat);
+      } else {
+        labelCentroid = path.centroid(feat);
+      }
+      if (labelCentroid && !isNaN(labelCentroid[0])) {
+        const fontSize = name.length >= 4 ? '9.5' : '11';
+        const xOffset = name === '和歌山県' ? -18 : 0;
+        g.append('text')
+          .attr('x', labelCentroid[0] + xOffset)
+          .attr('y', labelCentroid[1])
+          .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'middle')
+          .attr('font-size', fontSize)
+          .attr('font-weight', '500')
+          .attr('fill', '#fff')
+          .attr('pointer-events', 'none')
+          .attr('font-family', 'Hiragino Sans, Yu Gothic, sans-serif')
+          .text(name);
+      }
+    });
+
+  } catch(e) {
+    document.getElementById('kinkiMapContainer').innerHTML =
+      '<span style="color:rgba(255,255,255,0.4);font-size:13px;">地図の読み込みに失敗しました</span>';
+  }
+})();
+</script>
+</body>
+</html>

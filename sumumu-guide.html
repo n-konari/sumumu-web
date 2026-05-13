@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お役立ちコラム｜すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-lite:#F97272; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010; --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE; --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+  --orange-bg:#FAEEDA; --purple-bg:#EEEDFE; --pink-bg:#FBEAF0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);}
+.line-logo-img{width:16px;height:16px;display:block;flex-shrink:0;object-fit:contain;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;background:transparent;border:none;box-shadow:none;padding:0 6px;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.25s;}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:16px;display:flex;flex-direction:column;gap:2px;}
+.mob-link{display:block;padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);border-radius:var(--r-md);}
+.mob-link:hover{background:var(--bg-page);}
+.mob-group{border-bottom:0.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;}
+.mob-parent{padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);border-radius:var(--r-md);}
+.mob-sub a{display:block;padding:8px 16px;font-size:12px;color:var(--text-secondary);}
+.mob-util{display:flex;gap:12px;padding:8px 12px;font-size:12px;color:var(--text-muted);}
+.mob-cta{display:block;margin:10px 0 4px;padding:12px;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:13px;font-weight:500;}
+
+/* ─── HERO ────────────────────────────────── */
+.guide-hero{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:52px 32px 48px;text-align:center;}
+.guide-hero-inner{max-width:800px;margin:0 auto;}
+.hero-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.22em;color:var(--brand);text-transform:uppercase;margin-bottom:18px;}
+.hero-ttl{font-size:28px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:12px;}
+.hero-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:32px;}
+.guide-search{display:flex;gap:0;max-width:600px;margin:0 auto;border:0.5px solid var(--border);border-radius:var(--r-pill);background:var(--bg-white);overflow:hidden;box-shadow:var(--shadow-sm);}
+.guide-search-input{flex:1;padding:12px 20px;border:none;font-size:13.5px;font-family:inherit;color:var(--text-primary);background:transparent;outline:none;}
+.guide-search-input::placeholder{color:var(--text-muted);}
+.btn-guide-search{padding:11px 24px;background:var(--brand);color:#fff;font-size:13px;font-weight:500;white-space:nowrap;cursor:pointer;border:none;font-family:inherit;transition:background 0.15s;border-radius:0 var(--r-pill) var(--r-pill) 0;}
+.btn-guide-search:hover{background:var(--brand-h);}
+
+/* ─── CATEGORY GRID ───────────────────────── */
+.cat-sec{background:var(--bg-page);padding:36px 32px;}
+.cat-sec-inner{max-width:1280px;margin:0 auto;}
+.cat-sec-ttl{font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:16px;}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.cat-tile{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-md);cursor:pointer;transition:all 0.15s;}
+.cat-tile:hover,.cat-tile.active{border-color:var(--green-mid);background:var(--green-bg);}
+.cat-tile.active .cat-name{color:var(--green-dark);}
+.cat-icon{width:32px;height:32px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;color:#fff;}
+.cat-info{}
+.cat-name{font-size:12.5px;font-weight:500;color:var(--text-primary);line-height:1.3;}
+.cat-count{font-size:10.5px;color:var(--text-muted);}
+
+/* ─── FILTER BAR ──────────────────────────── */
+.filter-bar{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:10px 32px;position:sticky;top:72px;z-index:100;}
+.filter-bar-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.filter-active-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--brand-bg);border:0.5px solid var(--brand);border-radius:var(--r-pill);font-size:12px;font-weight:500;color:var(--brand);}
+.filter-clear{cursor:pointer;font-size:14px;line-height:1;transition:opacity 0.15s;}
+.filter-clear:hover{opacity:0.6;}
+.filter-total{font-size:12px;color:var(--text-muted);}
+.filter-sort{padding:6px 10px;border:0.5px solid var(--border);border-radius:var(--r-md);font-size:12px;background:var(--bg-page);font-family:inherit;color:var(--text-secondary);cursor:pointer;margin-left:auto;}
+
+/* ─── CONTENT LAYOUT ──────────────────────── */
+.guide-wrap{max-width:1280px;margin:0 auto;padding:32px 32px 56px;display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:32px;align-items:start;}
+.guide-main{}
+.guide-sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:120px;}
+
+/* ─── BADGE ───────────────────────────────── */
+.g-badge{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:10.5px;font-weight:500;}
+.g-badge.must{background:var(--brand);color:#fff;}
+.g-badge.new{background:var(--green-mid);color:#fff;}
+.g-badge.pick{background:var(--dark-bg);color:rgba(255,255,255,0.85);}
+
+/* ─── CAT BADGE ───────────────────────────── */
+.g-cat{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:10.5px;font-weight:500;}
+
+/* ─── FEATURED CARD ───────────────────────── */
+.gcard-featured{display:grid;grid-template-columns:300px 1fr;background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);overflow:hidden;margin-bottom:16px;transition:box-shadow 0.15s;}
+.gcard-featured:hover{box-shadow:var(--shadow-md);}
+.gcard-featured-img{width:100%;height:100%;object-fit:cover;display:block;}
+.gcard-featured-body{padding:24px 22px;display:flex;flex-direction:column;}
+.gcard-featured-badges{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.gcard-featured-ttl{font-size:16.5px;font-weight:500;line-height:1.55;color:var(--text-primary);margin-bottom:10px;}
+.gcard-featured-excerpt{font-size:12.5px;color:var(--text-secondary);line-height:1.85;margin-bottom:14px;flex:1;}
+.gcard-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-muted);margin-top:auto;flex-wrap:wrap;}
+.gcard-author{font-weight:500;color:var(--text-secondary);}
+.gcard-sep{opacity:0.3;}
+
+/* ─── GRID CARDS ──────────────────────────── */
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.gcard{background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);overflow:hidden;transition:box-shadow 0.15s;display:flex;flex-direction:column;}
+.gcard:hover{box-shadow:var(--shadow-md);}
+.gcard-img-wrap{aspect-ratio:16/9;overflow:hidden;background:var(--bg-page);}
+.gcard-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.35s;}
+.gcard:hover .gcard-img{transform:scale(1.04);}
+.gcard-body{padding:13px 14px;flex:1;display:flex;flex-direction:column;}
+.gcard-badges{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap;}
+.gcard-ttl{font-size:13px;font-weight:500;line-height:1.55;color:var(--text-primary);margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.gcard-footer{display:flex;align-items:center;gap:6px;padding-top:8px;border-top:0.5px solid var(--border);margin-top:auto;font-size:10.5px;color:var(--text-muted);}
+
+/* ─── LIST CARDS ──────────────────────────── */
+.guide-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.lcard{display:flex;gap:12px;background:var(--bg-white);border-radius:var(--r-lg);border:0.5px solid var(--border);padding:13px 14px;transition:box-shadow 0.15s;}
+.lcard:hover{box-shadow:var(--shadow-sm);}
+.lcard-thumb{width:88px;height:60px;object-fit:cover;border-radius:var(--r-md);flex-shrink:0;background:var(--bg-page);}
+.lcard-body{flex:1;min-width:0;}
+.lcard-badges{display:flex;gap:5px;margin-bottom:5px;flex-wrap:wrap;}
+.lcard-ttl{font-size:13px;font-weight:500;line-height:1.5;color:var(--text-primary);margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.lcard-meta{display:flex;align-items:center;gap:8px;font-size:10.5px;color:var(--text-muted);}
+
+/* ─── LOAD MORE ───────────────────────────── */
+.btn-more{display:block;width:100%;padding:14px 0;border:0.5px solid var(--border);border-radius:var(--r-md);background:var(--bg-white);font-size:13px;font-weight:500;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;text-align:center;font-family:inherit;}
+.btn-more:hover{border-color:var(--green-mid);color:var(--green-dark);background:var(--green-bg);}
+
+/* ─── EMPTY STATE ─────────────────────────── */
+.guide-empty{text-align:center;padding:60px 0;color:var(--text-muted);font-size:13px;}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.sb-box{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.sb-hd{padding:12px 16px;border-bottom:0.5px solid var(--border);font-size:10.5px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;}
+.sb-pv-list{}
+.sb-pv-item{display:flex;gap:10px;padding:10px 14px;border-bottom:0.5px solid var(--border);transition:background 0.12s;cursor:pointer;}
+.sb-pv-item:last-child{border-bottom:none;}
+.sb-pv-item:hover{background:var(--bg-page);}
+.sb-pv-thumb{width:52px;height:36px;object-fit:cover;border-radius:4px;flex-shrink:0;background:var(--bg-page);}
+.sb-pv-body{flex:1;min-width:0;}
+.sb-pv-cat{font-size:9.5px;font-weight:500;margin-bottom:2px;}
+.sb-pv-ttl{font-size:11.5px;color:var(--text-primary);line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.sb-pv-num{font-size:9.5px;color:var(--text-muted);margin-top:2px;}
+.sb-cat-list{}
+.sb-cat-item{display:flex;align-items:center;justify-content:space-between;padding:9px 14px;border-bottom:0.5px solid var(--border);font-size:12.5px;color:var(--text-secondary);cursor:pointer;transition:background 0.12s;}
+.sb-cat-item:last-child{border-bottom:none;}
+.sb-cat-item:hover{background:var(--bg-page);color:var(--green-dark);}
+.sb-cat-left{display:flex;align-items:center;gap:8px;}
+.sb-cat-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sb-cat-count{font-size:11px;color:var(--text-muted);}
+.sb-con-box{background:var(--green-dark);border-radius:var(--r-lg);padding:18px;}
+.sb-con-eyebrow{font-size:9.5px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);text-transform:uppercase;margin-bottom:8px;}
+.sb-con-ttl{font-size:13px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:7px;}
+.sb-con-text{font-size:11.5px;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:13px;}
+.btn-sb-con{display:block;width:100%;padding:10px 0;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-sb-con:hover{background:var(--line-h);}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.btn-cta .line-logo-img{width:22px;height:22px;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+  .filter-bar{top:52px;}
+}
+@media(max-width:960px){
+  .cat-grid{grid-template-columns:repeat(3,1fr);}
+  .guide-wrap{grid-template-columns:1fr;padding:24px 16px 48px;}
+  .guide-sidebar{position:static;flex-direction:row;flex-wrap:wrap;}
+  .guide-sidebar .sb-box,.guide-sidebar .sb-con-box{flex:1;min-width:260px;}
+  .gcard-featured{grid-template-columns:200px 1fr;}
+  .cat-sec{padding:28px 16px;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+}
+@media(max-width:680px){
+  .guide-hero{padding:36px 16px 32px;}
+  .hero-ttl{font-size:22px;}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .guide-grid{grid-template-columns:1fr;}
+  .gcard-featured{grid-template-columns:1fr;}
+  .gcard-featured-img{aspect-ratio:16/9;width:100%;height:auto;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+  .guide-sidebar{flex-direction:column;}
+}
+@media(max-width:480px){
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0g{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0g" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni"><span class="nl">すむむとは。<i>▾</i></span><div class="nd"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a><a href="sumumu-about.html#media">メディア掲載</a></div></div>
+      <div class="ni"><span class="nl">住まいを探す<i>▾</i></span><div class="nd"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a><a href="properties/sumumu-kinki-00001.html">個別物件</a></div></div>
+      <div class="ni"><span class="nl">先輩の体験談<i>▾</i></span><div class="nd"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+      <div class="ni"><span class="nl" style="color:var(--green-mid)">お役立ちコラム<i>▾</i></span><div class="nd"><a href="sumumu-guide.html" style="color:var(--green-mid)">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a><a href="sumumu-guide.html?cat=loan">住宅ローン</a></div></div>
+      <div class="ni"><span class="nl">シミュレーション<i>▾</i></span><div class="nd"><a href="sumumu-tool-loan.html">ローンシミュレーター</a><a href="sumumu-tool-borrowing.html">借入可能額</a><a href="sumumu-tool-rentbuy.html">賃貸vs購入</a></div></div>
+      <div class="ni"><a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a><div class="nd"><a href="sumumu-area.html">エリア一覧</a><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div></div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">住まいを探す<i>▾</i></div><div class="mob-sub"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <div class="mob-group"><div class="mob-parent">お役立ちコラム<i>▾</i></div><div class="mob-sub"><a href="sumumu-guide.html">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a><a href="sumumu-guide.html?cat=loan">住宅ローン</a></div></div>
+        <a href="sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util"><a href="sumumu-faq.html">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="guide-hero">
+  <div class="guide-hero-inner">
+    <span class="hero-eyebrow">Column</span>
+    <h1 class="hero-ttl">「知らなかった」で後悔しないために。<br>住まい購入のすべてをプロが解説。</h1>
+    <p class="hero-lead">住宅ローン・資金計画・物件選び・購入手続きまで。<br>専門家が書いたわかりやすいコラムが、あなたの住み替えの道しるべになる。</p>
+    <div class="guide-search">
+      <input class="guide-search-input" type="text" id="kwInput"
+             placeholder="知りたいことを入力（例：頭金 相場、ローン 審査 落ちた）">
+      <button class="btn-guide-search" id="kwBtn">検索する →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY GRID -->
+<div class="cat-sec">
+  <div class="cat-sec-inner">
+    <div class="cat-sec-ttl">カテゴリから探す</div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-bar-inner">
+    <div id="filterTag" style="display:none">
+      <span class="filter-active-tag" id="filterTagInner">
+        <span id="filterTagLabel"></span>
+        <span class="filter-clear" id="filterClear">×</span>
+      </span>
+    </div>
+    <span class="filter-total" id="filterTotal">全485件のコラム</span>
+    <select class="filter-sort" id="sortSel">
+      <option value="latest">新着順</option>
+      <option value="pv">よく読まれている順</option>
+    </select>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="guide-wrap">
+
+  <!-- MAIN -->
+  <div class="guide-main">
+    <div id="featuredArea"></div>
+    <div class="guide-grid" id="guideGrid"></div>
+    <div class="guide-list" id="guideList"></div>
+    <button class="btn-more" id="moreBtn" style="display:none"></button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="guide-sidebar">
+
+    <!-- よく読まれている -->
+    <div class="sb-box">
+      <div class="sb-hd">よく読まれているコラム</div>
+      <div class="sb-pv-list">
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide13.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg13/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#3B6D11;">税金・控除</div>
+            <div class="sb-pv-ttl">住宅ローン控除の仕組みを10分で理解する</div>
+            <div class="sb-pv-num">月間 / 21,170 PV</div>
+          </div>
+        </a>
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide11.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg11/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#085041;">資金計画</div>
+            <div class="sb-pv-ttl">頭金ゼロで家は買えるか？リスクと対策を正直に解説</div>
+            <div class="sb-pv-num">月間 / 18,820 PV</div>
+          </div>
+        </a>
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide06.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg06/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#A32D2D;">契約・重要事項</div>
+            <div class="sb-pv-ttl">不動産売買契約書の読み方完全ガイド</div>
+            <div class="sb-pv-num">月間 / 15,570 PV</div>
+          </div>
+        </a>
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide14.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg14/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#534AB7;">物件選び</div>
+            <div class="sb-pv-ttl">購入前に知っておきたい管理費・修繕積立金の現実</div>
+            <div class="sb-pv-num">月間 / 12,710 PV</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- 新着コラム -->
+    <div class="sb-box">
+      <div class="sb-hd">新着コラム</div>
+      <div class="sb-pv-list">
+        <a class="sb-pv-item" href="sumumu-guide-00001.html">
+          <img class="sb-pv-thumb" src="images/guide01.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg01/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#085041;">資金計画</div>
+            <div class="sb-pv-ttl">頭金は「いくら用意すべき」か。資金計画の全体像</div>
+            <div class="sb-pv-num">2024年4月</div>
+          </div>
+        </a>
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide03.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg03/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#993556;">住み替え</div>
+            <div class="sb-pv-ttl">「売ってから買う」vs「買ってから売る」。住み替えの順番</div>
+            <div class="sb-pv-num">2024年4月</div>
+          </div>
+        </a>
+        <a class="sb-pv-item" href="#">
+          <img class="sb-pv-thumb" src="images/guide06.jpg" alt="" onerror="this.src='https://picsum.photos/seed/sg06/120/80'">
+          <div class="sb-pv-body">
+            <div class="sb-pv-cat" style="color:#A32D2D;">契約・重要事項</div>
+            <div class="sb-pv-ttl">不動産売買契約書、絶対サインしていませんか？</div>
+            <div class="sb-pv-num">2024年3月</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- カテゴリ一覧 -->
+    <div class="sb-box">
+      <div class="sb-hd">カテゴリ一覧</div>
+      <div class="sb-cat-list" id="sbCatList"></div>
+    </div>
+
+    <!-- CONCIERGE -->
+    <div class="sb-con-box">
+      <div class="sb-con-eyebrow">CONCIERGE</div>
+      <div class="sb-con-ttl">コラムを読んで疑問が出たら、コンシェルジュへ</div>
+      <p class="sb-con-text">資金計画・ローン選び・物件の疑問点など、専門家が一人ひとりに答えます。</p>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sb-con">
+        無料で相談する →
+      </a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">コラムを読んで、<br>次は専門家に話してみよう</h2>
+    <p class="concierge-lead">
+      中立な立場の専任スタッフが、資金計画から物件選びまで一緒に整理します。<br>
+      疑問・不安・漠然とした悩みも、話すとスッキリします。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fstg{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fstg" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">すべて</a></li><li><a href="sumumu-guide.html?cat=fund">資金計画</a></li><li><a href="sumumu-guide.html?cat=loan">住宅ローン</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tool-loan.html">ローンシミュレーター</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li><li><a href="sumumu-tool-rentbuy.html">賃貸vs購入</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li><li><a href="/news/?cat=community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Category data ── */
+const CATS = [
+  { key:'fund',     label:'資金計画',         icon:'¥',  color:'#085041', count:48 },
+  { key:'loan',     label:'住宅ローン',         icon:'％', color:'#185FA5', count:62 },
+  { key:'property', label:'物件選び',           icon:'戸', color:'#534AB7', count:55 },
+  { key:'process',  label:'購入手続き',         icon:'書', color:'#854F0B', count:41 },
+  { key:'replace',  label:'住み替え',           icon:'替', color:'#993556', count:36 },
+  { key:'first',    label:'はじめての購入',     icon:'初', color:'#085041', count:58 },
+  { key:'tax',      label:'税金・控除',         icon:'税', color:'#3B6D11', count:33 },
+  { key:'contract', label:'契約・重要事項',     icon:'約', color:'#A32D2D', count:33 },
+  { key:'area',     label:'エリア・街選び',     icon:'地', color:'#534AB7', count:44 },
+  { key:'newold',   label:'新築vs中古',         icon:'比', color:'#854F0B', count:26 },
+  { key:'child',    label:'子育て・学区',       icon:'学', color:'#085041', count:31 },
+  { key:'reform',   label:'購入後・リフォーム', icon:'修', color:'#185FA5', count:22 },
+];
+const TOTAL_ALL = 485;
+
+/* ── Column data ── */
+const COLUMNS = [
+  { id:1,  cat:'fund',     badge:'必読', featured:true,
+    title:'頭金は「いくら用意すべき」か。住宅購入前に絶対知っておきたい資金計画の全体像',
+    excerpt:'「頭金ゼロ」でも家が買えるとよく聞くけれど、本当にそれでいいの？住宅購入前に知っておくべき資金計画の全体像を、FPが体系的に解説します。',
+    author:'山口 FP事務所', mins:7, date:'2024年4月' },
+  { id:2,  cat:'loan',     badge:'新着',
+    title:'変動金利か固定金利か。2024年、今ならどちらが正解？リスクと対策を10年後まで徹底比較',
+    excerpt:'金利上昇が話題の今、変動か固定かはどちらを選ぶべきか。10年後のシナリオで比較して解説。',
+    author:'住宅ローン研究所', mins:6, date:'2024年3月' },
+  { id:3,  cat:'replace',  badge:'必読',
+    title:'「売ってから買う」vs「買ってから売る」。住み替えの順番で資金計画がこれだけ変わる',
+    excerpt:'住み替えの最大の難関は「売却と購入のタイミング」。どちらを先にするかで、リスクと資金計画がまったく変わります。',
+    author:'住み替え相談所', mins:9, date:'2024年4月' },
+  { id:4,  cat:'loan',
+    title:'住宅ローン固定か変動か、2024年の改正ポイントを図解で解説',
+    excerpt:'政策金利の変化で注目が集まる変動金利。固定との差はどれくらいあるのか、具体的な数字で見てみましょう。',
+    author:'住宅ローン研究所', mins:5, date:'2024年1月' },
+  { id:5,  cat:'loan',
+    title:'ローン審査に落ちた理由ランキングTOP5と、通過するための対策',
+    excerpt:'「審査に落ちた」という相談は実は多い。落ちる理由のトップ5を解説し、改善ポイントを具体的にお伝えします。',
+    author:'住宅ローン研究所', mins:7, date:'2024年1月' },
+  { id:6,  cat:'contract', badge:'新着',
+    title:'不動産売買契約書、絶対サインしていませんか？見落としがちな7つのチェックポイント',
+    excerpt:'売買契約書の重要ポイントを、法律のプロが7つに絞って解説。サインする前に必ず確認してください。',
+    author:'宅建士・法律監修', mins:8, date:'2024年3月' },
+  { id:7,  cat:'tax',
+    title:'住宅ローン控除、賢く使えていますか？2024年改正の全ポイントを解説',
+    excerpt:'住宅ローン控除は正しく申請すれば最大数百万の節税に。2024年改正の変更点を詳しくまとめました。',
+    author:'税理士・FP', mins:6, date:'2024年3月' },
+  { id:8,  cat:'child',
+    title:'学区で変わる？小学校区の選び方と、物件選びで気をつけること',
+    excerpt:'学区は物件の価値にも影響する重要な要素。子どもの進学先を見越した物件選びの考え方を解説します。',
+    author:'教育・住宅研究所', mins:5, date:'2024年2月' },
+  { id:9,  cat:'property',
+    title:'内覧で必ず確認すべき15のチェックリスト。プロが「見るポイント」を全公開',
+    excerpt:'内覧は印象で判断しがち。後悔しないために、プロが実際に使うチェックポイントを15項目で全公開します。',
+    author:'不動産コンサルタント', mins:8, date:'2024年1月' },
+  { id:10, cat:'area',
+    title:'「職場から30分圏内」か「広さ」か。エリア選びで後悔しないための優先順位の決め方',
+    excerpt:'エリア選びは「通勤」か「広さ」か「学区」か、何を優先するかで正解が変わります。優先順位の決め方を整理します。',
+    author:'エリア住宅研究所', mins:7, date:'2024年2月' },
+  { id:11, cat:'fund',
+    title:'頭金ゼロで家は買えるか？リスクと対策を正直に解説',
+    excerpt:'フルローンで住宅を購入する人が増えています。メリットとリスクを正直に整理した上で、向いている人の条件も解説。',
+    author:'山口 FP事務所', mins:6, date:'2023年12月' },
+  { id:12, cat:'newold',
+    title:'新築と中古、結局どちらを買うべきか。プロが教える5つの判断基準',
+    excerpt:'新築か中古か。この選択で総コストが大きく変わります。プロ目線で5つの判断基準を整理しました。',
+    author:'不動産コンサルタント', mins:6, date:'2023年11月' },
+  { id:13, cat:'tax',
+    title:'住宅ローン控除の仕組みを10分で理解する。計算例つき完全ガイド',
+    excerpt:'住宅ローン控除は申請しなければ一切受けられません。仕組みから計算方法まで、10分でわかるよう解説します。',
+    author:'税理士・FP', mins:10, date:'2023年10月' },
+  { id:14, cat:'property',
+    title:'購入前に知っておきたい管理費・修繕積立金の現実。10年後に後悔しないために',
+    excerpt:'マンション購入で見落としがちな管理費と修繕積立金。後から「こんなに高いと思わなかった」とならないための知識を整理します。',
+    author:'マンション管理士', mins:6, date:'2023年10月' },
+  { id:15, cat:'reform',
+    title:'中古を買ってリノベーション。費用・工期・後悔ポイントのリアルな話',
+    excerpt:'中古＋リノベのコンビは理想的に見えますが、費用の読みにくさと工期の長さが最大の壁。経験者が語るリアルをまとめました。',
+    author:'リノベ研究所', mins:7, date:'2023年9月' },
+];
+
+/* ── Cat lookup ── */
+const CAT_MAP = {};
+CATS.forEach(c => { CAT_MAP[c.key] = c; });
+
+/* ── State ── */
+const PAGE_FEATURED = 1;
+const PAGE_GRID     = 4;
+const PAGE_SIZE     = PAGE_FEATURED + PAGE_GRID;
+let activeCat  = 'all';
+let keyword    = '';
+let shownCount = PAGE_SIZE;
+
+/* ── Render category grid ── */
+function renderCatGrid() {
+  document.getElementById('catGrid').innerHTML = CATS.map(c => `
+<div class="cat-tile" data-key="${c.key}">
+  <div class="cat-icon" style="background:${c.color};">${c.icon}</div>
+  <div class="cat-info">
+    <div class="cat-name">${c.label}</div>
+    <div class="cat-count">${c.count}件</div>
+  </div>
+</div>`).join('');
+
+  document.querySelectorAll('.cat-tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      activeCat = tile.dataset.key;
+      shownCount = PAGE_SIZE;
+      keyword = '';
+      document.getElementById('kwInput').value = '';
+      updateFilterBar();
+      updateUI();
+      document.querySelector('.cat-sec').scrollIntoView({ behavior:'smooth', block:'start' });
+    });
+  });
+}
+
+/* ── Render sidebar cat list ── */
+function renderSbCats() {
+  document.getElementById('sbCatList').innerHTML = CATS.map(c => `
+<div class="sb-cat-item" data-key="${c.key}">
+  <span class="sb-cat-left">
+    <span class="sb-cat-dot" style="background:${c.color}"></span>${c.label}
+  </span>
+  <span class="sb-cat-count">${c.count}件</span>
+</div>`).join('');
+
+  document.querySelectorAll('.sb-cat-item').forEach(item => {
+    item.addEventListener('click', () => {
+      activeCat = item.dataset.key;
+      shownCount = PAGE_SIZE;
+      updateFilterBar();
+      updateUI();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ── Filter bar ── */
+function updateFilterBar() {
+  const tag = document.getElementById('filterTag');
+  const label = document.getElementById('filterTagLabel');
+  document.querySelectorAll('.cat-tile').forEach(t => {
+    t.classList.toggle('active', t.dataset.key === activeCat);
+  });
+  if (activeCat !== 'all') {
+    tag.style.display = '';
+    label.textContent = CAT_MAP[activeCat]?.label || activeCat;
+  } else {
+    tag.style.display = 'none';
+  }
+}
+
+/* ── Card HTML helpers ── */
+function badgeHTML(badge) {
+  if (!badge) return '';
+  const cls = badge === '必読' ? 'must' : badge === '新着' ? 'new' : 'pick';
+  return `<span class="g-badge ${cls}">${badge}</span>`;
+}
+function catBadgeHTML(key) {
+  const c = CAT_MAP[key];
+  if (!c) return '';
+  return `<span class="g-cat" style="background:${c.color}1a;color:${c.color};">${c.label}</span>`;
+}
+function metaHTML(a) {
+  return `<span class="gcard-author">${a.author}</span><span class="gcard-sep">|</span><span>${a.mins}分で読める</span><span class="gcard-sep">|</span><span>${a.date}</span>`;
+}
+
+function featuredCardHTML(a) {
+  const imgId = String(a.id).padStart(2,'0');
+  const href = `sumumu-guide-${String(a.id).padStart(5,'0')}.html`;
+  return `
+<a class="gcard-featured" href="${href}">
+  <img class="gcard-featured-img"
+       src="images/guide${imgId}.jpg"
+       alt="${a.title}"
+       onerror="this.src='https://picsum.photos/seed/sg${a.id}f/700/480'">
+  <div class="gcard-featured-body">
+    <div class="gcard-featured-badges">${badgeHTML(a.badge)}${catBadgeHTML(a.cat)}</div>
+    <div class="gcard-featured-ttl">${a.title}</div>
+    <div class="gcard-featured-excerpt">${a.excerpt}</div>
+    <div class="gcard-meta">${metaHTML(a)}</div>
+  </div>
+</a>`;
+}
+
+function gridCardHTML(a) {
+  const imgId = String(a.id).padStart(2,'0');
+  const href = `sumumu-guide-${String(a.id).padStart(5,'0')}.html`;
+  return `
+<a class="gcard" href="${href}">
+  <div class="gcard-img-wrap">
+    <img class="gcard-img"
+         src="images/guide${imgId}.jpg"
+         alt="${a.title}"
+         onerror="this.src='https://picsum.photos/seed/sg${a.id}/600/400'">
+  </div>
+  <div class="gcard-body">
+    <div class="gcard-badges">${badgeHTML(a.badge)}${catBadgeHTML(a.cat)}</div>
+    <div class="gcard-ttl">${a.title}</div>
+    <div class="gcard-footer">${metaHTML(a)}</div>
+  </div>
+</a>`;
+}
+
+function listCardHTML(a) {
+  const imgId = String(a.id).padStart(2,'0');
+  const href = `sumumu-guide-${String(a.id).padStart(5,'0')}.html`;
+  return `
+<a class="lcard" href="${href}">
+  <img class="lcard-thumb"
+       src="images/guide${imgId}.jpg"
+       alt="${a.title}"
+       onerror="this.src='https://picsum.photos/seed/sg${a.id}l/200/140'">
+  <div class="lcard-body">
+    <div class="lcard-badges">${badgeHTML(a.badge)}${catBadgeHTML(a.cat)}</div>
+    <div class="lcard-ttl">${a.title}</div>
+    <div class="lcard-meta">${metaHTML(a)}</div>
+  </div>
+</a>`;
+}
+
+/* ── Get filtered ── */
+function getFiltered() {
+  return COLUMNS.filter(a => {
+    const catOk = activeCat === 'all' || a.cat === activeCat;
+    const kwOk  = !keyword || a.title.includes(keyword) || (a.excerpt || '').includes(keyword);
+    return catOk && kwOk;
+  });
+}
+
+/* ── Update UI ── */
+function updateUI() {
+  const filtered = getFiltered();
+  const catObj   = CAT_MAP[activeCat];
+  const total    = activeCat === 'all' ? TOTAL_ALL : (catObj ? catObj.count : filtered.length);
+  const toShow   = Math.min(shownCount, filtered.length);
+  const displayed = filtered.slice(0, toShow);
+  const remaining = Math.max(0, total - toShow);
+
+  document.getElementById('filterTotal').textContent = `全${total.toLocaleString()}件のコラム`;
+
+  const fa   = document.getElementById('featuredArea');
+  const gg   = document.getElementById('guideGrid');
+  const gl   = document.getElementById('guideList');
+  const btn  = document.getElementById('moreBtn');
+
+  if (displayed.length === 0) {
+    fa.innerHTML = '';
+    gg.innerHTML = '<div class="guide-empty">該当するコラムが見つかりませんでした</div>';
+    gl.innerHTML = '';
+    btn.style.display = 'none';
+    return;
+  }
+
+  fa.innerHTML = featuredCardHTML(displayed[0]);
+  const gridItems = displayed.slice(1, 1 + PAGE_GRID);
+  const listItems = displayed.slice(1 + PAGE_GRID);
+  gg.innerHTML = gridItems.map(gridCardHTML).join('');
+  gl.innerHTML = listItems.map(listCardHTML).join('');
+
+  if (total > toShow) {
+    btn.textContent = `もっと読む（残り${remaining.toLocaleString()}件）→`;
+    btn.style.display = '';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+/* ── Load more ── */
+document.getElementById('moreBtn').addEventListener('click', () => {
+  shownCount += PAGE_SIZE;
+  updateUI();
+});
+
+/* ── Filter clear ── */
+document.getElementById('filterClear').addEventListener('click', () => {
+  activeCat = 'all';
+  shownCount = PAGE_SIZE;
+  updateFilterBar();
+  updateUI();
+});
+
+/* ── Keyword search ── */
+let kwTimer;
+document.getElementById('kwInput').addEventListener('input', e => {
+  clearTimeout(kwTimer);
+  kwTimer = setTimeout(() => {
+    keyword    = e.target.value.trim();
+    activeCat  = 'all';
+    shownCount = PAGE_SIZE;
+    updateFilterBar();
+    updateUI();
+  }, 280);
+});
+document.getElementById('kwBtn').addEventListener('click', () => {
+  keyword    = document.getElementById('kwInput').value.trim();
+  activeCat  = 'all';
+  shownCount = PAGE_SIZE;
+  updateFilterBar();
+  updateUI();
+});
+
+/* ── URL param init ── */
+(function applyUrlParam() {
+  const param = new URLSearchParams(window.location.search).get('cat');
+  if (param && CAT_MAP[param]) {
+    activeCat = param;
+  }
+  renderCatGrid();
+  renderSbCats();
+  updateFilterBar();
+  updateUI();
+})();
+
+/* ── Hamburger ── */
+document.getElementById('hambBtn').addEventListener('click', () => {
+  document.getElementById('mobNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よくある質問｜すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010; --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE; --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+  --orange-bg:#FAEEDA; --purple-bg:#EEEDFE; --pink-bg:#FBEAF0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-white);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);}
+.line-logo-img{width:16px;height:16px;display:block;flex-shrink:0;object-fit:contain;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;background:transparent;border:none;box-shadow:none;padding:0 6px;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.25s;}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:16px;display:flex;flex-direction:column;gap:2px;}
+.mob-link{display:block;padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);border-radius:var(--r-md);}
+.mob-link:hover{background:var(--bg-page);}
+.mob-group{border-bottom:0.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;}
+.mob-parent{padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);border-radius:var(--r-md);}
+.mob-sub a{display:block;padding:8px 16px;font-size:12px;color:var(--text-secondary);}
+.mob-util{display:flex;gap:12px;padding:8px 12px;font-size:12px;color:var(--text-muted);}
+.mob-cta{display:block;margin:10px 0 4px;padding:12px;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:13px;font-weight:500;}
+
+/* ─── PAGE HEADER ─────────────────────────── */
+.page-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:32px 32px 36px;}
+.page-hd-inner{max-width:1280px;margin:0 auto;}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);margin-bottom:20px;flex-wrap:wrap;}
+.breadcrumb a:hover{color:var(--green-mid);}
+.breadcrumb-sep{opacity:0.4;}
+.page-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-mid);text-transform:uppercase;margin-bottom:10px;}
+.page-h1{font-size:30px;font-weight:500;color:var(--text-primary);margin-bottom:12px;}
+.page-lead{font-size:13.5px;color:var(--text-secondary);line-height:1.9;margin-bottom:28px;max-width:680px;}
+.search-row{display:flex;gap:10px;max-width:600px;margin-bottom:20px;}
+.search-input{flex:1;padding:11px 16px;border:1px solid rgba(0,0,0,0.18);border-radius:var(--r-md);font-size:13.5px;font-family:inherit;color:var(--text-primary);outline:none;transition:border-color 0.15s;}
+.search-input:focus{border-color:var(--green-mid);box-shadow:0 0 0 2px rgba(29,158,117,0.12);}
+.btn-search{padding:11px 22px;background:var(--green-dark);color:#fff;border:none;border-radius:var(--r-md);font-size:13.5px;font-weight:500;cursor:pointer;font-family:inherit;transition:background 0.15s;white-space:nowrap;}
+.btn-search:hover{background:var(--green-mid);}
+.cat-chips{display:flex;gap:7px;flex-wrap:wrap;}
+.cat-chip{padding:5px 14px;border-radius:var(--r-pill);font-size:12px;border:0.5px solid var(--border);color:var(--text-secondary);background:var(--bg-white);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.cat-chip:hover{border-color:var(--green-mid);color:var(--green-dark);}
+.cat-chip.active{background:var(--green-dark);color:#fff;border-color:var(--green-dark);}
+
+/* ─── CATEGORY GRID ───────────────────────── */
+.cat-section{background:var(--bg-page);border-bottom:0.5px solid var(--border);padding:28px 32px;}
+.cat-section-inner{max-width:1280px;margin:0 auto;}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.cat-card{display:flex;flex-direction:column;align-items:flex-start;padding:18px 20px 16px;border-radius:var(--r-lg);border:1.5px solid transparent;background:var(--bg-white);cursor:pointer;transition:box-shadow 0.15s,transform 0.12s,border-color 0.15s;text-align:left;}
+.cat-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.cat-card.active{border-color:var(--cat-color,var(--green-dark));box-shadow:var(--shadow-md);}
+.cat-icon{width:38px;height:38px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;margin-bottom:12px;flex-shrink:0;}
+.cat-name{font-size:12.5px;font-weight:500;color:var(--text-primary);line-height:1.45;margin-bottom:5px;}
+.cat-count{font-size:11px;color:var(--text-muted);}
+
+/* ─── FAQ LAYOUT ──────────────────────────── */
+.faq-wrap{max-width:1280px;margin:0 auto;padding:40px 32px 64px;display:grid;grid-template-columns:minmax(0,1fr) 256px;gap:40px;align-items:start;}
+
+/* ─── FAQ ACCORDION ───────────────────────── */
+.faq-main{}
+.no-result{display:none;padding:48px 0;text-align:center;color:var(--text-muted);font-size:13.5px;}
+.faq-group{margin-bottom:40px;}
+.faq-group-hd{display:flex;align-items:center;gap:10px;padding:0 0 12px;border-bottom:2px solid var(--border);margin-bottom:2px;}
+.faq-group-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;}
+.faq-group-name{font-size:14px;font-weight:500;color:var(--text-primary);flex:1;}
+.faq-group-count{font-size:11px;color:var(--text-muted);}
+.faq-item{border-bottom:0.5px solid var(--border);}
+.faq-q{display:flex;align-items:flex-start;gap:12px;padding:16px 4px;cursor:pointer;user-select:none;}
+.faq-q-mark{font-size:14px;font-weight:500;color:var(--green-mid);flex-shrink:0;margin-top:1px;width:16px;}
+.faq-q-text{font-size:13.5px;font-weight:500;color:var(--text-primary);flex:1;line-height:1.6;}
+.faq-toggle{font-size:16px;color:var(--text-muted);transition:transform 0.25s;flex-shrink:0;margin-top:1px;}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{display:none;padding:0 4px 18px 32px;}
+.faq-item.open .faq-a{display:block;}
+.faq-a p{font-size:13px;color:var(--text-secondary);line-height:1.95;padding:12px 16px;background:var(--bg-page);border-radius:var(--r-md);border-left:3px solid var(--border);}
+.faq-a p+p{margin-top:8px;}
+.highlight{background:#FFF3CD;border-radius:2px;padding:0 2px;}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.faq-sidebar{position:sticky;top:96px;display:flex;flex-direction:column;gap:14px;}
+.sb-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+.sb-hd{padding:13px 16px 11px;font-size:10.5px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;border-bottom:0.5px solid var(--border);}
+.sb-cat-list{list-style:none;padding:8px 0;}
+.sb-cat-item{display:flex;align-items:center;gap:8px;padding:8px 16px;cursor:pointer;transition:background 0.12s;font-size:12.5px;color:var(--text-secondary);}
+.sb-cat-item:hover{background:var(--bg-page);}
+.sb-cat-item.active{color:var(--green-dark);font-weight:500;}
+.sb-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sb-cat-num{margin-left:auto;font-size:11px;color:var(--text-muted);}
+.sb-popular-list{list-style:none;padding:4px 0;}
+.sb-popular-item{padding:10px 16px;border-bottom:0.5px solid var(--border);cursor:pointer;transition:background 0.12s;}
+.sb-popular-item:last-child{border-bottom:none;}
+.sb-popular-item:hover{background:var(--bg-page);}
+.sb-popular-q{font-size:12px;color:var(--text-primary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.sb-popular-cat{font-size:10px;color:var(--text-muted);margin-top:3px;}
+.sb-concierge{background:var(--green-dark);border-radius:var(--r-lg);padding:20px;}
+.sb-con-eyebrow{font-size:9.5px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);text-transform:uppercase;margin-bottom:10px;}
+.sb-con-ttl{font-size:13px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:8px;}
+.sb-con-text{font-size:11.5px;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:14px;}
+.btn-sb-con{display:block;width:100%;padding:11px 0;text-align:center;background:var(--green-mid);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-sb-con:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.btn-cta .line-logo-img{width:22px;height:22px;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+  .cat-grid{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:960px){
+  .faq-wrap{grid-template-columns:1fr;padding:28px 16px 48px;gap:28px;}
+  .faq-sidebar{position:static;}
+  .page-hd{padding:24px 16px 28px;}
+  .cat-section{padding:20px 16px;}
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+  .footer-nav{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:640px){
+  .cat-grid{grid-template-columns:repeat(2,1fr);}
+  .page-h1{font-size:24px;}
+  .search-row{flex-direction:column;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html" style="color:#fff;">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0fq{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0fq" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni"><span class="nl">すむむとは。<i>▾</i></span><div class="nd"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a><a href="sumumu-about.html#media">メディア掲載</a></div></div>
+      <div class="ni"><span class="nl">住まいを探す<i>▾</i></span><div class="nd"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a><a href="properties/sumumu-kinki-00001.html">個別物件</a></div></div>
+      <div class="ni"><span class="nl">先輩の体験談<i>▾</i></span><div class="nd"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+      <div class="ni"><span class="nl">お役立ちコラム<i>▾</i></span><div class="nd"><a href="sumumu-guide.html">資金計画</a><a href="sumumu-guide.html">物件選び</a><a href="sumumu-guide.html">購入手続き</a></div></div>
+      <div class="ni"><span class="nl">シミュレーション<i>▾</i></span><div class="nd"><a href="sumumu-tool-loan.html">ローン返済</a><a href="sumumu-tool-borrowing.html">借入可能額</a><a href="sumumu-tools.html">一覧を見る</a></div></div>
+      <div class="ni"><a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a><div class="nd"><a href="sumumu-area.html">エリア一覧</a><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div></div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">住まいを探す</div><div class="mob-sub"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談</div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <a href="sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util"><a href="sumumu-faq.html" style="color:var(--green-mid);">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-hd">
+  <div class="page-hd-inner">
+    <nav class="breadcrumb">
+      <a href="sumumu-main.html">トップ</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>よくある質問</span>
+    </nav>
+    <div class="page-eyebrow">FAQ</div>
+    <h1 class="page-h1">よくある質問</h1>
+    <p class="page-lead">すむむ。についてよく寄せられる質問をカテゴリ別にまとめました。<br>お探しの回答が見つからない場合は、コンシェルジュにお気軽にご相談ください。</p>
+    <div class="search-row">
+      <input type="text" class="search-input" id="searchInput" placeholder="キーワードで検索する（例：無料で使えますか、内覧）">
+      <button class="btn-search" id="searchBtn">検索する</button>
+    </div>
+    <div class="cat-chips" id="catChips">
+      <button class="cat-chip active" data-cat="all">すべて</button>
+      <button class="cat-chip" data-cat="about">すむむ。について</button>
+      <button class="cat-chip" data-cat="account">会員登録・アカウント</button>
+      <button class="cat-chip" data-cat="property">物件情報・検索</button>
+      <button class="cat-chip" data-cat="community">コミュニティ・先輩</button>
+      <button class="cat-chip" data-cat="event">イベント・セミナー</button>
+      <button class="cat-chip" data-cat="simulation">シミュレーション</button>
+      <button class="cat-chip" data-cat="concierge">コンシェルジュ相談</button>
+      <button class="cat-chip" data-cat="privacy">プライバシー</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY GRID -->
+<div class="cat-section">
+  <div class="cat-section-inner">
+    <div class="cat-grid" id="catGrid">
+      <button class="cat-card" data-cat="about" style="--cat-color:#085041;">
+        <div class="cat-icon" style="background:#E1F5EE;color:#085041;">す</div>
+        <div class="cat-name">すむむ。について</div>
+        <div class="cat-count">6問</div>
+      </button>
+      <button class="cat-card" data-cat="account" style="--cat-color:#185FA5;">
+        <div class="cat-icon" style="background:#E6F1FB;color:#185FA5;">登</div>
+        <div class="cat-name">会員登録・アカウント</div>
+        <div class="cat-count">5問</div>
+      </button>
+      <button class="cat-card" data-cat="property" style="--cat-color:#534AB7;">
+        <div class="cat-icon" style="background:#EEEDFE;color:#534AB7;">物</div>
+        <div class="cat-name">物件情報・検索</div>
+        <div class="cat-count">5問</div>
+      </button>
+      <button class="cat-card" data-cat="community" style="--cat-color:#993556;">
+        <div class="cat-icon" style="background:#FBEAF0;color:#993556;">先</div>
+        <div class="cat-name">コミュニティ・先輩への質問</div>
+        <div class="cat-count">6問</div>
+      </button>
+      <button class="cat-card" data-cat="event" style="--cat-color:#633806;">
+        <div class="cat-icon" style="background:#FAEEDA;color:#633806;">イ</div>
+        <div class="cat-name">イベント・セミナー</div>
+        <div class="cat-count">5問</div>
+      </button>
+      <button class="cat-card" data-cat="simulation" style="--cat-color:#1D9E75;">
+        <div class="cat-icon" style="background:#DCF5EC;color:#1D9E75;">シ</div>
+        <div class="cat-name">シミュレーション・診断ツール</div>
+        <div class="cat-count">5問</div>
+      </button>
+      <button class="cat-card" data-cat="concierge" style="--cat-color:#085041;">
+        <div class="cat-icon" style="background:#E1F5EE;color:#085041;">相</div>
+        <div class="cat-name">コンシェルジュ相談</div>
+        <div class="cat-count">5問</div>
+      </button>
+      <button class="cat-card" data-cat="privacy" style="--cat-color:#666666;">
+        <div class="cat-icon" style="background:#F0F0EE;color:#666666;">鍵</div>
+        <div class="cat-name">プライバシー・セキュリティ</div>
+        <div class="cat-count">3問</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ MAIN CONTENT -->
+<div class="faq-wrap">
+  <main class="faq-main" id="faqMain">
+    <div class="no-result" id="noResult">該当する質問が見つかりませんでした。キーワードを変えて再度お試しください。</div>
+
+    <!-- すむむ。について -->
+    <div class="faq-group" data-cat="about" id="group-about">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#E1F5EE;color:#085041;">す</div>
+        <span class="faq-group-name">すむむ。について</span>
+        <span class="faq-group-count">6問</span>
+      </div>
+      <div class="faq-item" id="faq-ab-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">すむむ。とはどのようなサービスですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>住み替えを検討している方が、先輩の体験談の閲覧・コンシェルジュへの無料相談・コミュニティ参加を通じて、安心して住み替えを進められるサービスです。物件の仲介・売買は行っておらず、情報収集・相談・コミュニティ参加に特化しています。「営業されずに、まず話を聞きたい」という方にとって、最初のステップとして最適なサービスです。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ab-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">すむむ。は無料で使えますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>はい、すべての基本機能は無料でご利用いただけます。先輩の体験談の閲覧・シミュレーションツール・コンシェルジュへの相談・コミュニティ参加——いずれも登録料・利用料は一切かかりません。将来的に有料オプションを設ける際は事前にお知らせします。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ab-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">宅建業者免許を持っていないとはどういう意味ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>すむむ。を運営する株式会社サクシードは、宅地建物取引業（宅建業）の免許を持っていません。そのため、物件の仲介・売買・賃貸の媒介といった取引行為は法的に行えません。</p><p>すむむ。はあくまで「住み替えの情報収集・相談・コミュニティ参加」に特化したサービスです。実際の物件購入・売却は、HOME'S・SUUMO等の不動産会社と直接ご契約ください。このことにより、すむむ。は特定の物件や会社を勧めるインセンティブがなく、中立な立場でサポートできる構造になっています。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ab-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">対応エリアはどこですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>現在は関西・京滋エリア（大阪・京都・滋賀・兵庫）を中心にサービスを展開しています。イベントも主に大阪・京都・名古屋周辺で定期開催しています。全国展開を準備中ですので、対応エリア外の方もコンシェルジュへの相談やオンラインコミュニティはご利用いただけます。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ab-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">すむむ。の運営会社はどこですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>株式会社サクシード（長谷工グループ）が運営しています。東京本社（港区）・大阪支店・名古屋支店ほか複数拠点があります。詳しくは<a href="sumumu-company.html" style="color:var(--green-mid);">運営会社ページ</a>をご覧ください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ab-6">
+        <div class="faq-q" onclick="toggleFAQ('faq-ab-6')"><span class="faq-q-mark">Q</span><span class="faq-q-text">掲載されている情報の正確性はどのように保たれていますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>先輩の体験談は投稿者本人の実体験に基づくものですが、内容については編集チームが確認した上で掲載しています。シミュレーションツールや金利情報は定期的に更新していますが、あくまで参考値です。最新・正確な情報は各金融機関・不動産会社にご確認ください。</p></div>
+      </div>
+    </div>
+
+    <!-- 会員登録・アカウント -->
+    <div class="faq-group" data-cat="account" id="group-account">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#E6F1FB;color:#185FA5;">登</div>
+        <span class="faq-group-name">会員登録・アカウント</span>
+        <span class="faq-group-count">5問</span>
+      </div>
+      <div class="faq-item" id="faq-ac-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-ac-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">会員登録は必要ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>先輩の体験談の閲覧・シミュレーションツールの利用は登録なしでもお使いいただけます。コンシェルジュへの相談やコミュニティへの参加には、LINEアカウントによる登録が必要です。登録は30秒ほどで完了します。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ac-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-ac-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">SNSアカウントで登録できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>現在はLINEアカウントでの登録に対応しています。LINE公式アカウント「すむむ。」に友だち追加することで、コミュニティへの参加やコンシェルジュへの相談が可能になります。今後、他のSNS連携も検討しています。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ac-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-ac-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">退会する方法を教えてください。</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>LINEのすむむ。公式アカウントで「退会」とメッセージを送るか、LINEのブロック機能をご利用ください。退会後は個人データの削除申請が可能です（プライバシーポリシーをご参照ください）。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ac-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-ac-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">パスワードを忘れてしまいました。</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>すむむ。はLINEアカウントと連携しているため、パスワードの管理はLINEアプリ側となります。LINEアプリの「パスワードを忘れた場合」の手順に従ってリセットしてください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ac-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-ac-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">メールマガジンを停止できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>マイページの通知設定、またはメールマガジン本文下部の「配信停止」リンクからいつでも停止できます。LINEメッセージのみのご連絡をご希望の方も、設定変更が可能です。</p></div>
+      </div>
+    </div>
+
+    <!-- 物件情報・検索 -->
+    <div class="faq-group" data-cat="property" id="group-property">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#EEEDFE;color:#534AB7;">物</div>
+        <span class="faq-group-name">物件情報・検索</span>
+        <span class="faq-group-count">5問</span>
+      </div>
+      <div class="faq-item" id="faq-pr-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-pr-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">どのような物件が掲載されていますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>関西・京滋エリアを中心に、新築マンション・中古マンション・戸建て・土地などの住宅物件情報を掲載しています。提携する不動産情報サービスと連携しており、条件別・エリア別に絞り込みが可能です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pr-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-pr-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">内覧の申し込みはどこでするのですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>すむむ。では内覧の直接申し込みは行っていません（宅建業免許非保有のため）。物件ページの「詳細を見る」ボタンから各不動産会社の掲載ページへ遷移し、そちらでお申し込みください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pr-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-pr-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">掲載物件の情報はリアルタイムで更新されていますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>提携する不動産情報サービスのデータをもとに定期的に更新していますが、成約済みや情報変更のタイムラグが生じる場合があります。最新の物件状況は各掲載会社に直接ご確認ください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pr-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-pr-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">物件のお気に入り機能はありますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>会員登録後、物件をお気に入りに追加してマイページで管理できます。お気に入り物件に更新があった際に通知を受け取る設定も可能です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pr-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-pr-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">掲載されていない物件について相談できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>はい、コンシェルジュへの相談で対応可能です。「こんな条件の物件を探している」「このエリアに合う物件はあるか」などの相談を受け付けています。ただし、すむむ。自体が物件を仲介することはできないため、適切な不動産会社・検索サービスのご案内という形になります。</p></div>
+      </div>
+    </div>
+
+    <!-- コミュニティ・先輩 -->
+    <div class="faq-group" data-cat="community" id="group-community">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#FBEAF0;color:#993556;">先</div>
+        <span class="faq-group-name">コミュニティ・先輩への質問</span>
+        <span class="faq-group-count">6問</span>
+      </div>
+      <div class="faq-item" id="faq-cm-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">先輩とはどのような人ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>実際に住み替えや住宅購入を経験した一般の方々です。すむむ。のコミュニティに参加し、体験談の執筆や後輩への質問回答をしてくださっているボランティアメンバーです。特定の不動産会社・金融機関とは一切無関係です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-cm-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">先輩への質問は誰でもできますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>すむむ。のLINEコミュニティに参加した会員であれば、どなたでも先輩に質問できます。プロフィールや体験談を見て、自分の状況に近い先輩を選んで直接メッセージを送ることができます。</p></div>
+      </div>
+      <div class="faq-item" id="faq-cm-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">先輩の体験談はどんな内容でも投稿できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>実際の住み替え・住宅購入体験に関する内容であれば基本的に投稿可能です。ただし、特定の不動産会社・金融機関の宣伝になる内容、個人情報が含まれる内容、事実に基づかない内容などは掲載できない場合があります。</p></div>
+      </div>
+      <div class="faq-item" id="faq-cm-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">先輩の体験談を年齢・エリアなどで絞り込めますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>はい、先輩の声ページでは年齢・エリア・物件タイプ・購入価格帯・購入時期などのフィルターで絞り込みが可能です。自分の状況に近い先輩の体験談を探しやすくなっています。</p></div>
+      </div>
+      <div class="faq-item" id="faq-cm-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">先輩の連絡先を直接知ることはできますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>先輩の個人的な連絡先（電話番号・メールアドレス等）をすむむ。が提供することはありません。コミュニティ内のメッセージ機能を通じてコンタクトを取っていただく形になります。</p></div>
+      </div>
+      <div class="faq-item" id="faq-cm-6">
+        <div class="faq-q" onclick="toggleFAQ('faq-cm-6')"><span class="faq-q-mark">Q</span><span class="faq-q-text">不適切な体験談や回答を見つけた場合はどうすればよいですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>各体験談・回答ページの「報告する」ボタンよりご連絡ください。編集チームが内容を確認し、ガイドライン違反が確認された場合は非公開またはアカウント停止の対処を行います。</p></div>
+      </div>
+    </div>
+
+    <!-- イベント・セミナー -->
+    <div class="faq-group" data-cat="event" id="group-event">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#FAEEDA;color:#633806;">イ</div>
+        <span class="faq-group-name">イベント・セミナー</span>
+        <span class="faq-group-count">5問</span>
+      </div>
+      <div class="faq-item" id="faq-ev-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-ev-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">イベントはどのような内容ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>住み替えを経験した先輩によるトークイベント（大阪・名古屋・京都など各地で定期開催）や、住宅ローン・エリア選びをテーマにしたセミナーを開催しています。参加者同士のネットワーキングの場も設けています。最新のイベント情報は<a href="sumumu-news.html" style="color:var(--green-mid);">お知らせページ</a>でご確認ください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ev-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-ev-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">参加費はかかりますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>現在開催しているすべてのイベント・セミナーは無料でご参加いただけます。事前申込（LINE）が必要なものがほとんどです。有料イベントを開催する際は事前にお知らせします。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ev-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-ev-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">オンラインでも参加できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>イベントによって異なります。リアル開催のみのものと、オンライン併用のものがあります。各イベントページの開催形式をご確認ください。オンライン専用イベントも定期的に開催予定です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ev-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-ev-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">参加申込後のキャンセルはできますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>参加申込後のキャンセルはLINEにてご連絡ください。キャンセル料は発生しません。定員が限られているため、参加が難しくなった場合はなるべく早めにご連絡いただけると助かります。</p></div>
+      </div>
+      <div class="faq-item" id="faq-ev-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-ev-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">イベントで個人情報はどのように取り扱われますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>イベント申込時にいただいた情報（お名前・連絡先等）は、イベント運営の目的のみに使用します。第三者への提供や営業目的での利用は行いません。詳細は<a href="/privacy/" style="color:var(--green-mid);">プライバシーポリシー</a>をご覧ください。</p></div>
+      </div>
+    </div>
+
+    <!-- シミュレーション -->
+    <div class="faq-group" data-cat="simulation" id="group-simulation">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#DCF5EC;color:#1D9E75;">シ</div>
+        <span class="faq-group-name">シミュレーション・診断ツール</span>
+        <span class="faq-group-count">5問</span>
+      </div>
+      <div class="faq-item" id="faq-si-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-si-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">シミュレーションの結果はどこまで正確ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>あくまで参考値としてご活用ください。入力した条件（収入・金利・物件価格等）をもとに計算していますが、実際の審査結果や物件価格は異なります。特にローン借入可能額や売却想定価格は、実際の審査・査定と乖離する場合があります。正確な数値は各金融機関・不動産会社にご相談ください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-si-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-si-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">入力したデータは保存されますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>現在のシミュレーション結果はブラウザを閉じると消えます。会員登録後は、シミュレーション結果を保存してマイページで確認できるようになる予定です（2025年内に実装予定）。</p></div>
+      </div>
+      <div class="faq-item" id="faq-si-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-si-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">シミュレーション結果をPDF等で保存・共有できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>現在はブラウザの印刷機能（PDF保存）を使った保存が可能です。専用のダウンロード・共有機能は今後実装予定です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-si-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-si-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">エリア診断・子育て診断のスコアはどのように算出されていますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>公開データ（国勢調査・学校情報・交通データ等）と独自の評価指標をもとに算出しています。あくまで参考情報であり、実際の生活満足度を保証するものではありません。現地での確認や各自治体へのお問い合わせも合わせて行ってください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-si-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-si-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">スマートフォンでもシミュレーションを使えますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>はい、スマートフォン・タブレットに対応したレスポンシブデザインになっています。主要な機能はすべてスマートフォンからご利用いただけます。</p></div>
+      </div>
+    </div>
+
+    <!-- コンシェルジュ相談 -->
+    <div class="faq-group" data-cat="concierge" id="group-concierge">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#E1F5EE;color:#085041;">相</div>
+        <span class="faq-group-name">コンシェルジュ相談</span>
+        <span class="faq-group-count">5問</span>
+      </div>
+      <div class="faq-item" id="faq-co-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-co-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">コンシェルジュとはどんな人ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>住み替えや住宅購入の流れ・資金計画・エリア選びなどの相談に対応する、中立な立場のスタッフです。特定の不動産会社や金融機関からの紹介報酬を受け取らず、ユーザーの利益を最優先に動きます。</p></div>
+      </div>
+      <div class="faq-item" id="faq-co-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-co-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">コンシェルジュへの相談は有料ですか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>無料です。相談回数・時間に制限もありません。LINEから気軽にメッセージをお送りください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-co-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-co-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">何回でも相談できますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>相談回数に制限はありません。「まず聞いてみたい」という段階から、実際の住み替えが完了するまで継続的にサポートします。</p></div>
+      </div>
+      <div class="faq-item" id="faq-co-4">
+        <div class="faq-q" onclick="toggleFAQ('faq-co-4')"><span class="faq-q-mark">Q</span><span class="faq-q-text">物件の紹介・仲介サポートはしてもらえますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>物件の仲介・紹介は行っていません（宅建業免許非保有のため）。ただし、「こういった条件の物件を探している」という相談を受けて、適切な不動産会社・検索サービスをご案内することは可能です。</p></div>
+      </div>
+      <div class="faq-item" id="faq-co-5">
+        <div class="faq-q" onclick="toggleFAQ('faq-co-5')"><span class="faq-q-mark">Q</span><span class="faq-q-text">相談した内容は第三者に共有されますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>相談内容を第三者に共有することはありません。ただし、サービス改善の目的で個人を特定できない形での統計的な分析に使用する場合があります。詳細は<a href="/privacy/" style="color:var(--green-mid);">プライバシーポリシー</a>をご確認ください。</p></div>
+      </div>
+    </div>
+
+    <!-- プライバシー・セキュリティ -->
+    <div class="faq-group" data-cat="privacy" id="group-privacy">
+      <div class="faq-group-hd">
+        <div class="faq-group-icon" style="background:#F0F0EE;color:#666666;">鍵</div>
+        <span class="faq-group-name">プライバシー・セキュリティ</span>
+        <span class="faq-group-count">3問</span>
+      </div>
+      <div class="faq-item" id="faq-pv-1">
+        <div class="faq-q" onclick="toggleFAQ('faq-pv-1')"><span class="faq-q-mark">Q</span><span class="faq-q-text">個人情報はどのように管理されていますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>個人情報は株式会社サクシードのプライバシーポリシーに基づき厳重に管理しています。SSL通信による暗号化、アクセス権限の制限、定期的なセキュリティ審査を実施しています。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pv-2">
+        <div class="faq-q" onclick="toggleFAQ('faq-pv-2')"><span class="faq-q-mark">Q</span><span class="faq-q-text">退会後もデータは保持されますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>退会後は、法令上の保存義務がある場合を除き、登録情報および個人を特定できるデータを削除します。削除には数週間程度かかる場合があります。詳細は<a href="/privacy/" style="color:var(--green-mid);">プライバシーポリシー</a>をご覧ください。</p></div>
+      </div>
+      <div class="faq-item" id="faq-pv-3">
+        <div class="faq-q" onclick="toggleFAQ('faq-pv-3')"><span class="faq-q-mark">Q</span><span class="faq-q-text">サービス内での行動データはどのように使われますか？</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a"><p>閲覧履歴・クリック履歴等の行動データは、コンテンツの改善・レコメンド機能の向上・サービス品質の分析に使用します。第三者への販売は行いません。詳細は<a href="/privacy/" style="color:var(--green-mid);">プライバシーポリシー</a>をご確認ください。</p></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="faq-sidebar">
+
+    <!-- カテゴリ -->
+    <div class="sb-card">
+      <div class="sb-hd">カテゴリ</div>
+      <ul class="sb-cat-list" id="sbCatList">
+        <li class="sb-cat-item active" data-cat="all"><span class="sb-cat-dot" style="background:#1A1A1A;"></span>すべて<span class="sb-cat-num">40</span></li>
+        <li class="sb-cat-item" data-cat="about"><span class="sb-cat-dot" style="background:#085041;"></span>すむむ。について<span class="sb-cat-num">6</span></li>
+        <li class="sb-cat-item" data-cat="account"><span class="sb-cat-dot" style="background:#185FA5;"></span>会員登録・アカウント<span class="sb-cat-num">5</span></li>
+        <li class="sb-cat-item" data-cat="property"><span class="sb-cat-dot" style="background:#534AB7;"></span>物件情報・検索<span class="sb-cat-num">5</span></li>
+        <li class="sb-cat-item" data-cat="community"><span class="sb-cat-dot" style="background:#993556;"></span>コミュニティ・先輩<span class="sb-cat-num">6</span></li>
+        <li class="sb-cat-item" data-cat="event"><span class="sb-cat-dot" style="background:#633806;"></span>イベント・セミナー<span class="sb-cat-num">5</span></li>
+        <li class="sb-cat-item" data-cat="simulation"><span class="sb-cat-dot" style="background:#1D9E75;"></span>シミュレーション<span class="sb-cat-num">5</span></li>
+        <li class="sb-cat-item" data-cat="concierge"><span class="sb-cat-dot" style="background:#085041;opacity:0.6;"></span>コンシェルジュ相談<span class="sb-cat-num">5</span></li>
+        <li class="sb-cat-item" data-cat="privacy"><span class="sb-cat-dot" style="background:#888;"></span>プライバシー<span class="sb-cat-num">3</span></li>
+      </ul>
+    </div>
+
+    <!-- よく見られている質問 -->
+    <div class="sb-card">
+      <div class="sb-hd">よく見られている質問</div>
+      <ul class="sb-popular-list">
+        <li class="sb-popular-item" onclick="jumpToFAQ('faq-ab-3')">
+          <div class="sb-popular-q">宅建業者免許を持っていないとはどういう意味ですか？</div>
+          <div class="sb-popular-cat">すむむ。について</div>
+        </li>
+        <li class="sb-popular-item" onclick="jumpToFAQ('faq-co-1')">
+          <div class="sb-popular-q">コンシェルジュとはどんな人ですか？</div>
+          <div class="sb-popular-cat">コンシェルジュ相談</div>
+        </li>
+        <li class="sb-popular-item" onclick="jumpToFAQ('faq-ab-2')">
+          <div class="sb-popular-q">すむむ。は無料で使えますか？</div>
+          <div class="sb-popular-cat">すむむ。について</div>
+        </li>
+        <li class="sb-popular-item" onclick="jumpToFAQ('faq-pr-2')">
+          <div class="sb-popular-q">内覧の申し込みはどこでするのですか？</div>
+          <div class="sb-popular-cat">物件情報・検索</div>
+        </li>
+        <li class="sb-popular-item" onclick="jumpToFAQ('faq-si-1')">
+          <div class="sb-popular-q">シミュレーションの結果はどこまで正確ですか？</div>
+          <div class="sb-popular-cat">シミュレーション</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- コンシェルジュCTA -->
+    <div class="sb-concierge">
+      <div class="sb-con-eyebrow">CONCIERGE</div>
+      <div class="sb-con-ttl">答えが見つからない場合は<br>コンシェルジュへ</div>
+      <p class="sb-con-text">どんな小さな疑問でも構いません。中立な立場のスタッフが丁寧にお答えします。</p>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sb-con">
+        無料で相談する →
+      </a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">解決しない場合は、<br>コンシェルジュへ</h2>
+    <p class="concierge-lead">
+      FAQ で解決しない疑問・不安はコンシェルジュが直接お答えします。<br>
+      営業・勧誘は一切なし。住み替えの「最初の相談相手」として、気軽にどうぞ。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0fq{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0fq" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">資金計画</a></li><li><a href="sumumu-guide.html">物件選び</a></li><li><a href="sumumu-guide.html">購入手続き</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tool-loan.html">ローン返済</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li><li><a href="sumumu-tools.html">一覧を見る</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>サポート</h4><ul><li><a href="sumumu-faq.html" style="color:rgba(255,255,255,0.8);">よくある質問</a></li><li><a href="sumumu-contact.html">お問い合わせ</a></li><li><a href="sumumu-company.html">運営会社</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Accordion ── */
+function toggleFAQ(id) {
+  const item = document.getElementById(id);
+  const isOpen = item.classList.contains('open');
+  item.classList.toggle('open', !isOpen);
+}
+
+function jumpToFAQ(id) {
+  const item = document.getElementById(id);
+  if (!item) return;
+  const group = item.closest('.faq-group');
+  if (group && group.style.display === 'none') {
+    filterByCat('all');
+  }
+  item.classList.add('open');
+  setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'center' }), 60);
+}
+
+/* ── Filter ── */
+let activeCat = 'all';
+let searchQuery = '';
+
+function applyFilter() {
+  const groups = document.querySelectorAll('.faq-group');
+  let totalVisible = 0;
+  groups.forEach(group => {
+    const catId = group.dataset.cat;
+    const catMatch = activeCat === 'all' || catId === activeCat;
+    let groupVisible = 0;
+    group.querySelectorAll('.faq-item').forEach(item => {
+      const qText = item.querySelector('.faq-q-text').textContent;
+      const aText = item.querySelector('.faq-a').textContent;
+      const searchMatch = !searchQuery || qText.includes(searchQuery) || aText.includes(searchQuery);
+      const show = searchQuery ? searchMatch : catMatch;
+      item.style.display = show ? '' : 'none';
+      if (show) groupVisible++;
+    });
+    const showGroup = searchQuery ? groupVisible > 0 : catMatch;
+    group.style.display = showGroup ? '' : 'none';
+    totalVisible += groupVisible;
+  });
+  document.getElementById('noResult').style.display = totalVisible === 0 ? 'block' : 'none';
+}
+
+function filterByCat(cat) {
+  activeCat = cat;
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  applyFilter();
+
+  // update chips
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+  // update sidebar
+  document.querySelectorAll('.sb-cat-item').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+  // update cat cards
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.toggle('active', c.dataset.cat === cat));
+
+  if (cat !== 'all') {
+    const group = document.getElementById('group-' + cat);
+    if (group) setTimeout(() => group.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  }
+}
+
+// Chips
+document.querySelectorAll('.cat-chip').forEach(chip => {
+  chip.addEventListener('click', () => filterByCat(chip.dataset.cat));
+});
+
+// Category cards
+document.querySelectorAll('.cat-card').forEach(card => {
+  card.addEventListener('click', () => filterByCat(card.dataset.cat));
+});
+
+// Sidebar category list
+document.querySelectorAll('.sb-cat-item').forEach(item => {
+  item.addEventListener('click', () => filterByCat(item.dataset.cat));
+});
+
+/* ── Search ── */
+function doSearch() {
+  const val = document.getElementById('searchInput').value.trim();
+  searchQuery = val;
+  activeCat = 'all';
+  document.querySelectorAll('.cat-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+  document.querySelectorAll('.sb-cat-item').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+  document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('active'));
+  applyFilter();
+}
+
+document.getElementById('searchBtn').addEventListener('click', doSearch);
+document.getElementById('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+document.getElementById('searchInput').addEventListener('input', () => {
+  if (document.getElementById('searchInput').value === '') {
+    searchQuery = '';
+    applyFilter();
+  }
+});
+
+/* ── Hamburger ── */
+document.getElementById('hambBtn').addEventListener('click', () => {
+  document.getElementById('mobNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>

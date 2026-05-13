@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グランドメゾン大阪上町｜新築マンション｜すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-lite:#F97272; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010; --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE; --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+  --orange-bg:#FAEEDA; --purple-bg:#EEEDFE; --pink-bg:#FBEAF0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);}
+.line-logo-img{width:16px;height:16px;display:block;flex-shrink:0;object-fit:contain;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.25s;}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:16px;display:flex;flex-direction:column;gap:2px;}
+.mob-link{display:block;padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);border-radius:var(--r-md);}
+.mob-link:hover{background:var(--bg-page);}
+.mob-group{border-radius:var(--r-md);overflow:hidden;}
+.mob-parent{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;font-size:13px;font-weight:500;cursor:pointer;}
+.mob-parent i{font-style:normal;font-size:11px;color:var(--text-muted);transition:transform 0.2s;}
+.mob-parent.open i{transform:rotate(180deg);}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);}
+.mob-sub.open{max-height:220px;}
+.mob-sub a{display:block;padding:8px 12px 8px 20px;font-size:12px;color:var(--text-secondary);}
+.mob-util{display:flex;gap:8px;padding:10px 12px;flex-wrap:wrap;}
+.mob-util a{font-size:12px;color:var(--text-muted);}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--line);color:#fff;padding:12px 20px;border-radius:var(--r-pill);font-size:13px;font-weight:500;margin:8px 12px 12px;}
+.mob-cta .line-logo-img{width:18px;height:18px;}
+@media(max-width:1060px){
+  .util-bar{display:none;} .main-nav{display:none;} .hamb{display:flex;}
+  .mob-nav{display:block;} .main-hd{padding:0 16px;height:52px;align-items:center;}
+}
+
+/* ─── PAGE WRAPPER ──────────────────────── */
+.prop-page-sec{background:var(--bg-white);padding:0 32px 56px;border-bottom:0.5px solid var(--border);}
+.prop-page-wrap{max-width:1080px;margin:0 auto;}
+
+/* ─── BREADCRUMB ────────────────────────── */
+.breadcrumb{font-size:11.5px;color:var(--text-muted);display:flex;align-items:center;gap:6px;padding:20px 0 18px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--text-muted);transition:color 0.12s;}
+.breadcrumb a:hover{color:var(--green-mid);}
+.breadcrumb span{color:var(--text-secondary);}
+.breadcrumb-sep{color:var(--border);}
+
+/* ─── GALLERY ───────────────────────────── */
+.gallery{margin-bottom:32px;}
+.gallery-main{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg-page);border-radius:var(--r-lg);overflow:hidden;}
+.gallery-main img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.2s;}
+.gallery-counter{position:absolute;bottom:12px;right:14px;background:rgba(0,0,0,0.55);color:#fff;font-size:11px;padding:3px 10px;border-radius:var(--r-pill);letter-spacing:0.04em;}
+.gallery-label{position:absolute;top:12px;left:14px;background:rgba(0,0,0,0.45);color:rgba(255,255,255,0.85);font-size:11px;padding:3px 10px;border-radius:var(--r-pill);}
+.gallery-thumbs{display:flex;gap:8px;margin-top:8px;overflow-x:auto;padding-bottom:2px;}
+.gallery-thumb{width:76px;height:56px;border-radius:var(--r-md);overflow:hidden;cursor:pointer;border:2px solid transparent;flex-shrink:0;transition:border-color 0.15s;}
+.gallery-thumb.active{border-color:var(--green-mid);}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* ─── 2-COLUMN LAYOUT ───────────────────── */
+.prop-detail-layout{display:grid;grid-template-columns:1fr 296px;gap:28px;align-items:start;}
+
+/* ─── PROPERTY HEADER ───────────────────── */
+.prop-hd{padding-bottom:24px;border-bottom:0.5px solid var(--border);margin-bottom:24px;}
+.prop-hd-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+.prop-type-badge{font-size:10.5px;font-weight:500;color:#fff;padding:3px 10px;border-radius:var(--r-pill);}
+.prop-type--nm{background:#C94020;}
+.prop-type--um{background:#9E5F15;}
+.prop-type--nh{background:var(--green-dark);}
+.prop-type--uh{background:var(--blue-dark);}
+.prop-count-text{font-size:11.5px;color:var(--text-muted);}
+.prop-name-large{font-size:24px;font-weight:500;line-height:1.4;color:var(--text-primary);margin-bottom:8px;}
+.prop-loc-row{font-size:12px;color:var(--text-secondary);margin-bottom:16px;display:flex;align-items:center;gap:6px;}
+.prop-loc-pin{color:var(--brand);font-size:13px;}
+.prop-price-large{font-size:34px;font-weight:500;color:var(--green-dark);line-height:1.2;margin-bottom:16px;}
+.prop-price-large .unit{font-size:16px;color:var(--text-muted);font-weight:400;margin-left:2px;}
+.prop-action-row{display:flex;gap:8px;}
+.btn-fav,.btn-share{padding:7px 18px;font-size:12px;border:0.5px solid var(--border);border-radius:var(--r-pill);background:var(--bg-white);cursor:pointer;transition:all 0.15s;color:var(--text-secondary);}
+.btn-fav:hover{border-color:var(--brand);color:var(--brand);}
+.btn-share:hover{border-color:var(--green-mid);color:var(--green-dark);}
+.btn-fav.active{background:var(--brand-bg);border-color:var(--brand);color:var(--brand);}
+
+/* ─── SPEC GRID ─────────────────────────── */
+.spec-grid{display:grid;grid-template-columns:repeat(3,1fr);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:12px;}
+.spec-item{padding:13px 16px;border-right:0.5px solid var(--border);border-bottom:0.5px solid var(--border);}
+.spec-item:nth-child(3n){border-right:none;}
+.spec-item:nth-last-child(-n+3){border-bottom:none;}
+.spec-label{font-size:10.5px;color:var(--text-muted);margin-bottom:4px;}
+.spec-value{font-size:15px;font-weight:500;color:var(--text-primary);}
+.spec-sub{display:flex;gap:0;flex-wrap:wrap;margin-bottom:32px;border:0.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;}
+.spec-sub-item{padding:10px 18px;border-right:0.5px solid var(--border);flex:1;min-width:0;}
+.spec-sub-item:last-child{border-right:none;}
+.spec-sub-label{font-size:10px;color:var(--text-muted);margin-bottom:3px;}
+.spec-sub-value{font-size:12.5px;font-weight:500;color:var(--text-secondary);}
+
+/* ─── SECTION COMMON ────────────────────── */
+.prop-section{margin-bottom:36px;padding-bottom:36px;border-bottom:0.5px solid var(--border);}
+.prop-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.prop-sec-ttl{font-size:15px;font-weight:500;color:var(--text-primary);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--green-mid);display:inline-block;}
+.prop-desc{font-size:13px;color:var(--text-secondary);line-height:2;}
+
+/* ─── FACILITY TABLE ────────────────────── */
+.facility-table{width:100%;border-collapse:collapse;}
+.facility-table tr{border-bottom:0.5px solid var(--border);}
+.facility-table tr:last-child{border-bottom:none;}
+.facility-table th{font-size:11px;color:var(--text-muted);font-weight:500;padding:12px 0 12px 0;width:110px;vertical-align:top;padding-right:12px;}
+.facility-table td{font-size:13px;color:var(--text-primary);padding:12px 0;line-height:1.8;}
+.facility-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.facility-tag{padding:3px 10px;font-size:11.5px;border:0.5px solid var(--border);border-radius:var(--r-pill);color:var(--text-secondary);background:var(--bg-page);}
+
+/* ─── FLOOR PLAN + MAP ──────────────────── */
+.floorplan-ph,.map-ph{border:0.5px solid var(--border);border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--text-muted);font-size:13px;}
+.floorplan-ph{min-height:200px;background:var(--bg-page);}
+.map-ph{min-height:220px;background:#EAF0EA;}
+.map-ph-pin{font-size:28px;}
+.map-ph-label{font-size:12px;color:var(--green-dark);}
+
+/* ─── NEARBY TABLE ──────────────────────── */
+.nearby-table{width:100%;border-collapse:collapse;}
+.nearby-table tr{border-bottom:0.5px solid var(--border);}
+.nearby-table tr:last-child{border-bottom:none;}
+.nearby-table th{font-size:11px;color:var(--text-muted);font-weight:500;width:90px;padding:11px 12px 11px 0;vertical-align:top;}
+.nearby-table td{font-size:12.5px;color:var(--text-secondary);padding:11px 0;line-height:1.9;}
+
+/* ─── SIDEBAR ───────────────────────────── */
+.prop-sidebar{position:sticky;top:72px;display:flex;flex-direction:column;gap:14px;}
+.sidebar-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-sm);}
+.sidebar-price{font-size:26px;font-weight:500;color:var(--green-dark);line-height:1.3;margin-bottom:6px;}
+.sidebar-price .unit{font-size:13px;color:var(--text-muted);font-weight:400;margin-left:2px;}
+.sidebar-price-note{font-size:11px;color:var(--text-muted);margin-bottom:18px;}
+.btn-consult-primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:13px;font-weight:500;text-decoration:none;transition:background 0.15s;margin-bottom:8px;}
+.btn-consult-primary:hover{background:var(--line-h);}
+.btn-consult-secondary{display:flex;align-items:center;justify-content:center;width:100%;padding:12px 16px;background:transparent;color:var(--green-dark);border:0.5px solid var(--green-mid);border-radius:var(--r-md);font-size:13px;font-weight:500;text-decoration:none;transition:all 0.15s;}
+.btn-consult-secondary:hover{background:var(--green-bg);}
+.consult-note{font-size:10.5px;color:var(--text-muted);margin-top:10px;text-align:center;line-height:1.7;}
+.sidebar-concierge{background:var(--green-dark);border-radius:var(--r-lg);padding:20px;}
+.sidebar-con-eyebrow{font-size:9.5px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);margin-bottom:10px;text-transform:uppercase;}
+.sidebar-con-ttl{font-size:13px;font-weight:500;color:#fff;margin-bottom:8px;line-height:1.5;}
+.sidebar-con-text{font-size:11.5px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:14px;}
+.btn-concierge-sm{display:block;width:100%;padding:11px 0;text-align:center;background:var(--green-mid);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge-sm:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── VOICES SECTION ────────────────────── */
+.prop-voices-sec{background:var(--dark-bg);padding:52px 32px;}
+.prop-voices-inner{max-width:1080px;margin:0 auto;}
+.voices-eyebrow{font-size:10.5px;font-weight:500;letter-spacing:0.14em;color:var(--brand-lite);margin-bottom:12px;text-transform:uppercase;}
+.voices-ttl{font-size:20px;font-weight:500;color:rgba(255,255,255,0.92);margin-bottom:28px;}
+.voices-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px;}
+.voice-card{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.10);border-radius:var(--r-lg);padding:20px;display:flex;flex-direction:column;gap:12px;transition:background 0.15s;}
+.voice-card:hover{background:rgba(255,255,255,0.08);}
+.voice-card-top{display:flex;align-items:center;justify-content:space-between;}
+.voice-stage{font-size:10.5px;font-weight:500;background:rgba(249,114,114,0.15);color:var(--brand-lite);padding:3px 10px;border-radius:var(--r-pill);}
+.voice-pref{font-size:10.5px;color:rgba(255,255,255,0.35);}
+.voice-info{display:flex;align-items:center;gap:10px;}
+.voice-avatar{width:38px;height:38px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500;flex-shrink:0;}
+.voice-name{font-size:13px;font-weight:500;color:rgba(255,255,255,0.90);}
+.voice-detail{font-size:10.5px;color:rgba(255,255,255,0.40);margin-top:2px;}
+.voice-quote{font-size:12.5px;color:rgba(255,255,255,0.68);line-height:1.85;}
+.voice-link{font-size:11.5px;color:var(--green-light);display:inline-flex;align-items:center;gap:4px;transition:color 0.15s;}
+.voice-link:hover{color:var(--green-pale);}
+.voices-all-link{text-align:center;}
+.btn-voices-more{display:inline-block;padding:12px 44px;font-size:13.5px;font-weight:500;border:1.5px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.82);border-radius:var(--r-pill);transition:all 0.15s;background:transparent;cursor:pointer;}
+.btn-voices-more:hover{border-color:rgba(255,255,255,0.55);color:#fff;background:rgba(255,255,255,0.06);}
+
+/* ─── RELATED PROPS ─────────────────────── */
+.related-sec{background:var(--bg-white);padding:48px 32px;border-top:0.5px solid var(--border);}
+.related-inner{max-width:1080px;margin:0 auto;}
+.related-ttl{font-size:18px;font-weight:500;color:var(--text-primary);margin-bottom:24px;}
+.prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.prop-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:background 0.15s,border-color 0.15s,box-shadow 0.15s;text-decoration:none;display:block;color:inherit;}
+.prop-card:hover{background:var(--bg-page);border-color:var(--green-mid);box-shadow:var(--shadow-sm);}
+.prop-img{position:relative;width:100%;aspect-ratio:4/3;background:var(--bg-page);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.prop-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0;}
+.prop-img-ph{font-size:12px;color:var(--text-muted);position:relative;z-index:0;}
+.prop-type{position:absolute;top:10px;left:10px;font-size:10.5px;font-weight:500;color:#fff;padding:3px 9px;border-radius:var(--r-pill);z-index:1;}
+.prop-body{padding:14px 16px 16px;}
+.prop-name{font-size:13.5px;font-weight:500;color:var(--text-primary);margin-bottom:4px;line-height:1.4;}
+.prop-loc{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+.prop-price{font-size:19px;font-weight:500;color:var(--green-dark);margin-bottom:5px;line-height:1.2;}
+.prop-price em{font-style:normal;font-size:12px;color:var(--text-muted);}
+.prop-specs{font-size:11px;color:var(--text-secondary);}
+
+/* ─── CONCIERGE BAR ─────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ───────────────────────── */
+.all-cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.all-cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.btn-cta .line-logo-img{width:22px;height:22px;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ────────────────────────── */
+@media(max-width:900px){
+  .prop-page-sec{padding:0 16px 44px;}
+  .prop-detail-layout{grid-template-columns:1fr;}
+  .prop-sidebar{position:static;}
+  .spec-grid{grid-template-columns:repeat(2,1fr);}
+  .spec-item:nth-child(2n){border-right:none;}
+  .spec-item:nth-child(3n){border-right:0.5px solid var(--border);}
+  .spec-item:nth-child(2n){border-right:none;}
+  .voices-grid-2{grid-template-columns:1fr;}
+  .prop-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+  .footer-top{gap:28px;}
+  .concierge-bar{padding:48px 16px;}
+  .all-cta-sec{padding:64px 16px;}
+  .prop-voices-sec{padding:40px 16px;}
+  .related-sec{padding:36px 16px;}
+}
+@media(max-width:600px){
+  .spec-grid{grid-template-columns:1fr;}
+  .spec-item:nth-child(n){border-right:none;}
+  .spec-sub{flex-direction:column;}
+  .spec-sub-item{border-right:none;border-bottom:0.5px solid var(--border);}
+  .spec-sub-item:last-child{border-bottom:none;}
+  .prop-grid{grid-template-columns:1fr;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+  .cta-title{font-size:22px;}
+  .prop-name-large{font-size:20px;}
+  .prop-price-large{font-size:28px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="../sumumu-faq.html">よくある質問</a>
+        <a href="../sumumu-contact.html">お問合せ</a>
+        <a href="../sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="../sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0k1{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0k1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="../sumumu-main.html" class="nl">トップ</a>
+      <div class="ni">
+        <span class="nl">すむむとは。<i>▾</i></span>
+        <div class="nd"><a href="../sumumu-about.html">すむむ。のサービス</a><a href="../sumumu-about.html#partners">パートナー</a><a href="../sumumu-about.html#media">メディア掲載</a></div>
+      </div>
+      <div class="ni">
+        <span class="nl" style="color:var(--green-mid)">住まいを探す<i>▾</i></span>
+        <div class="nd"><a href="sumumu-kinki.html">エリア別</a><a href="sumumu-kinki-all.html" style="color:var(--green-mid)">条件別</a><a href="sumumu-kinki-00001.html">個別物件</a></div>
+      </div>
+      <div class="ni">
+        <span class="nl">先輩の体験談<i>▾</i></span>
+        <div class="nd"><a href="../sumumu-journal.html">先輩の声</a><a href="../sumumu-journal.html?type=purchase">購入体験</a><a href="../sumumu-journal.html?type=life">暮らし</a></div>
+      </div>
+      <div class="ni">
+        <span class="nl">お役立ちコラム<i>▾</i></span>
+        <div class="nd"><a href="../sumumu-guide.html">資金計画</a><a href="../sumumu-guide.html">物件選び</a><a href="../sumumu-guide.html">購入手続き</a></div>
+      </div>
+      <div class="ni">
+        <span class="nl">シミュレーション<i>▾</i></span>
+        <div class="nd"><a href="../sumumu-tool-loan.html">ローンシミュレーター</a><a href="../sumumu-tool-borrowing.html">借入可能額</a><a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a></div>
+      </div>
+      <div class="ni">
+        <a href="../sumumu-area.html" class="nl">エリア特集<i>▾</i></a>
+        <div class="nd"><a href="../sumumu-area.html">エリア一覧</a><a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div>
+      </div>
+      <a href="../sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hamb" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="../sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">住まいを探す<i>▾</i></div><div class="mob-sub"><a href="sumumu-kinki.html">エリア別</a><a href="sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="../sumumu-journal.html">先輩の声</a><a href="../sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <a href="../sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util"><a href="../sumumu-faq.html">よくある質問</a><a href="../sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">
+          <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">コミュニティに無料で参加する
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPERTY PAGE -->
+<section class="prop-page-sec">
+  <div class="prop-page-wrap">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="../sumumu-main.html">ホーム</a><span class="breadcrumb-sep">›</span>
+      <a href="sumumu-kinki.html">住まいを探す（近畿）</a><span class="breadcrumb-sep">›</span>
+      <a href="sumumu-kinki-all.html">物件一覧</a><span class="breadcrumb-sep">›</span>
+      <span>グランドメゾン大阪上町</span>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="gallery-main">
+        <span class="gallery-label">物件メイン画像</span>
+        <img id="galleryMainImg" src="../images/prop1.jpg" alt="グランドメゾン大阪上町 外観"
+             onerror="this.src='https://picsum.photos/seed/smprop1main/1200/800'">
+        <span class="gallery-counter" id="galleryCounter">1 / 4</span>
+      </div>
+      <div class="gallery-thumbs">
+        <div class="gallery-thumb active" data-idx="0">
+          <img src="../images/prop1.jpg" alt="外観" onerror="this.src='https://picsum.photos/seed/smprop1a/300/200'">
+        </div>
+        <div class="gallery-thumb" data-idx="1">
+          <img src="../images/prop1b.jpg" alt="エントランス" onerror="this.src='https://picsum.photos/seed/smprop1b/300/200'">
+        </div>
+        <div class="gallery-thumb" data-idx="2">
+          <img src="../images/prop1c.jpg" alt="リビング" onerror="this.src='https://picsum.photos/seed/smprop1c/300/200'">
+        </div>
+        <div class="gallery-thumb" data-idx="3">
+          <img src="../images/prop1d.jpg" alt="キッチン" onerror="this.src='https://picsum.photos/seed/smprop1d/300/200'">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2-column layout -->
+    <div class="prop-detail-layout">
+
+      <!-- LEFT: main content -->
+      <div class="prop-main">
+
+        <!-- Property header -->
+        <div class="prop-hd">
+          <div class="prop-hd-top">
+            <span class="prop-type-badge prop-type--nm">新築マンション</span>
+            <span class="prop-count-text">近畿エリア 全607件のうちの1件</span>
+          </div>
+          <h1 class="prop-name-large">グランドメゾン大阪上町</h1>
+          <div class="prop-loc-row">
+            <span class="prop-loc-pin">📍</span>
+            大阪府大阪市中央区上本町 ／ 谷町四丁目駅 徒歩5分
+          </div>
+          <div class="prop-price-large">4,980<span class="unit">万円〜</span></div>
+          <div class="prop-action-row">
+            <button class="btn-fav" id="btnFav">♡ お気に入り</button>
+            <button class="btn-share" id="btnShare">↗ シェア</button>
+          </div>
+        </div>
+
+        <!-- Spec grid (6 items) -->
+        <div class="spec-grid">
+          <div class="spec-item">
+            <div class="spec-label">間取り</div>
+            <div class="spec-value">3LDK</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">専有面積</div>
+            <div class="spec-value">75.20㎡</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">築年数</div>
+            <div class="spec-value">新築</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">管理費</div>
+            <div class="spec-value">約12,000円</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">修繕積立金</div>
+            <div class="spec-value">約8,500円</div>
+          </div>
+          <div class="spec-item">
+            <div class="spec-label">総階数</div>
+            <div class="spec-value">地上10階</div>
+          </div>
+        </div>
+
+        <!-- Sub specs (3 items) -->
+        <div class="spec-sub">
+          <div class="spec-sub-item">
+            <div class="spec-sub-label">駐車場</div>
+            <div class="spec-sub-value">あり（30,000円/月）</div>
+          </div>
+          <div class="spec-sub-item">
+            <div class="spec-sub-label">販売状況</div>
+            <div class="spec-sub-value">販売中（新築建売）</div>
+          </div>
+          <div class="spec-sub-item">
+            <div class="spec-sub-label">物件ID</div>
+            <div class="spec-sub-value">#01422</div>
+          </div>
+        </div>
+
+        <!-- 物件の特徴 -->
+        <div class="prop-section">
+          <h2 class="prop-sec-ttl">物件の特徴</h2>
+          <p class="prop-desc">大阪城公園や難波宮跡にほど近い上本町エリアに誕生する新築マンションです。谷町四丁目駅から徒歩5分という好立地ながら、閑静な住宅街に位置し、都市の喧騒から離れた落ち着いた暮らしを実現できます。<br><br>近鉄・大阪メトロを利用すれば大阪市内主要駅へのアクセスも良好。共働き世帯の方にも、子育て世代の方にも、バランスの取れた立地です。上本町エリアは学区評価も高く、周辺には評判の小・中学校が徒歩圏内に複数あります。<br><br>全戸南向きバルコニーで採光・通風に優れ、ファミリー向け3LDKを主力プランに展開。ディスポーザー・床暖房・食洗機など生活の質を高める設備を標準搭載しています。</p>
+        </div>
+
+        <!-- 建物・設備 -->
+        <div class="prop-section">
+          <h2 class="prop-sec-ttl">建物・設備</h2>
+          <table class="facility-table">
+            <tr>
+              <th>建物設備</th>
+              <td>
+                <div class="facility-tags">
+                  <span class="facility-tag">オートロック</span>
+                  <span class="facility-tag">管理人常駐</span>
+                  <span class="facility-tag">宅配ボックス</span>
+                  <span class="facility-tag">24時間ゴミ出し</span>
+                  <span class="facility-tag">床暖房</span>
+                  <span class="facility-tag">食洗機</span>
+                  <span class="facility-tag">ディスポーザー</span>
+                  <span class="facility-tag">エレベーター</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>駐車場</th>
+              <td>あり（機械式 / 月額30,000円）</td>
+            </tr>
+            <tr>
+              <th>駐輪場</th>
+              <td>あり（無料）</td>
+            </tr>
+            <tr>
+              <th>インターネット</th>
+              <td>高速インターネット対応（光ファイバー）</td>
+            </tr>
+            <tr>
+              <th>バルコニー</th>
+              <td>あり（約11.2㎡ / 全戸南向き）</td>
+            </tr>
+            <tr>
+              <th>構造</th>
+              <td>鉄筋コンクリート造（新耐震基準適合）</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- 間取り -->
+        <div class="prop-section">
+          <h2 class="prop-sec-ttl">間取り</h2>
+          <div class="floorplan-ph">
+            <div style="font-size:32px;">🏠</div>
+            <div>間取り図（3LDK / 75.20㎡）</div>
+            <div style="font-size:11px;color:var(--text-muted);">正式な間取り図は外部サイトよりご確認ください</div>
+          </div>
+        </div>
+
+        <!-- 周辺地図 -->
+        <div class="prop-section">
+          <h2 class="prop-sec-ttl">周辺地図</h2>
+          <div class="map-ph">
+            <div class="map-ph-pin">📍</div>
+            <div class="map-ph-label">大阪府大阪市中央区上本町</div>
+            <div style="font-size:11px;color:var(--green-mid);">谷町四丁目駅 徒歩5分</div>
+          </div>
+        </div>
+
+        <!-- 周辺施設 -->
+        <div class="prop-section">
+          <h2 class="prop-sec-ttl">周辺施設</h2>
+          <table class="nearby-table">
+            <tr>
+              <th>教育施設</th>
+              <td>
+                大阪市立清水小学校（徒歩5分）<br>
+                大阪市立中央中学校（徒歩6分）<br>
+                大阪市立清水谷高等学校（徒歩8分）
+              </td>
+            </tr>
+            <tr>
+              <th>買い物</th>
+              <td>
+                ファミリーマート 上本町六丁目店（徒歩1分）<br>
+                スーパー光洋 上本町店（徒歩3分）<br>
+                近鉄百貨店 上本町店（徒歩6分）
+              </td>
+            </tr>
+            <tr>
+              <th>医療</th>
+              <td>うえほんまちハイハイタウン内 医療モール（徒歩5分）</td>
+            </tr>
+            <tr>
+              <th>公共施設</th>
+              <td>
+                上本町郵便局（徒歩2分）<br>
+                大阪市中央区役所（徒歩12分）
+              </td>
+            </tr>
+            <tr>
+              <th>公園・緑地</th>
+              <td>
+                難波宮跡公園（徒歩8分）<br>
+                大阪城公園（徒歩20分）
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </div><!-- /prop-main -->
+
+      <!-- RIGHT: Sidebar -->
+      <div class="prop-sidebar">
+
+        <!-- Price + external links -->
+        <div class="sidebar-card">
+          <div class="sidebar-price">4,980<span class="unit">万円〜</span></div>
+          <div class="sidebar-price-note">3LDK / 75.20㎡ / 新築</div>
+
+          <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-consult-primary">
+            <img src="../images/line-logo.png" alt="LINE" class="line-logo-img" onerror="this.style.display='none'">
+            内覧についてコンシェルジュに相談する（無料）
+          </a>
+          <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-consult-secondary">
+            資料・間取りについて相談する（無料）
+          </a>
+          <div class="consult-note">営業・勧誘は一切ありません</div>
+        </div>
+
+        <!-- CONCIERGE -->
+        <div class="sidebar-concierge">
+          <div class="sidebar-con-eyebrow">CONCIERGE</div>
+          <div class="sidebar-con-ttl">この物件について、<br>コンシェルジュに相談できます</div>
+          <p class="sidebar-con-text">資金計画・エリア比較・購入の進め方など、中立な立場でサポートします。営業・勧誘は一切ありません。</p>
+          <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge-sm">
+            コンシェルジュに相談する →
+          </a>
+        </div>
+
+      </div><!-- /prop-sidebar -->
+
+    </div><!-- /prop-detail-layout -->
+  </div><!-- /prop-page-wrap -->
+</section>
+
+<!-- VOICES -->
+<section class="prop-voices-sec">
+  <div class="prop-voices-inner">
+    <div class="voices-eyebrow">VOICES</div>
+    <h2 class="voices-ttl">この物件を購入した先輩の声</h2>
+    <div class="voices-grid-2">
+      <div class="voice-card">
+        <div class="voice-card-top">
+          <span class="voice-stage">はじめての住み替え</span>
+          <span class="voice-pref">大阪府吹田市</span>
+        </div>
+        <div class="voice-info">
+          <div class="voice-avatar">田</div>
+          <div>
+            <div class="voice-name">田中 さやか</div>
+            <div class="voice-detail">33歳 / 会社員 / 夫・子2人</div>
+          </div>
+        </div>
+        <p class="voice-quote">「コミュニティで同じ条件の方の体験を聞けたことで、ローンへの不安がなくなりました。コンシェルジュの方も中立な立場でアドバイスしてくれて、本当に安心して進められました。」</p>
+        <a class="voice-link" href="/voices/001/">購入体験の詳細を読む →</a>
+      </div>
+      <div class="voice-card">
+        <div class="voice-card-top">
+          <span class="voice-stage">買い替え</span>
+          <span class="voice-pref">大阪市福島区</span>
+        </div>
+        <div class="voice-info">
+          <div class="voice-avatar">加</div>
+          <div>
+            <div class="voice-name">加藤 昌弘</div>
+            <div class="voice-detail">37歳 / 会社員 / 妻・子1人</div>
+          </div>
+        </div>
+        <p class="voice-quote">「価格帯が高い物件で慎重になっていましたが、同価格帯で購入した先輩の「後悔していない」という声が決断の背中を押してくれました。中立な立場のアドバイスが信頼できました。」</p>
+        <a class="voice-link" href="/voices/012/">購入体験の詳細を読む →</a>
+      </div>
+    </div>
+    <div class="voices-all-link">
+      <a href="/voices/?prop=00001" class="btn-voices-more">この物件の体験談をもっと見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED PROPERTIES -->
+<section class="related-sec">
+  <div class="related-inner">
+    <h2 class="related-ttl">この物件に近い物件</h2>
+    <div class="prop-grid">
+      <a class="prop-card" href="sumumu-kinki-00004.html">
+        <div class="prop-img">
+          <span class="prop-img-ph">物件画像</span>
+          <img src="../images/prop4.jpg" alt="プレサンス大阪上本町"
+               onerror="this.src='https://picsum.photos/seed/smprop4/400/300'">
+          <span class="prop-type prop-type--um">中古マンション</span>
+        </div>
+        <div class="prop-body">
+          <div class="prop-name">プレサンス大阪上本町</div>
+          <div class="prop-loc">大阪市中央区 / 上本町駅 徒歩3分</div>
+          <div class="prop-price">3,280万円</div>
+          <div class="prop-specs">2LDK / 62.8㎡ / 築8年</div>
+        </div>
+      </a>
+      <a class="prop-card" href="sumumu-kinki-00006.html">
+        <div class="prop-img">
+          <span class="prop-img-ph">物件画像</span>
+          <img src="../images/prop6.jpg" alt="ジオ吹田南千里"
+               onerror="this.src='https://picsum.photos/seed/smprop6/400/300'">
+          <span class="prop-type prop-type--nm">新築マンション</span>
+        </div>
+        <div class="prop-body">
+          <div class="prop-name">ジオ吹田南千里</div>
+          <div class="prop-loc">大阪府吹田市 / 南千里駅 徒歩7分</div>
+          <div class="prop-price">4,280万円<em>〜</em></div>
+          <div class="prop-specs">3LDK / 72.8㎡ / 新築</div>
+        </div>
+      </a>
+      <a class="prop-card" href="sumumu-kinki-00026.html">
+        <div class="prop-img">
+          <span class="prop-img-ph">物件画像</span>
+          <img src="../images/prop26.jpg" alt="プレサンスロジェ心斎橋"
+               onerror="this.src='https://picsum.photos/seed/smprop26/400/300'">
+          <span class="prop-type prop-type--nm">新築マンション</span>
+        </div>
+        <div class="prop-body">
+          <div class="prop-name">プレサンスロジェ心斎橋</div>
+          <div class="prop-loc">大阪市中央区 / 心斎橋駅 徒歩5分</div>
+          <div class="prop-price">5,480万円<em>〜</em></div>
+          <div class="prop-specs">2LDK / 55.8㎡ / 新築</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">気になる物件が見つかったら、<br>コンシェルジュに相談しましょう</h2>
+    <p class="concierge-lead">資金計画から物件選び・エリア比較まで、中立な専任スタッフが無料でサポートします。<br>営業・勧誘は一切ありません。</p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="all-cta-sec">
+  <div class="all-cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0k1{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0k1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="../sumumu-about.html">すむむ。のサービス</a></li><li><a href="../sumumu-about.html#partners">パートナー</a></li><li><a href="../sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="sumumu-kinki.html">エリア別</a></li><li><a href="sumumu-kinki-all.html">条件別</a></li><li><a href="sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="../sumumu-journal.html">先輩の声</a></li><li><a href="../sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="../sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="../sumumu-guide.html">資金計画</a></li><li><a href="../sumumu-guide.html">物件選び</a></li><li><a href="../sumumu-guide.html">購入手続き</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="../sumumu-tool-loan.html">ローンシミュレーター</a></li><li><a href="../sumumu-tool-borrowing.html">借入可能額</a></li><li><a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="../sumumu-area.html">エリア一覧</a></li><li><a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="../sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li><li><a href="/news/?cat=community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="../sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile nav
+const hamb = document.getElementById('hamb');
+const mobNav = document.getElementById('mobNav');
+if (hamb) {
+  hamb.addEventListener('click', () => {
+    mobNav.classList.toggle('open');
+    hamb.classList.toggle('open');
+  });
+}
+document.querySelectorAll('.mob-parent').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  });
+});
+
+// Gallery
+const GALLERY = [
+  { src:'../images/prop1.jpg',  fb:'https://picsum.photos/seed/smprop1main/1200/800', alt:'グランドメゾン大阪上町 外観' },
+  { src:'../images/prop1b.jpg', fb:'https://picsum.photos/seed/smprop1b/1200/800',   alt:'エントランス' },
+  { src:'../images/prop1c.jpg', fb:'https://picsum.photos/seed/smprop1c/1200/800',   alt:'リビング' },
+  { src:'../images/prop1d.jpg', fb:'https://picsum.photos/seed/smprop1d/1200/800',   alt:'キッチン' },
+];
+const mainImg  = document.getElementById('galleryMainImg');
+const counter  = document.getElementById('galleryCounter');
+const thumbs   = document.querySelectorAll('.gallery-thumb');
+
+function showImg(idx) {
+  mainImg.style.opacity = '0';
+  setTimeout(() => {
+    mainImg.src = GALLERY[idx].src;
+    mainImg.alt = GALLERY[idx].alt;
+    mainImg.onerror = function(){ this.src = GALLERY[idx].fb; };
+    mainImg.style.opacity = '1';
+  }, 120);
+  counter.textContent = `${idx + 1} / ${GALLERY.length}`;
+  thumbs.forEach((t, i) => t.classList.toggle('active', i === idx));
+}
+thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => showImg(i)));
+
+// Favourite toggle
+const btnFav = document.getElementById('btnFav');
+btnFav.addEventListener('click', () => {
+  const on = btnFav.classList.toggle('active');
+  btnFav.textContent = on ? '♥ お気に入り済み' : '♡ お気に入り';
+});
+
+// Share
+document.getElementById('btnShare').addEventListener('click', () => {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(() => alert('URLをコピーしました'));
+  }
+});
+</script>
+
+</body>
+</html>

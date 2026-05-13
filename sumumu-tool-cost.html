@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>購入コスト全体像シミュレーター | すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --dark-bg:#1A1010;
+  --line:#06C755; --line-h:#05a849;
+  --tool-color:#854F0B; --tool-mid:#B87419; --tool-light:#E4A85A; --tool-bg:#FAEEDA;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5; --green-bg:#E1F5EE;
+  --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --purple-dark:#534AB7; --purple-bg:#EEEDFE;
+  --orange-dark:#854F0B; --orange-bg:#FAEEDA;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);color:#fff;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;user-select:none;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;min-width:auto;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);background:none;}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.2s;border-radius:1px;}
+.hamb.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamb.open span:nth-child(2){opacity:0;}
+.hamb.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;background:var(--bg-white);border-bottom:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,0.12);max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:8px 16px 24px;}
+.mob-link{display:block;font-size:14px;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);}
+.mob-parent{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);cursor:pointer;}
+.mob-parent i{font-style:normal;font-size:11px;transition:transform 0.2s;}
+.mob-parent.open i{transform:rotate(180deg);}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);}
+.mob-sub.open{max-height:220px;}
+.mob-sub a{display:block;font-size:13px;color:var(--text-secondary);padding:10px 28px;border-bottom:0.5px solid var(--border);}
+.mob-sub a:last-child{border-bottom:none;}
+.mob-util{margin-top:16px;padding:0 4px;display:flex;flex-wrap:wrap;gap:8px;}
+.mob-util a{font-size:12px;color:var(--text-secondary);padding:5px 14px;border:1px solid var(--border);border-radius:var(--r-pill);}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--line);color:#fff;padding:12px;border-radius:var(--r-md);font-size:14px;font-weight:500;margin:14px 4px 0;transition:background 0.15s;}
+.mob-cta:hover{background:var(--line-h);color:#fff;}
+.line-logo-img{width:22px;height:22px;display:block;flex-shrink:0;object-fit:contain;}
+.btn-util .line-logo-img{width:16px;height:16px;}
+
+/* ─── TOOL NAV ────────────────────────────── */
+.tool-nav{position:sticky;top:88px;z-index:100;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.tool-nav-inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;padding:10px 32px;overflow-x:auto;scrollbar-width:none;}
+.tool-nav-inner::-webkit-scrollbar{display:none;}
+.tnav{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;white-space:nowrap;border:1.5px solid var(--border);color:var(--text-secondary);background:var(--bg-white);text-decoration:none;transition:all 0.15s;}
+.tnav:hover{border-color:var(--tool-mid);color:var(--tool-mid);}
+.tnav.active{background:var(--tool-color);border-color:var(--tool-color);color:#fff;}
+.tnav-num{font-size:10px;opacity:0.65;}
+
+/* ─── HERO ────────────────────────────────── */
+.tool-hero{background:var(--bg-white);padding:36px 32px 40px;border-bottom:0.5px solid var(--border);}
+.tool-hero-inner{max-width:1080px;margin:0 auto;}
+.tool-hero-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:16px;}
+.tool-num-badge{font-size:10px;font-weight:500;letter-spacing:0.1em;padding:4px 12px;border-radius:var(--r-pill);border:1.5px solid var(--tool-color);color:var(--tool-color);white-space:nowrap;margin-top:4px;}
+.tool-hero-h1{font-size:22px;font-weight:500;line-height:1.45;color:var(--text-primary);}
+.tool-hero-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;max-width:680px;margin-bottom:20px;}
+.tool-points{display:flex;gap:12px;flex-wrap:wrap;}
+.tool-point{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-secondary);background:var(--tool-bg);padding:6px 14px;border-radius:var(--r-pill);}
+.tool-point::before{content:"◎";color:var(--tool-mid);font-size:11px;}
+.tool-disclaimer{font-size:11px;color:var(--text-muted);margin-top:14px;padding:8px 14px;border:0.5px solid var(--border);border-radius:var(--r-md);background:var(--bg-page);}
+
+/* ─── LAYOUT ──────────────────────────────── */
+.tool-wrap{max-width:1080px;margin:0 auto;padding:32px 32px 56px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
+
+/* ─── INPUT CARD ──────────────────────────── */
+.sim-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-sm);}
+.sim-card-ttl{font-size:13px;font-weight:500;color:var(--text-primary);margin-bottom:20px;padding-bottom:12px;border-bottom:0.5px solid var(--border);}
+.input-row{margin-bottom:20px;}
+.input-row:last-child{margin-bottom:0;}
+.input-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.input-label-text{font-size:12.5px;color:var(--text-secondary);}
+.input-val{font-size:17px;font-weight:500;color:var(--tool-color);}
+.input-val small{font-size:11px;color:var(--text-muted);font-weight:400;margin-left:2px;}
+input[type=range]{width:100%;height:4px;border-radius:2px;background:var(--border);outline:none;-webkit-appearance:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--tool-color);cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--tool-color);cursor:pointer;border:2px solid #fff;}
+.range-limits{display:flex;justify-content:space-between;font-size:10px;color:var(--text-muted);margin-top:4px;}
+.type-toggle{display:flex;gap:8px;flex-wrap:wrap;}
+.type-btn{padding:8px 18px;border-radius:var(--r-pill);font-size:12px;font-weight:500;border:1.5px solid var(--border);color:var(--text-secondary);background:var(--bg-white);cursor:pointer;transition:all 0.15s;}
+.type-btn.active{background:var(--tool-color);border-color:var(--tool-color);color:#fff;}
+
+/* ─── SUMMARY CARD ────────────────────────── */
+.cost-total-row{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;}
+.cost-total-val{font-size:44px;font-weight:500;color:var(--tool-color);line-height:1;}
+.cost-total-unit{font-size:16px;color:var(--text-muted);}
+.cost-rate-tag{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--tool-mid);background:var(--tool-bg);padding:3px 14px;border-radius:var(--r-pill);margin-bottom:20px;}
+.cost-summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.cost-summary-item{background:var(--bg-page);border-radius:var(--r-md);padding:12px 10px;text-align:center;}
+.cost-summary-label{font-size:10.5px;color:var(--text-muted);margin-bottom:4px;line-height:1.4;}
+.cost-summary-val{font-size:15px;font-weight:500;color:var(--text-primary);}
+.cost-summary-val small{font-size:10px;font-weight:400;color:var(--text-muted);}
+
+/* ─── BREAKDOWN TABLE ─────────────────────── */
+.breakdown-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:20px;}
+.breakdown-table th{font-size:11px;font-weight:500;color:var(--text-muted);padding:8px 10px;text-align:left;border-bottom:0.5px solid var(--border);}
+.breakdown-table td{padding:9px 10px;border-bottom:0.5px solid var(--border);}
+.breakdown-table tr:last-child td{border-bottom:none;}
+.bd-val{text-align:right;font-weight:500;color:var(--tool-color);}
+.bd-note{font-size:10.5px;color:var(--text-muted);}
+.bd-zero{color:var(--text-muted) !important;font-weight:400 !important;}
+.bd-total-row{background:var(--tool-bg);}
+.bd-total-row td{font-weight:500;color:var(--tool-color);}
+.chart-wrap{position:relative;height:200px;}
+
+/* ─── HIDDEN COST CARD ─────────────────────── */
+.hcost-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-sm);}
+.hcost-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:0.5px solid var(--border);}
+.hcost-icon{width:32px;height:32px;border-radius:50%;background:#FFEBEE;color:#C62828;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+.hcost-head-body{flex:1;}
+.hcost-title{font-size:13px;font-weight:500;color:var(--text-primary);}
+.hcost-title small{display:block;font-size:10.5px;font-weight:400;color:var(--text-muted);margin-top:2px;}
+.hcost-items{display:flex;flex-direction:column;gap:12px;}
+.hcost-item{display:flex;gap:14px;padding:14px;background:var(--bg-page);border-radius:var(--r-md);border-left:3px solid;opacity:1;transition:opacity 0.2s;}
+.hcost-item.dim{opacity:0.38;}
+.hcost-item.red{border-color:#F44336;}
+.hcost-item.orange{border-color:#FF9800;}
+.hcost-item.yellow{border-color:#FFC107;}
+.hcost-num{font-size:20px;font-weight:500;flex-shrink:0;width:28px;text-align:center;line-height:1.5;}
+.hcost-item.red .hcost-num{color:#C62828;}
+.hcost-item.orange .hcost-num{color:#E65100;}
+.hcost-item.yellow .hcost-num{color:#F57F17;}
+.hcost-body{flex:1;}
+.hcost-item-ttl{font-size:12.5px;font-weight:500;color:var(--text-primary);margin-bottom:3px;}
+.hcost-item-desc{font-size:11.5px;color:var(--text-secondary);line-height:1.7;}
+.hcost-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.hcost-tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;}
+.hcost-tag.applies{background:var(--tool-bg);color:var(--tool-color);}
+.hcost-tag.na{background:var(--bg-page);color:var(--text-muted);border:0.5px solid var(--border);}
+
+/* ─── RUNNING COST ─────────────────────────── */
+.run-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+.run-item{background:var(--bg-page);border-radius:var(--r-md);padding:14px 12px;}
+.run-item-label{font-size:11px;color:var(--text-muted);margin-bottom:4px;}
+.run-item-val{font-size:16px;font-weight:500;color:var(--text-primary);}
+.run-item-val small{font-size:10px;color:var(--text-muted);font-weight:400;}
+.run-item-note{font-size:10.5px;color:var(--text-muted);margin-top:2px;}
+.run-total-banner{background:var(--tool-color);border-radius:var(--r-lg);padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.run-total-lhs{font-size:12px;color:rgba(255,255,255,0.65);}
+.run-total-lhs strong{color:#fff;display:block;font-size:14px;}
+.run-total-rhs{text-align:right;}
+.run-total-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.12em;color:var(--tool-light);margin-bottom:4px;}
+.run-total-num{font-size:32px;font-weight:500;color:#fff;line-height:1;}
+.run-total-unit{font-size:13px;color:rgba(255,255,255,0.65);margin-left:4px;}
+.run-35y{font-size:11.5px;color:rgba(255,255,255,0.55);margin-top:6px;}
+
+/* ─── COMPARE CARD ─────────────────────────── */
+.compare-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-sm);}
+.compare-head{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:0.5px solid var(--border);}
+.compare-badge{font-size:9px;font-weight:500;letter-spacing:0.08em;padding:2px 8px;border-radius:10px;background:var(--tool-bg);color:var(--tool-color);}
+.compare-ttl{font-size:13px;font-weight:500;color:var(--text-primary);}
+.compare-note{font-size:11px;color:var(--text-muted);margin-bottom:16px;}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.compare-col{border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all 0.2s;}
+.compare-col.active{border-color:var(--tool-color);box-shadow:0 0 0 2px rgba(133,79,11,0.12);}
+.compare-col-hd{padding:12px 14px;background:var(--bg-page);border-bottom:0.5px solid var(--border);text-align:center;}
+.compare-col.active .compare-col-hd{background:var(--tool-bg);}
+.compare-col-type{font-size:11.5px;font-weight:500;color:var(--text-primary);}
+.compare-col.active .compare-col-type{color:var(--tool-color);}
+.compare-active-tag{display:block;font-size:9.5px;color:var(--tool-mid);font-weight:500;margin-top:2px;}
+.compare-row{padding:10px 14px;border-bottom:0.5px solid var(--border);}
+.compare-row:last-child{border-bottom:none;}
+.compare-row-label{font-size:10px;color:var(--text-muted);margin-bottom:2px;}
+.compare-row-val{font-size:13px;font-weight:500;color:var(--text-primary);}
+.compare-col.active .compare-row-val{color:var(--tool-color);}
+
+/* ─── VOICE MATCHING ──────────────────────── */
+.vm-sub{font-size:12px;color:var(--text-muted);margin-bottom:16px;}
+.vm-sub strong{color:var(--tool-color);}
+.vm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px;}
+.vm-card{border:0.5px solid var(--border);border-radius:var(--r-md);padding:16px;display:flex;flex-direction:column;gap:10px;transition:box-shadow 0.2s;}
+.vm-card:hover{box-shadow:var(--shadow-md);}
+.vm-card-top{display:flex;align-items:center;gap:12px;}
+.vm-avatar{width:40px;height:40px;border-radius:50%;background:var(--tool-bg);color:var(--tool-color);font-size:13px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.vm-profile{flex:1;min-width:0;}
+.vm-name{font-size:13px;font-weight:500;color:var(--text-primary);}
+.vm-attr{font-size:11px;color:var(--text-muted);}
+.vm-conditions{display:flex;gap:8px;flex-wrap:wrap;}
+.vm-badge{font-size:10.5px;padding:3px 10px;border-radius:var(--r-pill);background:var(--tool-bg);color:var(--tool-color);font-weight:500;}
+.vm-badge-neutral{font-size:10.5px;padding:3px 10px;border-radius:var(--r-pill);background:var(--bg-page);color:var(--text-muted);border:0.5px solid var(--border);}
+.vm-quote{font-size:12.5px;color:var(--text-secondary);line-height:1.75;border-left:2.5px solid var(--tool-bg);padding-left:10px;}
+.vm-link{font-size:11.5px;color:var(--tool-mid);font-weight:500;align-self:flex-start;}
+.vm-link:hover{text-decoration:underline;}
+.vm-more{display:inline-flex;align-items:center;font-size:12px;color:var(--tool-mid);font-weight:500;}
+.vm-more:hover{text-decoration:underline;}
+
+/* ─── SHARE CARD ──────────────────────────── */
+.share-card{background:var(--tool-color);border-radius:var(--r-lg);padding:28px;margin-bottom:20px;}
+.share-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.14em;color:var(--tool-light);margin-bottom:8px;}
+.share-ttl{font-size:17px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:8px;}
+.share-lead{font-size:12.5px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:20px;}
+.share-summary{background:rgba(255,255,255,0.10);border-radius:var(--r-md);padding:16px;margin-bottom:20px;font-family:monospace;font-size:12px;color:rgba(255,255,255,0.90);line-height:1.9;white-space:pre-wrap;}
+.share-actions{display:flex;align-items:center;gap:14px;}
+.btn-share{display:inline-flex;align-items:center;gap:8px;background:var(--line);color:#fff;padding:12px 24px;border-radius:var(--r-pill);font-size:13.5px;font-weight:500;border:none;cursor:pointer;transition:background 0.15s;}
+.btn-share:hover{background:var(--line-h);}
+.share-toast{font-size:12px;color:var(--tool-light);opacity:0;transition:opacity 0.3s;}
+.share-toast.show{opacity:1;}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.tool-sidebar{display:flex;flex-direction:column;gap:16px;}
+.sb-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);}
+.sb-hd{font-size:11px;font-weight:500;letter-spacing:0.08em;color:var(--text-muted);padding:14px 16px 10px;border-bottom:0.5px solid var(--border);text-transform:uppercase;}
+.sb-tool-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:0.5px solid var(--border);text-decoration:none;transition:background 0.15s;}
+.sb-tool-item:hover{background:var(--bg-page);}
+.sb-tool-item:last-child{border-bottom:none;}
+.sb-tool-num{font-size:10px;font-weight:500;width:48px;padding:3px 6px;border-radius:var(--r-pill);border:1px solid currentColor;text-align:center;flex-shrink:0;}
+.sb-tool-body{flex:1;min-width:0;}
+.sb-tool-name{font-size:12.5px;font-weight:500;color:var(--text-primary);margin-bottom:2px;}
+.sb-tool-desc{font-size:11px;color:var(--text-muted);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sb-con-box{background:var(--tool-color);border-radius:var(--r-lg);padding:20px;}
+.sb-con-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.14em;color:var(--tool-light);margin-bottom:8px;}
+.sb-con-ttl{font-size:14px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:8px;}
+.sb-con-lead{font-size:11.5px;color:rgba(255,255,255,0.65);line-height:1.7;margin-bottom:16px;}
+.btn-sb-con{display:block;text-align:center;background:var(--tool-mid);color:#fff;padding:10px;border-radius:var(--r-pill);font-size:12.5px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-sb-con:hover{background:var(--tool-light);color:var(--tool-color);}
+
+/* ─── RELATED / CONCIERGE / CTA / FOOTER ─── */
+.related-sec{background:var(--bg-white);padding:48px 32px;border-top:0.5px solid var(--border);}
+.related-inner{max-width:1080px;margin:0 auto;}
+.related-hd{font-size:11px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:20px;text-transform:uppercase;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.rcol-card{display:flex;flex-direction:column;background:var(--bg-page);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow 0.2s;}
+.rcol-card:hover{box-shadow:var(--shadow-md);}
+.rcol-img{aspect-ratio:16/9;background:var(--tool-bg);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.rcol-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.rcol-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;}
+.rcol-cat{font-size:10.5px;font-weight:500;margin-bottom:6px;}
+.rcol-ttl{font-size:13px;font-weight:500;line-height:1.55;color:var(--text-primary);flex:1;}
+.rcol-meta{font-size:11px;color:var(--text-muted);margin-top:10px;}
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+  .tool-nav{top:52px;}
+}
+@media(max-width:900px){
+  .tool-wrap{grid-template-columns:1fr;padding:24px 16px 48px;}
+  .tool-sidebar{order:2;}
+  .related-grid{grid-template-columns:1fr;}
+  .tool-hero{padding:28px 16px 32px;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:600px){
+  .cost-summary-grid{grid-template-columns:1fr 1fr;}
+  .run-grid{grid-template-columns:1fr 1fr;}
+  .compare-grid{grid-template-columns:1fr;}
+  .tool-points{flex-direction:column;}
+  .tool-nav-inner{padding:10px 16px;}
+  .vm-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .cost-total-val{font-size:34px;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st1{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni"><span class="nl">すむむとは。<i>▾</i></span><div class="nd"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a><a href="sumumu-about.html#media">メディア掲載</a></div></div>
+      <div class="ni"><span class="nl">住まいを探す<i>▾</i></span><div class="nd"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+      <div class="ni"><span class="nl">先輩の体験談<i>▾</i></span><div class="nd"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+      <div class="ni"><span class="nl">お役立ちコラム<i>▾</i></span><div class="nd"><a href="sumumu-guide.html">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a><a href="sumumu-guide.html?cat=loan">住宅ローン</a></div></div>
+      <div class="ni"><span class="nl" style="color:var(--tool-mid)">シミュレーション<i>▾</i></span><div class="nd"><a href="sumumu-tools.html" style="color:var(--tool-mid)">すべてのツール</a><a href="sumumu-tool-loan.html" style="color:var(--green-mid)">ローン返済</a><a href="sumumu-tool-cost.html" style="color:var(--tool-mid)">購入コスト</a></div></div>
+      <div class="ni"><a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a><div class="nd"><a href="sumumu-area.html">エリア一覧</a><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div></div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <div class="mob-group"><div class="mob-parent">お役立ちコラム<i>▾</i></div><div class="mob-sub"><a href="sumumu-guide.html">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a></div></div>
+        <div class="mob-group"><div class="mob-parent" style="color:var(--tool-mid)">シミュレーション<i>▾</i></div><div class="mob-sub"><a href="sumumu-tools.html">すべてのツール</a><a href="sumumu-tool-loan.html">ローン返済</a><a href="sumumu-tool-cost.html">購入コスト</a></div></div>
+        <div class="mob-util"><a href="sumumu-faq.html">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOL NAV BAR -->
+<div class="tool-nav">
+  <div class="tool-nav-inner">
+    <a href="sumumu-tool-loan.html" class="tnav"><span class="tnav-num">01</span> ローン返済</a>
+    <a href="sumumu-tool-borrowing.html" class="tnav"><span class="tnav-num">02</span> 借入可能額・住み替え</a>
+    <a href="sumumu-tool-cost.html" class="tnav active"><span class="tnav-num">03</span> 購入コスト</a>
+    <a href="sumumu-tool-rentbuy.html" class="tnav"><span class="tnav-num">04</span> 賃貸 vs 購入</a>
+    <a href="sumumu-tool-area.html" class="tnav"><span class="tnav-num">05</span> エリア診断</a>
+    <a href="sumumu-tool-kosodate.html" class="tnav"><span class="tnav-num">06</span> 子育て診断</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="tool-hero">
+  <div class="tool-hero-inner">
+    <div class="tool-hero-top">
+      <span class="tool-num-badge">TOOL 03</span>
+      <h1 class="tool-hero-h1">購入コスト全体像シミュレーター</h1>
+    </div>
+    <p class="tool-hero-lead">物件種別・価格・借入条件を入力するだけで、諸費用（初期費用）を項目別に自動算出。見落としがちな隠れコストも警告し、35年間のランニングコストまで一括で把握できます。新築・中古・戸建ての3種別同時比較はすむむ。だけの機能です。</p>
+    <div class="tool-points">
+      <span class="tool-point">諸費用を10項目に分けて算出</span>
+      <span class="tool-point">隠れコスト3点を事前に警告</span>
+      <span class="tool-point">3種別を同じ物件価格で一括比較</span>
+    </div>
+    <p class="tool-disclaimer">※ 試算結果はあくまで参考値です。税率は軽減措置の適用を一部含みます。実際の諸費用は物件・契約条件により異なります。専門家にご確認ください。</p>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="tool-wrap">
+  <div class="tool-main">
+
+    <!-- 入力カード -->
+    <div class="sim-card">
+      <div class="sim-card-ttl">条件を入力する</div>
+
+      <div class="input-row">
+        <div class="input-label"><span class="input-label-text">物件種別</span></div>
+        <div class="type-toggle">
+          <button class="type-btn active" data-type="new_mansion" onclick="setType(this)">新築マンション</button>
+          <button class="type-btn" data-type="used_mansion" onclick="setType(this)">中古マンション</button>
+          <button class="type-btn" data-type="new_house" onclick="setType(this)">新築戸建て</button>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">
+          <span class="input-label-text">物件価格</span>
+          <span class="input-val"><span id="dispPrice">4,000</span><small>万円</small></span>
+        </div>
+        <input type="range" id="sliderPrice" min="1000" max="15000" step="100" value="4000">
+        <div class="range-limits"><span>1,000万円</span><span>1億5,000万円</span></div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">
+          <span class="input-label-text">借入額</span>
+          <span class="input-val"><span id="dispLoan">3,200</span><small>万円</small></span>
+        </div>
+        <input type="range" id="sliderLoan" min="500" max="15000" step="100" value="3200">
+        <div class="range-limits"><span>500万円</span><span>1億5,000万円</span></div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">
+          <span class="input-label-text">金利（年）</span>
+          <span class="input-val"><span id="dispRate">0.50</span><small>%</small></span>
+        </div>
+        <input type="range" id="sliderRate" min="10" max="500" step="5" value="50">
+        <div class="range-limits"><span>0.1%</span><span>5.0%</span></div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">
+          <span class="input-label-text">返済期間</span>
+          <span class="input-val"><span id="dispYears">35</span><small>年</small></span>
+        </div>
+        <input type="range" id="sliderYears" min="5" max="35" step="1" value="35">
+        <div class="range-limits"><span>5年</span><span>35年</span></div>
+      </div>
+    </div>
+
+    <!-- 初期費用サマリー -->
+    <div class="sim-card">
+      <div class="sim-card-ttl">初期費用（諸費用）サマリー</div>
+      <div class="cost-total-row">
+        <span class="cost-total-val" id="totalInitialDisp">−</span>
+        <span class="cost-total-unit">万円</span>
+      </div>
+      <div class="cost-rate-tag">物件価格の <span id="initialRateDisp">−</span>% が初期費用</div>
+      <div class="cost-summary-grid">
+        <div class="cost-summary-item">
+          <div class="cost-summary-label">仲介・登記・税金系</div>
+          <div class="cost-summary-val" id="grp1Disp">−<small>万円</small></div>
+        </div>
+        <div class="cost-summary-item">
+          <div class="cost-summary-label">ローン費用・司法書士</div>
+          <div class="cost-summary-val" id="grp2Disp">−<small>万円</small></div>
+        </div>
+        <div class="cost-summary-item">
+          <div class="cost-summary-label">保険・引越し・家具</div>
+          <div class="cost-summary-val" id="grp3Disp">−<small>万円</small></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 初期費用内訳 -->
+    <div class="sim-card">
+      <div class="sim-card-ttl">初期費用 内訳</div>
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>費用項目</th>
+            <th>根拠・備考</th>
+            <th style="text-align:right">金額</th>
+          </tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+      <div class="chart-wrap">
+        <canvas id="costChart"></canvas>
+      </div>
+    </div>
+
+    <!-- 隠れコスト警告（差別化） -->
+    <div class="hcost-card">
+      <div class="hcost-header">
+        <div class="hcost-icon">⚠</div>
+        <div class="hcost-head-body">
+          <div class="hcost-title">購入前に知っておきたい「隠れコスト」3選
+            <small>すむむ。だけの差別化情報。試算には含まれていない将来コストを事前に把握しましょう。</small>
+          </div>
+        </div>
+      </div>
+      <div class="hcost-items">
+        <div class="hcost-item red" id="hc1">
+          <div class="hcost-num">1</div>
+          <div class="hcost-body">
+            <div class="hcost-item-ttl">修繕積立金の値上がり（マンション）</div>
+            <div class="hcost-item-desc">新築時の修繕積立金は意図的に低く設定されており、一般的に10年後には1.5〜2倍に上昇します。月額試算は初期額で計算しているため、将来の増加分は含まれません。</div>
+            <div class="hcost-tags" id="hc1Tags"></div>
+          </div>
+        </div>
+        <div class="hcost-item orange" id="hc2">
+          <div class="hcost-num">2</div>
+          <div class="hcost-body">
+            <div class="hcost-item-ttl">大規模修繕の一時金（マンション）</div>
+            <div class="hcost-item-desc">築12〜15年ごとに行われる大規模修繕。修繕積立金が不足している場合、1世帯あたり50〜200万円の一時金が発生することがあります。管理組合の長期修繕計画を確認することが重要です。</div>
+            <div class="hcost-tags" id="hc2Tags"></div>
+          </div>
+        </div>
+        <div class="hcost-item yellow" id="hc3">
+          <div class="hcost-num">3</div>
+          <div class="hcost-body">
+            <div class="hcost-item-ttl">固定資産税の新築特例終了（新築のみ）</div>
+            <div class="hcost-item-desc">新築住宅は固定資産税が3〜5年間（マンションは5年間）1/2に軽減されます。特例終了後は税額が倍増するため、年間3〜10万円程度の増加を見込む必要があります。</div>
+            <div class="hcost-tags" id="hc3Tags"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ランニングコスト -->
+    <div class="sim-card">
+      <div class="sim-card-ttl">月額ランニングコスト（ローン返済を除く）</div>
+      <div class="run-grid">
+        <div class="run-item">
+          <div class="run-item-label">管理費</div>
+          <div class="run-item-val" id="runMgmt">−<small>/月</small></div>
+        </div>
+        <div class="run-item">
+          <div class="run-item-label">修繕積立金</div>
+          <div class="run-item-val" id="runRepair">−<small>/月</small></div>
+          <div class="run-item-note" id="runRepairNote"></div>
+        </div>
+        <div class="run-item">
+          <div class="run-item-label">固定資産税（月割）</div>
+          <div class="run-item-val" id="runPropTax">−<small>/月</small></div>
+        </div>
+        <div class="run-item">
+          <div class="run-item-label">都市計画税（月割）</div>
+          <div class="run-item-val" id="runCityTax">−<small>/月</small></div>
+        </div>
+      </div>
+      <div class="run-total-banner">
+        <div class="run-total-lhs">
+          ローン返済を含む月額合計
+          <strong id="runTotalMonthly">−</strong>
+        </div>
+        <div class="run-total-rhs">
+          <div class="run-total-eyebrow">35年 総コスト</div>
+          <div>
+            <span class="run-total-num" id="total35Disp">−</span>
+            <span class="run-total-unit">万円</span>
+          </div>
+          <div class="run-35y">初期費用 + 総返済額 + 35年ランニング</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3種別一括比較（差別化） -->
+    <div class="compare-card">
+      <div class="compare-head">
+        <span class="compare-badge">すむむ。のみ</span>
+        <span class="compare-ttl">3種別コスト一括比較</span>
+      </div>
+      <p class="compare-note">同じ物件価格・借入額・金利で3種別を同時に試算。現在選択中の種別をハイライト表示します。</p>
+      <div class="compare-grid" id="compareGrid"></div>
+    </div>
+
+    <!-- 先輩の声マッチング -->
+    <div class="sim-card" id="voiceSection">
+      <div class="sim-card-ttl">同じ種別で買った先輩の声</div>
+      <div class="vm-sub"><strong id="vmTypeName">新築マンション</strong>を購入した先輩</div>
+      <div class="vm-grid" id="vmGrid"></div>
+      <a href="sumumu-journal.html" class="vm-more">すべての体験談を見る →</a>
+    </div>
+
+    <!-- コンシェルジュ共有 -->
+    <div class="share-card">
+      <div class="share-eyebrow">CONCIERGE</div>
+      <div class="share-ttl">この試算結果を持って、コンシェルジュに相談する</div>
+      <div class="share-lead">入力条件と費用内訳をテキストにまとめます。LINEに貼り付けて送るだけで相談スタート。</div>
+      <div class="share-summary" id="shareSummary"></div>
+      <div class="share-actions">
+        <button class="btn-share" onclick="copyAndLine()">結果をコピーしてLINEで相談 →</button>
+        <span class="share-toast" id="copyToast">コピーしました！</span>
+      </div>
+    </div>
+
+  </div><!-- /tool-main -->
+
+  <!-- SIDEBAR -->
+  <aside class="tool-sidebar">
+    <div class="sb-card">
+      <div class="sb-hd">他のシミュレーション</div>
+      <a class="sb-tool-item" href="sumumu-tool-loan.html">
+        <span class="sb-tool-num" style="color:#085041;">01</span>
+        <div class="sb-tool-body">
+          <div class="sb-tool-name">ローン返済</div>
+          <div class="sb-tool-desc">月返済・総利息をリアルタイム確認</div>
+        </div>
+      </a>
+      <a class="sb-tool-item" href="sumumu-tool-borrowing.html">
+        <span class="sb-tool-num" style="color:#534AB7;">02</span>
+        <div class="sb-tool-body">
+          <div class="sb-tool-name">借入可能額・住み替え</div>
+          <div class="sb-tool-desc">年収から上限・住み替え試算まで</div>
+        </div>
+      </a>
+      <a class="sb-tool-item" href="sumumu-tool-rentbuy.html">
+        <span class="sb-tool-num" style="color:#185FA5;">04</span>
+        <div class="sb-tool-body">
+          <div class="sb-tool-name">賃貸 vs 購入 比較</div>
+          <div class="sb-tool-desc">35年累計で損益分岐を確認</div>
+        </div>
+      </a>
+      <a class="sb-tool-item" href="sumumu-tool-area.html">
+        <span class="sb-tool-num" style="color:#534AB7;">05</span>
+        <div class="sb-tool-body">
+          <div class="sb-tool-name">エリア診断</div>
+          <div class="sb-tool-desc">5軸でエリアをスコアリング</div>
+        </div>
+      </a>
+      <a class="sb-tool-item" href="sumumu-tool-kosodate.html">
+        <span class="sb-tool-num" style="color:#085041;">06</span>
+        <div class="sb-tool-body">
+          <div class="sb-tool-name">子育て診断</div>
+          <div class="sb-tool-desc">フェーズ別に学区・保育を確認</div>
+        </div>
+      </a>
+    </div>
+    <div class="sb-con-box">
+      <div class="sb-con-eyebrow">CONCIERGE</div>
+      <div class="sb-con-ttl">費用の詳細を一緒に整理しませんか？</div>
+      <div class="sb-con-lead">「思ったより諸費用がかかる」と気づいた方ほど、早めの相談が計画を救います。</div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sb-con">コンシェルジュに相談する →</a>
+    </div>
+  </aside>
+
+</div>
+
+<!-- RELATED COLUMNS -->
+<section class="related-sec">
+  <div class="related-inner">
+    <div class="related-hd">関連コラム</div>
+    <div class="related-grid">
+      <a class="rcol-card" href="sumumu-guide-00001.html">
+        <div class="rcol-img"><img src="images/guide01.jpg" alt="" onerror="this.src='https://picsum.photos/seed/guide01/400/225'"></div>
+        <div class="rcol-body">
+          <div class="rcol-cat" style="color:#085041;">資金計画</div>
+          <div class="rcol-ttl">頭金は「いくら用意すべき」か。住宅購入前に絶対知っておきたい資金計画の全体像</div>
+          <div class="rcol-meta">山口 FP事務所 · 約7分</div>
+        </div>
+      </a>
+      <a class="rcol-card" href="sumumu-guide-00002.html">
+        <div class="rcol-img"><img src="images/guide02.jpg" alt="" onerror="this.src='https://picsum.photos/seed/guide02/400/225'"></div>
+        <div class="rcol-body">
+          <div class="rcol-cat" style="color:#854F0B;">購入手続き</div>
+          <div class="rcol-ttl">新築マンション・中古・戸建て、諸費用の違いを完全比較。知らないと100万円単位で損する</div>
+          <div class="rcol-meta">すむむ。編集部 · 約8分</div>
+        </div>
+      </a>
+      <a class="rcol-card" href="sumumu-guide-00003.html">
+        <div class="rcol-img"><img src="images/guide03.jpg" alt="" onerror="this.src='https://picsum.photos/seed/guide03/400/225'"></div>
+        <div class="rcol-body">
+          <div class="rcol-cat" style="color:#3B6D11;">税金・控除</div>
+          <div class="rcol-ttl">固定資産税の新築特例とは。3〜5年後に税額が上がる理由と対策を解説</div>
+          <div class="rcol-meta">住まいの税務研究所 · 約6分</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">費用の全体像が見えたら、次は専門家に話してみよう</h2>
+    <p class="concierge-lead">シミュレーション結果をそのまま持ち込んで相談できます。<br>中立な立場の専任スタッフが、数字を一緒に読み解きます。</p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">コンシェルジュに相談する →</a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>気持ちが固まったら LINE でコミュニティに参加してみてください。</p>
+    <ul class="cta-catches">
+      <li>登録30秒</li><li>営業・勧誘なし</li><li>完全無料</li><li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst1{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g><path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/><path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/><path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/><path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/><path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/></g>
+            </g>
+            <path class="fst1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">すべて</a></li><li><a href="sumumu-guide.html?cat=fund">資金計画</a></li><li><a href="sumumu-guide.html?cat=loan">住宅ローン</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tools.html">すべてのツール</a></li><li><a href="sumumu-tool-loan.html">ローン返済</a></li><li><a href="sumumu-tool-cost.html">購入コスト</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+/* ── ユーティリティ ── */
+function fmt(v, d) { return v.toFixed(d ?? 0).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function fmtMan(yen) { return fmt(yen / 10000, 1); }
+function fmtManInt(yen) { return fmt(Math.round(yen / 10000), 0); }
+function fmtYen(yen) {
+  if (yen === 0) return '−';
+  const m = Math.round(yen / 10000);
+  return m.toLocaleString() + ' 万円';
+}
+function calcMonthly(principal, annualRate, years) {
+  const r = annualRate / 100 / 12, n = years * 12;
+  if (r === 0) return principal / n;
+  return principal * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+}
+
+/* ── 物件種別パラメータ ── */
+const COST_PARAMS = {
+  new_mansion: {
+    label: '新築マンション',
+    agentFeeRate: 0, agentFeeFixed: 0,
+    regTaxRate: 0.0015,
+    loanFeeRate: 0.022,
+    guaranteeRate: 0.002,
+    acqTaxRate: 0.015,
+    lawyerFee: 100000,
+    fireIns: 80000,
+    moving: 200000,
+    furniture: 500000,
+    mgmtFee: 15000,
+    repairFund: 12000,
+    propTaxRate: 0.002,
+    cityTaxRate: 0.0003,
+    propTaxSpecial: true,
+    isMansion: true,
+  },
+  used_mansion: {
+    label: '中古マンション',
+    agentFeeRate: 0.03, agentFeeFixed: 60000,
+    regTaxRate: 0.003,
+    loanFeeRate: 0.022,
+    guaranteeRate: 0.002,
+    acqTaxRate: 0.015,
+    lawyerFee: 120000,
+    fireIns: 80000,
+    moving: 200000,
+    furniture: 300000,
+    mgmtFee: 18000,
+    repairFund: 20000,
+    propTaxRate: 0.0018,
+    cityTaxRate: 0.0003,
+    propTaxSpecial: false,
+    isMansion: true,
+  },
+  new_house: {
+    label: '新築戸建て',
+    agentFeeRate: 0, agentFeeFixed: 0,
+    regTaxRate: 0.002,
+    loanFeeRate: 0.022,
+    guaranteeRate: 0,
+    acqTaxRate: 0.015,
+    lawyerFee: 130000,
+    fireIns: 150000,
+    moving: 200000,
+    furniture: 600000,
+    mgmtFee: 0,
+    repairFund: 10000,
+    propTaxRate: 0.0015,
+    cityTaxRate: 0.0002,
+    propTaxSpecial: true,
+    isMansion: false,
+  }
+};
+
+/* ── 状態変数 ── */
+let propType = 'new_mansion';
+let price = 4000;
+let loan  = 3200;
+let rate  = 0.5;
+let years = 35;
+let costChart = null;
+
+/* ── コスト計算 ── */
+function calcCosts(t, pMan, lMan, r, y) {
+  const cp = COST_PARAMS[t];
+  const p = pMan * 10000;
+  const l = lMan * 10000;
+
+  const agentFee = cp.agentFeeRate > 0
+    ? Math.round((p * cp.agentFeeRate + cp.agentFeeFixed) * 1.1) : 0;
+  const regTax     = Math.round(p * cp.regTaxRate);
+  const loanFee    = Math.round(l * cp.loanFeeRate);
+  const guarantee  = Math.round(l * cp.guaranteeRate);
+  const acqTax     = Math.round(p * cp.acqTaxRate);
+  const lawyerFee  = cp.lawyerFee;
+  const fireIns    = cp.fireIns;
+  const moving     = cp.moving;
+  const furniture  = cp.furniture;
+
+  const totalInitial = agentFee + regTax + loanFee + guarantee + acqTax + lawyerFee + fireIns + moving + furniture;
+
+  const propTaxMonthly = Math.round(p * cp.propTaxRate / 12);
+  const cityTaxMonthly = Math.round(p * cp.cityTaxRate / 12);
+  const runMonthly = cp.mgmtFee + cp.repairFund + propTaxMonthly + cityTaxMonthly;
+  const loanMonthly = calcMonthly(l, r, y);
+  const totalMonthly = runMonthly + loanMonthly;
+  const totalLoan = loanMonthly * y * 12;
+  const totalRun35 = runMonthly * 12 * 35;
+  const total35 = totalInitial + totalLoan + totalRun35;
+
+  return {
+    agentFee, regTax, loanFee, guarantee, acqTax,
+    lawyerFee, fireIns, moving, furniture,
+    totalInitial,
+    propTaxMonthly, cityTaxMonthly, runMonthly,
+    loanMonthly, totalMonthly,
+    totalLoan, totalRun35, total35,
+    initialRate: totalInitial / p * 100,
+    cp,
+  };
+}
+
+/* ── メイン更新 ── */
+function update() {
+  const c = calcCosts(propType, price, loan, rate, years);
+  const cp = c.cp;
+
+  /* サマリー */
+  document.getElementById('totalInitialDisp').textContent = fmtManInt(c.totalInitial);
+  document.getElementById('initialRateDisp').textContent = c.initialRate.toFixed(1);
+  const grp1 = c.agentFee + c.regTax + c.acqTax;
+  const grp2 = c.loanFee + c.guarantee + c.lawyerFee;
+  const grp3 = c.fireIns + c.moving + c.furniture;
+  document.getElementById('grp1Disp').innerHTML = fmtManInt(grp1) + '<small>万円</small>';
+  document.getElementById('grp2Disp').innerHTML = fmtManInt(grp2) + '<small>万円</small>';
+  document.getElementById('grp3Disp').innerHTML = fmtManInt(grp3) + '<small>万円</small>';
+
+  /* 内訳テーブル */
+  const items = [
+    { name: '仲介手数料', val: c.agentFee, note: cp.agentFeeRate > 0 ? '物件価格×3%+6万×1.1' : '新築のため不要' },
+    { name: '登録免許税・所有権', val: c.regTax, note: `物件価格×${(cp.regTaxRate * 100).toFixed(2)}%（軽減措置）` },
+    { name: 'ローン手数料', val: c.loanFee, note: '借入額×2.2%（消費税込）' },
+    { name: '保証料', val: c.guarantee, note: cp.guaranteeRate > 0 ? '借入額×0.2%' : '手数料型のため不要' },
+    { name: '不動産取得税', val: c.acqTax, note: '物件価格×1.5%（軽減後概算）' },
+    { name: '司法書士費用', val: c.lawyerFee, note: '所有権移転・抵当権設定等' },
+    { name: '火災保険（10年）', val: c.fireIns, note: '建物・家財込み概算' },
+    { name: '引越し費用', val: c.moving, note: '概算（時期・距離による）' },
+    { name: '家具・家電', val: c.furniture, note: '概算（ライフスタイルによる）' },
+  ];
+  const tbody = document.getElementById('breakdownBody');
+  tbody.innerHTML = items.map(item => {
+    const isZero = item.val === 0;
+    return `<tr>
+      <td>${item.name}</td>
+      <td class="bd-note">${item.note}</td>
+      <td class="bd-val${isZero ? ' bd-zero' : ''}">${isZero ? '−' : fmtYen(item.val)}</td>
+    </tr>`;
+  }).join('') + `<tr class="bd-total-row">
+    <td><strong>初期費用 合計</strong></td>
+    <td class="bd-note">物件価格の ${c.initialRate.toFixed(1)}%</td>
+    <td class="bd-val"><strong>${fmtManInt(c.totalInitial)} 万円</strong></td>
+  </tr>`;
+
+  /* グラフ更新 */
+  const chartItems = items.filter(i => i.val > 0);
+  const chartLabels = chartItems.map(i => i.name);
+  const chartData = chartItems.map(i => Math.round(i.val / 10000));
+  if (costChart) {
+    costChart.data.labels = chartLabels;
+    costChart.data.datasets[0].data = chartData;
+    costChart.update();
+  }
+
+  /* ランニングコスト */
+  const fmtM = v => v === 0 ? '−' : fmt(v, 0) + '<small>/月</small>';
+  document.getElementById('runMgmt').innerHTML = cp.mgmtFee > 0 ? fmt(cp.mgmtFee, 0) + '<small>/月</small>' : '−<small>（管理費なし）</small>';
+  document.getElementById('runRepair').innerHTML = fmt(cp.repairFund, 0) + '<small>/月</small>';
+  document.getElementById('runRepairNote').textContent = cp.isMansion ? '※将来値上がりの可能性あり' : '自己積立（任意）';
+  document.getElementById('runPropTax').innerHTML = fmt(c.propTaxMonthly, 0) + '<small>/月</small>';
+  document.getElementById('runCityTax').innerHTML = fmt(c.cityTaxMonthly, 0) + '<small>/月</small>';
+  document.getElementById('runTotalMonthly').textContent = fmt(Math.round(c.totalMonthly), 0) + ' 円/月';
+  document.getElementById('total35Disp').textContent = fmtManInt(c.total35);
+
+  /* 隠れコスト */
+  updateHiddenCosts();
+
+  /* 3種比較 */
+  updateCompare();
+
+  /* 先輩の声 */
+  document.getElementById('vmTypeName').textContent = cp.label;
+  renderVoices(propType);
+
+  /* 共有テキスト */
+  updateShareSummary(c);
+}
+
+/* ── 隠れコスト警告 ── */
+function updateHiddenCosts() {
+  const cp = COST_PARAMS[propType];
+  const isMansion = cp.isMansion;
+  const isNewSpec = cp.propTaxSpecial;
+
+  const appliesTag = '<span class="hcost-tag applies">現在の試算に関係あり</span>';
+  const naTag = '<span class="hcost-tag na">現在の試算では該当なし</span>';
+
+  document.getElementById('hc1').classList.toggle('dim', !isMansion);
+  document.getElementById('hc1Tags').innerHTML = isMansion ? appliesTag : naTag;
+
+  document.getElementById('hc2').classList.toggle('dim', !isMansion);
+  document.getElementById('hc2Tags').innerHTML = isMansion ? appliesTag : naTag;
+
+  document.getElementById('hc3').classList.toggle('dim', !isNewSpec);
+  document.getElementById('hc3Tags').innerHTML = isNewSpec ? appliesTag : naTag;
+}
+
+/* ── 3種比較 ── */
+function updateCompare() {
+  const types = ['new_mansion', 'used_mansion', 'new_house'];
+  const html = types.map(t => {
+    const c = calcCosts(t, price, loan, rate, years);
+    const isActive = t === propType;
+    return `<div class="compare-col${isActive ? ' active' : ''}">
+      <div class="compare-col-hd">
+        <div class="compare-col-type">${COST_PARAMS[t].label}</div>
+        ${isActive ? '<span class="compare-active-tag">← 現在選択中</span>' : ''}
+      </div>
+      <div class="compare-rows">
+        <div class="compare-row">
+          <div class="compare-row-label">初期費用（諸費用）</div>
+          <div class="compare-row-val">${fmtManInt(c.totalInitial)} 万円</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-row-label">諸費用率</div>
+          <div class="compare-row-val">${c.initialRate.toFixed(1)}%</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-row-label">月額ランニング（ローン除く）</div>
+          <div class="compare-row-val">${fmt(c.runMonthly, 0)} 円</div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-row-label">35年 総コスト</div>
+          <div class="compare-row-val">${fmtManInt(c.total35)} 万円</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('compareGrid').innerHTML = html;
+}
+
+/* ── 先輩の声データ（物件種別ベースマッチング）── */
+const VOICES = [
+  { id:1, name:'田中 さやか', initials:'田', attr:'33歳 / 大阪市 / 3人家族',
+    types:['new_mansion'], conditions:['新築マンション','3,800万円'],
+    quote:'諸費用が想定より100万円以上かかると聞いていましたが、事前に内訳を把握していたのでまったく焦りませんでした。コンシェルジュに試算を見せながら相談できたのが良かったです。',
+    href:'sumumu-journal.html#tanaka' },
+  { id:2, name:'山本 健二', initials:'山', attr:'38歳 / 滋賀県 / 4人家族',
+    types:['used_mansion'], conditions:['中古マンション','3,200万円'],
+    quote:'中古は仲介手数料が思ったより大きかった。でもリフォーム費用込みでも新築より650万円ほど安く、修繕積立金の積立状況も確認した上で判断できました。',
+    href:'sumumu-journal.html#yamamoto' },
+  { id:3, name:'佐藤 美由紀', initials:'佐', attr:'36歳 / 京都市 / 夫婦2人',
+    types:['new_mansion','new_house'], conditions:['新築マンション','2,900万円'],
+    quote:'管理費と修繕積立金を月々の試算に入れていなくて最初に焦りました。事前にコストシミュレーターで把握しておけば頭金の計画も変わっていたかもしれません。',
+    href:'sumumu-journal.html#sato' },
+  { id:4, name:'中村 拓也', initials:'中', attr:'42歳 / 名古屋市 / 4人家族',
+    types:['new_house'], conditions:['新築戸建て','4,500万円'],
+    quote:'戸建ては管理費ゼロですが、自分で修繕を積み立てていないと将来大変。月1万円を専用口座に積み立てています。総コストで考えると管理費型の方が楽なこともあると実感しました。',
+    href:'sumumu-journal.html#nakamura' },
+  { id:5, name:'林 愛子', initials:'林', attr:'30歳 / 兵庫県 / 夫婦2人',
+    types:['used_mansion'], conditions:['中古マンション','2,400万円'],
+    quote:'中古は固定資産税の新築特例がないと知らなかった。諸費用の総額を把握してから頭金の計画を立て直せて、結果的に手元資金を十分に残せました。',
+    href:'sumumu-journal.html#hayashi' },
+  { id:6, name:'高橋 誠一', initials:'高', attr:'45歳 / 大阪市 / 4人家族',
+    types:['new_mansion'], conditions:['新築マンション','6,800万円'],
+    quote:'大規模修繕の積立不足問題を購入前に知っていたので、管理組合の長期修繕計画書を必ず取り寄せて確認しました。それが購入の決め手の一つになりました。',
+    href:'sumumu-journal.html#takahashi' },
+];
+
+function renderVoices(type) {
+  const grid = document.getElementById('vmGrid');
+  if (!grid) return;
+  let matched = VOICES.filter(v => v.types.includes(type));
+  if (matched.length >= 2) {
+    matched = matched.slice(0, 2);
+  } else if (matched.length === 1) {
+    const others = VOICES.filter(v => v.id !== matched[0].id);
+    matched.push(others[0]);
+  } else {
+    matched = VOICES.slice(0, 2);
+  }
+  grid.innerHTML = matched.map(v => `
+    <div class="vm-card">
+      <div class="vm-card-top">
+        <div class="vm-avatar">${v.initials}</div>
+        <div class="vm-profile"><div class="vm-name">${v.name}</div><div class="vm-attr">${v.attr}</div></div>
+      </div>
+      <div class="vm-conditions">
+        ${v.conditions.map((c, i) => `<span class="${i === 0 ? 'vm-badge' : 'vm-badge-neutral'}">${c}</span>`).join('')}
+      </div>
+      <div class="vm-quote">${v.quote}</div>
+      <a href="${v.href}" class="vm-link">体験談を読む →</a>
+    </div>`).join('');
+}
+
+/* ── 共有テキスト ── */
+function updateShareSummary(c) {
+  const el = document.getElementById('shareSummary');
+  if (!el) return;
+  const cp = COST_PARAMS[propType];
+  el.textContent = [
+    '【購入コストシミュレーション結果】',
+    '',
+    `物件種別　: ${cp.label}`,
+    `物件価格　: ${price.toLocaleString()} 万円`,
+    `借入額　　: ${loan.toLocaleString()} 万円`,
+    `金利　　　: ${rate.toFixed(2)}% / 返済期間: ${years}年`,
+    '',
+    `初期費用　: ${fmtManInt(c.totalInitial)} 万円（物件価格の ${c.initialRate.toFixed(1)}%）`,
+    `月額ローン: ${fmt(Math.round(c.loanMonthly), 0)} 円`,
+    `月額ラン　: ${fmt(c.runMonthly, 0)} 円（管理費・修繕・税金）`,
+    `月額合計　: ${fmt(Math.round(c.totalMonthly), 0)} 円`,
+    `35年総コスト: ${fmtManInt(c.total35)} 万円`,
+    '',
+    'この内容をもとに相談したいです。',
+  ].join('\n');
+}
+
+function copyAndLine() {
+  const el = document.getElementById('shareSummary');
+  const text = el ? el.textContent : '';
+  const toast = document.getElementById('copyToast');
+  navigator.clipboard.writeText(text).then(() => {
+    if (toast) { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
+    setTimeout(() => window.open('https://lin.ee/sumumu', '_blank', 'noopener,noreferrer'), 600);
+  }).catch(() => {
+    window.open('https://lin.ee/sumumu', '_blank', 'noopener,noreferrer');
+  });
+}
+
+/* ── 物件種別切替 ── */
+function setType(btn) {
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  propType = btn.dataset.type;
+  update();
+}
+
+/* ── Chart.js 初期化 ── */
+function initChart() {
+  const ctx = document.getElementById('costChart').getContext('2d');
+  costChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        data: [],
+        backgroundColor: '#E4A85A',
+        borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.05)' },
+          ticks: { font: { size: 10 }, callback: v => v + '万' }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 10.5 } }
+        }
+      }
+    }
+  });
+}
+
+/* ── スライダーイベント ── */
+document.getElementById('sliderPrice').addEventListener('input', function() {
+  price = parseInt(this.value);
+  document.getElementById('dispPrice').textContent = price.toLocaleString();
+  if (loan > price) {
+    loan = price;
+    document.getElementById('sliderLoan').value = loan;
+    document.getElementById('dispLoan').textContent = loan.toLocaleString();
+  }
+  update();
+});
+document.getElementById('sliderLoan').addEventListener('input', function() {
+  loan = parseInt(this.value);
+  document.getElementById('dispLoan').textContent = loan.toLocaleString();
+  update();
+});
+document.getElementById('sliderRate').addEventListener('input', function() {
+  rate = parseInt(this.value) / 100;
+  document.getElementById('dispRate').textContent = rate.toFixed(2);
+  update();
+});
+document.getElementById('sliderYears').addEventListener('input', function() {
+  years = parseInt(this.value);
+  document.getElementById('dispYears').textContent = years;
+  update();
+});
+
+/* ── モバイルナビ ── */
+document.getElementById('hambBtn').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobNav').classList.toggle('open');
+});
+document.querySelectorAll('.mob-parent').forEach(p => {
+  p.addEventListener('click', function() {
+    this.classList.toggle('open');
+    this.nextElementSibling.classList.toggle('open');
+  });
+});
+
+/* ── 初期化 ── */
+initChart();
+update();
+</script>
+</body>
+</html>

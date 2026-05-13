@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>すむむ。とは | すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-lite:#F97272; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010;
+  --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE;
+  --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --purple-dark:#534AB7; --purple-bg:#EEEDFE;
+  --orange-dark:#854F0B; --orange-bg:#FAEEDA;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);color:#fff;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;user-select:none;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nl.active-section{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;min-width:auto;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);background:none;}
+.nd a.active{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.2s;border-radius:1px;}
+.hamb.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamb.open span:nth-child(2){opacity:0;}
+.hamb.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;background:var(--bg-white);border-bottom:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,0.12);max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:8px 16px 24px;}
+.mob-link{display:block;font-size:14px;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);}
+.mob-group{border-bottom:0.5px solid var(--border);}
+.mob-parent{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:var(--text-primary);padding:12px 8px;cursor:pointer;}
+.mob-parent i{font-style:normal;font-size:11px;transition:transform 0.2s;}
+.mob-parent.open i{transform:rotate(180deg);}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);}
+.mob-sub.open{max-height:220px;}
+.mob-sub a{display:block;font-size:13px;color:var(--text-secondary);padding:10px 28px;border-bottom:0.5px solid var(--border);}
+.mob-sub a:last-child{border-bottom:none;}
+.mob-util{margin-top:16px;padding:0 4px;display:flex;flex-wrap:wrap;gap:8px;}
+.mob-util a{font-size:12px;color:var(--text-secondary);padding:5px 14px;border:1px solid var(--border);border-radius:var(--r-pill);}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--line);color:#fff;padding:12px;border-radius:var(--r-md);font-size:14px;font-weight:500;margin:14px 4px 0;transition:background 0.15s;}
+.mob-cta:hover{background:var(--line-h);color:#fff;}
+.line-logo-img{width:22px;height:22px;display:block;flex-shrink:0;object-fit:contain;}
+.btn-util .line-logo-img{width:16px;height:16px;}
+
+/* ─── HERO ────────────────────────────────── */
+.about-hero{position:relative;overflow:hidden;min-height:480px;display:flex;align-items:flex-end;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(26,16,16,0.38) 0%,rgba(26,16,16,0.78) 100%);z-index:1;}
+.hero-body{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:60px 32px 64px;width:100%;}
+.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:20px;}
+.breadcrumb a{font-size:11px;color:rgba(255,255,255,0.55);transition:color 0.15s;}
+.breadcrumb a:hover{color:#fff;}
+.breadcrumb-sep{font-size:10px;color:rgba(255,255,255,0.3);}
+.breadcrumb-cur{font-size:11px;color:rgba(255,255,255,0.7);}
+.hero-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.2em;color:var(--brand-lite);margin-bottom:16px;}
+.hero-h1{font-size:36px;font-weight:500;line-height:1.45;color:#fff;margin-bottom:16px;}
+.hero-lead{font-size:14px;color:rgba(255,255,255,0.78);line-height:1.9;max-width:560px;}
+
+/* ─── SECTION BASE ─────────────────────────── */
+.sec{padding:72px 32px;}
+.inner{max-width:1080px;margin:0 auto;}
+.eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:8px;}
+.sec-title{font-size:24px;font-weight:500;line-height:1.5;margin-bottom:16px;}
+.sec-title em{color:var(--brand);font-style:normal;}
+.sec-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:40px;max-width:680px;}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--brand);color:var(--brand-h);padding:10px 28px;border-radius:var(--r-pill);font-size:13px;transition:all 0.15s;}
+.btn-outline:hover{background:var(--brand);border-color:var(--brand);color:#fff;}
+.cta-row{text-align:center;margin-top:32px;}
+.fade{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade.in{opacity:1;transform:translateY(0);}
+
+/* ─── WHAT (すむむとは) ──────────────────────── */
+.what-sec{background:var(--bg-white);padding:72px 32px;}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px;}
+.what-card{border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--bg-page);}
+.what-card-img{height:180px;overflow:hidden;}
+.what-card-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.what-card-body{padding:22px 20px 24px;}
+.what-card-icon{width:36px;height:36px;border-radius:50%;background:var(--brand-bg);display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.what-card-name{font-size:16px;font-weight:500;margin-bottom:8px;}
+.what-card-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.8;margin-bottom:16px;}
+.what-tag{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);border:0.5px solid var(--border);color:var(--text-muted);background:var(--bg-white);}
+.what-card-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--brand-h);margin-top:12px;border-bottom:0.5px solid rgba(240,70,70,0.3);padding-bottom:1px;transition:border-color 0.15s;}
+.what-card-link:hover{border-color:var(--brand);}
+
+/* Property search bar */
+.search-bar{background:var(--dark-bg);border-radius:var(--r-lg);padding:28px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.search-label{font-size:11px;color:rgba(255,255,255,0.5);white-space:nowrap;flex-shrink:0;}
+.search-sel{flex:1;min-width:120px;background:rgba(255,255,255,0.09);border:0.5px solid rgba(255,255,255,0.18);border-radius:var(--r-md);color:#fff;font-size:13px;padding:9px 14px;font-family:inherit;cursor:pointer;}
+.search-sel option{background:#1A1010;color:#fff;}
+.search-divider{width:0.5px;height:24px;background:rgba(255,255,255,0.15);flex-shrink:0;}
+.btn-search{display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;padding:10px 24px;border-radius:var(--r-pill);font-size:13px;font-weight:500;border:none;cursor:pointer;white-space:nowrap;transition:background 0.15s;font-family:inherit;}
+.btn-search:hover{background:var(--brand-h);}
+.btn-search-sub{display:inline-flex;align-items:center;gap:6px;background:var(--green-dark);color:#fff;padding:10px 24px;border-radius:var(--r-pill);font-size:13px;font-weight:500;border:none;cursor:pointer;white-space:nowrap;transition:background 0.15s;font-family:inherit;}
+.btn-search-sub:hover{background:#063629;}
+
+/* ─── PAIN ────────────────────────────────── */
+.pain-sec{background:var(--bg-page);padding:72px 32px;}
+.pain-intro{font-size:11px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);margin-bottom:12px;}
+.pain-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px;}
+.pain-card{background:var(--bg-white);border:0.5px solid rgba(240,70,70,0.18);border-left:3px solid var(--brand-lite);border-radius:var(--r-md);padding:24px 22px;box-shadow:var(--shadow-sm);}
+.pain-icon{font-size:20px;margin-bottom:10px;}
+.pain-ttl{font-size:14px;font-weight:500;color:#882020;line-height:1.55;margin-bottom:8px;}
+.pain-desc{font-size:12px;color:var(--text-secondary);line-height:1.8;}
+.solve-bridge{display:flex;align-items:center;gap:16px;margin:28px 0 44px;}
+.solve-bridge-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--brand-lite),transparent);opacity:0.45;}
+.solve-bridge-label{font-size:12px;font-weight:500;color:var(--brand-h);white-space:nowrap;padding:7px 20px;background:var(--brand-bg);border-radius:var(--r-pill);border:0.5px solid rgba(240,70,70,0.25);}
+.steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:start;gap:0;}
+.step{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);}
+.step-photo{width:100%;height:160px;object-fit:cover;display:block;}
+.step-inner{padding:18px 18px 22px;}
+.step-num{font-size:10px;font-weight:500;letter-spacing:0.12em;color:var(--brand);margin-bottom:6px;}
+.step-ttl{font-size:14px;font-weight:500;line-height:1.5;margin-bottom:6px;}
+.step-sub{font-size:11.5px;color:var(--text-secondary);line-height:1.7;}
+.step-arr{align-self:center;font-size:22px;color:var(--border);padding:0 8px;}
+
+/* ─── HOW (仕組み) ───────────────────────── */
+.how-sec{background:var(--bg-white);padding:72px 32px;}
+.compare-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:0;border-radius:var(--r-lg);overflow:hidden;border:0.5px solid var(--border);margin-bottom:48px;}
+.compare-col{padding:0;}
+.compare-head{padding:18px 24px;font-size:12px;font-weight:500;text-align:center;}
+.compare-head.bad{background:#F7EFEF;color:#882020;}
+.compare-head.good{background:var(--green-bg);color:var(--green-dark);}
+.compare-divider-col{width:1px;background:var(--border);position:relative;}
+.compare-vs{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg-page);border:0.5px solid var(--border);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--text-muted);}
+.compare-list{list-style:none;padding:12px 0;}
+.compare-list li{display:flex;align-items:flex-start;gap:10px;padding:12px 24px;border-top:0.5px solid var(--border);font-size:12.5px;color:var(--text-secondary);line-height:1.7;}
+.compare-list li:first-child{border-top:none;}
+.compare-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+.compare-icon.x{color:#CC3030;}
+.compare-icon.ok{color:var(--green-mid);}
+
+.how-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--dark-bg);border-radius:var(--r-lg);overflow:hidden;}
+.how-step{padding:28px 20px;border-right:0.5px solid rgba(255,255,255,0.08);text-align:center;}
+.how-step:last-child{border-right:none;}
+.how-step-num{font-size:10px;font-weight:500;letter-spacing:0.12em;color:var(--brand-lite);margin-bottom:10px;}
+.how-step-icon{font-size:26px;margin-bottom:10px;}
+.how-step-name{font-size:14px;font-weight:500;color:#fff;margin-bottom:8px;}
+.how-step-desc{font-size:11.5px;color:rgba(255,255,255,0.58);line-height:1.7;}
+
+/* ─── REASONS ────────────────────────────── */
+.reason-sec{background:var(--bg-page);padding:72px 32px;}
+.reason-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.reason-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);padding:32px 26px;box-shadow:var(--shadow-sm);}
+.reason-num{font-size:28px;font-weight:500;color:rgba(240,70,70,0.15);line-height:1;margin-bottom:16px;letter-spacing:-0.02em;}
+.reason-icon-wrap{width:48px;height:48px;border-radius:50%;background:var(--brand-bg);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.reason-ttl{font-size:16px;font-weight:500;line-height:1.5;margin-bottom:12px;}
+.reason-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.85;}
+.reason-badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);border:1px solid rgba(240,70,70,0.3);color:var(--brand-h);background:var(--brand-bg);margin-top:14px;}
+
+/* ─── VOICES ─────────────────────────────── */
+.voices-sec{background:var(--dark-bg);padding:72px 32px;}
+.voices-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand-lite);margin-bottom:8px;}
+.voices-title{font-size:24px;font-weight:500;color:#fff;margin-bottom:12px;}
+.voices-lead{font-size:13px;color:rgba(255,255,255,0.58);line-height:1.9;margin-bottom:40px;}
+.voices-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:32px;}
+.voice-card{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:var(--r-lg);overflow:hidden;}
+.voice-img{height:160px;overflow:hidden;}
+.voice-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.voice-body{padding:20px 22px 24px;}
+.voice-stage{font-size:10px;font-weight:500;letter-spacing:0.1em;color:var(--brand-lite);margin-bottom:12px;}
+.voice-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.voice-initial{width:32px;height:32px;border-radius:50%;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:#fff;flex-shrink:0;}
+.voice-name{font-size:14px;font-weight:500;color:#fff;}
+.voice-detail{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5;}
+.voice-props{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.voice-prop{font-size:10.5px;padding:3px 10px;border-radius:var(--r-pill);background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.65);}
+.voice-price{font-size:18px;font-weight:500;color:var(--brand-lite);margin-bottom:10px;line-height:1.2;}
+.voice-price span{font-size:11px;color:rgba(255,255,255,0.4);font-weight:400;margin-left:4px;}
+.voice-quote{font-size:12.5px;color:rgba(255,255,255,0.68);line-height:1.8;margin-bottom:14px;}
+.voice-link{font-size:12px;color:var(--brand-lite);border-bottom:0.5px solid rgba(249,114,114,0.4);padding-bottom:1px;transition:border-color 0.15s;}
+.voice-link:hover{border-color:var(--brand-lite);}
+.voices-footer{text-align:center;}
+.voices-cta-btn{display:inline-flex;align-items:center;gap:6px;border:1.5px solid rgba(255,255,255,0.3);color:#fff;padding:11px 32px;border-radius:var(--r-pill);font-size:13px;transition:all 0.15s;}
+.voices-cta-btn:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.5);}
+.voices-note{font-size:11px;color:rgba(255,255,255,0.3);margin-top:10px;}
+
+/* ─── COMMUNITY ──────────────────────────── */
+.community-sec{background:var(--bg-white);padding:72px 32px;}
+.community-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.community-img{border-radius:var(--r-lg);overflow:hidden;}
+.community-img img{width:100%;display:block;object-fit:cover;height:340px;}
+.community-body .eyebrow{color:var(--brand);}
+.community-ttl{font-size:22px;font-weight:500;line-height:1.55;margin:8px 0 16px;}
+.community-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:24px;}
+.community-feats{list-style:none;margin-bottom:28px;}
+.community-feats li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--text-secondary);line-height:1.7;}
+.community-feats li:last-child{border-bottom:none;}
+.feat-check{color:var(--green-mid);font-size:14px;flex-shrink:0;margin-top:2px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--line);color:#fff;padding:12px 28px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;}
+.btn-primary:hover{background:var(--line-h);color:#fff;}
+
+/* ─── EVENTS ─────────────────────────────── */
+.events-sec{background:var(--bg-page);padding:72px 32px;}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
+.event-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);}
+.event-img{height:140px;overflow:hidden;}
+.event-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.event-body{padding:18px 18px 22px;}
+.event-tag{display:inline-block;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);background:var(--brand-bg);color:var(--brand-h);margin-bottom:10px;}
+.event-ttl{font-size:14px;font-weight:500;line-height:1.5;margin-bottom:8px;}
+.event-desc{font-size:12px;color:var(--text-secondary);line-height:1.7;}
+.event-meta{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:11px;color:var(--text-muted);}
+
+/* ─── CONCIERGE ──────────────────────────── */
+.concierge-sec{background:var(--green-dark);padding:72px 32px;}
+.concierge-inner{max-width:1080px;margin:0 auto;}
+.concierge-hd{margin-bottom:40px;}
+.concierge-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);margin-bottom:8px;}
+.concierge-title{font-size:24px;font-weight:500;color:#fff;line-height:1.5;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.68);line-height:1.9;}
+.concierge-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:36px;}
+.conc-feat{background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.14);border-radius:var(--r-md);padding:22px 20px;}
+.conc-feat-icon{font-size:22px;margin-bottom:10px;}
+.conc-feat-ttl{font-size:14px;font-weight:500;color:#fff;margin-bottom:8px;}
+.conc-feat-desc{font-size:12px;color:rgba(255,255,255,0.62);line-height:1.75;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:14px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;}
+.btn-concierge:hover{background:#17835e;}
+.concierge-note{font-size:11px;color:rgba(255,255,255,0.35);margin-top:10px;}
+
+/* ─── PARTNERS ───────────────────────────── */
+.partner-sec{background:var(--bg-page);padding:72px 32px;}
+.partner-lead-sub{font-size:12.5px;color:var(--text-secondary);line-height:1.9;margin-bottom:40px;max-width:600px;}
+.partner-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.partner-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;}
+.partner-card-logo{min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px 20px;border-bottom:0.5px solid var(--border);position:relative;}
+.partner-card-cat{position:absolute;top:14px;right:14px;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);background:var(--bg-page);border:0.5px solid var(--border);color:var(--text-muted);}
+.partner-logo-text{font-size:32px;font-weight:400;color:var(--text-primary);line-height:1.2;margin-bottom:6px;letter-spacing:-0.01em;}
+.partner-logo-kana{font-size:11px;color:var(--text-muted);}
+.partner-card-body{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column;}
+.partner-card-name{font-size:16px;font-weight:500;margin-bottom:4px;}
+.partner-card-tagline{font-size:11.5px;color:var(--text-muted);margin-bottom:14px;line-height:1.6;}
+.partner-card-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.85;margin-bottom:16px;flex:1;}
+.partner-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;}
+.partner-tag{font-size:10.5px;padding:4px 12px;border-radius:var(--r-pill);background:var(--bg-page);border:0.5px solid var(--border);color:var(--text-secondary);}
+.partner-card-foot{display:flex;align-items:center;justify-content:space-between;border-top:0.5px solid var(--border);padding-top:14px;margin-top:auto;}
+.partner-url{font-size:11px;color:var(--text-muted);}
+.partner-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:500;color:var(--brand-h);border:1px solid rgba(240,70,70,0.25);border-radius:var(--r-pill);padding:6px 14px;transition:all 0.15s;}
+.partner-link:hover{background:var(--brand);border-color:var(--brand);color:#fff;}
+.partner-link-icon{font-size:11px;}
+
+/* ─── MEDIA ──────────────────────────────── */
+.media-sec{background:var(--dark-bg);padding:72px 32px;}
+.media-inner{max-width:1080px;margin:0 auto;}
+.media-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:40px;}
+.media-hd-left .eyebrow-dark{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand-lite);margin-bottom:8px;}
+.media-title{font-size:24px;font-weight:500;color:#fff;margin-bottom:8px;}
+.media-lead{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.8;}
+.media-hd-link{font-size:12px;color:rgba(255,255,255,0.45);white-space:nowrap;border-bottom:0.5px solid rgba(255,255,255,0.2);padding-bottom:1px;flex-shrink:0;transition:color 0.15s;}
+.media-hd-link:hover{color:#fff;}
+.media-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+.media-featured{background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);border-radius:var(--r-lg);padding:28px 24px;display:flex;flex-direction:column;}
+.media-feat-label{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);background:var(--brand);color:#fff;margin-bottom:16px;width:fit-content;}
+.media-feat-source{font-size:28px;font-weight:500;color:#fff;margin-bottom:4px;}
+.media-feat-source-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:20px;}
+.media-feat-date{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:10px;}
+.media-feat-ttl{font-size:15px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:12px;}
+.media-feat-desc{font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.8;flex:1;}
+.media-feat-foot{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:0.5px solid rgba(255,255,255,0.1);}
+.media-feat-tag{font-size:10px;padding:3px 10px;border-radius:var(--r-pill);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);}
+.media-feat-link{font-size:12px;color:var(--brand-lite);display:flex;align-items:center;gap:4px;transition:opacity 0.15s;}
+.media-feat-link:hover{opacity:0.75;}
+.media-list{display:flex;flex-direction:column;gap:10px;}
+.media-item{background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);border-radius:var(--r-md);padding:16px 18px;display:flex;gap:14px;align-items:flex-start;}
+.media-item-type{flex-shrink:0;text-align:center;min-width:42px;}
+.media-item-type-icon{font-size:16px;line-height:1;margin-bottom:2px;}
+.media-item-type-label{font-size:9px;color:rgba(255,255,255,0.35);line-height:1;}
+.media-item-body{flex:1;min-width:0;}
+.media-item-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.media-item-cat{font-size:9.5px;font-weight:500;padding:2px 8px;border-radius:var(--r-pill);}
+.media-item-cat.web{background:rgba(24,95,165,0.3);color:#7BBAED;}
+.media-item-cat.mag{background:rgba(83,74,183,0.3);color:#B0A9F0;}
+.media-item-cat.tv{background:rgba(240,70,70,0.25);color:var(--brand-lite);}
+.media-item-date{font-size:10px;color:rgba(255,255,255,0.3);}
+.media-item-ttl{font-size:12.5px;color:rgba(255,255,255,0.78);line-height:1.6;margin-bottom:3px;}
+.media-item-source{font-size:10.5px;color:rgba(255,255,255,0.35);}
+.media-logos{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-bottom:28px;}
+.media-logo-pill{font-size:12px;color:rgba(255,255,255,0.35);padding:8px 18px;border:0.5px solid rgba(255,255,255,0.12);border-radius:var(--r-pill);}
+.btn-media{display:inline-flex;align-items:center;gap:6px;border:1.5px solid rgba(255,255,255,0.25);color:#fff;padding:12px 32px;border-radius:var(--r-pill);font-size:13px;transition:all 0.15s;}
+.btn-media:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.45);}
+
+/* ─── GET STARTED ────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.2em;color:var(--brand);margin-bottom:16px;}
+.cta-title{font-size:28px;font-weight:500;line-height:1.5;margin-bottom:16px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+.btn-cta-line{display:inline-flex;align-items:center;gap:8px;background:var(--line);color:#fff;padding:14px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;}
+.btn-cta-line:hover{background:var(--line-h);color:#fff;}
+.btn-cta-ghost{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--border);color:var(--text-secondary);padding:13px 28px;border-radius:var(--r-pill);font-size:13px;transition:all 0.15s;}
+.btn-cta-ghost:hover{border-color:var(--text-primary);color:var(--text-primary);}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:16px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);padding:56px 32px 28px;}
+.footer-inner{max-width:1080px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:40px;}
+.footer-logo{margin-bottom:8px;}
+.footer-logo svg{height:32px;width:auto;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:190px;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:16px;}
+.fnav-group h4{font-size:11px;font-weight:500;color:rgba(255,255,255,0.5);margin-bottom:10px;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:6px;}
+.fnav-group a{font-size:11px;color:rgba(255,255,255,0.32);transition:color 0.12s;}
+.fnav-group a:hover{color:rgba(255,255,255,0.7);}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.footer-copy{font-size:11px;color:rgba(255,255,255,0.25);}
+.footer-legal{display:flex;gap:18px;}
+.footer-legal a{font-size:11px;color:rgba(255,255,255,0.25);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.6);}
+
+/* ─── STATS BAR ──────────────────────────── */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);margin-top:52px;background:var(--dark-bg);border-radius:var(--r-lg);overflow:hidden;}
+.stat-item{padding:26px 16px;text-align:center;border-right:0.5px solid rgba(255,255,255,0.1);}
+.stat-item:last-child{border-right:none;}
+.stat-val{font-size:28px;font-weight:500;color:var(--brand-lite);line-height:1.2;margin-bottom:6px;}
+.stat-unit{font-size:13px;font-weight:400;}
+.stat-label{font-size:11px;color:rgba(255,255,255,0.62);line-height:1.5;}
+.stat-note{font-size:9.5px;color:rgba(255,255,255,0.32);margin-top:3px;}
+
+/* ─── RESPONSIVE ─────────────────────────── */
+@media(max-width:1060px){
+  .util-bar{display:none;}
+  .main-nav{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:0 16px;height:52px;align-items:center;}
+}
+@media(max-width:900px){
+  .about-hero{min-height:360px;}
+  .hero-h1{font-size:26px;}
+  .what-grid{grid-template-columns:1fr;}
+  .pain-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;gap:12px;}
+  .step-arr{display:none;}
+  .compare-wrap{grid-template-columns:1fr;border-radius:var(--r-lg);}
+  .compare-divider-col{width:100%;height:1px;}
+  .compare-vs{top:0;left:50%;transform:translate(-50%,-50%);}
+  .how-flow{grid-template-columns:repeat(2,1fr);}
+  .how-step:nth-child(2){border-right:none;}
+  .how-step:nth-child(3){border-top:0.5px solid rgba(255,255,255,0.08);}
+  .reason-grid{grid-template-columns:1fr;}
+  .voices-grid{grid-template-columns:1fr;}
+  .community-layout{grid-template-columns:1fr;}
+  .community-img{order:2;}
+  .events-grid{grid-template-columns:1fr;}
+  .concierge-feats{grid-template-columns:1fr;}
+  .search-bar{flex-direction:column;align-items:stretch;}
+  .search-divider{display:none;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(2){border-right:none;}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-top:0.5px solid rgba(255,255,255,0.1);}
+  .footer-top{grid-template-columns:1fr;gap:24px;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center;}
+  .footer-legal{flex-wrap:wrap;justify-content:center;gap:12px;}
+}
+@media(max-width:480px){
+  .hero-body{padding:40px 16px 48px;}
+  .sec{padding:48px 16px;}
+  .what-sec{padding:48px 16px;}
+  .pain-sec{padding:48px 16px;}
+  .how-sec{padding:48px 16px;}
+  .reason-sec{padding:48px 16px;}
+  .voices-sec{padding:48px 16px;}
+  .community-sec{padding:48px 16px;}
+  .events-sec{padding:48px 16px;}
+  .concierge-sec{padding:48px 16px;}
+  .partner-sec{padding:48px 16px;}
+  .partner-grid{grid-template-columns:1fr;}
+  .media-sec{padding:48px 16px;}
+  .media-layout{grid-template-columns:1fr;}
+  .media-hd{flex-direction:column;gap:10px;}
+  .cta-sec{padding:56px 16px;}
+  .footer{padding:40px 16px 24px;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+  .how-flow{grid-template-columns:1fr;}
+  .how-step{border-right:none;border-top:0.5px solid rgba(255,255,255,0.08);}
+  .how-step:first-child{border-top:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0ab{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0ab" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni">
+        <span class="nl active-section">すむむとは。<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-about.html" class="active">すむむ。のサービス</a>
+          <a href="sumumu-about.html#partners">パートナー</a>
+          <a href="sumumu-about.html#media">メディア掲載</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">住まいを探す<i>▾</i></span>
+        <div class="nd">
+          <a href="properties/sumumu-kinki.html">エリア別</a>
+          <a href="properties/sumumu-kinki-all.html">条件別</a>
+          <a href="properties/sumumu-kinki-00001.html">個別物件</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">先輩の体験談<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-journal.html">先輩の声</a>
+          <a href="sumumu-journal.html">購入体験</a>
+          <a href="sumumu-journal.html">暮らし</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">お役立ちコラム<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-guide.html">資金計画</a>
+          <a href="sumumu-guide.html">物件選び</a>
+          <a href="sumumu-guide.html">購入手続き</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">シミュレーション<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-tool-loan.html">ローン返済</a>
+          <a href="sumumu-tool-borrowing.html">借入可能額</a>
+          <a href="sumumu-tools.html">すべてのツール</a>
+        </div>
+      </div>
+      <div class="ni">
+        <a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a>
+        <div class="nd">
+          <a href="sumumu-area.html">エリア一覧</a>
+          <a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a>
+          <a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a>
+          <a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a>
+        </div>
+      </div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hamb" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group">
+          <div class="mob-parent">すむむとは。<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="sumumu-about.html">すむむ。のサービス</a>
+            <a href="sumumu-about.html#partners">パートナー</a>
+            <a href="sumumu-about.html#media">メディア掲載</a>
+          </div>
+        </div>
+        <div class="mob-group">
+          <div class="mob-parent">住まいを探す<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="properties/sumumu-kinki.html">エリア別</a>
+            <a href="properties/sumumu-kinki-all.html">条件別</a>
+          </div>
+        </div>
+        <div class="mob-group">
+          <div class="mob-parent">先輩の体験談<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="sumumu-journal.html">先輩の声</a>
+            <a href="sumumu-journal.html">購入体験</a>
+          </div>
+        </div>
+        <div class="mob-group">
+          <div class="mob-parent">シミュレーション<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="sumumu-tools.html">すべてのツール</a>
+            <a href="sumumu-tool-loan.html">ローン返済</a>
+            <a href="sumumu-tool-borrowing.html">借入可能額</a>
+          </div>
+        </div>
+        <a href="sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util">
+          <a href="sumumu-faq.html">よくある質問</a>
+          <a href="sumumu-contact.html">お問合せ</a>
+          <a href="sumumu-company.html">運営会社</a>
+        </div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">
+          <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+          コミュニティに無料で参加する
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="hero-bg">
+    <img src="images/fv-hero.png" alt=""
+         onerror="this.src='https://picsum.photos/seed/about-sumumu/1400/560'">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-body">
+    <nav class="breadcrumb">
+      <a href="sumumu-main.html">トップ</a>
+      <span class="breadcrumb-sep">›</span>
+      <span class="breadcrumb-cur">すむむとは。</span>
+    </nav>
+    <span class="hero-eyebrow">ABOUT SUMUMU</span>
+    <h1 class="hero-h1">すむむ。で<br>理想の住まいにたどり着ける。</h1>
+    <p class="hero-lead">情報収集から、専門家への相談、そして理想の住まいへ。<br>すべてのステップを、すむむ。がサポートします。</p>
+  </div>
+</section>
+
+<!-- WHAT: すむむ。とは -->
+<section class="what-sec fade">
+  <div class="inner">
+    <span class="eyebrow">ABOUT SUMUMU</span>
+    <h2 class="sec-title">すべての人に、<br>理想の住み替えを</h2>
+    <p class="sec-lead">
+      「情報は多いのに、信頼できる人がいない」——住み替えを考えるすべての人が抱えるこの課題に、すむむ。は向き合います。<br>
+      先輩の体験談・無料の住み替え支援・シミュレーションツールを一体で提供し、あなたのペースで住み替えを進められる場所です。
+    </p>
+
+    <div class="what-grid">
+      <!-- コミュニティ -->
+      <div class="what-card">
+        <div class="what-card-img">
+          <img src="images/step01-community.jpg" alt="コミュニティ"
+               onerror="this.src='https://picsum.photos/seed/community-about/600/320'">
+        </div>
+        <div class="what-card-body">
+          <div class="what-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="what-card-name">コミュニティ</div>
+          <span class="what-tag">いつでも・無料・匿名</span>
+          <p class="what-card-desc">実際に住み替えた先輩の体験談が読める場所。営業担当には聞けないリアルな声で、情報収集の不安を解消します。</p>
+          <a href="sumumu-journal.html" class="what-card-link">先輩の声を読む →</a>
+        </div>
+      </div>
+
+      <!-- イベント -->
+      <div class="what-card">
+        <div class="what-card-img">
+          <img src="images/step02-event.jpg" alt="イベント"
+               onerror="this.src='https://picsum.photos/seed/event-about/600/320'">
+        </div>
+        <div class="what-card-body">
+          <div class="what-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div class="what-card-name">イベント</div>
+          <span class="what-tag">毎月開催・オンライン/オフライン</span>
+          <p class="what-card-desc">先輩・専門家に直接会える場。すむむ。TV・座談会・モデルルーム見学会など多彩なイベントを毎月開催しています。</p>
+          <a href="sumumu-news.html" class="what-card-link">イベントを見る →</a>
+        </div>
+      </div>
+
+      <!-- コンシェルジュ -->
+      <div class="what-card">
+        <div class="what-card-img">
+          <img src="images/step03-consult.jpg" alt="コンシェルジュ"
+               onerror="this.src='https://picsum.photos/seed/concierge-about/600/320'">
+        </div>
+        <div class="what-card-body">
+          <div class="what-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div class="what-card-name">コンシェルジュ</div>
+          <span class="what-tag">個別相談・中立・完全無料</span>
+          <p class="what-card-desc">「さあ買おう」と決めたとき、専門家が中立な立場でサポート。資金計画・物件選び・住み替えタイミングまで一緒に考えます。</p>
+          <a href="https://lin.ee/sumumu" class="what-card-link">コンシェルジュに相談 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 物件検索バー -->
+    <div class="search-bar">
+      <span class="search-label">物件を探す</span>
+      <select class="search-sel">
+        <option value="">エリアを選ぶ</option>
+        <option>大阪府</option>
+        <option>兵庫県</option>
+        <option>京都府</option>
+        <option>滋賀県</option>
+        <option>奈良県</option>
+        <option>愛知県</option>
+      </select>
+      <select class="search-sel">
+        <option value="">物件タイプ</option>
+        <option>新築マンション</option>
+        <option>中古マンション</option>
+        <option>戸建て</option>
+      </select>
+      <select class="search-sel">
+        <option value="">間取り</option>
+        <option>2LDK</option>
+        <option>3LDK</option>
+        <option>4LDK以上</option>
+      </select>
+      <div class="search-divider"></div>
+      <button class="btn-search">物件を探す</button>
+      <button class="btn-search-sub">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        コンシェルジュに相談
+      </button>
+    </div>
+
+    <!-- 数値バー -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-val">482<span class="stat-unit">件</span></div>
+        <div class="stat-label">先輩の体験談</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">10<span class="stat-unit">エリア</span></div>
+        <div class="stat-label">現在の対応エリア</div>
+        <div class="stat-note">順次拡大予定</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">¥0</div>
+        <div class="stat-label">相談・情報提供の費用</div>
+        <div class="stat-note">完全無料で利用できます</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">長谷工<span class="stat-unit">G</span></div>
+        <div class="stat-label">グループサポート</div>
+        <div class="stat-note">株式会社サクシード運営</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN: こんな悩み -->
+<section class="pain-sec fade">
+  <div class="inner">
+    <span class="eyebrow">FOR YOU</span>
+    <h2 class="sec-title">こんな悩み、ありませんか？</h2>
+    <p class="pain-intro">住み替えに踏み出せない、よくある理由</p>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">😕</div>
+        <div class="pain-ttl">情報は多いのに、<br>信頼できる人がいない</div>
+        <div class="pain-desc">ポータルサイト・YouTube・SNS…情報の海に溺れながら、中立に教えてくれる人が見つからない。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">😰</div>
+        <div class="pain-ttl">営業に急かされそうで<br>最初の一歩が踏み出せない</div>
+        <div class="pain-desc">不動産会社に相談したら、すぐに契約を迫られる気がして動けない。本当に中立な人に話を聞いてほしい。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">😵</div>
+        <div class="pain-ttl">売却と購入の同時進行が<br>複雑すぎて整理できない</div>
+        <div class="pain-desc">今の家を売りながら次の家を探す。タイミング・資金繰り・手続きが複雑で、一人では把握できない。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🤔</div>
+        <div class="pain-ttl">学区・子育て環境まで<br>考えると選べなくなる</div>
+        <div class="pain-desc">物件の条件だけでなく、小学校の学区・保育施設・公園の有無まで考えると比較しきれず、選択が止まる。</div>
+      </div>
+    </div>
+
+    <div class="solve-bridge">
+      <div class="solve-bridge-line"></div>
+      <span class="solve-bridge-label">すむむ。が、解決します</span>
+      <div class="solve-bridge-line"></div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <img class="step-photo" src="images/step01-community.jpg"
+             onerror="this.src='https://picsum.photos/seed/community-step/600/320'" alt="コミュニティ">
+        <div class="step-inner">
+          <div class="step-num">STEP 01</div>
+          <div class="step-ttl">先輩の体験談を読んで学ぶ</div>
+          <div class="step-sub">コミュニティで482件の実体験が読める。匿名で質問も可能</div>
+        </div>
+      </div>
+      <div class="step-arr">→</div>
+      <div class="step">
+        <img class="step-photo" src="images/step02-event.jpg"
+             onerror="this.src='https://picsum.photos/seed/event-step/600/320'" alt="イベント">
+        <div class="step-inner">
+          <div class="step-num">STEP 02</div>
+          <div class="step-ttl">イベントで先輩・専門家と直接話す</div>
+          <div class="step-sub">毎月開催のすむむ。TVや座談会で顔の見える場で学べる</div>
+        </div>
+      </div>
+      <div class="step-arr">→</div>
+      <div class="step">
+        <img class="step-photo" src="images/step03-consult.jpg"
+             onerror="this.src='https://picsum.photos/seed/consult-step/600/320'" alt="コンシェルジュ">
+        <div class="step-inner">
+          <div class="step-num">STEP 03</div>
+          <div class="step-ttl">コンシェルジュに個別相談して決断</div>
+          <div class="step-sub">中立な専門家が売り込みなしで、あなたの住み替えを伴走</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW: すむむ。の仕組み -->
+<section class="how-sec fade">
+  <div class="inner">
+    <span class="eyebrow">HOW IT WORKS</span>
+    <h2 class="sec-title">すむむ。の仕組み</h2>
+    <p class="sec-lead">一般的なポータルサイトと、すむむ。の違いはここにあります。</p>
+
+    <div class="compare-wrap">
+      <!-- Left: ポータルサイト -->
+      <div class="compare-col">
+        <div class="compare-head bad">一般的なポータルサイト</div>
+        <ul class="compare-list">
+          <li><span class="compare-icon x">✕</span>物件情報のみ。体験談・口コミは少ない</li>
+          <li><span class="compare-icon x">✕</span>問い合わせ先は不動産会社の営業担当</li>
+          <li><span class="compare-icon x">✕</span>情報収集は孤独。比較・整理は自分でやる</li>
+          <li><span class="compare-icon x">✕</span>売却と購入の同時進行を支援する機能がない</li>
+          <li><span class="compare-icon x">✕</span>シミュレーションは計算だけで終わり</li>
+        </ul>
+      </div>
+      <div class="compare-divider-col"><div class="compare-vs">vs</div></div>
+      <!-- Right: すむむ。 -->
+      <div class="compare-col">
+        <div class="compare-head good">すむむ。</div>
+        <ul class="compare-list">
+          <li><span class="compare-icon ok">✓</span>482件の先輩体験談＋物件情報が一体</li>
+          <li><span class="compare-icon ok">✓</span>相談先は中立な専門家（売り込みなし）</li>
+          <li><span class="compare-icon ok">✓</span>コミュニティで先輩に匿名相談できる</li>
+          <li><span class="compare-icon ok">✓</span>売却→購入の資金フローシミュレーション対応</li>
+          <li><span class="compare-icon ok">✓</span>計算→体験談照合→コンシェルジュが一気通貫</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- フロー -->
+    <div class="how-flow">
+      <div class="how-step">
+        <div class="how-step-num">STEP 01</div>
+        <div class="how-step-icon">💬</div>
+        <div class="how-step-name">コミュニティで<br>先輩の声を聞く</div>
+        <div class="how-step-desc">匿名で質問・相談。購入体験談482件を読んで不安を解消</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">STEP 02</div>
+        <div class="how-step-icon">📅</div>
+        <div class="how-step-name">イベントで<br>直接つながる</div>
+        <div class="how-step-desc">座談会・見学会・すむむ。TVで先輩・専門家と顔の見える交流</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">STEP 03</div>
+        <div class="how-step-icon">🧮</div>
+        <div class="how-step-name">シミュレーションで<br>数字を把握する</div>
+        <div class="how-step-desc">6つのツールでローン・コスト・エリア・子育て環境を徹底比較</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">STEP 04</div>
+        <div class="how-step-icon">🏠</div>
+        <div class="how-step-name">コンシェルジュと<br>理想の住まいへ</div>
+        <div class="how-step-desc">専門家が中立な立場で伴走。納得いくまで何度でも相談できる</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REASONS: 選ばれる3つの理由 -->
+<section class="reason-sec fade">
+  <div class="inner">
+    <span class="eyebrow">WHY SUMUMU</span>
+    <h2 class="sec-title">すむむ。が<em>選ばれる</em>3つの理由</h2>
+    <div class="reason-grid">
+      <div class="reason-card">
+        <div class="reason-num">01</div>
+        <div class="reason-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="reason-ttl">リアルな先輩の声が<br>すべての起点になる</div>
+        <div class="reason-desc">
+          住み替えで後悔した点・良かった点・資金のリアルな話。482件の体験談はすべて実際に購入した先輩からの声。広告や営業には書けない本音が読めます。
+        </div>
+        <span class="reason-badge">1,200件以上の体験談掲載中</span>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">02</div>
+        <div class="reason-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="reason-ttl">中立な専門家が<br>売り込みなしでサポート</div>
+        <div class="reason-desc">
+          すむむ。のコンシェルジュは特定の物件・会社に誘導しません。資金計画・売却タイミング・ローン選択まで、あなたの利益を最優先に考えたアドバイスを無料で提供します。
+        </div>
+        <span class="reason-badge">相談・情報提供は完全無料</span>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">03</div>
+        <div class="reason-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#f04646" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div class="reason-ttl">情報収集から決断まで<br>一気通貫で進められる</div>
+        <div class="reason-desc">
+          コミュニティ読む → イベント参加 → シミュレーション → コンシェルジュ相談。ばらばらのツールを行き来する必要がなく、すべてのステップがすむむ。の中でつながっています。
+        </div>
+        <span class="reason-badge">長谷工グループのサポート体制</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES: 先輩の声 -->
+<section class="voices-sec fade">
+  <div class="inner">
+    <span class="voices-eyebrow">VOICES</span>
+    <h2 class="voices-title">先輩たちの声</h2>
+    <p class="voices-lead">実際にすむむ。を使って住み替えた先輩のリアルな体験談。</p>
+    <div class="voices-grid">
+      <div class="voice-card">
+        <div class="voice-img">
+          <img src="images/voice01.jpg" alt="田中さやかさん"
+               onerror="this.src='https://picsum.photos/seed/voice01-about/600/280'">
+        </div>
+        <div class="voice-body">
+          <div class="voice-stage">✓ はじめての住まい購入</div>
+          <div class="voice-header">
+            <div class="voice-initial">田</div>
+            <div>
+              <div class="voice-name">田中 さやか</div>
+              <div class="voice-detail">33歳・育休復帰後・大阪市在住<br>夫・子1人（2歳）</div>
+            </div>
+          </div>
+          <div class="voice-props">
+            <span class="voice-prop">新築マンション</span>
+            <span class="voice-prop">3LDK</span>
+            <span class="voice-prop">約68m²</span>
+          </div>
+          <div class="voice-price">4,200万円<span>（住宅ローン利用）</span></div>
+          <p class="voice-quote">「営業に押し切られそうで一歩が踏み出せなかったんですが、コンシェルジュさんが本当に中立で。先輩の体験談と照らし合わせながら決断できました。」</p>
+          <a href="sumumu-journal-00001.html" class="voice-link">購入体験の詳細を読む →</a>
+        </div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-img">
+          <img src="images/voice02.jpg" alt="松本健一さん"
+               onerror="this.src='https://picsum.photos/seed/voice02-about/600/280'">
+        </div>
+        <div class="voice-body">
+          <div class="voice-stage">✓ マンション→新居への住み替え</div>
+          <div class="voice-header">
+            <div class="voice-initial">松</div>
+            <div>
+              <div class="voice-name">松本 健一</div>
+              <div class="voice-detail">44歳・管理職・滋賀県在住<br>妻・子2人（小5・中1）</div>
+            </div>
+          </div>
+          <div class="voice-props">
+            <span class="voice-prop">新築戸建て</span>
+            <span class="voice-prop">4LDK</span>
+            <span class="voice-prop">約105m²</span>
+          </div>
+          <div class="voice-price">5,800万円<span>（住み替え＋ローン）</span></div>
+          <p class="voice-quote">「今のマンションを売りながら次を買う、という流れがまったく整理できていませんでした。住み替え資金シミュレーターで数字が見えてからは動きが早かったです。」</p>
+          <a href="sumumu-journal-00001.html" class="voice-link">購入体験の詳細を読む →</a>
+        </div>
+      </div>
+    </div>
+    <div class="voices-footer">
+      <a href="sumumu-journal.html" class="voices-cta-btn">先輩の体験談をもっと読む →</a>
+      <p class="voices-note">1,200件以上の体験談を掲載中。登録不要で閲覧できます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community-sec fade">
+  <div class="inner">
+    <div class="community-layout">
+      <div class="community-body">
+        <span class="eyebrow">COMMUNITY</span>
+        <h2 class="community-ttl">すむむ。コミュニティ</h2>
+        <p class="community-lead">
+          住み替えを経験した先輩が集まるオンラインコミュニティ。体験談を読む・匿名で質問する・先輩に直接連絡する。登録不要で、今日からすぐに活用できます。
+        </p>
+        <ul class="community-feats">
+          <li><span class="feat-check">✓</span>住み替え体験談・後悔ポイントを読む</li>
+          <li><span class="feat-check">✓</span>匿名で先輩に質問・相談できる</li>
+          <li><span class="feat-check">✓</span>エリア・物件タイプ・家族構成で絞り込み</li>
+          <li><span class="feat-check">✓</span>登録不要・完全無料で閲覧できる</li>
+        </ul>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          <img src="images/LINE_Brand_icon.png" style="width:18px;height:18px;object-fit:contain;" alt="LINE">
+          コミュニティに無料で参加する
+        </a>
+      </div>
+      <div class="community-img">
+        <img src="images/step01-community.jpg" alt="コミュニティ"
+             onerror="this.src='https://picsum.photos/seed/community-detail/600/340'">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events-sec fade">
+  <div class="inner">
+    <span class="eyebrow">EVENTS</span>
+    <h2 class="sec-title">イベント・座談会</h2>
+    <p class="sec-lead">先輩・専門家に実際に会って学ぶ・つながる。オンライン・オフライン問わず毎月開催しています。</p>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-img">
+          <img src="images/yt01.jpg" alt="すむむ。TV"
+               onerror="this.src='https://picsum.photos/seed/event01-about/600/280'">
+        </div>
+        <div class="event-body">
+          <span class="event-tag">毎月定例</span>
+          <div class="event-ttl">すむむ。TV（オンライン配信）</div>
+          <div class="event-desc">毎月テーマを変えてお届けするオンラインイベント。専門家・先輩ゲストが住み替えのリアルを語ります。</div>
+          <div class="event-meta">📅 毎月第2土曜日 &nbsp;|&nbsp; 💻 オンライン</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-img">
+          <img src="images/yt02.jpg" alt="先輩後輩座談会"
+               onerror="this.src='https://picsum.photos/seed/event02-about/600/280'">
+        </div>
+        <div class="event-body">
+          <span class="event-tag">少人数制</span>
+          <div class="event-ttl">先輩・後輩の住まい座談会</div>
+          <div class="event-desc">購入経験者と検討者が少人数でリアルに話し合える場。本音の質問ができる顔の見える交流会です。</div>
+          <div class="event-meta">📅 月2〜3回開催 &nbsp;|&nbsp; 💻 オンライン</div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-img">
+          <img src="images/yt03.jpg" alt="モデルルーム見学会"
+               onerror="this.src='https://picsum.photos/seed/event03-about/600/280'">
+        </div>
+        <div class="event-body">
+          <span class="event-tag">現地開催</span>
+          <div class="event-ttl">モデルルーム見学ツアー</div>
+          <div class="event-desc">先輩と一緒に物件を見学し、実際の購入判断プロセスを体験。見学後の座談会で先輩に直接質問できます。</div>
+          <div class="event-meta">📅 不定期開催 &nbsp;|&nbsp; 📍 関西エリア</div>
+        </div>
+      </div>
+    </div>
+    <div class="cta-row"><a href="sumumu-news.html" class="btn-outline">すべてのイベントを見る →</a></div>
+  </div>
+</section>
+
+<!-- CONCIERGE -->
+<section class="concierge-sec fade">
+  <div class="concierge-inner">
+    <div class="concierge-hd">
+      <span class="concierge-eyebrow">CONCIERGE</span>
+      <h2 class="concierge-title">コンシェルジュ相談（無料）</h2>
+      <p class="concierge-lead">
+        「さあ買おう」と決めたとき、中立な専門家が個別にサポートします。<br>
+        特定の物件や不動産会社への誘導はしません。あなたの利益を最優先に考えたアドバイスを、売り込みなしで提供します。
+      </p>
+    </div>
+    <div class="concierge-feats">
+      <div class="conc-feat">
+        <div class="conc-feat-icon">💰</div>
+        <div class="conc-feat-ttl">資金計画・住宅ローン相談</div>
+        <div class="conc-feat-desc">借入可能額の算出・返済シミュレーション・金利タイプの選び方まで、FP的な視点でアドバイスします。</div>
+      </div>
+      <div class="conc-feat">
+        <div class="conc-feat-icon">🏡</div>
+        <div class="conc-feat-ttl">物件選び・エリア比較のサポート</div>
+        <div class="conc-feat-desc">希望条件の整理から、エリア・学区・交通利便性を踏まえた物件候補の絞り込みまでサポートします。</div>
+      </div>
+      <div class="conc-feat">
+        <div class="conc-feat-icon">🔄</div>
+        <div class="conc-feat-ttl">売却タイミング・住み替え計画</div>
+        <div class="conc-feat-desc">今のお住まいの売却と新居購入の同時進行。資金フロー・タイミングの整理を専門家がサポートします。</div>
+      </div>
+      <div class="conc-feat">
+        <div class="conc-feat-icon">📋</div>
+        <div class="conc-feat-ttl">セカンドオピニオン</div>
+        <div class="conc-feat-desc">「不動産会社にこう言われたけど本当？」営業担当の提案が適切かどうかを中立な視点で確認できます。</div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+        <img src="images/LINE_Brand_icon.png" style="width:18px;height:18px;object-fit:contain;" alt="LINE">
+        コンシェルジュに相談する（無料）
+      </a>
+      <p class="concierge-note">相談・情報提供は完全無料。費用が発生するのは住み替えが成立した後のみです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners" class="partner-sec fade">
+  <div class="inner">
+    <span class="eyebrow">PARTNERS</span>
+    <h2 class="sec-title">住まいの先を、もっと楽しく</h2>
+    <p class="partner-lead-sub">
+      マンションを買ったあとの暮らしを豊かにするメディアをご紹介します。<br>
+      インテリア・リノベーション・家族との日々——住み替えの次のステージへ。
+    </p>
+    <div class="partner-grid">
+
+      <!-- ToKoSie -->
+      <div class="partner-card">
+        <div class="partner-card-logo">
+          <span class="partner-card-cat">暮らし・インテリア</span>
+<div class="partner-logo-text">ToKoSie</div>
+          <div class="partner-logo-kana">トコシエ</div>
+        </div>
+        <div class="partner-card-body">
+          <div class="partner-card-name">トコシエ</div>
+          <div class="partner-card-tagline">リノベーション&amp; 部屋づくり、自分らしい暮らしを楽しむウェブマガジン</div>
+          <p class="partner-card-desc">
+            マンションを手に入れた次のステップは、自分らしい空間づくり。リノベーション事例・DIYアイデア・インテリアスタイルの実例を豊富に掲載。購入後の住まいをもっと好きになれるヒントが見つかります。
+          </p>
+          <div class="partner-tags">
+            <span class="partner-tag">リノベーション</span>
+            <span class="partner-tag">インテリア</span>
+            <span class="partner-tag">DIY</span>
+            <span class="partner-tag">部屋づくり</span>
+            <span class="partner-tag">実例紹介</span>
+          </div>
+          <div class="partner-card-foot">
+            <span class="partner-url">tokosie.jp</span>
+            <a href="https://tokosie.jp" target="_blank" rel="noopener noreferrer" class="partner-link">
+              サイトを見る <span class="partner-link-icon">↗</span> →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- アイスム -->
+      <div class="partner-card">
+        <div class="partner-card-logo">
+          <span class="partner-card-cat">家族・ライフスタイル</span>
+<div class="partner-logo-text" style="font-size:28px;letter-spacing:0.02em;">アイスム</div>
+          <div class="partner-logo-kana">ism.life</div>
+        </div>
+        <div class="partner-card-body">
+          <div class="partner-card-name">アイスム</div>
+          <div class="partner-card-tagline">がんばる日も、がんばらない日も、あなたらしく。</div>
+          <p class="partner-card-desc">
+            食・家族・ライフスタイルをテーマにした暮らし系ウェブマガジン。新居での家族との日々や、等身大の暮らしのアイデアが充実。マンション購入後の「家族としての暮らし方」を考えるきっかけになります。
+          </p>
+          <div class="partner-tags">
+            <span class="partner-tag">家族</span>
+            <span class="partner-tag">食・レシピ</span>
+            <span class="partner-tag">ライフスタイル</span>
+            <span class="partner-tag">座談会</span>
+            <span class="partner-tag">インタビュー</span>
+          </div>
+          <div class="partner-card-foot">
+            <span class="partner-url">ism.life</span>
+            <a href="https://ism.life" target="_blank" rel="noopener noreferrer" class="partner-link">
+              サイトを見る <span class="partner-link-icon">↗</span> →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA -->
+<section id="media" class="media-sec fade">
+  <div class="media-inner">
+    <div class="media-hd">
+      <div class="media-hd-left">
+        <span class="eyebrow-dark">MEDIA</span>
+        <h2 class="media-title">すむむ。が紹介されました</h2>
+        <p class="media-lead">新聞・ウェブメディア・テレビなど、さまざまなメディアに取り上げていただいています。</p>
+      </div>
+      <a href="sumumu-about.html#media" class="media-hd-link">すべての掲載情報を見る →</a>
+    </div>
+
+    <div class="media-layout">
+
+      <!-- Featured -->
+      <div class="media-featured">
+        <span class="media-feat-label">注目の掲載</span>
+        <div class="media-feat-source">〇〇新聞</div>
+        <div class="media-feat-source-sub">全国紙・朝刊</div>
+        <div class="media-feat-date">2026年3月28日</div>
+        <div class="media-feat-ttl">「住まい購入のリアルを届けるコミュニティ、すむむ。が注目を集める理由」</div>
+        <p class="media-feat-desc">
+          購入経験者と検討者をつなぐ新しい形のコミュニティメディアとして、〇〇新聞の住まい特集ページにて取り上げていただきました。先輩・後輩の循環モデルに注目が集まっています。
+        </p>
+        <div class="media-feat-foot">
+          <span class="media-feat-tag">新聞</span>
+          <a href="sumumu-about.html#media" class="media-feat-link">詳細を読む →</a>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="media-list">
+        <div class="media-item">
+          <div class="media-item-type">
+            <div class="media-item-type-icon">🌐</div>
+            <div class="media-item-type-label">WEB<br>メディア</div>
+          </div>
+          <div class="media-item-body">
+            <div class="media-item-meta">
+              <span class="media-item-cat web">ウェブ</span>
+              <span class="media-item-date">2026年4月10日</span>
+            </div>
+            <div class="media-item-ttl">「不動産業界に新風、体験談コミュニティが変える住まい探し」</div>
+            <div class="media-item-source">〇〇ウェブメディア</div>
+          </div>
+        </div>
+        <div class="media-item">
+          <div class="media-item-type">
+            <div class="media-item-type-icon">📕</div>
+            <div class="media-item-type-label">業界<br>誌</div>
+          </div>
+          <div class="media-item-body">
+            <div class="media-item-meta">
+              <span class="media-item-cat mag">雑誌</span>
+              <span class="media-item-date">2026年3月号</span>
+            </div>
+            <div class="media-item-ttl">「2026年注目の住まいサービス10選」に選出</div>
+            <div class="media-item-source">〇〇住まい専門誌</div>
+          </div>
+        </div>
+        <div class="media-item">
+          <div class="media-item-type">
+            <div class="media-item-type-icon">📺</div>
+            <div class="media-item-type-label">TV<br>番組</div>
+          </div>
+          <div class="media-item-body">
+            <div class="media-item-meta">
+              <span class="media-item-cat tv">テレビ</span>
+              <span class="media-item-date">2026年2月15日</span>
+            </div>
+            <div class="media-item-ttl">住まい特集コーナーにてサービス内容が紹介されました</div>
+            <div class="media-item-source">〇〇テレビ</div>
+          </div>
+        </div>
+        <div class="media-item">
+          <div class="media-item-type">
+            <div class="media-item-type-icon">🌐</div>
+            <div class="media-item-type-label">WEB<br>メディア</div>
+          </div>
+          <div class="media-item-body">
+            <div class="media-item-meta">
+              <span class="media-item-cat web">ウェブ</span>
+              <span class="media-item-date">2026年1月22日</span>
+            </div>
+            <div class="media-item-ttl">「口コミ・体験談で選ぶ時代へ。住まい探しのDXを担う新興サービス」</div>
+            <div class="media-item-source">〇〇テックメディア</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Logos -->
+    <div class="media-logos">
+      <span class="media-logo-pill">〇〇新聞</span>
+      <span class="media-logo-pill">△△テレビ</span>
+      <span class="media-logo-pill">□□住まい誌</span>
+      <span class="media-logo-pill">◇◇ウェブ</span>
+      <span class="media-logo-pill">〇〇テク</span>
+    </div>
+    <div style="text-align:center;">
+      <a href="sumumu-about.html#media" class="btn-media">掲載情報をすべて見る</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec fade">
+  <span class="cta-eyebrow">GET STARTED</span>
+  <h2 class="cta-title">まずは、先輩の声を読むだけでOK。</h2>
+  <p class="cta-lead">登録不要・完全無料。すむむ。は読むだけでも十分役に立ちます。準備ができたら、いつでもコンシェルジュに相談してください。</p>
+  <div class="cta-btns">
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta-line">
+      <img src="images/LINE_Brand_icon.png" style="width:18px;height:18px;object-fit:contain;" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <a href="sumumu-journal.html" class="btn-cta-ghost">先輩の体験談を読む →</a>
+  </div>
+  <p class="cta-note">相談・情報提供は完全無料 &nbsp;|&nbsp; 登録不要で閲覧できます</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0ab{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0ab" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html">購入体験</a></li><li><a href="sumumu-journal.html">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">資金計画</a></li><li><a href="sumumu-guide.html">物件選び</a></li><li><a href="sumumu-guide.html">購入手続き</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tools.html">すべてのツール</a></li><li><a href="sumumu-tool-loan.html">ローン返済</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li><li><a href="/news/?cat=community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile nav
+const hamb = document.getElementById('hamb');
+const mobNav = document.getElementById('mobNav');
+hamb.addEventListener('click', () => {
+  hamb.classList.toggle('open');
+  mobNav.classList.toggle('open');
+});
+document.querySelectorAll('.mob-parent').forEach(p => {
+  p.addEventListener('click', () => {
+    p.classList.toggle('open');
+    const sub = p.nextElementSibling;
+    if (sub) sub.classList.toggle('open');
+  });
+});
+
+// Fade in on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

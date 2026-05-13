@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シミュレーション一覧 | すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --dark-bg:#1A1010;
+  --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE;
+  --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --purple-dark:#534AB7; --purple-bg:#EEEDFE;
+  --orange-dark:#854F0B; --orange-bg:#FAEEDA;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);color:#fff;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;user-select:none;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;transform:none;background:transparent;border:none;box-shadow:none;padding:0 6px;min-width:auto;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);background:none;}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.2s;border-radius:1px;}
+.hamb.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.hamb.open span:nth-child(2){opacity:0;}
+.hamb.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;background:var(--bg-white);border-bottom:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,0.12);max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:8px 16px 24px;}
+.mob-link{display:block;font-size:14px;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);}
+.mob-parent{display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:500;color:var(--text-primary);padding:12px 8px;border-bottom:0.5px solid var(--border);cursor:pointer;}
+.mob-parent i{font-style:normal;font-size:11px;transition:transform 0.2s;}
+.mob-parent.open i{transform:rotate(180deg);}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);}
+.mob-sub.open{max-height:220px;}
+.mob-sub a{display:block;font-size:13px;color:var(--text-secondary);padding:10px 28px;border-bottom:0.5px solid var(--border);}
+.mob-sub a:last-child{border-bottom:none;}
+.mob-util{margin-top:16px;padding:0 4px;display:flex;flex-wrap:wrap;gap:8px;}
+.mob-util a{font-size:12px;color:var(--text-secondary);padding:5px 14px;border:1px solid var(--border);border-radius:var(--r-pill);}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--line);color:#fff;padding:12px;border-radius:var(--r-md);font-size:14px;font-weight:500;margin:14px 4px 0;transition:background 0.15s;}
+.mob-cta:hover{background:var(--line-h);color:#fff;}
+.line-logo-img{width:22px;height:22px;display:block;flex-shrink:0;object-fit:contain;}
+.btn-util .line-logo-img{width:16px;height:16px;}
+
+/* ─── HERO ────────────────────────────────── */
+.tools-hero{background:var(--bg-white);padding:56px 32px 0;text-align:center;}
+.tools-hero-inner{max-width:760px;margin:0 auto;}
+.tools-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-mid);margin-bottom:16px;}
+.tools-h1{font-size:26px;font-weight:500;line-height:1.55;margin-bottom:16px;color:var(--text-primary);}
+.tools-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.tools-stats{display:flex;align-items:center;justify-content:center;margin-bottom:44px;}
+.stat-item{padding:0 36px;text-align:center;}
+.stat-item+.stat-item{border-left:0.5px solid var(--border);}
+.stat-num{display:block;font-size:36px;font-weight:500;color:var(--green-dark);line-height:1.1;margin-bottom:4px;}
+.stat-num sup{font-size:14px;vertical-align:super;}
+.stat-label{font-size:11px;color:var(--text-muted);}
+
+/* ─── TAB NAV ─────────────────────────────── */
+.tools-tab-nav{position:sticky;top:88px;z-index:100;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.tools-tab-inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;padding:12px 32px;overflow-x:auto;scrollbar-width:none;}
+.tools-tab-inner::-webkit-scrollbar{display:none;}
+.ttab{display:inline-flex;align-items:center;gap:5px;padding:7px 16px;border-radius:var(--r-pill);font-size:12px;font-weight:500;white-space:nowrap;border:1.5px solid var(--border);color:var(--text-secondary);background:var(--bg-white);cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.ttab:hover{border-color:var(--green-mid);color:var(--green-mid);}
+.ttab.active{background:var(--green-dark);border-color:var(--green-dark);color:#fff;}
+.ttab-num{font-size:10px;opacity:0.65;}
+
+/* ─── TOOLS BODY ──────────────────────────── */
+.tools-body{background:var(--bg-page);padding:44px 32px 72px;}
+.tools-body-inner{max-width:1080px;margin:0 auto;}
+.tc-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+
+/* Standard card */
+.tc-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:box-shadow 0.2s;scroll-margin-top:160px;}
+.tc-card:hover{box-shadow:var(--shadow-md);}
+.tc-card-head{padding:24px 24px 0;}
+.tc-badge-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.tc-num{font-size:10px;font-weight:500;letter-spacing:0.1em;padding:3px 10px;border-radius:var(--r-pill);border:1px solid currentColor;}
+.tc-badge-wide{font-size:10px;font-weight:500;padding:3px 10px;border-radius:var(--r-pill);background:var(--bg-page);border:1px solid var(--border);color:var(--text-muted);}
+.tc-name{font-size:17px;font-weight:500;line-height:1.45;margin-bottom:10px;}
+.tc-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.8;}
+.tc-can{padding:16px 24px;flex:1;}
+.tc-can-ttl{font-size:10.5px;font-weight:500;color:var(--text-muted);letter-spacing:0.08em;margin-bottom:8px;}
+.tc-can-list{list-style:none;}
+.tc-can-list li{font-size:12.5px;color:var(--text-secondary);padding:4px 0;display:flex;align-items:flex-start;gap:6px;}
+.tc-can-list li::before{content:"◎";color:var(--green-mid);flex-shrink:0;}
+.tc-footer{border-top:0.5px solid var(--border);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+.tc-mins{font-size:11px;color:var(--text-muted);}
+.btn-tc{display:inline-flex;align-items:center;gap:6px;color:#fff;padding:9px 22px;border-radius:var(--r-pill);font-size:13px;font-weight:500;transition:opacity 0.15s;text-decoration:none;}
+.btn-tc:hover{opacity:0.85;}
+
+/* Wide card */
+.tc-card--wide{display:grid;grid-template-columns:1fr 1fr;margin-bottom:20px;scroll-margin-top:160px;}
+.tc-card--wide.tc-card{flex-direction:unset;}
+.tc-main{display:flex;flex-direction:column;}
+.tc-card--wide .tc-card-head{padding:28px 28px 0;}
+.tc-card--wide .tc-can{padding:16px 28px;}
+.tc-card--wide .tc-footer{padding:18px 28px;}
+.tc-preview{background:var(--bg-page);border-left:0.5px solid var(--border);padding:24px;display:flex;flex-direction:column;}
+.tc-prev-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.tc-prev-tab{font-size:11px;font-weight:500;padding:5px 14px;border-radius:var(--r-pill);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.15s;background:var(--bg-white);}
+.tc-prev-tab.active{color:#fff;border-color:transparent;}
+.tc-prev-content{display:none;flex-direction:column;gap:0;flex:1;}
+.tc-prev-content.show{display:flex;}
+.tc-prev-ttl{font-size:11.5px;font-weight:500;color:var(--text-primary);margin-bottom:4px;}
+.tc-prev-note{font-size:10.5px;color:var(--text-muted);margin-bottom:14px;}
+.tc-bar-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text-muted);margin-bottom:3px;}
+.tc-bar-track{height:8px;background:rgba(0,0,0,0.07);border-radius:4px;overflow:hidden;margin-bottom:10px;}
+.tc-bar-fill{height:100%;border-radius:4px;}
+.tc-result-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:0.5px solid var(--border);}
+.tc-result-row:last-child{border-bottom:none;}
+.tc-result-label{font-size:12px;color:var(--text-secondary);}
+.tc-result-val{font-size:16px;font-weight:500;}
+.tc-result-sub{font-size:10px;color:var(--text-muted);display:block;}
+
+/* Diff banner */
+.diff-banner{background:var(--green-dark);border-radius:var(--r-lg);padding:28px 32px;margin:8px 0 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.diff-banner-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.14em;color:var(--green-light);margin-bottom:6px;}
+.diff-banner-ttl{font-size:17px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:6px;}
+.diff-banner-lead{font-size:12px;color:rgba(255,255,255,0.60);line-height:1.8;}
+.diff-feats{display:flex;gap:20px;flex-shrink:0;}
+.diff-feat{text-align:center;}
+.diff-feat-icon{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);color:var(--green-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;margin:0 auto 6px;}
+.diff-feat-label{font-size:10.5px;color:rgba(255,255,255,0.72);white-space:nowrap;}
+.btn-diff{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:11px 26px;border-radius:var(--r-pill);font-size:13px;font-weight:500;transition:background 0.15s;flex-shrink:0;text-decoration:none;}
+.btn-diff:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+  .tools-tab-nav{top:52px;}
+}
+@media(max-width:960px){
+  .tc-card--wide{grid-template-columns:1fr;}
+  .tc-preview{border-left:none;border-top:0.5px solid var(--border);}
+  .diff-banner{flex-direction:column;text-align:center;gap:20px;}
+  .diff-feats{justify-content:center;}
+  .tools-hero{padding:40px 16px 0;}
+  .tools-body{padding:32px 16px 56px;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+}
+@media(max-width:768px){
+  .tc-row{grid-template-columns:1fr;}
+  .tools-stats{gap:0;}
+  .stat-item{padding:0 20px;}
+  .stat-num{font-size:28px;}
+  .footer-nav{grid-template-columns:repeat(3,1fr);}
+  .tools-tab-inner{padding:10px 16px;}
+}
+@media(max-width:480px){
+  .tools-h1{font-size:20px;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.sts0{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="sts0" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni"><span class="nl">すむむとは。<i>▾</i></span><div class="nd"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a><a href="sumumu-about.html#media">メディア掲載</a></div></div>
+      <div class="ni"><span class="nl">住まいを探す<i>▾</i></span><div class="nd"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a><a href="properties/sumumu-kinki-00001.html">個別物件</a></div></div>
+      <div class="ni"><span class="nl">先輩の体験談<i>▾</i></span><div class="nd"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+      <div class="ni"><span class="nl">お役立ちコラム<i>▾</i></span><div class="nd"><a href="sumumu-guide.html">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a><a href="sumumu-guide.html?cat=loan">住宅ローン</a></div></div>
+      <div class="ni"><span class="nl" style="color:var(--green-mid)">シミュレーション<i>▾</i></span><div class="nd"><a href="sumumu-tools.html" style="color:var(--green-mid)">すべてのツール</a><a href="sumumu-tool-loan.html">ローンシミュレーター</a><a href="sumumu-tool-borrowing.html">借入可能額</a></div></div>
+      <div class="ni"><a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a><div class="nd"><a href="sumumu-area.html">エリア一覧</a><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div></div>
+      <a href="sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">住まいを探す<i>▾</i></div><div class="mob-sub"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <div class="mob-group"><div class="mob-parent">お役立ちコラム<i>▾</i></div><div class="mob-sub"><a href="sumumu-guide.html">すべて</a><a href="sumumu-guide.html?cat=fund">資金計画</a></div></div>
+        <div class="mob-group"><div class="mob-parent" style="color:var(--green-mid)">シミュレーション<i>▾</i></div><div class="mob-sub"><a href="sumumu-tools.html">すべてのツール</a><a href="sumumu-tool-loan.html">ローン返済</a><a href="sumumu-tool-borrowing.html">借入可能額</a></div></div>
+        <a href="sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util"><a href="sumumu-faq.html">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="tools-hero">
+  <div class="tools-hero-inner">
+    <span class="tools-eyebrow">SIMULATION</span>
+    <h1 class="tools-h1">「買えるか」「払えるか」「住めるか」<br>全部、ここで試してみてください。</h1>
+    <p class="tools-lead">
+      数字を見てから動く。すむむ。のシミュレーションは計算して終わりじゃない。<br>
+      結果を先輩の体験談と照らし合わせ、コンシェルジュに相談するまで一気通貫。
+    </p>
+    <div class="tools-stats">
+      <div class="stat-item">
+        <span class="stat-num">6</span>
+        <span class="stat-label">ツール収録</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">無料</span>
+        <span class="stat-label">すべて無料</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">3<sup>分〜</sup></span>
+        <span class="stat-label">最短3分で完了</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="tools-tab-nav">
+  <div class="tools-tab-inner" id="tabInner">
+    <a href="#tool01" class="ttab active"><span class="ttab-num">01</span> ローン返済</a>
+    <a href="#tool02" class="ttab"><span class="ttab-num">02</span> 借入可能額・住み替え</a>
+    <a href="#tool03" class="ttab"><span class="ttab-num">03</span> 購入コスト</a>
+    <a href="#tool04" class="ttab"><span class="ttab-num">04</span> 賃貸 vs 購入</a>
+    <a href="#tool05" class="ttab"><span class="ttab-num">05</span> エリア診断</a>
+    <a href="#tool06" class="ttab"><span class="ttab-num">06</span> 子育て診断</a>
+  </div>
+</div>
+
+<!-- TOOLS BODY -->
+<div class="tools-body">
+  <div class="tools-body-inner">
+
+    <!-- ROW 1: TOOL 01 + TOOL 04 -->
+    <div class="tc-row">
+
+      <!-- TOOL 01: ローン返済 (green) -->
+      <div class="tc-card" id="tool01">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#085041;border-color:#085041;">TOOL 01</span>
+          </div>
+          <div class="tc-name">ローン返済シミュレーター</div>
+          <div class="tc-desc">借入額・金利・返済期間を入力するだけで月々の返済額を即計算。変動・固定・全期間固定の3パターンで比較できます。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること</div>
+          <ul class="tc-can-list">
+            <li>月々返済額と総返済額を瞬時に算出</li>
+            <li>変動・固定・全期間固定の3パターン同時比較</li>
+            <li>年別返済スケジュールを一覧表示</li>
+            <li>先輩の同条件体験談と照らし合わせる</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約3分</span>
+          <a href="sumumu-tool-loan.html" class="btn-tc" style="background:#085041;">ローンを計算する →</a>
+        </div>
+      </div>
+
+      <!-- TOOL 04: 賃貸 vs 購入 (blue) -->
+      <div class="tc-card" id="tool04">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#185FA5;border-color:#185FA5;">TOOL 04</span>
+          </div>
+          <div class="tc-name">賃貸 vs 購入 比較ツール</div>
+          <div class="tc-desc">35年トータルで賃貸と購入どちらが得か。家賃・物件価格・金利などを入力すると損益分岐点まで見えてきます。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること</div>
+          <ul class="tc-can-list">
+            <li>35年累計コストを折れ線グラフで可視化</li>
+            <li>損益分岐点（何年目で逆転するか）を自動算出</li>
+            <li>購入コストの内訳（頭金・諸費用・税金）を詳細表示</li>
+            <li>年別の比較表で差額を確認</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約5分</span>
+          <a href="sumumu-tool-rentbuy.html" class="btn-tc" style="background:#185FA5;">比較してみる →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 02: 借入可能額 & 住み替え (purple WIDE) -->
+    <div class="tc-card tc-card--wide" id="tool02">
+      <div class="tc-main">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#534AB7;border-color:#534AB7;">TOOL 02</span>
+            <span class="tc-badge-wide">統合ツール</span>
+          </div>
+          <div class="tc-name">借入可能額 ＆ 住み替え資金計画</div>
+          <div class="tc-desc">年収・勤務形態から最大借入可能額を算出。住み替えモードでは現マンションの売却想定価値 → 残債控除 → 新規借入額まで3ステップで完結。他ポータルにない一貫した設計です。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること（2つのモード）</div>
+          <ul class="tc-can-list">
+            <li>Aモード：年収・勤続年数から借入可能額の上限・目安を算出</li>
+            <li>Aモード：返済負担率ゲージで無理のない借入額を把握</li>
+            <li>Bモード：現マンションの売却想定価値を簡易試算</li>
+            <li>Bモード：残債控除 → 手取り → 新規借入額を自動計算</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約5分</span>
+          <a href="sumumu-tool-borrowing.html" class="btn-tc" style="background:#534AB7;">借入可能額を調べる →</a>
+        </div>
+      </div>
+      <div class="tc-preview" id="prev02">
+        <div class="tc-prev-tabs">
+          <button class="tc-prev-tab active" onclick="switchPrev('prev02',0,this)" data-bg="#534AB7" style="background:#534AB7;border-color:#534AB7;color:#fff;">Aモード（初購入）</button>
+          <button class="tc-prev-tab" onclick="switchPrev('prev02',1,this)" data-bg="#534AB7">Bモード（住み替え）</button>
+        </div>
+        <div class="tc-prev-content show" data-idx="0">
+          <div class="tc-prev-ttl">年収650万円の場合の借入可能額</div>
+          <div class="tc-prev-note">返済負担率 25%〜35% の範囲で試算</div>
+          <div class="tc-bar-label"><span>無理なし目安</span><span>3,900万円</span></div>
+          <div class="tc-bar-track"><div class="tc-bar-fill" style="width:60%;background:#534AB7;"></div></div>
+          <div class="tc-bar-label"><span>最大借入可能額</span><span>5,200万円</span></div>
+          <div class="tc-bar-track"><div class="tc-bar-fill" style="width:80%;background:#534AB7;opacity:0.45;"></div></div>
+          <div class="tc-result-row" style="margin-top:8px;">
+            <span class="tc-result-label">月々返済（3,900万・35年・1.0%）</span>
+            <span class="tc-result-val" style="color:#534AB7;">10.6万円</span>
+          </div>
+        </div>
+        <div class="tc-prev-content" data-idx="1">
+          <div class="tc-prev-ttl">住み替え資金フロー（Bモード）</div>
+          <div class="tc-prev-note">現マンション → 売却 → 新居購入の流れ</div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">現マンション 売却想定価格</span>
+            <span class="tc-result-val" style="color:#534AB7;">3,400万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">残債残高</span>
+            <span class="tc-result-val">− 1,800万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">売却手取り（諸費用控除後）</span>
+            <span class="tc-result-val" style="color:#534AB7;">1,520万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label" style="font-weight:500;">新居購入 必要借入額</span>
+            <span class="tc-result-val" style="color:#534AB7;font-size:20px;">2,880万円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOL 03: 購入コスト (orange WIDE) -->
+    <div class="tc-card tc-card--wide" id="tool03">
+      <div class="tc-main">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#854F0B;border-color:#854F0B;">TOOL 03</span>
+            <span class="tc-badge-wide">統合ツール</span>
+          </div>
+          <div class="tc-name">購入コスト全体像ツール</div>
+          <div class="tc-desc">物件価格だけじゃない。仲介手数料・登記費用・ローン手数料・火災保険まで、購入にかかる全コストを物件種別ごとに自動算出します。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること（2つのビュー）</div>
+          <ul class="tc-can-list">
+            <li>初期費用：購入時にかかる諸費用を項目別に明細表示</li>
+            <li>月額コスト：管理費・修繕積立金・ローンの月々合計を試算</li>
+            <li>新築・中古・戸建ての3種別で費用構成が自動切替</li>
+            <li>35年累計の総保有コストを棒グラフで確認</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約4分</span>
+          <a href="sumumu-tool-cost.html" class="btn-tc" style="background:#854F0B;">コストを把握する →</a>
+        </div>
+      </div>
+      <div class="tc-preview" id="prev03">
+        <div class="tc-prev-tabs">
+          <button class="tc-prev-tab active" onclick="switchPrev('prev03',0,this)" data-bg="#854F0B" style="background:#854F0B;border-color:#854F0B;color:#fff;">諸費用</button>
+          <button class="tc-prev-tab" onclick="switchPrev('prev03',1,this)" data-bg="#854F0B">月額コスト</button>
+        </div>
+        <div class="tc-prev-content show" data-idx="0">
+          <div class="tc-prev-ttl">4,500万円 新築マンションの場合</div>
+          <div class="tc-prev-note">物件価格の約3〜7%が諸費用の目安</div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">仲介手数料</span>
+            <div><span class="tc-result-val" style="color:#854F0B;">0円</span><span class="tc-result-sub">新築のため無料</span></div>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">登記・司法書士費用</span>
+            <span class="tc-result-val" style="color:#854F0B;">28万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">ローン手数料・保証料</span>
+            <span class="tc-result-val" style="color:#854F0B;">90万円</span>
+          </div>
+          <div class="tc-result-row" style="border-top:1.5px solid rgba(0,0,0,0.12);margin-top:4px;padding-top:12px;">
+            <span class="tc-result-label" style="font-weight:500;">諸費用 合計</span>
+            <span class="tc-result-val" style="color:#854F0B;font-size:20px;">約180万円</span>
+          </div>
+        </div>
+        <div class="tc-prev-content" data-idx="1">
+          <div class="tc-prev-ttl">月々の保有コスト内訳</div>
+          <div class="tc-prev-note">借入3,600万円・35年・1.0%の場合</div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">住宅ローン返済</span>
+            <span class="tc-result-val" style="color:#854F0B;">9.7万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">管理費・修繕積立金</span>
+            <span class="tc-result-val" style="color:#854F0B;">2.8万円</span>
+          </div>
+          <div class="tc-result-row">
+            <span class="tc-result-label">固定資産税（月換算）</span>
+            <span class="tc-result-val" style="color:#854F0B;">0.8万円</span>
+          </div>
+          <div class="tc-result-row" style="border-top:1.5px solid rgba(0,0,0,0.12);margin-top:4px;padding-top:12px;">
+            <span class="tc-result-label" style="font-weight:500;">月々 合計</span>
+            <span class="tc-result-val" style="color:#854F0B;font-size:20px;">約13.3万円</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: TOOL 05 + TOOL 06 -->
+    <div class="tc-row">
+
+      <!-- TOOL 05: エリア診断 (purple) -->
+      <div class="tc-card" id="tool05">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#534AB7;border-color:#534AB7;">TOOL 05</span>
+          </div>
+          <div class="tc-name">エリア診断</div>
+          <div class="tc-desc">「どのエリアで買うか」を5つのライフスタイル軸でスコアリング。先輩の声と合わせて、自分に合ったエリアが見えてきます。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること</div>
+          <ul class="tc-can-list">
+            <li>5軸スコア（交通・教育・商業・自然・コスト）でエリア評価</li>
+            <li>最大3エリアの比較表で一目確認</li>
+            <li>レーダーチャートで強み・弱みを可視化</li>
+            <li>先輩が同エリアで感じたリアルな声を参照</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約5分</span>
+          <a href="sumumu-tool-area.html" class="btn-tc" style="background:#534AB7;">エリアを診断する →</a>
+        </div>
+      </div>
+
+      <!-- TOOL 06: 子育て診断 (green) -->
+      <div class="tc-card" id="tool06">
+        <div class="tc-card-head">
+          <div class="tc-badge-row">
+            <span class="tc-num" style="color:#085041;border-color:#085041;">TOOL 06</span>
+          </div>
+          <div class="tc-name">子育て診断</div>
+          <div class="tc-desc">子どもの年齢フェーズ（乳幼児〜中学生）ごとに学区・保育・公園・医療のスコアを動的に表示。「今」と「将来」を同時に確認できます。</div>
+        </div>
+        <div class="tc-can">
+          <div class="tc-can-ttl">できること</div>
+          <ul class="tc-can-list">
+            <li>4フェーズ（乳幼児・未就学・小学生・中学生）を切り替えて確認</li>
+            <li>成長タイムラインで将来の住環境変化を可視化</li>
+            <li>学区情報・小中学校の評判を一覧で確認</li>
+            <li>子育て世帯の先輩体験談と照らし合わせる</li>
+          </ul>
+        </div>
+        <div class="tc-footer">
+          <span class="tc-mins">約4分</span>
+          <a href="sumumu-tool-kosodate.html" class="btn-tc" style="background:#085041;">子育てで診断する →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">計算したら、次は専門家に話してみよう</h2>
+    <p class="concierge-lead">
+      シミュレーション結果をそのまま持ち込んで相談できます。<br>
+      中立な立場の専任スタッフが、数字を一緒に読み解きます。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0t{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0t" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">すべて</a></li><li><a href="sumumu-guide.html?cat=fund">資金計画</a></li><li><a href="sumumu-guide.html?cat=loan">住宅ローン</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tools.html">すべてのツール</a></li><li><a href="sumumu-tool-loan.html">ローンシミュレーター</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="/news/?cat=event">イベント</a></li><li><a href="/news/?cat=community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Preview tab switch ── */
+function switchPrev(containerId, idx, btn) {
+  const wrap = document.getElementById(containerId);
+  wrap.querySelectorAll('.tc-prev-tab').forEach(t => {
+    t.classList.remove('active');
+    t.style.background = 'var(--bg-white)';
+    t.style.color = 'var(--text-muted)';
+    t.style.borderColor = 'var(--border)';
+  });
+  btn.classList.add('active');
+  btn.style.background = btn.dataset.bg;
+  btn.style.color = '#fff';
+  btn.style.borderColor = btn.dataset.bg;
+  wrap.querySelectorAll('.tc-prev-content').forEach(c => c.classList.remove('show'));
+  wrap.querySelectorAll('.tc-prev-content')[idx].classList.add('show');
+}
+
+/* ── Tab nav active on scroll ── */
+const TAB_IDS = ['tool01','tool02','tool03','tool04','tool05','tool06'];
+const tabs = document.querySelectorAll('.ttab');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-20% 0px -60% 0px' });
+TAB_IDS.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+
+/* ── Mobile nav ── */
+document.getElementById('hambBtn').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('mobNav').classList.toggle('open');
+});
+document.querySelectorAll('.mob-parent').forEach(p => {
+  p.addEventListener('click', function() {
+    this.classList.toggle('open');
+    this.nextElementSibling.classList.toggle('open');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物件一覧 近畿エリア｜すむむ。</title>
+<style>
+:root {
+  --brand:      #f04646;
+  --brand-h:    #D63B3B;
+  --brand-lite: #F97272;
+  --brand-bg:   #FFF0F0;
+  --dark-bg:    #1A1010;
+  --line:       #06C755;
+  --line-h:     #05a849;
+  --green-dark:   #085041;
+  --green-mid:    #1D9E75;
+  --green-light:  #5DCAA5;
+  --green-pale:   #9FE1CB;
+  --green-bg:     #E1F5EE;
+  --blue-dark:    #185FA5;
+  --blue-bg:      #E6F1FB;
+  --text-primary:   #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --text-muted:     #888888;
+  --border:         rgba(0,0,0,0.09);
+  --bg-page:        #F8F5F3;
+  --bg-white:       #FFFFFF;
+  --shadow-sm:      0 1px 4px rgba(0,0,0,0.06);
+  --shadow-md:      0 2px 12px rgba(0,0,0,0.09);
+  --r-lg: 12px;
+  --r-md:  8px;
+  --r-pill: 20px;
+  --orange-bg: #FAEEDA;
+  --purple-bg: #EEEDFE;
+  --pink-bg:   #FBEAF0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background: var(--bg-page);
+}
+a { color: inherit; text-decoration: none; }
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd { position: sticky; top: 0; z-index: 200; }
+.util-bar { background: var(--dark-bg); padding: 0 32px; }
+.util-inner {
+  max-width: 1280px; margin: 0 auto; height: 36px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 20px;
+}
+.util-links { display: flex; gap: 16px; align-items: center; }
+.util-links a { font-size: 11px; color: rgba(255,255,255,0.68); transition: color 0.15s; }
+.util-links a:hover { color: #fff; }
+.btn-util {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--line); color: #fff; padding: 5px 14px;
+  border-radius: var(--r-pill); font-size: 11.5px; font-weight: 500;
+  transition: background 0.15s; white-space: nowrap;
+}
+.btn-util:hover { background: var(--line-h); }
+.line-logo-img { width: 16px; height: 16px; display: block; flex-shrink: 0; object-fit: contain; }
+.main-hd {
+  background: var(--bg-white); border-bottom: 0.5px solid var(--border);
+  padding: 14px 32px; display: flex; align-items: flex-start; position: relative;
+}
+.logo { display: flex; align-items: center; margin-right: 28px; flex-shrink: 0; padding-top: 2px; }
+.logo svg { height: 36px; width: auto; display: block; }
+.main-nav { display: flex; align-items: flex-start; flex: 1; flex-wrap: wrap; gap: 0; }
+.ni { display: flex; flex-direction: column; align-items: flex-start; padding: 0 6px; }
+.nl {
+  display: block; font-size: 11.5px; font-weight: 500; color: var(--text-primary);
+  padding: 0 6px 6px; white-space: nowrap; cursor: pointer; transition: color 0.15s;
+}
+.nl i { display: none; }
+.nl:hover { color: var(--brand); }
+.nd { position: static; opacity: 1; visibility: visible; transform: none; background: transparent; border: none; box-shadow: none; padding: 0 6px; }
+.nd a { display: block; font-size: 11px; color: var(--text-muted); padding: 3px 0; white-space: nowrap; transition: color 0.12s; }
+.nd a:hover { color: var(--brand); }
+.hamb { display: none; background: none; border: none; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
+.hamb span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); transition: all 0.25s; }
+.mob-nav { display: none; position: absolute; top: 52px; left: 0; right: 0; max-height: 0; overflow: hidden; transition: max-height 0.35s ease; z-index: 200; background: var(--bg-white); border-bottom: 0.5px solid var(--border); }
+.mob-nav.open { max-height: 80vh; overflow-y: auto; }
+.mob-inner { padding: 16px; display: flex; flex-direction: column; gap: 2px; }
+.mob-link { display: block; padding: 10px 12px; font-size: 13px; font-weight: 500; color: var(--text-primary); border-radius: var(--r-md); }
+.mob-link:hover { background: var(--bg-page); }
+.mob-group { border-radius: var(--r-md); overflow: hidden; }
+.mob-parent { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.mob-parent i { font-style: normal; font-size: 11px; color: var(--text-muted); transition: transform 0.2s; }
+.mob-parent.open i { transform: rotate(180deg); }
+.mob-sub { max-height: 0; overflow: hidden; transition: max-height 0.25s ease; background: var(--bg-page); }
+.mob-sub.open { max-height: 220px; }
+.mob-sub a { display: block; padding: 8px 12px 8px 20px; font-size: 12px; color: var(--text-secondary); }
+.mob-util { display: flex; gap: 8px; padding: 10px 12px; flex-wrap: wrap; }
+.mob-util a { font-size: 12px; color: var(--text-muted); }
+.mob-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--line); color: #fff; padding: 12px 20px;
+  border-radius: var(--r-pill); font-size: 13px; font-weight: 500; margin: 8px 12px 12px;
+}
+.mob-cta .line-logo-img { width: 18px; height: 18px; }
+
+@media (max-width: 1060px) {
+  .util-bar { display: none; }
+  .main-nav { display: none; }
+  .hamb { display: flex; }
+  .mob-nav { display: block; }
+  .main-hd { padding: 0 16px; height: 52px; align-items: center; }
+}
+
+/* ─── SEARCH SECTION（ページ上部・絞り込み） ─── */
+.search-sec {
+  background: var(--bg-page);
+  padding: 28px 32px 36px;
+  border-bottom: 0.5px solid var(--border);
+}
+.search-inner { max-width: 1080px; margin: 0 auto; }
+
+/* パンくず */
+.breadcrumb {
+  font-size: 11.5px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--text-muted); transition: color 0.12s; }
+.breadcrumb a:hover { color: var(--green-mid); }
+.breadcrumb span { color: var(--text-secondary); }
+
+.page-ttl {
+  font-size: 20px; font-weight: 500; color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+/* Main tabs */
+.search-tabs {
+  display: flex; gap: 0; margin-bottom: 20px;
+  border-bottom: 1.5px solid var(--border);
+}
+.stab {
+  padding: 10px 20px; font-size: 13px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px; transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+}
+.stab.active { color: var(--text-primary); border-bottom-color: var(--green-mid); }
+.stab:hover:not(.active) { color: var(--text-secondary); }
+
+/* Tab panels */
+.stab-panel { display: none; }
+.stab-panel.active { display: block; }
+
+/* Search bar */
+.search-bar {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.search-input {
+  flex: 1; min-width: 240px; height: 44px; padding: 0 14px;
+  border: 0.5px solid var(--border); border-radius: var(--r-md);
+  background: var(--bg-white); color: var(--text-primary); font-size: 13px;
+  outline: none; transition: border-color 0.15s;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus { border-color: var(--green-mid); }
+.search-select {
+  height: 44px; padding: 0 32px 0 14px; border: 0.5px solid var(--border);
+  border-radius: var(--r-md); background: var(--bg-white);
+  color: var(--text-primary); font-size: 13px; cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  outline: none; transition: border-color 0.15s; white-space: nowrap;
+}
+.search-select:focus { border-color: var(--green-mid); }
+.btn-search {
+  height: 44px; padding: 0 28px; background: var(--green-mid); color: #fff;
+  border: none; border-radius: var(--r-md); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: background 0.15s; white-space: nowrap;
+}
+.btn-search:hover { background: var(--green-dark); }
+
+/* Keyword input */
+.keyword-panel { display: flex; gap: 10px; }
+.keyword-input {
+  flex: 1; height: 44px; padding: 0 16px; font-size: 13px;
+  border: 0.5px solid var(--border); border-radius: var(--r-md);
+  background: var(--bg-white); color: var(--text-primary); outline: none;
+}
+.keyword-input::placeholder { color: var(--text-muted); }
+.keyword-input:focus { border-color: var(--green-mid); }
+
+/* こだわり条件（条件タブ内） */
+.kodawari-row { margin-top: 14px; }
+.kodawari-label { font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px; }
+.kodawari-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.kchip {
+  padding: 5px 13px; font-size: 11.5px; border-radius: var(--r-pill);
+  border: 0.5px solid var(--border); color: var(--text-muted);
+  cursor: pointer; transition: all 0.15s; background: var(--bg-white);
+}
+.kchip:hover, .kchip.selected {
+  background: var(--green-bg); border-color: var(--green-mid); color: var(--green-dark);
+}
+
+/* ─── PROPERTY LISTING SECTION ─────────────── */
+.allprops-sec {
+  background: var(--bg-white);
+  padding: 36px 32px 56px;
+  border-top: none;
+}
+.allprops-inner { max-width: 1080px; margin: 0 auto; }
+
+.allprops-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px; flex-wrap: wrap; gap: 12px;
+}
+.allprops-ttl-group { display: flex; align-items: baseline; gap: 14px; }
+.allprops-ttl { font-size: 18px; font-weight: 500; color: var(--text-primary); }
+.allprops-total { font-size: 13px; color: var(--text-muted); }
+
+.sort-select {
+  height: 36px; padding: 0 28px 0 12px;
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-md); background: var(--bg-page);
+  color: var(--text-primary); font-size: 12px; cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  outline: none; transition: border-color 0.15s;
+}
+.sort-select:focus { border-color: var(--green-mid); }
+
+/* Prefecture chips */
+.pref-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid var(--border);
+}
+.pchip {
+  padding: 6px 16px; font-size: 12px; font-weight: 500;
+  border-radius: var(--r-pill); border: 0.5px solid var(--border);
+  background: var(--bg-page); color: var(--text-muted);
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.pchip.active { background: var(--green-mid); color: #fff; border-color: var(--green-mid); }
+.pchip:hover:not(.active) { background: var(--green-bg); color: var(--green-dark); border-color: var(--green-mid); }
+
+/* Property grid */
+.prop-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-bottom: 36px;
+}
+.prop-card {
+  background: var(--bg-white);
+  border: 0.5px solid var(--border);
+  border-radius: var(--r-lg); overflow: hidden;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  text-decoration: none; display: block; color: inherit;
+}
+.prop-card:hover { background: var(--bg-page); border-color: var(--green-mid); box-shadow: var(--shadow-sm); }
+.prop-img {
+  position: relative; width: 100%; aspect-ratio: 4/3;
+  background: var(--bg-page);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.prop-img img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; z-index: 0;
+}
+.prop-img-ph { font-size: 12px; color: var(--text-muted); position: relative; z-index: 0; }
+.prop-type {
+  position: absolute; top: 10px; left: 10px;
+  font-size: 10.5px; font-weight: 500; color: #fff;
+  padding: 3px 9px; border-radius: var(--r-pill); z-index: 1;
+}
+.prop-type--nm { background: #C94020; }
+.prop-type--um { background: #9E5F15; }
+.prop-type--nh { background: var(--green-dark); }
+.prop-type--uh { background: var(--blue-dark); }
+.prop-body { padding: 14px 16px 16px; }
+.prop-name {
+  font-size: 13.5px; font-weight: 500; color: var(--text-primary);
+  margin-bottom: 4px; line-height: 1.4;
+}
+.prop-loc { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.prop-price { font-size: 19px; font-weight: 500; color: var(--green-dark); margin-bottom: 5px; line-height: 1.2; }
+.prop-price em { font-style: normal; font-size: 12px; color: var(--text-muted); }
+.prop-specs { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
+.prop-voices { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--green-mid); }
+.prop-voices-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-mid); flex-shrink: 0; }
+
+/* Load more button */
+.allprops-cta-wrap { text-align: center; }
+.btn-more {
+  display: inline-block; padding: 14px 52px; font-size: 14px; font-weight: 500;
+  border: 1.5px solid var(--green-mid); color: var(--green-dark);
+  border-radius: var(--r-pill); transition: all 0.15s; cursor: pointer;
+  background: transparent;
+}
+.btn-more:hover { background: var(--green-mid); color: #fff; }
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar {
+  background: var(--green-dark);
+  padding: 60px 32px;
+  text-align: center;
+}
+.concierge-inner { max-width: 580px; margin: 0 auto; }
+.concierge-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+  color: var(--green-light); margin-bottom: 14px; text-transform: uppercase;
+}
+.concierge-ttl {
+  font-size: 22px; font-weight: 500; color: #fff;
+  line-height: 1.6; margin-bottom: 12px;
+}
+.concierge-lead {
+  font-size: 13px; color: rgba(255,255,255,0.60);
+  line-height: 1.9; margin-bottom: 28px;
+}
+.btn-concierge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-mid); color: #fff;
+  padding: 13px 36px; border-radius: var(--r-pill);
+  font-size: 14px; font-weight: 500;
+  transition: background 0.15s; text-decoration: none;
+}
+.btn-concierge:hover { background: var(--green-light); color: var(--green-dark); }
+
+/* ─── GET STARTED SECTION ────────────────── */
+.all-cta-sec {
+  background: var(--bg-white);
+  padding: 88px 32px;
+  text-align: center;
+  border-top: 0.5px solid var(--border);
+}
+.all-cta-inner { max-width: 520px; margin: 0 auto; }
+.cta-eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; color: var(--brand); margin-bottom: 14px;
+}
+.cta-title {
+  font-size: 26px; font-weight: 500; color: var(--text-primary);
+  line-height: 1.55; margin-bottom: 14px;
+}
+.cta-lead {
+  font-size: 13px; color: var(--text-secondary);
+  line-height: 1.9; margin-bottom: 36px;
+}
+.cta-catches {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; margin-bottom: 24px; flex-wrap: wrap; padding: 0;
+}
+.cta-catches li {
+  list-style: none; font-size: 12px; color: var(--text-muted);
+  display: flex; align-items: center; gap: 5px;
+}
+.cta-catches li::before { content: "✓"; color: var(--line); font-weight: 500; }
+.btn-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--line); color: #fff;
+  padding: 15px 40px; border-radius: var(--r-pill);
+  font-size: 15px; font-weight: 500; transition: background 0.15s; text-decoration: none;
+}
+.btn-cta:hover { background: var(--line-h); color: #fff; }
+.btn-cta .line-logo-img { width: 22px; height: 22px; }
+.cta-note { font-size: 11px; color: var(--text-muted); margin-top: 12px; }
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer { background: var(--dark-bg); color: rgba(255,255,255,0.68); }
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 52px 32px 28px; }
+.footer-top { display: flex; gap: 48px; margin-bottom: 40px; flex-wrap: wrap; }
+.footer-logo svg { display: block; }
+.footer-tagline { font-size: 12px; color: rgba(255,255,255,0.42); margin-top: 10px; line-height: 1.8; }
+.footer-nav { display: grid; grid-template-columns: repeat(7, 1fr); gap: 24px; flex: 1; }
+.fnav-group h4 {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.35); margin-bottom: 12px; text-transform: uppercase;
+}
+.fnav-group ul { list-style: none; }
+.fnav-group li { margin-bottom: 8px; }
+.fnav-group a { font-size: 12px; color: rgba(255,255,255,0.58); transition: color 0.15s; }
+.fnav-group a:hover { color: #fff; }
+.footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.08); padding-top: 20px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  font-size: 11px; color: rgba(255,255,255,0.28);
+}
+.footer-legal { display: flex; gap: 16px; }
+.footer-legal a { color: rgba(255,255,255,0.38); transition: color 0.15s; }
+.footer-legal a:hover { color: rgba(255,255,255,0.70); }
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media (max-width: 900px) {
+  .search-sec { padding: 20px 16px 28px; }
+  .allprops-sec { padding: 28px 16px 44px; }
+  .prop-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-nav { grid-template-columns: repeat(3, 1fr); }
+  .footer-top { gap: 28px; }
+  .concierge-bar { padding: 48px 16px; }
+  .all-cta-sec { padding: 64px 16px; }
+}
+@media (max-width: 600px) {
+  .search-bar { flex-direction: column; }
+  .search-input, .search-select, .btn-search { width: 100%; }
+  .prop-grid { grid-template-columns: 1fr; }
+  .footer-nav { grid-template-columns: repeat(2, 1fr); }
+  .btn-more { padding: 13px 28px; font-size: 13px; }
+  .concierge-ttl { font-size: 18px; }
+  .page-ttl { font-size: 17px; }
+  .cta-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="../sumumu-faq.html">よくある質問</a>
+        <a href="../sumumu-contact.html">お問合せ</a>
+        <a href="../sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="../sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.st0ka{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="st0ka" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+
+    <nav class="main-nav">
+      <a href="../sumumu-main.html" class="nl">トップ</a>
+      <div class="ni">
+        <span class="nl">すむむとは。<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-about.html">すむむ。のサービス</a>
+          <a href="../sumumu-about.html#partners">パートナー</a>
+          <a href="../sumumu-about.html#media">メディア掲載</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl" style="color:var(--green-mid)">住まいを探す<i>▾</i></span>
+        <div class="nd">
+          <a href="sumumu-kinki.html">エリア別</a>
+          <a href="sumumu-kinki-all.html" style="color:var(--green-mid)">条件別</a>
+          <a href="sumumu-kinki-00001.html">個別物件</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">先輩の体験談<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-journal.html">先輩の声</a>
+          <a href="../sumumu-journal.html?type=purchase">購入体験</a>
+          <a href="../sumumu-journal.html?type=life">暮らし</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">お役立ちコラム<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-guide.html">資金計画</a>
+          <a href="../sumumu-guide.html">物件選び</a>
+          <a href="../sumumu-guide.html">購入手続き</a>
+        </div>
+      </div>
+      <div class="ni">
+        <span class="nl">シミュレーション<i>▾</i></span>
+        <div class="nd">
+          <a href="../sumumu-tool-loan.html">ローンシミュレーター</a>
+          <a href="../sumumu-tool-borrowing.html">借入可能額</a>
+          <a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a>
+        </div>
+      </div>
+      <div class="ni">
+        <a href="../sumumu-area.html" class="nl">エリア特集<i>▾</i></a>
+        <div class="nd">
+          <a href="../sumumu-area.html">エリア一覧</a>
+          <a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a>
+          <a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a>
+          <a href="../../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a>
+        </div>
+      </div>
+      <a href="../sumumu-news.html" class="nl">お知らせ</a>
+    </nav>
+
+    <button class="hamb" id="hamb" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="../sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group">
+          <div class="mob-parent">住まいを探す<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="sumumu-kinki.html">エリア別</a>
+            <a href="sumumu-kinki-all.html">条件別</a>
+          </div>
+        </div>
+        <div class="mob-group">
+          <div class="mob-parent">先輩の体験談<i>▾</i></div>
+          <div class="mob-sub">
+            <a href="../sumumu-journal.html">先輩の声</a>
+            <a href="../sumumu-journal.html?type=purchase">購入体験</a>
+          </div>
+        </div>
+        <a href="../sumumu-news.html" class="mob-link">お知らせ</a>
+        <div class="mob-util">
+          <a href="../sumumu-faq.html">よくある質問</a>
+          <a href="../sumumu-contact.html">お問合せ</a>
+        </div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">
+          <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+          コミュニティに無料で参加する
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH SECTION（condensed） -->
+<section class="search-sec">
+  <div class="search-inner">
+
+    <div class="breadcrumb">
+      <a href="../sumumu-main.html">ホーム</a>
+      <span>›</span>
+      <a href="sumumu-kinki.html">住まいを探す（近畿）</a>
+      <span>›</span>
+      <span>物件一覧</span>
+    </div>
+
+    <h1 class="page-ttl">近畿エリア 物件一覧</h1>
+
+    <div class="search-tabs">
+      <div class="stab active" data-tab="area">エリアから探す</div>
+      <div class="stab" data-tab="condition">条件から絞り込む</div>
+      <div class="stab" data-tab="keyword">物件名・住所</div>
+    </div>
+
+    <!-- Tab 1: エリアから探す -->
+    <div class="stab-panel active" id="panel-area">
+      <div class="search-bar">
+        <input class="search-input" type="text" placeholder="都道府県・市区町村・路線・駅名を入力">
+        <select class="search-select">
+          <option>種別：すべて</option>
+          <option>新築マンション</option>
+          <option>中古マンション</option>
+          <option>新築戸建</option>
+          <option>中古戸建</option>
+          <option>土地</option>
+        </select>
+        <select class="search-select">
+          <option>予算：上限なし</option>
+          <option>〜2,000万円</option>
+          <option>〜3,000万円</option>
+          <option>〜4,000万円</option>
+          <option>〜5,000万円</option>
+          <option>〜6,000万円</option>
+          <option>6,000万円以上</option>
+        </select>
+        <button class="btn-search">検索する →</button>
+      </div>
+    </div>
+
+    <!-- Tab 2: 条件から絞り込む -->
+    <div class="stab-panel" id="panel-condition">
+      <div class="search-bar">
+        <select class="search-select">
+          <option>種別：すべて</option>
+          <option>新築マンション</option>
+          <option>中古マンション</option>
+          <option>新築戸建</option>
+          <option>中古戸建</option>
+        </select>
+        <select class="search-select">
+          <option>価格：指定なし</option>
+          <option>〜2,000万円</option>
+          <option>〜3,000万円</option>
+          <option>〜4,000万円</option>
+          <option>〜5,000万円</option>
+          <option>6,000万円以上</option>
+        </select>
+        <select class="search-select">
+          <option>間取り：指定なし</option>
+          <option>1R・1K</option>
+          <option>1LDK・2K</option>
+          <option>2LDK・3K</option>
+          <option>3LDK</option>
+          <option>4LDK以上</option>
+        </select>
+        <select class="search-select">
+          <option>築年数：指定なし</option>
+          <option>新築</option>
+          <option>5年以内</option>
+          <option>10年以内</option>
+          <option>15年以内</option>
+          <option>20年以内</option>
+        </select>
+        <button class="btn-search">検索する →</button>
+      </div>
+      <div class="kodawari-row">
+        <div class="kodawari-label">こだわり条件</div>
+        <div class="kodawari-chips">
+          <div class="kchip" onclick="this.classList.toggle('selected')">学区設定</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">ペット可</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">駐車場あり</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">二重床</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">宅配ボックス</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">床暖房</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">リノベ済み</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">角部屋</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">南向き</div>
+          <div class="kchip" onclick="this.classList.toggle('selected')">新耐震</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: 物件名・住所 -->
+    <div class="stab-panel" id="panel-keyword">
+      <div class="keyword-panel">
+        <input class="keyword-input" type="text" placeholder="物件名・住所を入力してください（例：グランドメゾン大阪、大阪市中央区）">
+        <button class="btn-search">検索する →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROPERTY LISTING SECTION -->
+<section class="allprops-sec">
+  <div class="allprops-inner">
+
+    <div class="allprops-header">
+      <div class="allprops-ttl-group">
+        <h2 class="allprops-ttl">物件一覧</h2>
+        <span class="allprops-total" id="allPropsTotal">全607件</span>
+      </div>
+      <select class="sort-select">
+        <option>並び替え：新着順</option>
+        <option>価格が安い順</option>
+        <option>価格が高い順</option>
+        <option>面積が広い順</option>
+        <option>駅近順</option>
+      </select>
+    </div>
+
+    <!-- Prefecture filter chips -->
+    <div class="pref-chips" id="prefChips">
+      <div class="pchip active" data-pref="all">すべて（607件）</div>
+      <div class="pchip" data-pref="大阪府">大阪府（248件）</div>
+      <div class="pchip" data-pref="京都府">京都府（134件）</div>
+      <div class="pchip" data-pref="兵庫県">兵庫県（112件）</div>
+      <div class="pchip" data-pref="奈良県">奈良県（44件）</div>
+      <div class="pchip" data-pref="滋賀県">滋賀県（37件）</div>
+      <div class="pchip" data-pref="和歌山県">和歌山県（20件）</div>
+      <div class="pchip" data-pref="三重県">三重県（12件）</div>
+    </div>
+
+    <!-- Property grid (JS-rendered) -->
+    <div class="prop-grid" id="allPropGrid"></div>
+
+    <!-- Load more -->
+    <div class="allprops-cta-wrap">
+      <button class="btn-more" id="allPropsMoreBtn">さらに物件を見る →</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">物件選びに迷ったら、<br>コンシェルジュに相談を</h2>
+    <p class="concierge-lead">
+      中立な立場の専任スタッフが、資金計画から物件選び・エリア比較まで<br>
+      無料でサポートします。営業・勧誘は一切ありません。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="all-cta-sec">
+  <div class="all-cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="../images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fst0ka{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fst0ka" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group">
+          <h4>すむむとは。</h4>
+          <ul>
+            <li><a href="../sumumu-about.html">すむむ。のサービス</a></li>
+            <li><a href="../sumumu-about.html#partners">パートナー</a></li>
+            <li><a href="../sumumu-about.html#media">メディア掲載</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>住まいを探す</h4>
+          <ul>
+            <li><a href="sumumu-kinki.html">エリア別</a></li>
+            <li><a href="sumumu-kinki-all.html">条件別</a></li>
+            <li><a href="sumumu-kinki-00001.html">個別物件</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>先輩の体験談</h4>
+          <ul>
+            <li><a href="../sumumu-journal.html">先輩の声</a></li>
+            <li><a href="../sumumu-journal.html?type=purchase">購入体験</a></li>
+            <li><a href="../sumumu-journal.html?type=life">暮らし</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>お役立ちコラム</h4>
+          <ul>
+            <li><a href="../sumumu-guide.html">資金計画</a></li>
+            <li><a href="../sumumu-guide.html">物件選び</a></li>
+            <li><a href="../sumumu-guide.html">購入手続き</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>シミュレーション</h4>
+          <ul>
+            <li><a href="../sumumu-tool-loan.html">ローンシミュレーター</a></li>
+            <li><a href="../sumumu-tool-borrowing.html">借入可能額</a></li>
+            <li><a href="../sumumu-tool-rentbuy.html">賃貸vs購入</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>エリア特集</h4>
+          <ul>
+            <li><a href="../sumumu-area.html">エリア一覧</a></li>
+            <li><a href="../../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li>
+            <li><a href="../../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li>
+          </ul>
+        </div>
+        <div class="fnav-group">
+          <h4>お知らせ</h4>
+          <ul>
+            <li><a href="../sumumu-news.html">すべて</a></li>
+            <li><a href="/news/?cat=event">イベント</a></li>
+            <li><a href="/news/?cat=community">コミュニティ</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile nav
+const hamb = document.getElementById('hamb');
+const mobNav = document.getElementById('mobNav');
+if (hamb) {
+  hamb.addEventListener('click', () => {
+    mobNav.classList.toggle('open');
+    hamb.classList.toggle('open');
+  });
+}
+document.querySelectorAll('.mob-parent').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  });
+});
+
+// Search tab switching
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.stab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+  });
+});
+</script>
+
+<script>
+/* ── 物件データ ── */
+const PREF_TOTAL = {
+  all: 607,
+  '大阪府': 248, '京都府': 134, '兵庫県': 112,
+  '奈良県': 44, '滋賀県': 37, '和歌山県': 20, '三重県': 12
+};
+
+const ALL_PROPERTIES = [
+  // ── 大阪府 ──
+  { id:1,  pref:'大阪府', type:'新築マンション', name:'グランドメゾン大阪上町',           loc:'大阪市中央区',   station:'谷町四丁目駅', walk:5,  price:'4,980', layout:'3LDK', area:75.2,  age:null, voices:3 },
+  { id:4,  pref:'大阪府', type:'中古マンション', name:'プレサンス大阪上本町',             loc:'大阪市中央区',   station:'上本町駅',     walk:3,  price:'3,280', layout:'2LDK', area:62.8,  age:8,    voices:2 },
+  { id:6,  pref:'大阪府', type:'新築マンション', name:'ジオ吹田南千里',                  loc:'大阪府吹田市',   station:'南千里駅',     walk:7,  price:'4,280', layout:'3LDK', area:72.8,  age:null, voices:5 },
+  { id:10, pref:'大阪府', type:'新築戸建て',     name:'パナソニックホームズ豊中刀根山',   loc:'大阪府豊中市',   station:'緑地公園駅',   walk:12, price:'5,480', layout:'4LDK', area:118.6, age:null, voices:4 },
+  { id:11, pref:'大阪府', type:'中古マンション', name:'ブランズシティ大阪美野島',          loc:'大阪市福島区',   station:'野田阪神駅',   walk:6,  price:'5,980', layout:'3LDK', area:83.4,  age:5,    voices:1 },
+  { id:20, pref:'大阪府', type:'中古戸建て',     name:'箕面市牧落 一戸建て',              loc:'大阪府箕面市',   station:'牧落駅',       walk:8,  price:'4,180', layout:'4LDK', area:112.0, age:12,   voices:1 },
+  { id:23, pref:'大阪府', type:'中古マンション', name:'ライオンズ茨木太田',               loc:'大阪府茨木市',   station:'茨木市駅',     walk:7,  price:'2,880', layout:'3LDK', area:70.5,  age:16,   voices:0 },
+  { id:26, pref:'大阪府', type:'新築マンション', name:'プレサンスロジェ心斎橋',           loc:'大阪市中央区',   station:'心斎橋駅',     walk:5,  price:'5,480', layout:'2LDK', area:55.8,  age:null, voices:2 },
+  { id:29, pref:'大阪府', type:'中古戸建て',     name:'枚方市招提元町 一戸建て',          loc:'大阪府枚方市',   station:'香里園駅',     walk:22, price:'2,280', layout:'4LDK', area:95.3,  age:28,   voices:0 },
+  { id:31, pref:'大阪府', type:'新築マンション', name:'ユニハイム天王寺',                 loc:'大阪市天王寺区', station:'四天王寺前夕陽ケ丘駅', walk:4, price:'5,780', layout:'3LDK', area:74.6,  age:null, voices:3 },
+  // ── 京都府 ──
+  { id:2,  pref:'京都府', type:'中古マンション', name:'プレサンス京都丸太池',             loc:'京都市中京区',   station:'烏丸御池駅',   walk:3,  price:'3,580', layout:'2LDK', area:62.8,  age:8,    voices:1 },
+  { id:7,  pref:'京都府', type:'新築マンション', name:'グランドメゾン京都二条',           loc:'京都市中京区',   station:'二条駅',       walk:4,  price:'5,180', layout:'3LDK', area:78.5,  age:null, voices:2 },
+  { id:12, pref:'京都府', type:'中古マンション', name:'ミオカステーロ京都山科',           loc:'京都市山科区',   station:'山科駅',       walk:6,  price:'2,480', layout:'3LDK', area:68.2,  age:15,   voices:3 },
+  { id:13, pref:'京都府', type:'新築マンション', name:'エスリード京都桂',                loc:'京都市西京区',   station:'桂駅',         walk:8,  price:'4,280', layout:'3LDK', area:71.6,  age:null, voices:1 },
+  { id:21, pref:'京都府', type:'中古マンション', name:'コスモ京都白梅町',                loc:'京都市北区',     station:'北大路駅',     walk:9,  price:'2,980', layout:'3LDK', area:70.1,  age:14,   voices:2 },
+  { id:27, pref:'京都府', type:'新築戸建て',     name:'フジ住宅京都八幡',                loc:'京都府八幡市',   station:'八幡市駅',     walk:18, price:'3,480', layout:'4LDK', area:102.3, age:null, voices:0 },
+  { id:30, pref:'京都府', type:'中古マンション', name:'コスモ京都向島',                  loc:'京都市伏見区',   station:'向島駅',       walk:11, price:'1,880', layout:'3LDK', area:65.8,  age:25,   voices:1 },
+  // ── 兵庫県 ──
+  { id:5,  pref:'兵庫県', type:'中古マンション', name:'ローレルコート宝塚逆瀬川',         loc:'兵庫県宝塚市',   station:'逆瀬川駅',     walk:4,  price:'2,980', layout:'3LDK', area:80.1,  age:15,   voices:2 },
+  { id:8,  pref:'兵庫県', type:'中古マンション', name:'ベルパーク神戸三宮',               loc:'神戸市中央区',   station:'三宮駅',       walk:6,  price:'3,880', layout:'2LDK', area:65.4,  age:10,   voices:4 },
+  { id:14, pref:'兵庫県', type:'新築戸建て',     name:'リーブルガーデン西宮甲子園',       loc:'兵庫県西宮市',   station:'甲子園駅',     walk:12, price:'4,680', layout:'4LDK', area:108.2, age:null, voices:2 },
+  { id:22, pref:'兵庫県', type:'新築マンション', name:'グランドメゾン芦屋',               loc:'兵庫県芦屋市',   station:'芦屋駅',       walk:6,  price:'6,280', layout:'3LDK', area:82.4,  age:null, voices:3 },
+  { id:28, pref:'兵庫県', type:'中古マンション', name:'ローレルタワー舞子',               loc:'神戸市垂水区',   station:'舞子駅',       walk:3,  price:'4,280', layout:'3LDK', area:78.6,  age:18,   voices:1 },
+  // ── 滋賀県 ──
+  { id:3,  pref:'滋賀県', type:'新築戸建て',     name:'草津市矢橋町 一戸建て',            loc:'滋賀県草津市',   station:'草津駅',       walk:18, price:'3,180', layout:'4LDK', area:105.3, age:null, voices:2 },
+  { id:9,  pref:'滋賀県', type:'新築マンション', name:'グランドメゾン大津膳所',           loc:'滋賀県大津市',   station:'膳所駅',       walk:7,  price:'3,480', layout:'3LDK', area:72.1,  age:null, voices:1 },
+  { id:15, pref:'滋賀県', type:'中古マンション', name:'プレサンス草津南草津',             loc:'滋賀県草津市',   station:'南草津駅',     walk:9,  price:'2,780', layout:'3LDK', area:68.5,  age:12,   voices:3 },
+  { id:25, pref:'滋賀県', type:'新築戸建て',     name:'栗東市綣 一戸建て',                loc:'滋賀県栗東市',   station:'栗東駅',       walk:15, price:'3,680', layout:'4LDK', area:108.8, age:null, voices:1 },
+  // ── 奈良県 ──
+  { id:16, pref:'奈良県', type:'新築戸建て',     name:'ジェネービルド奈良学園前',         loc:'奈良県奈良市',   station:'学園前駅',     walk:15, price:'4,280', layout:'4LDK', area:112.5, age:null, voices:1 },
+  { id:17, pref:'奈良県', type:'中古マンション', name:'プレサンス奈良三条',               loc:'奈良県奈良市',   station:'近鉄奈良駅',   walk:8,  price:'2,180', layout:'3LDK', area:72.3,  age:18,   voices:0 },
+  { id:24, pref:'奈良県', type:'中古戸建て',     name:'橿原市曲川町 一戸建て',            loc:'奈良県橿原市',   station:'大和八木駅',   walk:20, price:'2,480', layout:'4LDK', area:120.5, age:22,   voices:0 },
+  // ── 三重県 ──
+  { id:18, pref:'三重県', type:'中古マンション', name:'ライオンズ津駅前',                 loc:'三重県津市',     station:'津駅',         walk:5,  price:'1,980', layout:'3LDK', area:74.5,  age:20,   voices:0 },
+  // ── 和歌山県 ──
+  { id:19, pref:'和歌山県',type:'中古マンション', name:'ライオンズ和歌山城南',            loc:'和歌山市',       station:'和歌山駅',     walk:12, price:'2,280', layout:'3LDK', area:72.3,  age:18,   voices:0 },
+];
+
+const TYPE_CLASS = {
+  '新築マンション': 'nm', '中古マンション': 'um',
+  '新築戸建て': 'nh',     '中古戸建て': 'uh'
+};
+
+function propCardHTML(p) {
+  const typeKey  = TYPE_CLASS[p.type] || 'nm';
+  const isNew    = p.type.startsWith('新築');
+  const age      = p.age ? `築${p.age}年` : '新築';
+  const priceTag = isNew
+    ? `${p.price}万円<em>〜</em>`
+    : `${p.price}万円`;
+  const voicesHTML = p.voices > 0
+    ? `<div class="prop-voices"><span class="prop-voices-dot"></span>体験談 ${p.voices}件あり</div>`
+    : '';
+  return `
+<a class="prop-card" href="sumumu-kinki-${String(p.id).padStart(5,'0')}.html">
+  <div class="prop-img">
+    <span class="prop-img-ph">物件画像</span>
+    <img src="../images/prop${p.id}.jpg" alt="${p.name}"
+         onerror="this.src='https://picsum.photos/seed/smprop${p.id}/400/300'">
+    <span class="prop-type prop-type--${typeKey}">${p.type}</span>
+  </div>
+  <div class="prop-body">
+    <div class="prop-name">${p.name}</div>
+    <div class="prop-loc">${p.loc} / ${p.station} 徒歩${p.walk}分</div>
+    <div class="prop-price">${priceTag}</div>
+    <div class="prop-specs">${p.layout} / ${p.area}㎡ / ${age}</div>
+    ${voicesHTML}
+  </div>
+</a>`;
+}
+
+/* ── State ── */
+const PAGE_SIZE = 12;
+let currentPref = 'all';
+let shownCount  = PAGE_SIZE;
+
+function getFiltered() {
+  return currentPref === 'all'
+    ? ALL_PROPERTIES
+    : ALL_PROPERTIES.filter(p => p.pref === currentPref);
+}
+
+function updateUI() {
+  const filtered = getFiltered();
+  const total    = PREF_TOTAL[currentPref] || filtered.length;
+  const toShow   = Math.min(shownCount, filtered.length);
+  const displayed = filtered.slice(0, toShow);
+  const remaining = Math.max(0, total - toShow);
+
+  document.getElementById('allPropsTotal').textContent = `全${total.toLocaleString()}件`;
+
+  const grid = document.getElementById('allPropGrid');
+  grid.innerHTML = displayed.length > 0
+    ? displayed.map(propCardHTML).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--text-muted);font-size:13px;">このエリアの物件は準備中です</div>';
+
+  const btn = document.getElementById('allPropsMoreBtn');
+  if (total > toShow) {
+    btn.textContent = `さらに物件を見る（残り${remaining.toLocaleString()}件）→`;
+    btn.style.display = '';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+document.getElementById('allPropsMoreBtn').addEventListener('click', () => {
+  shownCount += PAGE_SIZE;
+  updateUI();
+});
+
+document.querySelectorAll('.pchip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.pchip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    currentPref = chip.dataset.pref;
+    shownCount  = PAGE_SIZE;
+    updateUI();
+  });
+});
+
+// URL パラメータから都道府県を読み込み初期フィルターを適用
+(function applyUrlPref() {
+  const param = new URLSearchParams(window.location.search).get('pref');
+  if (param && PREF_TOTAL[param]) {
+    currentPref = param;
+    document.querySelectorAll('.pchip').forEach(c => {
+      c.classList.toggle('active', c.dataset.pref === param);
+    });
+  }
+  updateUI();
+})();
+</script>
+
+</body>
+</html>

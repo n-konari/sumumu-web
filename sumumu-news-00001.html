@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【大阪】住み替えトークイベント vol.12 ー 先輩から直接聞く「売却と購入の並走術」｜すむむ。</title>
+<style>
+:root {
+  --brand:#f04646; --brand-h:#D63B3B; --brand-lite:#F97272; --brand-bg:#FFF0F0;
+  --dark-bg:#1A1010; --line:#06C755; --line-h:#05a849;
+  --green-dark:#085041; --green-mid:#1D9E75; --green-light:#5DCAA5;
+  --green-pale:#9FE1CB; --green-bg:#E1F5EE; --blue-dark:#185FA5; --blue-bg:#E6F1FB;
+  --text-primary:#1A1A1A; --text-secondary:#4A4A4A; --text-muted:#888888;
+  --border:rgba(0,0,0,0.09); --bg-page:#F8F5F3; --bg-white:#FFFFFF;
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.06); --shadow-md:0 2px 12px rgba(0,0,0,0.09);
+  --r-lg:12px; --r-md:8px; --r-pill:20px;
+  --orange-bg:#FAEEDA; --purple-bg:#EEEDFE; --pink-bg:#FBEAF0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Sans","Yu Gothic",sans-serif;font-size:14px;line-height:1.8;color:var(--text-primary);background:var(--bg-page);}
+a{color:inherit;text-decoration:none;}
+
+/* ─── HEADER ─────────────────────────────── */
+.site-hd{position:sticky;top:0;z-index:200;}
+.util-bar{background:var(--dark-bg);padding:0 32px;}
+.util-inner{max-width:1280px;margin:0 auto;height:36px;display:flex;align-items:center;justify-content:flex-end;gap:20px;}
+.util-links{display:flex;gap:16px;align-items:center;}
+.util-links a{font-size:11px;color:rgba(255,255,255,0.68);transition:color 0.15s;}
+.util-links a:hover{color:#fff;}
+.btn-util{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:5px 14px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;transition:background 0.15s;white-space:nowrap;}
+.btn-util:hover{background:var(--line-h);}
+.line-logo-img{width:16px;height:16px;display:block;flex-shrink:0;object-fit:contain;}
+.main-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:14px 32px;display:flex;align-items:flex-start;position:relative;}
+.logo{display:flex;align-items:center;margin-right:28px;flex-shrink:0;padding-top:2px;}
+.logo svg{height:36px;width:auto;display:block;}
+.main-nav{display:flex;align-items:flex-start;flex:1;flex-wrap:wrap;gap:0;}
+.ni{display:flex;flex-direction:column;align-items:flex-start;padding:0 6px;}
+.nl{display:block;font-size:11.5px;font-weight:500;color:var(--text-primary);padding:0 6px 6px;white-space:nowrap;cursor:pointer;transition:color 0.15s;}
+.nl i{display:none;}
+.nl:hover{color:var(--brand);}
+.nd{position:static;opacity:1;visibility:visible;background:transparent;border:none;box-shadow:none;padding:0 6px;}
+.nd a{display:block;font-size:11px;color:var(--text-muted);padding:3px 0;white-space:nowrap;transition:color 0.12s;}
+.nd a:hover{color:var(--brand);}
+.hamb{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:5px;margin-left:auto;}
+.hamb span{display:block;width:22px;height:1.5px;background:var(--text-primary);transition:all 0.25s;}
+.mob-nav{display:none;position:absolute;top:52px;left:0;right:0;max-height:0;overflow:hidden;transition:max-height 0.35s ease;z-index:200;background:var(--bg-white);border-bottom:0.5px solid var(--border);}
+.mob-nav.open{max-height:80vh;overflow-y:auto;}
+.mob-inner{padding:16px;display:flex;flex-direction:column;gap:2px;}
+.mob-link{display:block;padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);border-radius:var(--r-md);}
+.mob-link:hover{background:var(--bg-page);}
+.mob-group{border-bottom:0.5px solid var(--border);padding-bottom:6px;margin-bottom:6px;}
+.mob-parent{padding:10px 12px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;}
+.mob-sub{max-height:0;overflow:hidden;transition:max-height 0.25s ease;background:var(--bg-page);border-radius:var(--r-md);}
+.mob-sub a{display:block;padding:8px 16px;font-size:12px;color:var(--text-secondary);}
+.mob-util{display:flex;gap:12px;padding:8px 12px;font-size:12px;color:var(--text-muted);}
+.mob-cta{display:block;margin:10px 0 4px;padding:12px;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:13px;font-weight:500;}
+
+/* ─── ARTICLE HEADER ──────────────────────── */
+.art-hd{background:var(--bg-white);border-bottom:0.5px solid var(--border);padding:28px 32px 32px;}
+.art-hd-inner{max-width:1280px;margin:0 auto;}
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);margin-bottom:20px;flex-wrap:wrap;}
+.breadcrumb a{transition:color 0.12s;}
+.breadcrumb a:hover{color:var(--green-mid);}
+.breadcrumb-sep{opacity:0.4;}
+.art-meta-top{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.art-cat{display:inline-block;padding:4px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:500;}
+.art-cat--event{background:var(--orange-bg);color:#633806;}
+.art-badge-new{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:11px;font-weight:500;background:var(--brand-bg);color:var(--brand);}
+.art-tag{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:11px;border:0.5px solid var(--border);color:var(--text-muted);}
+.art-title{font-size:24px;font-weight:500;line-height:1.6;color:var(--text-primary);margin-bottom:22px;max-width:860px;}
+.art-event-meta-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.art-event-meta-item{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--text-secondary);}
+.art-event-meta-label{font-size:10.5px;color:var(--text-muted);}
+.art-event-seats{display:inline-block;padding:3px 12px;border-radius:var(--r-pill);font-size:11.5px;font-weight:500;background:var(--brand-bg);color:var(--brand);}
+.art-hd-right{margin-left:auto;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.art-share-btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border:0.5px solid var(--border);border-radius:var(--r-pill);font-size:12px;color:var(--text-secondary);background:var(--bg-white);cursor:pointer;transition:all 0.15s;font-family:inherit;}
+.art-share-btn:hover{border-color:var(--text-muted);}
+.btn-art-apply{display:inline-flex;align-items:center;gap:6px;background:var(--line);color:#fff;padding:7px 18px;border-radius:var(--r-pill);font-size:12px;font-weight:500;transition:background 0.15s;}
+.btn-art-apply:hover{background:var(--line-h);}
+
+/* ─── HERO IMAGE ──────────────────────────── */
+.art-hero{background:var(--bg-page);border-bottom:0.5px solid var(--border);}
+.art-hero img{display:block;width:100%;max-height:480px;object-fit:cover;object-position:center;}
+
+/* ─── LAYOUT ──────────────────────────────── */
+.art-wrap{max-width:1280px;margin:0 auto;padding:40px 32px 60px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:48px;align-items:start;}
+
+/* ─── ARTICLE BODY ────────────────────────── */
+.art-body{max-width:720px;}
+.art-body p{font-size:14px;line-height:2;color:var(--text-secondary);margin-bottom:18px;}
+.art-body p:last-child{margin-bottom:0;}
+.art-h2{font-size:19px;font-weight:500;color:var(--text-primary);margin:40px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--green-bg);}
+.art-h3{font-size:15px;font-weight:500;color:var(--text-primary);margin:26px 0 10px;}
+
+/* Summary box */
+.art-summary{background:var(--orange-bg);border-left:3px solid #C47D2D;border-radius:0 var(--r-md) var(--r-md) 0;padding:20px 22px;margin-bottom:32px;}
+.art-summary-ttl{font-size:11px;font-weight:500;letter-spacing:0.1em;color:#633806;margin-bottom:10px;text-transform:uppercase;}
+.art-summary ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.art-summary li{font-size:13px;color:#633806;display:flex;gap:8px;line-height:1.7;}
+.art-summary li::before{content:"✓";color:#C47D2D;font-weight:500;flex-shrink:0;margin-top:1px;}
+
+/* Data grid — 3-col for 6 event details */
+.art-data{display:grid;grid-template-columns:repeat(3,1fr);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-bottom:36px;}
+.art-data-item{padding:14px 16px;border-right:0.5px solid var(--border);border-bottom:0.5px solid var(--border);background:var(--bg-white);}
+.art-data-item:nth-child(3n){border-right:none;}
+.art-data-item:nth-last-child(-n+3){border-bottom:none;}
+.art-data-label{font-size:10px;color:var(--text-muted);margin-bottom:4px;}
+.art-data-value{font-size:13px;font-weight:500;color:var(--text-primary);line-height:1.4;}
+.art-data-value--alert{color:var(--brand);}
+
+/* Timeline */
+.art-timeline{position:relative;padding-left:24px;margin:28px 0;}
+.art-timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:0.5px;background:var(--border);}
+.tl-item{position:relative;padding-bottom:22px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-dot{position:absolute;left:-17px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--bg-white);border:2px solid var(--green-mid);}
+.tl-dot.done{background:var(--green-mid);}
+.tl-date{font-size:10.5px;color:var(--text-muted);margin-bottom:3px;font-weight:500;}
+.tl-text{font-size:13px;color:var(--text-primary);line-height:1.7;}
+.tl-sub{font-size:12px;color:var(--text-muted);margin-top:3px;line-height:1.6;}
+
+/* Speaker cards */
+.art-speakers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 36px;}
+.speaker-box{border-radius:var(--r-lg);padding:22px 22px;background:var(--orange-bg);}
+.speaker-num{font-size:10px;font-weight:500;letter-spacing:0.1em;color:#C47D2D;text-transform:uppercase;margin-bottom:10px;}
+.speaker-avatar{width:44px;height:44px;border-radius:50%;background:rgba(99,56,6,0.15);color:#633806;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;margin-bottom:10px;}
+.speaker-name{font-size:15px;font-weight:500;color:#3A2200;margin-bottom:2px;}
+.speaker-age{font-size:11.5px;color:#8B5A00;margin-bottom:12px;}
+.speaker-profile{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.speaker-profile li{font-size:12.5px;color:#633806;line-height:1.65;display:flex;gap:7px;}
+.speaker-profile li::before{content:"◎";color:#C47D2D;flex-shrink:0;}
+
+/* Q&A */
+.qa-list{display:flex;flex-direction:column;gap:8px;margin:24px 0 36px;}
+.qa-item{border:0.5px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--bg-white);}
+.qa-q{padding:14px 18px;font-size:13.5px;font-weight:500;color:var(--text-primary);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;}
+.qa-q-text{flex:1;}
+.qa-icon{font-size:16px;color:var(--text-muted);transition:transform 0.25s;flex-shrink:0;}
+.qa-item.open .qa-icon{transform:rotate(45deg);}
+.qa-a{display:none;padding:0 18px 16px;font-size:13px;color:var(--text-secondary);line-height:1.9;border-top:0.5px solid var(--border);}
+.qa-a-inner{padding-top:14px;}
+.qa-item.open .qa-a{display:block;}
+
+/* Apply CTA box */
+.art-apply-box{background:var(--green-bg);border:0.5px solid var(--green-pale);border-radius:var(--r-lg);padding:28px 32px;margin:36px 0;text-align:center;}
+.art-apply-box-badge{display:inline-block;padding:3px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:500;background:var(--brand-bg);color:var(--brand);margin-bottom:10px;}
+.art-apply-box-ttl{font-size:16px;font-weight:500;color:var(--green-dark);margin-bottom:8px;}
+.art-apply-box-lead{font-size:12.5px;color:var(--text-secondary);margin-bottom:20px;line-height:1.7;}
+.btn-apply{display:inline-flex;align-items:center;gap:8px;background:var(--line);color:#fff;padding:13px 32px;border-radius:var(--r-pill);font-size:14px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-apply:hover{background:var(--line-h);}
+.btn-apply .line-logo-img{width:20px;height:20px;}
+.art-apply-box-note{font-size:11px;color:var(--text-muted);margin-top:10px;}
+
+/* Prev/Next nav */
+.art-prevnext{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px;padding-top:28px;border-top:0.5px solid var(--border);}
+.prevnext-item{display:flex;flex-direction:column;gap:5px;padding:14px 16px;background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-md);transition:box-shadow 0.15s;}
+.prevnext-item:hover{box-shadow:var(--shadow-sm);}
+.prevnext-dir{font-size:10px;color:var(--text-muted);letter-spacing:0.08em;}
+.prevnext-ttl{font-size:12.5px;color:var(--text-primary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.prevnext-item--next{text-align:right;}
+
+/* ─── SIDEBAR ─────────────────────────────── */
+.art-sidebar{position:sticky;top:96px;display:flex;flex-direction:column;gap:16px;}
+.sb-card{background:var(--bg-white);border:0.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden;}
+
+/* Event info sidebar card */
+.sb-event-info{padding:18px 20px;}
+.sb-event-badge{display:inline-block;padding:3px 10px;border-radius:var(--r-pill);font-size:10px;font-weight:500;background:var(--orange-bg);color:#633806;margin-bottom:12px;}
+.sb-event-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
+.sb-event-row:last-of-type{margin-bottom:16px;}
+.sb-event-label{font-size:10.5px;color:var(--text-muted);width:60px;flex-shrink:0;padding-top:2px;line-height:1.4;}
+.sb-event-value{font-size:12.5px;color:var(--text-primary);font-weight:500;line-height:1.5;flex:1;}
+.sb-event-value--alert{color:var(--brand);}
+.btn-sb-apply{display:block;width:100%;padding:12px 0;text-align:center;background:var(--line);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-sb-apply:hover{background:var(--line-h);}
+.sb-seats-note{font-size:11px;color:var(--brand);text-align:center;margin-top:8px;font-weight:500;}
+
+/* Concierge sidebar */
+.sb-concierge{background:var(--green-dark);border-radius:var(--r-lg);padding:20px;}
+.sb-con-eyebrow{font-size:9.5px;font-weight:500;letter-spacing:0.16em;color:var(--green-light);text-transform:uppercase;margin-bottom:10px;}
+.sb-con-ttl{font-size:13px;font-weight:500;color:#fff;line-height:1.55;margin-bottom:8px;}
+.sb-con-text{font-size:11.5px;color:rgba(255,255,255,0.62);line-height:1.8;margin-bottom:14px;}
+.btn-sb-con{display:block;width:100%;padding:11px 0;text-align:center;background:var(--green-mid);color:#fff;border-radius:var(--r-md);font-size:12.5px;font-weight:500;text-decoration:none;transition:background 0.15s;}
+.btn-sb-con:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* Related in sidebar */
+.sb-related-list{}
+.sb-related-item{display:flex;gap:10px;padding:10px 16px;border-bottom:0.5px solid var(--border);transition:background 0.12s;cursor:pointer;}
+.sb-related-item:last-child{border-bottom:none;}
+.sb-related-item:hover{background:var(--bg-page);}
+.sb-related-thumb{width:52px;height:36px;object-fit:cover;border-radius:4px;flex-shrink:0;background:var(--bg-page);}
+.sb-related-ttl{font-size:11.5px;color:var(--text-primary);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.sb-related-meta{font-size:10px;color:var(--text-muted);margin-top:2px;}
+
+/* ─── RELATED NEWS SECTION ────────────────── */
+.related-sec{background:var(--bg-white);border-top:0.5px solid var(--border);padding:52px 32px;}
+.related-inner{max-width:1280px;margin:0 auto;}
+.related-hd{margin-bottom:24px;}
+.related-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--green-mid);text-transform:uppercase;margin-bottom:10px;}
+.related-ttl{font-size:20px;font-weight:500;color:var(--text-primary);}
+.related-tabs{display:flex;gap:0;border-bottom:0.5px solid var(--border);margin-bottom:28px;}
+.rtab{padding:10px 20px;font-size:13px;font-weight:500;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
+.rtab:hover{color:var(--text-primary);}
+.rtab.active{color:var(--green-dark);border-bottom-color:var(--green-mid);}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+
+/* Related news card */
+.rcard{background:var(--bg-page);border-radius:var(--r-lg);border:0.5px solid var(--border);overflow:hidden;transition:box-shadow 0.15s;display:flex;flex-direction:column;}
+.rcard:hover{box-shadow:var(--shadow-md);}
+.rcard-img-wrap{aspect-ratio:16/9;overflow:hidden;background:var(--bg-page);}
+.rcard-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s;}
+.rcard:hover .rcard-img{transform:scale(1.04);}
+.rcard-body{padding:14px 16px;flex:1;display:flex;flex-direction:column;}
+.rcard-cat{display:inline-block;padding:2px 9px;border-radius:var(--r-pill);font-size:10px;font-weight:500;margin-bottom:8px;}
+.rcard-cat--event{background:var(--orange-bg);color:#633806;}
+.rcard-cat--community{background:var(--purple-bg);color:#3C3489;}
+.rcard-cat--news{background:var(--blue-bg);color:var(--blue-dark);}
+.rcard-cat--media{background:var(--pink-bg);color:#72243E;}
+.rcard-ttl{font-size:13px;font-weight:500;line-height:1.55;color:var(--text-primary);margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.rcard-footer{display:flex;align-items:center;padding-top:10px;border-top:0.5px solid var(--border);margin-top:auto;}
+.rcard-date{font-size:10.5px;color:var(--text-muted);margin-left:auto;}
+
+/* ─── CONCIERGE BAR ───────────────────────── */
+.concierge-bar{background:var(--green-dark);padding:60px 32px;text-align:center;}
+.concierge-inner{max-width:580px;margin:0 auto;}
+.concierge-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.18em;color:var(--green-light);margin-bottom:14px;text-transform:uppercase;}
+.concierge-ttl{font-size:22px;font-weight:500;color:#fff;line-height:1.6;margin-bottom:12px;}
+.concierge-lead{font-size:13px;color:rgba(255,255,255,0.60);line-height:1.9;margin-bottom:28px;}
+.btn-concierge{display:inline-flex;align-items:center;gap:8px;background:var(--green-mid);color:#fff;padding:13px 36px;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-concierge:hover{background:var(--green-light);color:var(--green-dark);}
+
+/* ─── GET STARTED ─────────────────────────── */
+.cta-sec{background:var(--bg-white);padding:88px 32px;text-align:center;border-top:0.5px solid var(--border);}
+.cta-inner{max-width:520px;margin:0 auto;}
+.cta-eyebrow{display:block;font-size:10px;font-weight:500;letter-spacing:0.16em;color:var(--brand);margin-bottom:14px;}
+.cta-title{font-size:26px;font-weight:500;color:var(--text-primary);line-height:1.55;margin-bottom:14px;}
+.cta-lead{font-size:13px;color:var(--text-secondary);line-height:1.9;margin-bottom:36px;}
+.cta-catches{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:24px;flex-wrap:wrap;padding:0;}
+.cta-catches li{list-style:none;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:5px;}
+.cta-catches li::before{content:"✓";color:var(--line);font-weight:500;}
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--line);color:#fff;padding:15px 40px;border-radius:var(--r-pill);font-size:15px;font-weight:500;transition:background 0.15s;text-decoration:none;}
+.btn-cta:hover{background:var(--line-h);color:#fff;}
+.btn-cta .line-logo-img{width:22px;height:22px;}
+.cta-note{font-size:11px;color:var(--text-muted);margin-top:12px;}
+
+/* ─── FOOTER ─────────────────────────────── */
+.footer{background:var(--dark-bg);color:rgba(255,255,255,0.68);}
+.footer-inner{max-width:1280px;margin:0 auto;padding:52px 32px 28px;}
+.footer-top{display:flex;gap:48px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-logo svg{display:block;}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.42);margin-top:10px;line-height:1.8;}
+.footer-nav{display:grid;grid-template-columns:repeat(7,1fr);gap:24px;flex:1;}
+.fnav-group h4{font-size:10px;font-weight:500;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:12px;text-transform:uppercase;}
+.fnav-group ul{list-style:none;}
+.fnav-group li{margin-bottom:8px;}
+.fnav-group a{font-size:12px;color:rgba(255,255,255,0.58);transition:color 0.15s;}
+.fnav-group a:hover{color:#fff;}
+.footer-bottom{border-top:0.5px solid rgba(255,255,255,0.08);padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:11px;color:rgba(255,255,255,0.28);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{color:rgba(255,255,255,0.38);transition:color 0.15s;}
+.footer-legal a:hover{color:rgba(255,255,255,0.70);}
+
+/* ─── RESPONSIVE ──────────────────────────── */
+@media(max-width:1060px){
+  .main-nav,.util-links,.btn-util{display:none;}
+  .hamb{display:flex;}
+  .mob-nav{display:block;}
+  .main-hd{padding:10px 16px;height:52px;align-items:center;}
+}
+@media(max-width:960px){
+  .art-wrap{grid-template-columns:1fr;padding:28px 16px 48px;gap:32px;}
+  .art-sidebar{position:static;}
+  .art-hd{padding:20px 16px 24px;}
+  .art-title{font-size:20px;}
+  .art-data{grid-template-columns:repeat(2,1fr);}
+  .art-data-item:nth-child(3n){border-right:0.5px solid var(--border);}
+  .art-data-item:nth-last-child(-n+3){border-bottom:0.5px solid var(--border);}
+  .art-data-item:nth-child(2n){border-right:none;}
+  .art-data-item:nth-last-child(-n+2){border-bottom:none;}
+  .related-sec{padding:40px 16px;}
+  .related-grid{grid-template-columns:1fr 1fr;}
+  .concierge-bar{padding:48px 16px;}
+  .cta-sec{padding:64px 16px;}
+  .footer-nav{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:640px){
+  .art-speakers{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:1fr;}
+  .art-title{font-size:18px;}
+  .footer-nav{grid-template-columns:repeat(2,1fr);}
+  .art-hd-right{display:none;}
+  .art-prevnext{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-hd">
+  <div class="util-bar">
+    <div class="util-inner">
+      <div class="util-links">
+        <a href="sumumu-faq.html">よくある質問</a>
+        <a href="sumumu-contact.html">お問合せ</a>
+        <a href="sumumu-company.html">運営会社</a>
+      </div>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-util">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        コミュニティに無料で参加する
+      </a>
+    </div>
+  </div>
+  <div class="main-hd">
+    <a href="sumumu-main.html" class="logo" aria-label="すむむ。トップへ">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="36" aria-hidden="true">
+        <defs><style>.stnw1{fill:#f04646}</style></defs>
+        <g>
+          <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+          <g>
+            <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+            <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+            <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+            <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+            <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+          </g>
+        </g>
+        <path class="stnw1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+        <g>
+          <path d="M22.5,9.9c-1.2,2.9-2.6,6-4.3,8.9v32.2h-5.2v-24.3c-1.2,1.6-2.5,3-3.8,4.3-.5-1.3-1.9-4.3-2.9-5.6,4.4-4.1,8.6-10.7,11.1-17.2l5.1,1.7ZM50.3,44.5v5.2h-29.7v-5.2h12.2v-9.2h-9.7v-5.2h9.7v-8h-11.2v-5.2h13.1c-2.3-1.7-5.2-3.7-7.7-5.1l3.6-3.9c3.4,1.8,8.1,4.6,10.4,6.7l-2,2.3h10.5v5.2h-11.2v8h9.9v5.2h-9.9v9.2h11.9Z"/>
+          <path d="M69.2,12.5c2.6,0,7.5-.2,9.7-.4,1.1,0,2.3-.3,3.1-.6l3.7,2.9c-.6.7-1.2,1.3-1.6,1.9-1.2,2-2.9,6-4.6,9.9,3.6.6,7,1.7,10,2.9,0-.6,0-1.1.1-1.6.1-1.8.1-3.6,0-5l6,.7c-.2,3.1-.4,5.9-.9,8.5,1.9,1.1,3.6,2.2,4.9,3.1l-2.7,6.4c-1.2-1.1-2.5-2.2-4-3.2-2,5.2-5.5,9.2-11.7,12.5l-4.9-4c6.9-3,10.2-7.4,11.7-11.5-3.3-1.8-6.9-3.2-10.9-3.7-1.7,3.9-3.6,8.5-5.2,11-1.8,2.8-4,4-7.2,4s-7.1-2.8-7.1-7.5c0-7.1,6.5-12.6,15.7-13,1.3-3,2.6-6.2,3.7-8.3-1.8,0-5.8.2-7.9.4-.9,0-2.5.2-3.7.4l-.2-5.9c1.2.1,2.8.2,3.8.2ZM65.1,40.2c.9,0,1.6-.5,2.4-1.6,1.2-1.7,2.4-4.6,3.7-7.5-5.2.8-8.1,3.9-8.1,6.8s.9,2.3,1.9,2.3Z"/>
+          <path d="M141.7,22.8c1.9,2.6,4.5,4.8,7.6,6-1.2,1-2.7,2.9-3.5,4.1-3.5-1.7-6.3-4.7-8.3-8.2-1.4,2.3-3.5,4.6-6.7,6.4h11.9v19.8h-5.6v-1.3h-19.9v1.5h-5.3v-19.5c-.8.6-1.7,1.1-2.5,1.6-.7-1.1-2.4-2.8-3.6-3.7,3.9-1.9,6.2-4.3,7.4-6.7h-6.4v-4.3h7.8c.1-.9.2-1.8.2-2.6h-6.5v-4.1h6.5v-3.6h5.2v3.6h5.5v4.1h-5.5c0,.9,0,1.7-.2,2.6h6.3v4.3h-6.1c2,1.5,4.4,3.2,5.7,4.3l-3.5,3.7c-1.2-1.1-3.2-2.9-5.2-4.4-1.1,1.7-2.5,3.3-4.5,4.7h16c-.8-1.1-1.9-2.3-2.9-2.9,3.7-1.4,5.8-3.3,7-5.4h-5.2v-4.3h6.8c.1-.9.2-1.7.2-2.5h0c0-.1-6.3-.1-6.3-.1v-4.1h6.3v-3.6h5.2v3.6h6.9v4.1h-6.9v.2c0,.8,0,1.6-.1,2.4h8.6v4.3h-6.4ZM137.2,35.7h-19.9v2.6h19.9v-2.6ZM137.2,45.1v-2.9h-19.9v2.9h19.9Z"/>
+          <path d="M183.8,26.7c-2.1,1.8-6.4,5.8-7.5,6.9.4,0,1.2.1,1.7.3,1.3.4,2.2,1.4,2.8,3.1.4,1.2.9,3,1.3,4.2.4,1.4,1.4,2.2,3.2,2.2,3.5,0,6.7-.4,9-.8l-.4,6c-1.9.4-6.6.7-9,.7-4.4,0-6.7-1-7.9-4-.5-1.4-1-3.5-1.3-4.7-.5-1.6-1.5-2.2-2.4-2.2s-1.9.7-3,1.8c-1.6,1.6-5,5.4-8.2,9.4l-5.4-3.8c.8-.7,1.9-1.7,3.2-2.9,2.3-2.4,11.8-11.8,16-16.2-3.2,0-8.7.6-11.4.8-1.6.1-3,.4-4,.5l-.6-6.3c1.1,0,2.7.2,4.4.1,2.2,0,12.6-.5,16.4-1,.9,0,2.1-.3,2.6-.5l3.4,3.8c-1.2.8-2.2,1.7-3,2.3ZM185.2,12l-.7,5.4c-4.8-.4-13.4-1.4-18.9-2.3l.9-5.3c5.2,1,14,1.9,18.8,2.3Z"/>
+          <path d="M219.5,16.3c2.3-.4,4.4-.9,6.2-1.5l.2,5.3c-2.1.6-5,1.2-8.1,1.6-2.2,6.4-6.1,14.5-9.8,19.7l-5.6-2.9c3.6-4.5,7.4-11.3,9.4-16.2-.8,0-1.6,0-2.4,0-1.9,0-3.8,0-5.8-.2l-.4-5.3c2,.2,4.4.3,6.1.3s2.8,0,4.2-.2c.6-2.5,1.2-5.3,1.2-7.7l6.3.6c-.4,1.5-1,3.8-1.7,6.3ZM232,30.2c0,1.3.2,3.5.3,5.8,4,1.5,7.2,3.8,9.5,5.9l-3.1,4.9c-1.6-1.5-3.7-3.4-6.2-4.9v.5c0,4.3-2.3,7.6-8.9,7.6s-10.2-2.5-10.2-7.6,3.8-8,10.2-8,2.1,0,3.2.2c-.2-3.4-.4-7.5-.5-10.3h5.8c-.1,1.9,0,3.9,0,5.9ZM222.8,44.7c3.2,0,4.1-1.7,4.1-4.3v-.9c-1.2-.3-2.4-.5-3.7-.5-2.7,0-4.4,1.2-4.4,2.8s1.4,2.9,4,2.9ZM228.8,20.3l2.9-4.6c3.3,1.4,9,4.6,11.4,6.3l-3.3,4.8c-2.7-2.1-7.9-5.1-11-6.5Z"/>
+          <path d="M260,30.1c4.2-3,8.7-4.4,13.6-4.4,8.1,0,12.7,5,12.7,10.5,0,8.4-6.6,14.8-25.8,13.2l-1.7-6c13.8,1.9,21.1-1.5,21.1-7.3s-2.9-5.2-6.9-5.2-9.9,1.9-12.8,5.4c-.8,1-1.3,1.7-1.7,2.7l-5.3-1.3c.9-4.5,2-13.5,2.3-19.2l6.2.9c-.6,2.5-1.4,8.1-1.7,10.8ZM279.8,13.6l-1.4,5.6c-4.6-.6-14.9-2.8-18.5-3.7l1.5-5.5c4.4,1.4,14.4,3.1,18.4,3.6Z"/>
+        </g>
+      </svg>
+    </a>
+    <nav class="main-nav">
+      <a href="sumumu-main.html" class="nl">トップ</a>
+      <div class="ni"><span class="nl">すむむとは。<i>▾</i></span><div class="nd"><a href="sumumu-about.html">すむむ。のサービス</a><a href="sumumu-about.html#partners">パートナー</a><a href="sumumu-about.html#media">メディア掲載</a></div></div>
+      <div class="ni"><span class="nl">住まいを探す<i>▾</i></span><div class="nd"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a><a href="properties/sumumu-kinki-00001.html">個別物件</a></div></div>
+      <div class="ni"><span class="nl">先輩の体験談<i>▾</i></span><div class="nd"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a><a href="sumumu-journal.html?type=life">暮らし</a></div></div>
+      <div class="ni"><span class="nl">お役立ちコラム<i>▾</i></span><div class="nd"><a href="sumumu-guide.html">資金計画</a><a href="sumumu-guide.html">物件選び</a><a href="sumumu-guide.html">購入手続き</a></div></div>
+      <div class="ni"><span class="nl">シミュレーション<i>▾</i></span><div class="nd"><a href="sumumu-tool-loan.html">ローンシミュレーター</a><a href="sumumu-tool-borrowing.html">借入可能額</a><a href="sumumu-tool-rentbuy.html">賃貸vs購入</a></div></div>
+      <div class="ni"><a href="sumumu-area.html" class="nl">エリア特集<i>▾</i></a><div class="nd"><a href="sumumu-area.html">エリア一覧</a><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a><a href="../sumumu-lp/lp_wireframe/osaka-city.html">大阪市</a></div></div>
+      <a href="sumumu-news.html" class="nl" style="color:var(--green-mid)">お知らせ</a>
+    </nav>
+    <button class="hamb" id="hambBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <div class="mob-nav" id="mobNav">
+      <div class="mob-inner">
+        <a href="sumumu-main.html" class="mob-link">トップ</a>
+        <div class="mob-group"><div class="mob-parent">住まいを探す<i>▾</i></div><div class="mob-sub"><a href="properties/sumumu-kinki.html">エリア別</a><a href="properties/sumumu-kinki-all.html">条件別</a></div></div>
+        <div class="mob-group"><div class="mob-parent">先輩の体験談<i>▾</i></div><div class="mob-sub"><a href="sumumu-journal.html">先輩の声</a><a href="sumumu-journal.html?type=purchase">購入体験</a></div></div>
+        <a href="sumumu-news.html" class="mob-link" style="color:var(--green-mid)">お知らせ</a>
+        <div class="mob-util"><a href="sumumu-faq.html">よくある質問</a><a href="sumumu-contact.html">お問合せ</a></div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="mob-cta">コミュニティに無料で参加する</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE HEADER -->
+<div class="art-hd">
+  <div class="art-hd-inner">
+    <nav class="breadcrumb">
+      <a href="sumumu-main.html">ホーム</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="sumumu-news.html">お知らせ</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="sumumu-news.html#event">イベント</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>【大阪】住み替えトークイベント vol.12</span>
+    </nav>
+    <div class="art-meta-top">
+      <span class="art-cat art-cat--event">イベント</span>
+      <span class="art-badge-new">NEW</span>
+      <span class="art-tag">大阪</span>
+      <span class="art-tag">リアル開催</span>
+      <span class="art-tag">住み替え</span>
+    </div>
+    <h1 class="art-title">【大阪】住み替えトークイベント vol.12<br>先輩から直接聞く「売却と購入の並走術」</h1>
+    <div class="art-event-meta-row">
+      <div class="art-event-meta-item">
+        <span class="art-event-meta-label">開催日</span>
+        <span>2025年5月20日（火）19:00〜21:00</span>
+      </div>
+      <div class="art-event-meta-item">
+        <span class="art-event-meta-label">会場</span>
+        <span>大阪市北区 梅田エリア</span>
+      </div>
+      <span class="art-event-seats">残席 6名</span>
+      <div class="art-hd-right">
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-art-apply">
+          <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+          LINEで申し込む
+        </a>
+        <button class="art-share-btn" id="shareBtn">↑ シェア</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO IMAGE -->
+<div class="art-hero">
+  <img src="images/news-event01.jpg" alt="住み替えトークイベント vol.12 大阪 梅田"
+       onerror="this.src='https://picsum.photos/seed/snw1hero/1440/480'">
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="art-wrap">
+
+  <!-- BODY -->
+  <article class="art-body">
+
+    <p>住み替えで一番難しいのは「売る」と「買う」を同時に進めることです。売却のタイミングと購入のタイミングがずれると、仮住まいが必要になったり、資金計画が大きく狂ったりする。でも、うまくやり切った先輩はたしかにいる——その経験を直接聞ける夜をつくりました。</p>
+    <p>今回は大阪市内と豊中市で住み替えを完了させた2名の先輩が登壇。売却査定から引き渡し、つなぎローンの活用まで、リアルな体験談と失敗談を包み隠さず話していただきます。</p>
+
+    <!-- サマリー -->
+    <div class="art-summary">
+      <div class="art-summary-ttl">このイベントでわかること</div>
+      <ul>
+        <li>売却と購入を「並走」させるための具体的なスケジュール管理の方法</li>
+        <li>つなぎローンを使った資金計画と、その際の注意点・体験談</li>
+        <li>不動産会社との交渉・断り方・査定のリアルな裏側</li>
+        <li>住み替えを経験した先輩への直接Q&Aタイム</li>
+      </ul>
+    </div>
+
+    <!-- 開催概要 -->
+    <div class="art-data">
+      <div class="art-data-item">
+        <div class="art-data-label">開催日時</div>
+        <div class="art-data-value">2025年5月20日（火）<br>19:00〜21:00（開場18:45）</div>
+      </div>
+      <div class="art-data-item">
+        <div class="art-data-label">会場</div>
+        <div class="art-data-value">大阪市北区 梅田エリア<br><span style="font-size:11px;font-weight:400;color:var(--text-muted);">詳細は申込後にご案内</span></div>
+      </div>
+      <div class="art-data-item">
+        <div class="art-data-label">定員</div>
+        <div class="art-data-value">20名<br><span class="art-data-value--alert" style="font-size:11.5px;">残席 6名</span></div>
+      </div>
+      <div class="art-data-item">
+        <div class="art-data-label">参加費</div>
+        <div class="art-data-value">無料</div>
+      </div>
+      <div class="art-data-item">
+        <div class="art-data-label">申込締切</div>
+        <div class="art-data-value">2025年5月18日（日）<br>23:59まで</div>
+      </div>
+      <div class="art-data-item">
+        <div class="art-data-label">形式</div>
+        <div class="art-data-value">リアル開催<br><span style="font-size:11px;font-weight:400;color:var(--text-muted);">オンライン配信なし</span></div>
+      </div>
+    </div>
+
+    <h2 class="art-h2">当日のプログラム</h2>
+    <div class="art-timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">18:45</div>
+        <div class="tl-text">開場・受付開始</div>
+        <div class="tl-sub">軽食・ドリンクをご用意しています。お早めにどうぞ。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">19:00</div>
+        <div class="tl-text">オープニング</div>
+        <div class="tl-sub">すむむ。スタッフより、イベント趣旨と登壇者のご紹介。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">19:15</div>
+        <div class="tl-text">先輩トーク①「売却のリアル ー 査定から引き渡しまで」</div>
+        <div class="tl-sub">山田さん夫妻（44歳・大阪市）が登壇。4LDKマンション売却の全過程を振り返る。査定会社の選び方・値引き交渉・内覧対応の工夫などを語っていただきます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">19:50</div>
+        <div class="tl-text">先輩トーク②「購入並走の記録 ー つなぎローンを使ってみて」</div>
+        <div class="tl-sub">中村さん（42歳・豊中市）が登壇。売却未完了のままマンションを購入し、2ヶ月のつなぎローンを経験した体験談。お金の動きをリアルな数字で公開してもらいます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">20:25</div>
+        <div class="tl-text">Q&Aタイム・ネットワーキング</div>
+        <div class="tl-sub">登壇者への質問を自由に。同じ住み替えを検討している参加者同士の交流タイムも設けます。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">20:55</div>
+        <div class="tl-text">クロージング・次回イベント案内</div>
+        <div class="tl-sub">次回 vol.13（名古屋予定）のご案内も予定しています。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">21:00</div>
+        <div class="tl-text">終了・解散</div>
+      </div>
+    </div>
+
+    <h2 class="art-h2">登壇者プロフィール</h2>
+    <div class="art-speakers">
+      <div class="speaker-box">
+        <div class="speaker-num">Speaker 01</div>
+        <div class="speaker-avatar">山</div>
+        <div class="speaker-name">山田 健二（仮名）</div>
+        <div class="speaker-age">44歳 · 大阪市在住</div>
+        <ul class="speaker-profile">
+          <li>4LDKマンション → 戸建てへ住み替え（2024年完了）</li>
+          <li>売却査定を5社に依頼し、最終的に買取保証付きで契約</li>
+          <li>引き渡し空白期間2ヶ月の間、仮住まいを経験</li>
+          <li>「査定額の差が1,000万円以上あって驚いた」</li>
+        </ul>
+      </div>
+      <div class="speaker-box">
+        <div class="speaker-num">Speaker 02</div>
+        <div class="speaker-avatar">中</div>
+        <div class="speaker-name">中村 美里（仮名）</div>
+        <div class="speaker-age">42歳 · 大阪府豊中市在住</div>
+        <ul class="speaker-profile">
+          <li>3LDK → 4LDKマンションへ住み替え（2024年完了）</li>
+          <li>売却前に購入を決め、つなぎローン2ヶ月を活用</li>
+          <li>購入・売却を1社でまとめず、あえて別会社に依頼</li>
+          <li>「並走は怖かったが、結果的に損はしなかった」</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="art-h2">よくある質問</h2>
+    <div class="qa-list">
+      <div class="qa-item" id="qa1">
+        <div class="qa-q" onclick="toggleQA('qa1')">
+          <span class="qa-q-text">オンラインでの参加・後日視聴は可能ですか？</span>
+          <span class="qa-icon">＋</span>
+        </div>
+        <div class="qa-a">
+          <div class="qa-a-inner">
+            <p>今回はリアル開催のみです。オンライン配信や録画視聴には対応していません。登壇者との直接のQ&Aや参加者同士のネットワーキングを大切にしているため、ぜひ会場でご参加ください。</p>
+            <p>次回以降、オンライン開催の予定が決まり次第お知らせします。LINE公式アカウントでご案内しています。</p>
+          </div>
+        </div>
+      </div>
+      <div class="qa-item" id="qa2">
+        <div class="qa-q" onclick="toggleQA('qa2')">
+          <span class="qa-q-text">申込後のキャンセルはできますか？</span>
+          <span class="qa-icon">＋</span>
+        </div>
+        <div class="qa-a">
+          <div class="qa-a-inner">
+            <p>申込後のキャンセルは、LINEにてご連絡ください。定員が少ないため、参加が難しくなった場合は早めのご連絡をお願いしています。なお、キャンセル料は発生しません。</p>
+          </div>
+        </div>
+      </div>
+      <div class="qa-item" id="qa3">
+        <div class="qa-q" onclick="toggleQA('qa3')">
+          <span class="qa-q-text">住み替えをまだ検討中の段階でも参加できますか？</span>
+          <span class="qa-icon">＋</span>
+        </div>
+        <div class="qa-a">
+          <div class="qa-a-inner">
+            <p>もちろんです。「いつか住み替えたい」「検討を始めたばかり」という方が多くご参加されています。先輩の経験談を聞くことで、自分に合ったタイミングや進め方のイメージが具体的につかめます。まずは話を聞くだけでも歓迎です。</p>
+          </div>
+        </div>
+      </div>
+      <div class="qa-item" id="qa4">
+        <div class="qa-q" onclick="toggleQA('qa4')">
+          <span class="qa-q-text">営業や勧誘はありますか？</span>
+          <span class="qa-icon">＋</span>
+        </div>
+        <div class="qa-a">
+          <div class="qa-a-inner">
+            <p>一切ありません。すむむ。は宅建業（物件の仲介・売買）を行っておらず、物件や特定サービスをその場で勧めることもしません。純粋に、住み替えを考える方が先輩の経験から学び、仲間と出会えるコミュニティイベントです。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 申込CTA -->
+    <div class="art-apply-box">
+      <div class="art-apply-box-badge">残席 6名 · 申込締切 5月18日（日）</div>
+      <div class="art-apply-box-ttl">LINEから30秒で申し込めます</div>
+      <p class="art-apply-box-lead">
+        すむむ。LINE公式アカウントに「vol.12参加希望」とメッセージを送るだけ。<br>
+        申込完了後、会場の詳細住所をご案内します。
+      </p>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-apply">
+        <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+        LINEで申し込む（無料）
+      </a>
+      <p class="art-apply-box-note">LINE公式アカウントに遷移します · 営業・勧誘は一切ありません</p>
+    </div>
+
+    <!-- 前後ナビ -->
+    <div class="art-prevnext">
+      <a class="prevnext-item" href="sumumu-news-00002.html">
+        <div class="prevnext-dir">← 前のお知らせ</div>
+        <div class="prevnext-ttl">【名古屋】住み替えセミナー vol.8 ー はじめての購入を考える夜</div>
+      </a>
+      <a class="prevnext-item prevnext-item--next" href="sumumu-news-00000.html">
+        <div class="prevnext-dir">次のお知らせ →</div>
+        <div class="prevnext-ttl">すむむ。コミュニティ会員 1,000名突破のお知らせ</div>
+      </a>
+    </div>
+
+  </article>
+
+  <!-- SIDEBAR -->
+  <aside class="art-sidebar">
+
+    <!-- 開催概要カード -->
+    <div class="sb-card">
+      <div class="sb-event-info">
+        <span class="sb-event-badge">イベント</span>
+        <div class="sb-event-row">
+          <div class="sb-event-label">開催日時</div>
+          <div class="sb-event-value">5月20日（火）<br>19:00〜21:00</div>
+        </div>
+        <div class="sb-event-row">
+          <div class="sb-event-label">会場</div>
+          <div class="sb-event-value">大阪市北区<br>梅田エリア</div>
+        </div>
+        <div class="sb-event-row">
+          <div class="sb-event-label">定員</div>
+          <div class="sb-event-value sb-event-value--alert">残席 6名</div>
+        </div>
+        <div class="sb-event-row">
+          <div class="sb-event-label">参加費</div>
+          <div class="sb-event-value">無料</div>
+        </div>
+        <div class="sb-event-row">
+          <div class="sb-event-label">申込締切</div>
+          <div class="sb-event-value">5月18日（日）23:59</div>
+        </div>
+        <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sb-apply">
+          LINEで申し込む →
+        </a>
+        <p class="sb-seats-note">残席わずか、お早めに</p>
+      </div>
+    </div>
+
+    <!-- コンシェルジュCTA -->
+    <div class="sb-concierge">
+      <div class="sb-con-eyebrow">CONCIERGE</div>
+      <div class="sb-con-ttl">イベント前に、<br>個別相談もできます</div>
+      <p class="sb-con-text">住み替えの状況や疑問を整理してからイベントに臨みたい方へ。コンシェルジュが事前にサポートします。</p>
+      <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-sb-con">
+        無料で相談する →
+      </a>
+    </div>
+
+    <!-- 関連お知らせ -->
+    <div class="sb-card">
+      <div class="sidebar-box-hd" style="padding:13px 16px 11px;font-size:10.5px;font-weight:500;letter-spacing:0.12em;color:var(--text-muted);text-transform:uppercase;border-bottom:0.5px solid var(--border);">同カテゴリのお知らせ</div>
+      <div class="sb-related-list">
+        <a class="sb-related-item" href="sumumu-news-00004.html">
+          <img class="sb-related-thumb" src="images/news-event04.jpg" alt="" onerror="this.src='https://picsum.photos/seed/snw4/120/80'">
+          <div>
+            <div class="sb-related-ttl">【名古屋】住み替えセミナー vol.8 ー はじめての購入を考える夜</div>
+            <div class="sb-related-meta">2025/04 · イベント</div>
+          </div>
+        </a>
+        <a class="sb-related-item" href="sumumu-news-00007.html">
+          <img class="sb-related-thumb" src="images/news-event07.jpg" alt="" onerror="this.src='https://picsum.photos/seed/snw7/120/80'">
+          <div>
+            <div class="sb-related-ttl">【大阪】コミュニティ懇親会 vol.3 ー 少人数ランチ会</div>
+            <div class="sb-related-meta">2025/03 · コミュニティ</div>
+          </div>
+        </a>
+        <a class="sb-related-item" href="sumumu-news-00010.html">
+          <img class="sb-related-thumb" src="images/news-event10.jpg" alt="" onerror="this.src='https://picsum.photos/seed/snw10/120/80'">
+          <div>
+            <div class="sb-related-ttl">【大阪】住み替えトークイベント vol.11 ー 売却体験を語る夜</div>
+            <div class="sb-related-meta">2025/02 · イベント</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </aside>
+</div><!-- /art-wrap -->
+
+<!-- RELATED NEWS -->
+<section class="related-sec">
+  <div class="related-inner">
+    <div class="related-hd">
+      <div class="related-eyebrow">Related News</div>
+      <h2 class="related-ttl">関連するお知らせ</h2>
+    </div>
+    <div class="related-tabs">
+      <span class="rtab active" data-tab="related">関連</span>
+      <span class="rtab" data-tab="same">同カテゴリ（イベント）</span>
+      <span class="rtab" data-tab="featured">注目</span>
+    </div>
+    <div class="related-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<!-- CONCIERGE BAR -->
+<section class="concierge-bar">
+  <div class="concierge-inner">
+    <div class="concierge-eyebrow">CONCIERGE</div>
+    <h2 class="concierge-ttl">イベントの前後に、<br>コンシェルジュに相談してみて</h2>
+    <p class="concierge-lead">
+      住み替えの疑問・不安・資金計画。中立な立場のスタッフが<br>
+      あなたのペースでサポートします。営業・勧誘は一切ありません。
+    </p>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-concierge">
+      コンシェルジュに相談する →
+    </a>
+  </div>
+</section>
+
+<!-- GET STARTED -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="cta-eyebrow">GET STARTED</span>
+    <h2 class="cta-title">住み替えの第一歩を、<br>すむむ。と一緒に。</h2>
+    <p class="cta-lead">
+      先輩の体験談を読んで、シミュレーションツールで数字を確認して、<br>
+      気持ちが固まったら LINE でコミュニティに参加してみてください。
+    </p>
+    <ul class="cta-catches">
+      <li>登録30秒</li>
+      <li>営業・勧誘なし</li>
+      <li>完全無料</li>
+      <li>いつでも退会OK</li>
+    </ul>
+    <a href="https://lin.ee/sumumu" target="_blank" rel="noopener noreferrer" class="btn-cta">
+      <img src="images/LINE_Brand_icon.png" class="line-logo-img" alt="LINE">
+      コミュニティに無料で参加する
+    </a>
+    <p class="cta-note">LINE公式アカウントに遷移します</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 230" height="32" aria-label="すむむ。">
+            <defs><style>.fstnw1{fill:#f04646}</style></defs>
+            <g fill="white">
+              <path d="M354.2,224.4c-12.7,0-23.1-10.3-23.1-23.1s10.3-23.1,23.1-23.1,23.1,10.3,23.1,23.1-10.3,23.1-23.1,23.1ZM354.2,194.8c-3.6,0-6.5,2.9-6.5,6.5s2.9,6.5,6.5,6.5,6.5-2.9,6.5-6.5-2.9-6.5-6.5-6.5Z"/>
+              <g>
+                <path d="M38.4,202.3c.6-.1,1.1.6.6,1.1-1,1.1-2.2,2.4-2.8,3.1-3.4,4-3.9,9.9,0,13.8,3.5,3.5,10.3,4,13.8,0,13.1-15.1,13.3-34.5,12.5-53.5-.4-8.3-1-16.7-1.8-25,0-1.1.8-2.1,1.9-2.1h15.3c5.8,0,10.4-5.1,9.6-11-.6-4.9-5-8.5-10-8.5h-16.3c-2.4,0-3.2-.7-3.3-1.6-.6-3.9-.7-7.9-1.8-11.7-1.5-5.5-6.5-8.4-11.6-7.2-6.3,1.5-8,7.2-7.2,12.4.3,2,.6,4,.9,6s-.7,2.1-1.9,2.1H15.7c-4.9,0-9.4,3.6-10,8.5-.7,5.9,3.9,11,9.6,11h23.9c1,0,1.8.7,1.9,1.7.2,2.1.5,4.3.7,6.4s-.8,1.8-1.8,1.6c-2.8-.6-5.7-.8-8.5-.4-9,1.1-17.2,7.1-21,15.3-3.9,8.2-3.2,18.3,1.6,25.9,4.9,7.6,13.8,12.8,22.8,12.5,1.4,0,2.6-.2,3.6-.4h0ZM43.2,180.1c-.7,1.5-2.2,2.7-3.6,3.5-1.6.8-3.4,1.2-5.2,1-2.4-.2-4.8-1.4-6.3-3.4-1.9-2.5-2.2-6.2-.8-9.1,1.3-2.9,4.2-4.7,7.2-5.2,2.7-.4,6.2.2,8,3,1.8,2.7,2.4,7,.8,10.2h-.1Z"/>
+                <path d="M182.1,186.5c-4.4-1.2-9.4,1-11.5,6.5-3.1,8.2-9.6,12.7-17.6,10.5s-9.5-17.9-8.4-27.1c2-16.7,3.4-33.4,3.9-50.1,0-.9.7-1.5,1.6-1.5h14c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-14.4c-.9,0-1.6-.7-1.6-1.6,0-5.1-.3-10.2-.6-15.4-.7-11.9-19.4-12-18.7,0,.3,5.1.5,10.2.6,15.3,0,.9-.7,1.6-1.6,1.6h-12.3c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h12.8c.9,0,1.6.7,1.6,1.6-.2,6.4-.4,11.5-.9,17.9,0,1.1-.6,2-1.4,2.6-1.5.9-4,.6-7.2.9-4.8.4-8.2,1.4-11.7,3.4-13.3,7.6-18.2,26.7-11.2,40.1,5.4,10.4,17.7,15.7,29,14.1,1.3-.2,2.5.5,3.1,1.6,5.3,9.9,15.2,16.7,27.3,17.2,15.2.7,29.4-11.4,31.6-26.3.7-5-1.2-10-6.5-11.5v.2ZM129.1,179c-.5,2.1-1.5,4-3.2,5.4-3,2.4-7.8,2.2-10.6-.5-2.4-2.3-3.2-6-2.6-9.3.4-2.5,1.5-5,3.4-6.7,3.5-3.2,9.3-3,11.8,1.2,1,1.7,1.5,3.6,1.6,5.6,0,1.4,0,2.9-.4,4.3h0Z"/>
+                <path d="M297.9,146.9c1.8,3.8,3.9,8,7.8,9.6,4,1.6,9.1-.6,10.7-4.6,1.7-4.4-.3-9.2-2-13.6-1.2-3.2-3-6.9-4.7-10.3-1.9-3.6-4.7-8.3-9-9s-8.1,1-9,5.4c-1.3,6.3,2.6,14.8,6.3,22.5h0Z"/>
+                <path d="M309.6,187.8c-.3-5.7-4.6-9.6-9.4-9.7-4.9,0-9.3,3.1-9.3,9.7s-1.3,13.5-7.7,16.5c-3.7,1.8-8.9,1.5-12.7,0-12.2-5-10.3-20.9-10.5-32.3l-.8-59.3c0-1.1.8-1.9,1.9-1.9h10.8c5.1,0,9.7-3.7,10.2-8.7.6-5.8-4-10.7-9.7-10.7h-11.6c-1,0-1.9-.8-1.9-1.9v-12.9c0-4.9-3.5-9.4-8.4-9.8-5.6-.6-10.3,3.9-10.3,9.3v13.4c0,1-.8,1.9-1.8,1.9h-14.4c-5.1,0-9.7,3.7-10.2,8.7-.6,5.8,4,10.7,9.7,10.7h15.2c1,0,1.9.8,1.9,1.9,0,3.2,0,6.4.1,9.5,0,1.2-1,2.1-2.3,2-5.2-.5-10.6.6-15.1,3-8.4,4.6-14.1,13.5-15.5,23-1.7,11.5,3.1,24,12.6,30.8,5.5,3.9,12.5,5.6,19.2,4.9,1.1-.1,2.1.7,2.2,1.8.2,2.1.4,4.1.8,6.2,2.9,17.5,18.3,31.8,36.6,30.4,19.1-1.5,31.5-18,30.3-36.5h.1ZM235.5,165.8c-3.7.2-7.1-1.6-8.7-4.9-1.6-3.3-1.5-7.3-.2-10.8,1-2.7,3.3-5.2,5.9-6.2,3-1.2,6.9-.7,9.4,2,2.9,3.1,3.7,8.3,2.6,12.6-1.4,5.2-5.4,7.1-8.9,7.3h-.1Z"/>
+                <path d="M173.7,158.5s-4.3-8.8-2-14.8c1.1-2.8,3.6-4.5,6.3-4.8,3.4-.4,6.4.7,8.9,4.1,3.9,5.4,8.8,16.2,6.8,23-.9,3-2.7,5.2-5.6,5.9-3.4.9-6.8-.3-9-2.9-2.1-2.3-4.4-8.2-5.4-10.6h0Z"/>
+              </g>
+            </g>
+            <path class="fstnw1" d="M390.4,68.9c-6.7-14.7-21.5-23.2-36.3-23.3-14.8,0-29.6,8.6-36.3,23.3-6,13.2-4.4,29.1,1.9,42.1,4.3,8.9,10.5,16.6,16.1,24.7,5.1,7.3,11.6,15.1,16.1,23.1.9,1.6,3.3,1.6,4.2,0,4.5-8,11.1-15.8,16.1-23.1,5.6-8.1,11.8-15.8,16.1-24.7,6.3-13.1,7.9-28.9,1.9-42.1h.2ZM354.2,106c-10.8,0-19.5-8.7-19.5-19.5s8.7-19.5,19.5-19.5,19.5,8.7,19.5,19.5-8.7,19.5-19.5,19.5Z"/>
+          </svg>
+        </div>
+        <div class="footer-tagline">すべての人に、<br>理想の住み替えを。</div>
+      </div>
+      <nav class="footer-nav">
+        <div class="fnav-group"><h4>すむむとは。</h4><ul><li><a href="sumumu-about.html">すむむ。のサービス</a></li><li><a href="sumumu-about.html#partners">パートナー</a></li><li><a href="sumumu-about.html#media">メディア掲載</a></li></ul></div>
+        <div class="fnav-group"><h4>住まいを探す</h4><ul><li><a href="properties/sumumu-kinki.html">エリア別</a></li><li><a href="properties/sumumu-kinki-all.html">条件別</a></li><li><a href="properties/sumumu-kinki-00001.html">個別物件</a></li></ul></div>
+        <div class="fnav-group"><h4>先輩の体験談</h4><ul><li><a href="sumumu-journal.html">先輩の声</a></li><li><a href="sumumu-journal.html?type=purchase">購入体験</a></li><li><a href="sumumu-journal.html?type=life">暮らし</a></li></ul></div>
+        <div class="fnav-group"><h4>お役立ちコラム</h4><ul><li><a href="sumumu-guide.html">資金計画</a></li><li><a href="sumumu-guide.html">物件選び</a></li><li><a href="sumumu-guide.html">購入手続き</a></li></ul></div>
+        <div class="fnav-group"><h4>シミュレーション</h4><ul><li><a href="sumumu-tool-loan.html">ローンシミュレーター</a></li><li><a href="sumumu-tool-borrowing.html">借入可能額</a></li><li><a href="sumumu-tool-rentbuy.html">賃貸vs購入</a></li></ul></div>
+        <div class="fnav-group"><h4>エリア特集</h4><ul><li><a href="sumumu-area.html">エリア一覧</a></li><li><a href="../sumumu-lp/lp_wireframe/biwako-nanto.html">琵琶湖南東</a></li><li><a href="../sumumu-lp/lp_wireframe/nagoya.html">名古屋</a></li></ul></div>
+        <div class="fnav-group"><h4>お知らせ</h4><ul><li><a href="sumumu-news.html">すべて</a></li><li><a href="sumumu-news.html#event">イベント</a></li><li><a href="sumumu-news.html#community">コミュニティ</a></li></ul></div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 株式会社サクシード（長谷工グループ）</div>
+      <div class="footer-legal">
+        <a href="/privacy/">プライバシーポリシー</a>
+        <a href="/terms/">利用規約</a>
+        <a href="/tokushoho/">特定商取引法</a>
+        <a href="sumumu-contact.html">お問い合わせ</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Q&A accordion ── */
+function toggleQA(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+/* ── Share ── */
+document.getElementById('shareBtn').addEventListener('click', () => {
+  navigator.clipboard.writeText(location.href).then(() => alert('URLをコピーしました'));
+});
+
+/* ── Related news data ── */
+const RELATED = {
+  related: [
+    { id:'r1', type:'event',     title:'【大阪】住み替えトークイベント vol.11 ー 売却体験を語る夜',                   date:'2025/02' },
+    { id:'r2', type:'community', title:'すむむ。コミュニティ会員 1,000名突破のお知らせ',                             date:'2025/04' },
+    { id:'r3', type:'event',     title:'【名古屋】住み替えセミナー vol.8 ー はじめての購入を考える夜',               date:'2025/04' },
+  ],
+  same: [
+    { id:'s1', type:'event',     title:'【名古屋】住み替えセミナー vol.8 ー はじめての購入を考える夜',               date:'2025/04' },
+    { id:'s2', type:'event',     title:'【大阪】住み替えトークイベント vol.11 ー 売却体験を語る夜',                   date:'2025/02' },
+    { id:'s3', type:'event',     title:'【京都】住み替えトークイベント vol.5 ー 賃貸vs購入のリアル体験談',           date:'2025/01' },
+  ],
+  featured: [
+    { id:'f1', type:'news',      title:'すむむ。コミュニティ会員 1,000名突破のお知らせ',                             date:'2025/04' },
+    { id:'f2', type:'event',     title:'【大阪】住み替えトークイベント vol.11 ー 売却体験を語る夜',                   date:'2025/02' },
+    { id:'f3', type:'media',     title:'「週刊住まい」にすむむ。が掲載されました',                                   date:'2025/01' },
+  ],
+};
+const TYPE_LABEL = { event:'イベント', community:'コミュニティ', news:'ニュース', media:'メディア掲載' };
+
+function rcardHTML(a) {
+  const seed = 'snwrel' + a.id;
+  return `
+<a class="rcard" href="sumumu-news-00001.html">
+  <div class="rcard-img-wrap">
+    <img class="rcard-img" src="images/news-${a.type}${a.id}.jpg" alt="${a.title}"
+         onerror="this.src='https://picsum.photos/seed/${seed}/600/400'">
+  </div>
+  <div class="rcard-body">
+    <span class="rcard-cat rcard-cat--${a.type}">${TYPE_LABEL[a.type]}</span>
+    <div class="rcard-ttl">${a.title}</div>
+    <div class="rcard-footer">
+      <span class="rcard-date">${a.date}</span>
+    </div>
+  </div>
+</a>`;
+}
+
+function renderRelated(tabKey) {
+  document.getElementById('relatedGrid').innerHTML = RELATED[tabKey].map(rcardHTML).join('');
+}
+
+document.querySelectorAll('.rtab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.rtab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderRelated(tab.dataset.tab);
+  });
+});
+
+renderRelated('related');
+
+/* ── Hamburger ── */
+document.getElementById('hambBtn').addEventListener('click', () => {
+  document.getElementById('mobNav').classList.toggle('open');
+});
+</script>
+</body>
+</html>
